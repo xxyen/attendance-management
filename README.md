@@ -1,93 +1,78 @@
-# project-template
+# ECE 651 - Spring 24 - Team Project - Evolution 1
+
+## Team #X
+*Please replace the _x_ above with your team number*
+
+## Team Members
+*Please complete your team information:*
+- *student name / netid*
+- *student name / netid*
+- *student name / netid*
+
+## LEAD TA
+- **Your Project LEAD TA is**: *TA's name here*
+- Your team will have one lead TA, to which you can reach out for clarification on the specifications.
+- You can ask for help from any TA, but regarding specifications, the LEAD TA definitions will have precedence over all others. 
+
+## Logistics
+Before we dive into the requirements, here are a few things you need to know about the logistics of this project:
+- We expect you to perform **good project management: estimating the time of tasks, setting intermediate deadlines, tracking progress, and adjusting your schedule as needed. For this evolution of your project, we have provided a spreadsheet with one possible task breakdown. You may use our task breakdown, or create your own. You may use a spreadsheet, GitLab issues, or any other tool you want. However, you must perform this project management and discuss it with your TA by 3/1. You may of course revise this as you go.
+- Please make **UML diagrams** of your planned design. Set up an appointment to discuss the initial version with your TA no later than 3/1. Revise them as needed and submit final versions with your final code. This is part of your design grade.
+- Keep in mind that **change is the only constant** in software engineering and prepare for it. 
+- We expect you to **use issues, feature branches, pull requests, and perform code reviews**. The process you use for software development is also part of your grade.
+- As always, we expect you to produce **clean code**:  to include comments, have good variable names, clean formatting, and well-abstracted methods. Your group should define its own coding standard, and you should all ensure that you follow it.
+- Your TA is your “customer” but also your mentor. You should meet with them frequently. You should meet at least twice per week while working on an evolution. You should have at least one “sprint review” style meeting per evolution, but may have more. There should be no surprises in grading—you should know what your TA thinks of your project throughout.
+- As we discussed in class, if you are having team problems, you should attempt to resolve them yourselves, and if that fails, involve your TA and/or professor. Whether your team is working well or poorly together, we ask that each of you do an individual contribution assessment at the end of each evolution. We will post a link to this form later.
+
+- List of things you will be graded on:
+    - Functionality
+    - Design
+    - Documentation (including initial UML review + final UML diagrams). 
+    - Testing (at least branch coverage)
+    - Other Code Quality Factors (e.g., naming, formatting, smells).
+    - Process + project management (Issue tracking, CI/CD, Code Reviews, etc).
+
+## User Stories
+During lecture time, most professors take attendance to record which students attend sessions. 
+Some professors take attendance using a signing sheet which is circulated among the students to sign their names. 
+Others use a traditional roll call, where the professor calls out the name of each student one at a time and updates an attendance spreadsheet. 
+Both are tedious processes that may take five to ten minutes in large enrollment courses or even more outside the classroom.
+
+Your team was assigned to design a system to ease this process. 
+This program should run on a text-based terminal and should operating system independent (i.e., may run on Windows, Mac, Linux, etc.)
+
+Keep in mind that the information about enrollment and attendance is sensitive, so security mechanisms should be considered. 
+
+Professors don't want to spend time outside the classroom inputting values from a paper attendance sheet more than students want to sign it. 
+
+The professor starts the classroom by taking attendance. 
+For this, they would like the system to present the name of the student on the screen, and then mark the student present or absent. 
+This should be dynamic, so doing this should be a matter of a keypress. 
+
+In many cases, students may arrive a few minutes late. 
+So, at the end of the session, those students may approach the professor and the professor may change the attendance to either present or most probably tardy.
+The system may allow options of browsing or searching to locate students that will be marked tardy.
+
+The system should record the attendance in plain text files.
+Also, an export option should be provided for other formats like `json`, `xml` or `custom`.
+
+As classes may be large, before the first day, the professor can load the roster from a `csv` file. The format of that file may vary, including headers or not, column order, or data. 
+
+As the semester progresses, other students may enroll late to the class as well as others may drop from the class. For students who dropped out, the professor is interested in keeping attendance records, but the student's name should not appear in the attendance-taking process anymore. 
+
+At the end of the class week, the system should send a report to the student with their current attendance records. 
+
+In addition, every time that the student's attendance is changed (e.g., from absent to tardy) the system should send a notification to the student. Initially, those notifications will be over email, though SMS or other methods could be added later on.
+
+In many cases, students desire that a different name be displayed during the attendance-taking process. 
+Thus, they can reach out to the professor asking them to change their name. 
+Given that, some university systems don't allow name changes, both the legal name and the display name should be kept in sync. 
 
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.oit.duke.edu/kits/project-000-000-01-test/project-template.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.oit.duke.edu/kits/project-000-000-01-test/project-template/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Submission
+- To submit your project, you need to generate a release on GitLab. 
+- Diagrams and their sources must be included in a folder called documentation in the GitLab repository. 
+    - Although you can use any tool, the tool needs to be freely available.
+    - PDF printouts should also be included. 
+    - We recommend [StarUML](https://staruml.io) to generate the diagrams. *You can use it as an evaluation, and including a white rectangle in the back helps you to generate good printouts.*
+- Documentation 
