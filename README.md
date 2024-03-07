@@ -12,25 +12,33 @@
 ## LEAD TA
 - **Your Project LEAD TA is**: *TA's name here*
 - Your team will have one lead TA, to which you can reach out for clarification on the specifications.
-- You can ask for help from any TA, but regarding specifications, the LEAD TA definitions will have precedence over all others. 
+- You can ask for help from any TA, but regarding specifications, the LEAD TA definitions will have precedence over all other TAs. 
 
 ## Logistics
 Before we dive into the requirements, here are a few things you need to know about the logistics of this project:
-- We expect you to perform **good project management: estimating the time of tasks, setting intermediate deadlines, tracking progress, and adjusting your schedule as needed. For this evolution of your project, we have provided a spreadsheet with one possible task breakdown. You may use our task breakdown, or create your own. You may use a spreadsheet, GitLab issues, or any other tool you want. However, you must perform this project management and discuss it with your TA by 3/1. You may of course revise this as you go.
-- Please make **UML diagrams** of your planned design. Set up an appointment to discuss the initial version with your TA no later than 3/1. Revise them as needed and submit final versions with your final code. This is part of your design grade.
+- We expect you to perform **good project management: estimating the time of tasks, setting intermediate deadlines, tracking progress, and adjusting your schedule as needed. For this evolution of your project, we have provided a spreadsheet with one possible task breakdown. You may use our task breakdown, or create your own. You may use a spreadsheet, GitLab issues, or any other tool you want. However, you must perform this project management and discuss it with your TA by 3/19. You may of course revise this as you go.
+- Please make **UML diagrams** of your planned design. Set up an appointment to discuss the initial version with your TA no later than 3/19. Revise them as needed and submit final versions with your final code. This is part of your design grade.
 - Keep in mind that **change is the only constant** in software engineering and prepare for it. 
 - We expect you to **use issues, feature branches, pull requests, and perform code reviews**. The process you use for software development is also part of your grade.
 - As always, we expect you to produce **clean code**:  to include comments, have good variable names, clean formatting, and well-abstracted methods. Your group should define its own coding standard, and you should all ensure that you follow it.
 - Your TA is your “customer” but also your mentor. You should meet with them frequently. You should meet at least twice per week while working on an evolution. You should have at least one “sprint review” style meeting per evolution, but may have more. There should be no surprises in grading—you should know what your TA thinks of your project throughout.
 - As we discussed in class, if you are having team problems, you should attempt to resolve them yourselves, and if that fails, involve your TA and/or professor. Whether your team is working well or poorly together, we ask that each of you do an individual contribution assessment at the end of each evolution. We will post a link to this form later.
 
-- List of things you will be graded on:
-    - Functionality
-    - Design
-    - Documentation (including initial UML review + final UML diagrams). 
-    - Testing (at least branch coverage)
-    - Other Code Quality Factors (e.g., naming, formatting, smells).
-    - Process + project management (Issue tracking, CI/CD, Code Reviews, etc).
+### List of things you will be graded on:
+- Functionality
+- Design
+- Documentation (including initial UML review + final UML diagrams). 
+- Testing (at least branch coverage)
+- Other Code Quality Factors (e.g., naming, formatting, smells).
+- Process + project management (Issue tracking, CI/CD, Code Reviews, etc).
+
+### Policies and Integrity
+- You need to create your own design and code. 
+- Gathering code from the internet and reusing it is not an acceptable practice for this course. 
+- The use of AI-driven tools (like ChatGPT, Copilot, etc.) is not allowed.
+- The use of pre-existing solutions (design patterns excluded) is also not acceptable in this course.
+- Reviewing other systems as examples is acceptable *but* you must document the sources and include those in your repository.
+- Violation of the previous policies is considered academic misconduct and it will be reported to the proper university officials.
 
 ## User Stories
 During lecture time, most professors take attendance to record which students attend sessions. 
@@ -82,3 +90,5 @@ Given that, some university systems don't allow name changes, both the legal nam
         - We recommend [StarUML](https://staruml.io) to generate the diagrams. *You can use it as an evaluation, and including a white rectangle in the back helps you to generate good printouts.*
     - Software Requirement Specification (SRS) Document
         - Document clearly the requirements of the software. 
+    - Design Decisions
+        - Include a document discussing the design decisions you made. E.g., which design patterns did you consider and why did you select one over the others. 
