@@ -83,7 +83,7 @@ Given that, some university systems don't allow name changes, both the legal nam
     - Make sure to commit, push, and generate a release on GitLab before the deadline.
 - Late submission policy
     - Late submissions are not allowed without a completed request before the deadline. 
-    - Grade penalty policy applies as described on the syllabus and day one slides.
+    - Grade penalty policy applies as described on day one slides.
 - Documentation 
     - Diagrams and their sources must be included in a folder called documentation in the GitLab repository. 
         - Although you can use any tool, the tool needs to be freely available.
