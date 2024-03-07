@@ -8,6 +8,7 @@
 - *student name / netid*
 - *student name / netid*
 - *student name / netid*
+- *student name / netid*
 
 ## LEAD TA
 - **Your Project LEAD TA is**: *TA's name here*
