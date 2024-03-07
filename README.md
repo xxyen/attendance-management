@@ -39,7 +39,7 @@ Others use a traditional roll call, where the professor calls out the name of ea
 Both are tedious processes that may take five to ten minutes in large enrollment courses or even more outside the classroom.
 
 Your team was assigned to design a system to ease this process. 
-This program should run on a text-based terminal and should operating system independent (i.e., may run on Windows, Mac, Linux, etc.)
+This program should run on a text-based terminal and should be operating system independent (i.e., may run on Windows, Mac, Linux, etc.)
 
 Keep in mind that the information about enrollment and attendance is sensitive, so security mechanisms should be considered. 
 
@@ -70,9 +70,15 @@ Given that, some university systems don't allow name changes, both the legal nam
 
 
 ## Submission
-- To submit your project, you need to generate a release on GitLab. 
-- Diagrams and their sources must be included in a folder called documentation in the GitLab repository. 
-    - Although you can use any tool, the tool needs to be freely available.
-    - PDF printouts should also be included. 
-    - We recommend [StarUML](https://staruml.io) to generate the diagrams. *You can use it as an evaluation, and including a white rectangle in the back helps you to generate good printouts.*
+- Project Submission is through GitLab
+    - Make sure to commit, push, and generate a release on GitLab before the deadline.
+- Late submission policy
+    - Late submissions are not allowed without a completed request before the deadline. 
+    - Grade penalty policy applies as described on the syllabus and day one slides.
 - Documentation 
+    - Diagrams and their sources must be included in a folder called documentation in the GitLab repository. 
+        - Although you can use any tool, the tool needs to be freely available.
+        - PDF printouts should also be included. 
+        - We recommend [StarUML](https://staruml.io) to generate the diagrams. *You can use it as an evaluation, and including a white rectangle in the back helps you to generate good printouts.*
+    - Software Requirement Specification (SRS) Document
+        - Document clearly the requirements of the software. 
