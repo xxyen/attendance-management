@@ -1,6 +1,6 @@
 # ECE 651 - Spring 24 - Team Project - Evolution 1
 
-shared files: https://drive.google.com/drive/folders/19_QKardQi9_KidrFnLpRn8xvNeWekr1V?q=sharedwith:public%20parent:19_QKardQi9_KidrFnLpRn8xvNeWekr1V 
+notes: https://docs.google.com/document/d/19UT7gxBy4_OIT_IGnYiJKJtE6IPL98P0elu3N3NwG6M/edit 
 
 ## Team #6
 
