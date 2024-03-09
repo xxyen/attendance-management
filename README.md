@@ -1,17 +1,17 @@
 # ECE 651 - Spring 24 - Team Project - Evolution 1
 
-## Team #X
+## Team #6
 *Please replace the _x_ above with your team number*
 
 ## Team Members
 *Please complete your team information:*
-- *student name / netid*
-- *student name / netid*
-- *student name / netid*
-- *student name / netid*
+- *Aoli Zhou / az161*
+- *Xinyi Xie / xx98*
+- *Jiazheng Sun / js1106*
+- *Can Pei / cp357*
 
 ## LEAD TA
-- **Your Project LEAD TA is**: *TA's name here*
+- **Your Project LEAD TA is**: Zhengge
 - Your team will have one lead TA, to which you can reach out for clarification on the specifications.
 - You can ask for help from any TA, but regarding specifications, the LEAD TA definitions will have precedence over all other TAs. 
 
