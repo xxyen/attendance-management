@@ -1,0 +1,47 @@
+before_script:
+  - hostname
+  - whoami
+  - pwd
+  - ls -la
+  - docker --version
+
+stages:
+   - build
+   - test
+   - coverage
+   - deploy
+   - test-deployment
+
+build:
+  tags:
+     - ece651
+  stage: build
+  script: docker build --build-arg LOCAL_USER_ID=`id -u` --file attendance-management/Dockerfile --tag citest .
+
+test:
+  tags:
+     - ece651
+  stage: test
+  coverage: '/TOTAL COVERAGE: \d+\%/'
+  script: attendance-management/scripts/run-tests-in-docker.sh
+  artifacts:
+    paths:
+      - attendance-management/coverage
+      
+pages:
+ stage: coverage
+ tags:
+     - ece651
+ dependencies:
+   - test
+ script:
+   - mv attendance-management/coverage public/
+ artifacts:
+   paths:
+     - public
+
+deploy:
+  tags:
+    - ece651
+  stage: deploy
+  script: ./attendance-management/scripts/redeploy.sh
