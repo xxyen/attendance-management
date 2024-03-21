@@ -25,7 +25,9 @@ test:
      - ece651
   stage: test
   coverage: '/TOTAL COVERAGE: \d+\%/'
-  script: attendance-management/scripts/run-tests-in-docker.sh
+  script:
+    - chmod +x attendance-management/scripts/run-tests-in-docker.sh
+    - attendance-management/scripts/run-tests-in-docker.sh
   artifacts:
     paths:
       - attendance-management/coverage
