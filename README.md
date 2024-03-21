@@ -1,4 +1,10 @@
 # ECE 651 - Spring 24 - Team Project - Evolution 1
+
+![pipeline status](https://gitlab.oit.duke.edu/kits/project-000-000-01-test/project-team-6/badges/main/pipeline.svg)
+![coverage](https://gitlab.oit.duke.edu/kits/project-000-000-01-test/project-team-6/badges/main/coverage.svg?job=test)
+
+
+## Documentation
 - Task Breakdown: https://docs.google.com/spreadsheets/d/1x7Ri4QJ-Jm6Cy72xTA2OOKtt6kzGuaV_iuCRhnrZxEg/edit#gid=0
 - UML notes: https://docs.google.com/document/d/1iMrOiYFH6AFFYmwq5D3bl4LEW6iYUJkcECoWVfw-Ucc/edit 
 - Notes: https://docs.google.com/document/d/19UT7gxBy4_OIT_IGnYiJKJtE6IPL98P0elu3N3NwG6M/edit 
