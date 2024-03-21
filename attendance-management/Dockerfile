@@ -34,6 +34,9 @@ RUN mkdir -p /home/juser/.emacs.d/dcoverage
 COPY --chown=juser scripts/dcoverage.el /home/juser/.emacs.d/dcoverage/
 RUN chmod u+x emacs-bare.sh && ./emacs-bare.sh
 
+COPY --chown=juser scripts/ ./scripts/
+# Set execute permission for all scripts
+RUN chmod u+x ./scripts/*.sh
 
 # we are going to do a bit of gradle first, just to speed
 # up future builds
