@@ -8,11 +8,15 @@ public class AttendanceRecordTest {
   @Test
   public void test_AttendanceRecord() {
     Student stud = new Student("zx123", "Zoe X", "Zoe", new Email("zoe.x@duke.edu"));
-    Status status = new Status('p');
+    Status status = new Status('a');
     AttendanceRecord record = new AttendanceRecord(stud, status);
 
     assertEquals("zx123", record.getStudent().getStudentID());
-    assertEquals('p', record.getStatus().getStatus());
+    assertEquals('a', record.getStatus().getStatus());
+
+    Status newStatus = new Status('l');
+    record.changeRecord(newStatus);
+    assertEquals('l', record.getStatus().getStatus());
   }
 
 }

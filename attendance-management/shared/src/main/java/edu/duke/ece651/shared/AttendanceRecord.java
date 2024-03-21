@@ -16,4 +16,8 @@ public class AttendanceRecord {
     public Status getStatus() {
         return status;
     }
+
+    public void changeRecord(Status newStatus) {
+        this.status = newStatus;
+    }
 }
