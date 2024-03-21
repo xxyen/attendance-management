@@ -50,4 +50,6 @@ deploy:
   tags:
     - ece651
   stage: deploy
-  script: ./attendance-management/scripts/redeploy.sh
+  script: 
+    - chmod +x attendance-management/scripts/redeploy.sh
+    ./attendance-management/scripts/redeploy.sh
