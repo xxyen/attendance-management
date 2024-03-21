@@ -16,7 +16,9 @@ build:
   tags:
      - ece651
   stage: build
-  script: docker build --build-arg LOCAL_USER_ID=`id -u` --file attendance-management/Dockerfile --tag citest .
+  script: 
+    - cd attendance-management
+    - docker build --build-arg LOCAL_USER_ID=`id -u` --tag citest .
 
 test:
   tags:
