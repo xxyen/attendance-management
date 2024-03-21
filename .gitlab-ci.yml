@@ -28,6 +28,7 @@ test:
   script:
     - chmod +x attendance-management/scripts/run-tests-in-docker.sh
     - chmod +x attendance-management/scripts/test.sh
+    - chmod +x attendance-management/scripts/coverage_summary.sh
     - attendance-management/scripts/run-tests-in-docker.sh
   artifacts:
     paths:
