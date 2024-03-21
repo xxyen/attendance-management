@@ -27,6 +27,7 @@ test:
   coverage: '/TOTAL COVERAGE: \d+\%/'
   script:
     - chmod +x attendance-management/scripts/run-tests-in-docker.sh
+    - chmod +x attendance-management/scripts/test.sh
     - attendance-management/scripts/run-tests-in-docker.sh
   artifacts:
     paths:
