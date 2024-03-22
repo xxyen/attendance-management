@@ -2,6 +2,10 @@ package edu.duke.ece651.shared;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -34,4 +38,28 @@ public class SessionTest {
     assertEquals(cur, session.getTime());
   }
 
+  @Test
+  public void test_saveAttendanceRecords() throws Exception {
+    Session session = new Session("course101", new Date());
+    Student student1 = new Student("id001", "Will Doe", "Will", new Email("will@gmail.com"));
+    Student student2 = new Student("id002", "Grace Doe", "Grace", new Email("grace@gmail.com"));
+    session.addRecord(new AttendanceRecord(student1, new Status('p')));
+    session.addRecord(new AttendanceRecord(student2, new Status('a')));
+
+    session.saveAttendanceRecords();
+
+    String workingDir = System.getProperty("user.dir");
+    String DATA_PATH = workingDir + "/data/" + session.getCourseid() + "/sessions/";
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
+    String fileName = dateFormat.format(session.getTime()) + ".txt";
+    String path = DATA_PATH + fileName;
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+      String line1 = reader.readLine();
+      String line2 = reader.readLine();
+
+      assertEquals("id001, p", line1);
+      assertEquals("id002, a", line2);
+    }
+  }
 }
