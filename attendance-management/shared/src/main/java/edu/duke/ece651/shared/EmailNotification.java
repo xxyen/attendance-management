@@ -7,6 +7,8 @@ public class EmailNotification implements Notification {
     this.fromAddress = fromAddress;
     this.toAddress = toAddress;
   }
+  @Override
   public boolean sendNotification() {
+    return false;
   }
 }
