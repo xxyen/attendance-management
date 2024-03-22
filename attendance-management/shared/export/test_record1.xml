@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sessions>
+	<session courseId="course01" time="2024-03-22 14:32">
+		<attendanceRecord>
+			<studentID>s01</studentID>
+			<legalName>Legal Name01</legalName>
+			<displayName>name01</displayName>
+			<email>email1@qq.com</email>
+			<status>p</status>
+		</attendanceRecord>
+		<attendanceRecord>
+			<studentID>s02</studentID>
+			<legalName>Legal Name02</legalName>
+			<displayName>name02</displayName>
+			<email>email2@gmail.com</email>
+			<status>a</status>
+		</attendanceRecord>
+	</session>
+	<session courseId="course02" time="2024-03-22 14:32">
+		<attendanceRecord>
+			<studentID>s03</studentID>
+			<legalName>Legal Name03</legalName>
+			<displayName>name03</displayName>
+			<email>email3@duke.edu</email>
+			<status>l</status>
+		</attendanceRecord>
+	</session>
+</sessions>
