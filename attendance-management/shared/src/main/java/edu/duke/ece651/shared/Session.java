@@ -30,4 +30,8 @@ public class Session {
     public void addRecord(AttendanceRecord record) {
         this.records.add(record);
     }
+
+    public void setRecords(List<AttendanceRecord> records) {
+        this.records = records;
+    }
 }
