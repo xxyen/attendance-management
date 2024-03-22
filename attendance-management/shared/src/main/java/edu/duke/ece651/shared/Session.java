@@ -32,17 +32,20 @@ public class Session {
         this.records.add(record);
     }
 
-  //////////////Added by Jiazheng Sun///////////////
-
-  public boolean changeRecord(Student student, Status newStatus) {
-    Iterable<AttendanceRecord> result = records;
-    for (AttendanceRecord rec: result) {
-      if (rec.getStudent().equals(student)) {
-        rec.changeRecord(newStatus);
-        return true;
-      }
+    public void setRecords(ArrayList<AttendanceRecord> records) {
+        this.records = records;
     }
-    return false;
-  }
-  /////////////////////////////////////////////////
+    ////////////// Added by Jiazheng Sun///////////////
+
+    public boolean changeRecord(Student student, Status newStatus) {
+        Iterable<AttendanceRecord> result = records;
+        for (AttendanceRecord rec : result) {
+            if (rec.getStudent().equals(student)) {
+                rec.changeRecord(newStatus);
+                return true;
+            }
+        }
+        return false;
+    }
+    /////////////////////////////////////////////////
 }

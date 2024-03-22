@@ -11,14 +11,18 @@ import org.junit.jupiter.api.Test;
 public class CourseTest {
   private Course course;
   private Student stud1, stud2;
+  private Professor prof1;
   private Session session1;
 
   public void createCourse() {
     stud1 = new Student("zx123", "Zoe X", "Zoey", new Email("zoe.x@duke.edu"));
     stud2 = new Student("cg456", "Carol G", "Caroline", new Email("carol.g@duke.edu"));
     Student[] studentsArray = { stud1 };
+    prof1 = new Professor("John", "jh123", new Email("jh123@duke.edu"));
+    Professor[] professorsArray = { prof1 };
 
-    course = new Course("ECE651", studentsArray, true);
+    course = new Course("ECE651", professorsArray, studentsArray, true);
+    // course = new Course("ECE651", studentsArray, true);
 
     session1 = new Session("ECE651", new Date());
   }
