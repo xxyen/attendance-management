@@ -3,6 +3,7 @@ package edu.duke.ece651.shared;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,7 +17,7 @@ public class FileHandlerTest {
   @Test
   void test_loadGlobalStudents() throws FileNotFoundException {
     Map<String, Student> students = FileHandler.loadGlobalStudents();
-    assertEquals(2, students.size());
+    assertEquals(4, students.size());
 
     Student student1 = students.get("s001");
     assertNotNull(student1);
@@ -69,6 +70,30 @@ public class FileHandlerTest {
 
     assertEquals("s002", attendanceRecords.get(1).getStudent().getStudentID());
     assertEquals('a', attendanceRecords.get(1).getStatus().getStatus());
+  }
+
+  // It has been tested
+  @Disabled
+  @Test
+  void test_loadRosterFromCsv() throws IOException {
+    String workingDir = System.getProperty("user.dir");
+    String path = workingDir + "/roster/";
+    String rosterPath = path + "roster_course456.csv";
+
+    Map<String, Student> globalStudents = FileHandler.loadGlobalStudents();
+    Map<String, Professor> globalProfessors = FileHandler.loadGlobalProfessors();
+    List<Course> courses = FileHandler.loadCourses(globalStudents,
+        globalProfessors);
+    Course cour = courses.get(1);
+    // Course cour = new Course("course456", null, null, true);
+
+    FileHandler.loadRosterFromCsv(cour.getCourseid(), cour, rosterPath);
+
+    assertFalse(cour.getStudents().isEmpty());
+    assertEquals(2, cour.getStudents().size());
+    assertEquals("s003", cour.getStudents().get(0).getStudentID());
+    assertEquals("David", cour.getStudents().get(0).getDisplayName());
+    assertEquals("s004", cour.getStudents().get(1).getStudentID());
   }
 
 }

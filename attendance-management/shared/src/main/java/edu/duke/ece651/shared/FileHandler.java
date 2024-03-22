@@ -1,9 +1,12 @@
 package edu.duke.ece651.shared;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
@@ -184,5 +187,83 @@ public class FileHandler {
             e.printStackTrace();
         }
         return records;
+    }
+
+    private static void updateOrAddStudentInGlobalList(Student student) throws IOException {
+        File file = new File(DATA_PATH + "StudentList.csv");
+        List<Student> allStudents = new ArrayList<>();
+        boolean studentFound = false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                if (values[0].equals(student.getStudentID())) {
+                    studentFound = true;
+                    allStudents.add(student);
+                } else {
+                    allStudents.add(new Student(values[0], values[1], values[2], new Email(values[3])));
+                }
+            }
+        }
+
+        if (!studentFound) {
+            allStudents.add(student);
+        }
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            for (Student s : allStudents) {
+                String line = s.getStudentID() + "," + s.getLegalName() + "," + s.getDisplayName() + ","
+                        + s.getEmailAddr().getEmailAddr();
+                bw.write(line);
+                bw.newLine();
+            }
+        }
+    }
+
+    // To do this, must make sure the course has been created (the course folder and sessions/manifest.txtexist).
+    public static void loadRosterFromCsv(String courseId, Course course, String rosterPath) throws IOException {
+        File rosterFile = new File(rosterPath);
+        if (!rosterFile.exists()) {
+            throw new FileNotFoundException("Roster file not found at: " + rosterPath);
+        }
+
+        Map<String, Student> globalStudents = loadGlobalStudents();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(rosterFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                Student newStudent = new Student(values[0], values[1], values[2], new Email(values[3]));
+                Student existingStudent = globalStudents.get(values[0]);
+
+                if (existingStudent != null) {
+                    // Check if the existing student details match the new details
+                    if (!existingStudent.equals(newStudent)) {
+                        // Update the global list with the new student details
+                        updateOrAddStudentInGlobalList(newStudent);
+                        globalStudents.put(newStudent.getStudentID(), newStudent);
+                    }
+                } else {
+                    // Student does not exist in global list, add new student
+                    updateOrAddStudentInGlobalList(newStudent);
+                    globalStudents.put(newStudent.getStudentID(), newStudent);
+                }
+
+                course.addStudent(newStudent);
+            }
+        }
+
+        // Update course-specific student list file
+        String courseRosterPath = DATA_PATH + courseId + "/StudentList_" + courseId + ".csv";
+        File file = new File(courseRosterPath);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            for (Student student : course.getStudents()) {
+                String line = student.getStudentID() + "," + student.getLegalName() + "," +
+                        student.getDisplayName() + "," + student.getEmailAddr().getEmailAddr();
+                bw.write(line);
+                bw.newLine();
+            }
+        }
     }
 }
