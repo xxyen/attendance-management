@@ -8,6 +8,7 @@ public class BasicAttendanceOperator implements AttendanceOperator {
   }
   
   @Override
-  public void changeSingleRecord(AttendanceRecord record, Status status) {
+  public boolean changeSingleRecord(Session session, Student student, Status newStatus) {
+    return session.changeRecord(student, newStatus);
   }
 }
