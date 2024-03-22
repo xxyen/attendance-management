@@ -25,7 +25,6 @@ public class FileHandlerTest {
     assertEquals("s001@duke.edu", student1.getEmailAddr().getEmailAddr());
   }
 
-  // @Disabled
   @Test
   void test_loadGlobalProfessors() {
     Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
@@ -37,7 +36,6 @@ public class FileHandlerTest {
     assertEquals("profx@gmail.com", professor1.getEmail().getEmailAddr());
   }
 
-  // @Disabled
   @Test
   void test_loadCourses() throws ParseException, FileNotFoundException {
     Map<String, Student> globalStudents = FileHandler.loadGlobalStudents();

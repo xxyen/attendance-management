@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// src/main/resources/
+// shared/data/
 // ├── StudentList.csv
 // ├── ProfessorList.csv
 // ├── courses_manifest.txt    // Lists all courses
@@ -25,16 +25,19 @@ import java.util.Map;
 // │       └── 2024-03-21_22-00.csv
 
 public class FileHandler {
+    private static final String workingDir = System.getProperty("user.dir");
+    private static final String DATA_PATH = workingDir + "/data/";
 
     public static Map<String, Student> loadGlobalStudents() throws FileNotFoundException {
         Map<String, Student> students = new HashMap<>();
-        String path = "StudentList.csv";
-        InputStream inputStream = FileHandler.class.getClassLoader().getResourceAsStream(path);
-        // InputStream inputStream = FileHandler.class.getResourceAsStream(path);
-        if (inputStream == null) {
-            throw new FileNotFoundException("Resource not found: " + path);
-        }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+        // String path = "StudentList.csv";
+        // InputStream inputStream =
+        // FileHandler.class.getClassLoader().getResourceAsStream(path);
+        // if (inputStream == null) {
+        // throw new FileNotFoundException("Resource not found: " + path);
+        // }
+        String path = DATA_PATH + "StudentList.csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
@@ -50,9 +53,8 @@ public class FileHandler {
 
     public static Map<String, Professor> loadGlobalProfessors() {
         Map<String, Professor> professors = new HashMap<>();
-        String path = "ProfessorList.csv";
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(FileHandler.class.getClassLoader().getResourceAsStream(path)))) {
+        String path = DATA_PATH + "ProfessorList.csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
@@ -68,11 +70,12 @@ public class FileHandler {
 
     private static List<String> loadManifest(String manifestPath) throws FileNotFoundException {
         List<String> items = new ArrayList<>();
-        InputStream inputStream = FileHandler.class.getClassLoader().getResourceAsStream(manifestPath);
-        if (inputStream == null) {
-            throw new FileNotFoundException("Resource not found: " + manifestPath);
-        }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+        // InputStream inputStream =
+        // FileHandler.class.getClassLoader().getResourceAsStream(manifestPath);
+        // if (inputStream == null) {
+        // throw new FileNotFoundException("Resource not found: " + manifestPath);
+        // }
+        try (BufferedReader br = new BufferedReader(new FileReader(manifestPath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 items.add(line.trim());
@@ -87,7 +90,8 @@ public class FileHandler {
     public static List<Course> loadCourses(Map<String, Student> globalStudents,
             Map<String, Professor> globalProfessors) throws FileNotFoundException {
         List<Course> courses = new ArrayList<>();
-        List<String> courseIds = loadManifest("course_manifest.txt");
+        String path = DATA_PATH + "course_manifest.txt";
+        List<String> courseIds = loadManifest(path);
         for (String courseId : courseIds) {
             List<Student> courseStudents = loadCourseStudents(courseId, globalStudents);
             List<Professor> courseProfessors = loadCourseProfessors(courseId, globalProfessors);
@@ -103,9 +107,8 @@ public class FileHandler {
 
     private static List<Student> loadCourseStudents(String courseId, Map<String, Student> globalStudents) {
         List<Student> students = new ArrayList<>();
-        String path = courseId + "/StudentList_" + courseId + ".csv";
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(FileHandler.class.getClassLoader().getResourceAsStream(path)))) {
+        String path = DATA_PATH + courseId + "/StudentList_" + courseId + ".csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
@@ -123,9 +126,8 @@ public class FileHandler {
 
     private static List<Professor> loadCourseProfessors(String courseId, Map<String, Professor> globalProfessors) {
         List<Professor> professors = new ArrayList<>();
-        String path = courseId + "/Professor_" + courseId + ".csv";
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(FileHandler.class.getClassLoader().getResourceAsStream(path)))) {
+        String path = DATA_PATH + courseId + "/Professor_" + courseId + ".csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
@@ -144,14 +146,15 @@ public class FileHandler {
     private static List<Session> loadSessions(String courseId, Map<String, Student> globalStudents)
             throws FileNotFoundException {
         List<Session> sessions = new ArrayList<>();
-        List<String> sessionFiles = loadManifest(courseId + "/sessions/manifest.txt");
+        List<String> sessionFiles = loadManifest(DATA_PATH + courseId + "/sessions/manifest.txt");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
 
         for (String fileName : sessionFiles) {
             try {
                 Date sessionDate = format.parse(fileName.replace(".csv", ""));
                 Session session = new Session(courseId, sessionDate);
-                List<AttendanceRecord> records = loadAttendanceRecords(courseId + "/sessions/" + fileName,
+                ArrayList<AttendanceRecord> records = loadAttendanceRecords(
+                        DATA_PATH + courseId + "/sessions/" + fileName,
                         globalStudents);
                 session.setRecords(records);
                 sessions.add(session);
@@ -162,10 +165,10 @@ public class FileHandler {
         return sessions;
     }
 
-    private static List<AttendanceRecord> loadAttendanceRecords(String filePath, Map<String, Student> globalStudents) {
-        List<AttendanceRecord> records = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(FileHandler.class.getClassLoader().getResourceAsStream(filePath)))) {
+    private static ArrayList<AttendanceRecord> loadAttendanceRecords(String filePath,
+            Map<String, Student> globalStudents) {
+        ArrayList<AttendanceRecord> records = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
