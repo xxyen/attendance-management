@@ -2,7 +2,7 @@ package edu.duke.ece651.shared;
 
 import java.util.ArrayList;
 
-public class Professor {
+public class Professor implements User {
   private String name;
   private String professorID;
   private Email email;
@@ -22,8 +22,9 @@ public class Professor {
   public String getName() {
     return name;
   }
-  
-  public String getProfessorID() {
+
+  @Override
+  public String getPersonalid() {
     return professorID;
   }
   
@@ -31,21 +32,22 @@ public class Professor {
     return email;
   }
   
-  public Iterable<String> getCourses(){
-    return courseids;
+  public boolean hasCourse(String courseid){
+    return courseids.contains(courseid);
   }
-  public boolean addCourse(String courseid) {
+  public void addCourse(String courseid) {
     if (courseids.contains(courseid)) {
-      return false;
+      throw new IllegalArgumentException(courseid + " exists!");
     }
     courseids.add(courseid);
-    return true;
   }
   
-  public boolean removeCourse(String courseid) {
+  public void removeCourse(String courseid) {
     if (courseids.contains(courseid)) {
       courseids.remove(courseid);
+      return;
     }
-    return false;
+    throw new IllegalArgumentException(name + " doesn't teach " + courseid + "!");      
   }
+  
 }

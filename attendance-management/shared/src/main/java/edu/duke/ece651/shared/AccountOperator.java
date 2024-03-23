@@ -3,6 +3,8 @@ package edu.duke.ece651.shared;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Optional;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,8 +14,10 @@ import org.json.JSONTokener;
 
 public class AccountOperator {
   private ArrayList<Account> accounts;
+  private String filePath;
   
-  public AccountOperator(){                                                                    
+  public AccountOperator(String importPath){                                                                    
+    this.filePath = importPath;
     this.accounts = importAccountsfromFile();
   }
 
@@ -26,7 +30,7 @@ public class AccountOperator {
     
     try {
       // Create a FileReader for the JSON file
-      FileReader reader = new FileReader("src/main/resources/AccountList.json");
+      FileReader reader = new FileReader(filePath);
       
       // Parse the FileReader using JSONTokener
       JSONTokener tokener = new JSONTokener(reader);
@@ -52,7 +56,6 @@ public class AccountOperator {
     String password = (String) jsonObject.optString("password", "");
     String type = (String) jsonObject.get("type");
     String uniqueId = (String) jsonObject.get("unique_id");
-    System.out.println(userid+", "+type);
     return createAccount(userid, password, type, uniqueId);
   }
   
@@ -72,10 +75,10 @@ public class AccountOperator {
       return false;
     }
     for (Account account : accounts) {
-      if (account == null) {
-        continue;
-      }
-      if (userid == account.getUserid()) {
+      //      if (account == null) {
+      // continue;
+      //}
+      if (userid.equals(account.getUserid())) {
         return true;
       }
     }
@@ -87,7 +90,7 @@ public class AccountOperator {
   }
 
   // return user???
-  public boolean signIn(String userid, String password) {
+  public User signIn(String userid, String password, Map<String, User> userList) {
     Account account = accounts.stream().filter(acc -> acc.getUserid().equals(userid)).findFirst().orElse(null);
     if(account == null) {
       throw new IllegalArgumentException("This account doesn't exist!");
@@ -95,7 +98,11 @@ public class AccountOperator {
     else {
       if(account.isCorrectPassword(password)){
         //find the professor in json file
-        return true;
+        Optional<Map.Entry<String, User>> userEntryOptional = userList.entrySet().stream().filter(entry -> entry.getKey().equals(account.getPersonalid())).findFirst();
+        if(userEntryOptional.isPresent()) {
+          return userEntryOptional.get().getValue();
+        }
+        throw new IllegalArgumentException("User not found in userList map!");
       }
       else {
         throw new IllegalArgumentException("Incorrect password!");

@@ -23,7 +23,7 @@ public class ProfessorAccount implements Account{
   }
 
   @Override
-  public String getPersonalId() {
+  public String getPersonalid() {
     return profid;
   }
   
@@ -40,10 +40,17 @@ public class ProfessorAccount implements Account{
 
   @Override
   public boolean isCorrectPassword(String pwd) {
+    if(pwd == null) {
+      return false;
+    }
     if(pwd.equals(password)) {
       return true;
     }
     return false;
   }
 
+  @Override
+  public void saveAccounts() {
+    
+  }
 }

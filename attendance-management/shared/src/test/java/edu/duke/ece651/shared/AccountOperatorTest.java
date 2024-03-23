@@ -1,15 +1,19 @@
 package edu.duke.ece651.shared;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 public class AccountOperatorTest {
+  AccountOperator accountOperator = new AccountOperator("src/main/resources/AccountList.json");
   @Test
   public void test_ParseAccountObjectWithPassword() {
     // Create a JSONObject with all required fields and password
@@ -20,7 +24,7 @@ public class AccountOperatorTest {
     jsonObject.put("unique_id", "PROF001");
 
     // Call parseAccountObject with the JSONObject
-    AccountOperator accountOperator = new AccountOperator();
+    //AccountOperator accountOperator = new AccountOperator();
     Account account = accountOperator.parseAccountObject(jsonObject);
 
     // Perform assertions on the returned account
@@ -28,7 +32,7 @@ public class AccountOperatorTest {
     assertEquals("john123", account.getUserid());
     assertTrue(account.isCorrectPassword("password123"));
     assertEquals("professor", account.getAccountType());
-    assertEquals("PROF001", account.getPersonalId());
+    assertEquals("PROF001", account.getPersonalid());
   }
 
   @Test
@@ -40,7 +44,7 @@ public class AccountOperatorTest {
     jsonObject.put("unique_id", "PROF001");
 
     // Call parseAccountObject with the JSONObject
-    AccountOperator accountOperator = new AccountOperator();
+    //AccountOperator accountOperator = new AccountOperator();
     Account account = accountOperator.parseAccountObject(jsonObject);
 
     // Perform assertions on the returned account
@@ -48,12 +52,12 @@ public class AccountOperatorTest {
     assertEquals("john123", account.getUserid());
     assertTrue(account.isCorrectPassword("password"));
     assertEquals("professor", account.getAccountType());
-    assertEquals("PROF001", account.getPersonalId());
+    assertEquals("PROF001", account.getPersonalid());
   }
 
   @Test
   public void test_setUp() {
-    AccountOperator accountOperator = new AccountOperator();
+    //AccountOperator accountOperator = new AccountOperator();
     ArrayList<String> expected = new ArrayList<>();
     expected.add("Tyler");
     expected.add("something123");
@@ -73,10 +77,30 @@ public class AccountOperatorTest {
       cnt++;
       assertTrue(account.isCorrectPassword(expected.get(cnt)));
       cnt++;
-      assertEquals(expected.get(cnt), account.getPersonalId());
+      assertEquals(expected.get(cnt), account.getPersonalid());
       assertEquals("professor", account.getAccountType());
       cnt ++;
     }
   }
 
+  @Test
+  public void test_createAccount_student() {
+    assertNull(accountOperator.createAccount("ss", "", "student", "123"));
+    assertThrows(IllegalArgumentException.class, () -> accountOperator.createAccount("Drew", "", "professor", "123"));
+  }
+
+  @Test
+  public void test_signIn_professor() {
+    Email email = new Email("xxx@xxx.com");
+    User prof1 = new Professor("DH", "adh39", email);
+    User prof2 = new Professor("TB", "tkb13", email);
+    HashMap<String, User> profList = new HashMap<>();
+    profList.put("adh39", prof1);
+    assertThrows(IllegalArgumentException.class, () -> accountOperator.signIn("Tyler", "something123", profList));
+    profList.put("tkb13", prof2);
+    assertEquals(prof2, accountOperator.signIn("Tyler", "something123", profList));
+    assertThrows(IllegalArgumentException.class, () -> accountOperator.signIn("David", "something123", profList));
+    assertThrows(IllegalArgumentException.class, () -> accountOperator.signIn("Tyler", "something234", profList));
+  }
+  
 }

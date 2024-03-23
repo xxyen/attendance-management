@@ -63,7 +63,7 @@ public class FileHandler {
                 String[] values = line.split(",");
                 // Assuming CSV format: name, professorID, email
                 Professor professor = new Professor(values[0], values[1], new Email(values[2]));
-                professors.put(professor.getProfessorID(), professor);
+                professors.put(professor.getPersonalid(), professor);
             }
         } catch (Exception e) {
             e.printStackTrace();
