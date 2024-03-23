@@ -24,7 +24,7 @@ public class Professor implements User {
   }
 
   @Override
-  public String getPersonalid() {
+  public String getPersonalID() {
     return professorID;
   }
   

@@ -1,6 +1,6 @@
 package edu.duke.ece651.shared;
 
-public class Student {
+public class Student implements User {
     private String studentID;
 
     private String legalName;
@@ -24,7 +24,7 @@ public class Student {
         this.emailAddr = emailAddr;
     }
 
-    public String getStudentID() {
+    public String getPersonalID() {
         return studentID;
     }
 

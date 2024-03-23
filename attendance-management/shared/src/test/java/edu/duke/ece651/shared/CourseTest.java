@@ -53,7 +53,7 @@ public class CourseTest {
     createCourse();
     course.addStudent(stud2);
     assertEquals(2, course.getStudents().size());
-    course.removeStudent(stud1.getStudentID());
+    course.removeStudent(stud1.getPersonalID());
     assertEquals(1, course.getStudents().size());
   }
 
@@ -85,7 +85,7 @@ public class CourseTest {
 
   private boolean containsStudent(List<Student> students, Student expectedStudent) {
     for (Student stu : students) {
-      if (stu.getStudentID().equals(expectedStudent.getStudentID())) {
+      if (stu.getPersonalID().equals(expectedStudent.getPersonalID())) {
         return true;
       }
     }

@@ -46,7 +46,7 @@ public class FileHandler {
                 String[] values = line.split(",");
                 // Assuming CSV format: studentID, legalName, displayName, email
                 Student student = new Student(values[0], values[1], values[2], new Email(values[3]));
-                students.put(student.getStudentID(), student);
+                students.put(student.getPersonalID(), student);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +63,7 @@ public class FileHandler {
                 String[] values = line.split(",");
                 // Assuming CSV format: name, professorID, email
                 Professor professor = new Professor(values[0], values[1], new Email(values[2]));
-                professors.put(professor.getPersonalid(), professor);
+                professors.put(professor.getPersonalID(), professor);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -198,7 +198,7 @@ public class FileHandler {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if (values[0].equals(student.getStudentID())) {
+                if (values[0].equals(student.getPersonalID())) {
                     studentFound = true;
                     allStudents.add(student);
                 } else {
@@ -213,7 +213,7 @@ public class FileHandler {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
             for (Student s : allStudents) {
-                String line = s.getStudentID() + "," + s.getLegalName() + "," + s.getDisplayName() + ","
+                String line = s.getPersonalID() + "," + s.getLegalName() + "," + s.getDisplayName() + ","
                         + s.getEmailAddr().getEmailAddr();
                 bw.write(line);
                 bw.newLine();
@@ -242,12 +242,12 @@ public class FileHandler {
                     if (!existingStudent.equals(newStudent)) {
                         // Update the global list with the new student details
                         updateOrAddStudentInGlobalList(newStudent);
-                        globalStudents.put(newStudent.getStudentID(), newStudent);
+                        globalStudents.put(newStudent.getPersonalID(), newStudent);
                     }
                 } else {
                     // Student does not exist in global list, add new student
                     updateOrAddStudentInGlobalList(newStudent);
-                    globalStudents.put(newStudent.getStudentID(), newStudent);
+                    globalStudents.put(newStudent.getPersonalID(), newStudent);
                 }
 
                 course.addStudent(newStudent);
@@ -259,7 +259,7 @@ public class FileHandler {
         File file = new File(courseRosterPath);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
             for (Student student : course.getStudents()) {
-                String line = student.getStudentID() + "," + student.getLegalName() + "," +
+                String line = student.getPersonalID() + "," + student.getLegalName() + "," +
                         student.getDisplayName() + "," + student.getEmailAddr().getEmailAddr();
                 bw.write(line);
                 bw.newLine();

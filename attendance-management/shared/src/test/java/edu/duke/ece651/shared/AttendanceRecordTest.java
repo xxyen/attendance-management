@@ -11,7 +11,7 @@ public class AttendanceRecordTest {
     Status status = new Status('a');
     AttendanceRecord record = new AttendanceRecord(stud, status);
 
-    assertEquals("zx123", record.getStudent().getStudentID());
+    assertEquals("zx123", record.getStudent().getPersonalID());
     assertEquals('a', record.getStatus().getStatus());
 
     Status newStatus = new Status('l');
