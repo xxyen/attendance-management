@@ -1,0 +1,19 @@
+[
+    {   
+	"userid": "Tyler",
+	"password": "something123",
+        "type": "professor",
+	"unique_id": "tkb13"
+    },
+    {
+	"userid": "Brian",
+	"password": "something234",
+        "type": "professor",
+	"unique_id": "bmr23"
+    },
+    {
+        "userid": "Drew",
+        "type": "professor",
+        "unique_id": "adh39"
+    }
+]
