@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class FileHandlerTest {
+  // @Disabled
   @Test
   void test_loadGlobalStudents() throws FileNotFoundException {
     Map<String, Student> students = FileHandler.loadGlobalStudents();
@@ -26,6 +27,7 @@ public class FileHandlerTest {
     assertEquals("s001@duke.edu", student1.getEmailAddr().getEmailAddr());
   }
 
+  // @Disabled
   @Test
   void test_loadGlobalProfessors() {
     Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
@@ -37,6 +39,7 @@ public class FileHandlerTest {
     assertEquals("profx@gmail.com", professor1.getEmail().getEmailAddr());
   }
 
+  // @Disabled
   @Test
   void test_loadCourses() throws ParseException, FileNotFoundException {
     Map<String, Student> globalStudents = FileHandler.loadGlobalStudents();
@@ -73,7 +76,8 @@ public class FileHandlerTest {
     assertEquals('a', attendanceRecords.get(1).getStatus().getStatus());
   }
 
-  // It has been tested
+  // It has been tested. To test this function, you need to disable all functions
+  // above
   @Disabled
   @Test
   void test_loadRosterFromCsv() throws IOException {
@@ -85,7 +89,15 @@ public class FileHandlerTest {
     Map<String, Professor> globalProfessors = FileHandler.loadGlobalProfessors();
     List<Course> courses = FileHandler.loadCourses(globalStudents,
         globalProfessors);
-    Course cour = courses.get(1);
+    // Course cour = courses.get(1);
+
+    Course cour = null;
+    for (Course course : courses) {
+      if ("course456".equals(course.getCourseid())) {
+        cour = course;
+        break;
+      }
+    }
     // Course cour = new Course("course456", null, null, true);
 
     FileHandler.loadRosterFromCsv(cour.getCourseid(), cour, rosterPath);
