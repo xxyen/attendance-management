@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Professor X",
+        "professorID": "p001",
+        "email": "profx@gmail.com"
+    },
+    {
+        "name": "Professor Y",
+        "professorID": "p002",
+        "email": "profy@duke.edu"
+    }
+]

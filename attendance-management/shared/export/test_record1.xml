@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sessions>
-	<session courseId="course01" time="2024-03-22 14:32">
+	<session courseId="course01" time="2024-03-23 00:00">
 		<attendanceRecord>
 			<studentID>s01</studentID>
 			<legalName>Legal Name01</legalName>
@@ -16,7 +16,7 @@
 			<status>a</status>
 		</attendanceRecord>
 	</session>
-	<session courseId="course02" time="2024-03-22 14:32">
+	<session courseId="course02" time="2024-03-23 00:00">
 		<attendanceRecord>
 			<studentID>s03</studentID>
 			<legalName>Legal Name03</legalName>

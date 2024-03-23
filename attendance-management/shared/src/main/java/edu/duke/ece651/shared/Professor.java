@@ -31,6 +31,10 @@ public class Professor {
         return email;
     }
 
+    public ArrayList<String> getCourseids() {
+        return courseids;
+    }
+
     public boolean addCourse(String courseid) {
         if (courseids.contains(courseid)) {
             return false;
