@@ -39,7 +39,8 @@ public class SessionTest {
     assertEquals(cur, session.getTime());
   }
 
-  // This method has been tested.
+  // This method has been tested. The file is encrypted, so you need to adjust the
+  // file name and change saveAttendanceRecords() when testing this function
   @Disabled
   @Test
   public void test_saveAttendanceRecords() throws Exception {
@@ -54,7 +55,7 @@ public class SessionTest {
     String workingDir = System.getProperty("user.dir");
     String DATA_PATH = workingDir + "/data/" + session.getCourseid() + "/sessions/";
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
-    String fileName = dateFormat.format(session.getTime()) + ".txt";
+    String fileName = dateFormat.format(session.getTime()) + ".txt.temp";
     String path = DATA_PATH + fileName;
 
     try (BufferedReader reader = new BufferedReader(new FileReader(path))) {

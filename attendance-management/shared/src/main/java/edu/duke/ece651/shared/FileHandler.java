@@ -21,15 +21,27 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 // shared/data/
-// ├── StudentList.csv
-// ├── ProfessorList.csv
+// ├── StudentList.json
+// ├── ProfessorList.json
 // ├── courses_manifest.txt    // Lists all courses
 // └── course123/
-// │   ├── StudentList_course123.csv
-// │   ├── professor_course123.csv
+// │   ├── StudentList_course123.json
+// │   ├── professor_course123.json
 // │   └── sessions/
 // │       ├── manifest.txt    // Lists all session files for course123
-// │       └── 2024-03-21_22-00.csv
+// │       └── 2024-03-21_22-00.txt
+
+// Decrypt file:
+// String decryptedPath = path + ".decrypted";
+// FileEncryptorDecryptor.decrypt(path, decryptedPath);
+// use the decryptedPath to read file
+// new File(decryptedPath).delete();
+
+// Encrypt file:
+// String tempPath = path + ".temp";
+// FileEncryptorDecryptor.encrypt(tempPath, path);
+// use the tempPath to write file
+// new File(tempPath).delete();
 
 public class FileHandler {
     private static final String workingDir = System.getProperty("user.dir");
