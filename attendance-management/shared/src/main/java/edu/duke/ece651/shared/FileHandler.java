@@ -137,6 +137,7 @@ public class FileHandler {
                 // Use professorID to fetch the Professor object from global list
                 Professor professor = globalProfessors.get(values[0]);
                 if (professor != null) {
+                    professor.addCourse(courseId);
                     professors.add(professor);
                 }
             }
@@ -221,7 +222,8 @@ public class FileHandler {
         }
     }
 
-    // To do this, must make sure the course has been created (the course folder and sessions/manifest.txtexist).
+    // To do this, must make sure the course has been created (the course folder and
+    // sessions/manifest.txtexist).
     public static void loadRosterFromCsv(String courseId, Course course, String rosterPath) throws IOException {
         File rosterFile = new File(rosterPath);
         if (!rosterFile.exists()) {

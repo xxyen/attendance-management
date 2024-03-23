@@ -53,6 +53,7 @@ public class FileHandlerTest {
     assertEquals(1, course123.getProfessors().size());
     assertEquals("p002", course123.getProfessors().get(0).getProfessorID());
     assertEquals("Professor Y", course123.getProfessors().get(0).getName());
+    assertTrue(course123.getProfessors().get(0).getCourseids().contains("course123"));
 
     assertEquals(1, course123.getSessions().size());
 
