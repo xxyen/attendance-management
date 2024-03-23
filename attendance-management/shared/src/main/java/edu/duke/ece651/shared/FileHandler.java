@@ -39,6 +39,7 @@ import org.json.JSONTokener;
 
 // Encrypt file:
 // String tempPath = path + ".temp";
+// FileEncryptorDecryptor.encrypt(tempPath, path);
 // use the tempPath to write file
 // new File(tempPath).delete();
 
