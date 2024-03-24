@@ -4,7 +4,7 @@
 ![coverage](https://gitlab.oit.duke.edu/kits/project-000-000-01-test/project-team-6/badges/main/coverage.svg?job=test)
 
 ## Coverage
-[Detailed coverage](https://kits-project-000-000-01-test.pages.oit.duke.edu/project-team-6/dashboard.html)
+[Detailed coverage](https://project-team-6-kits-project-000-000-01-test-a2e7317917c61f386e2.pages.oit.duke.edu/dashboard.html)
 
 ## Documentation
 - Task Breakdown: https://docs.google.com/spreadsheets/d/1x7Ri4QJ-Jm6Cy72xTA2OOKtt6kzGuaV_iuCRhnrZxEg/edit#gid=0
