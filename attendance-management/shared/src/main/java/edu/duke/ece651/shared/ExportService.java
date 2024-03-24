@@ -41,7 +41,7 @@ public class ExportService {
             for (AttendanceRecord record : session.getRecords()) {
                 JSONObject recordObj = new JSONObject();
                 if (fields.contains("studentID")) {
-                    recordObj.put("studentID", record.getStudent().getStudentID());
+                    recordObj.put("studentID", record.getStudent().getPersonalID());
                 }
                 if (fields.contains("legalName")) {
                     recordObj.put("legalName", record.getStudent().getLegalName());
@@ -79,7 +79,7 @@ public class ExportService {
                 xmlBuilder.append("\t\t<attendanceRecord>\n");
                 if (fields.contains("studentID")) {
                     xmlBuilder.append(
-                            String.format("\t\t\t<studentID>%s</studentID>\n", record.getStudent().getStudentID()));
+                            String.format("\t\t\t<studentID>%s</studentID>\n", record.getStudent().getPersonalID()));
                 }
                 if (fields.contains("legalName")) {
                     xmlBuilder.append(

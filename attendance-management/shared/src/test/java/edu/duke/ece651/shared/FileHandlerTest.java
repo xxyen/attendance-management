@@ -51,12 +51,12 @@ public class FileHandlerTest {
     assertNotNull(course123);
 
     assertEquals(2, course123.getStudents().size());
-    assertEquals("s001", course123.getStudents().get(0).getStudentID());
+    assertEquals("s001", course123.getStudents().get(0).getPersonalID());
 
     assertEquals(1, course123.getProfessors().size());
-    assertEquals("p002", course123.getProfessors().get(0).getProfessorID());
+    assertEquals("p002", course123.getProfessors().get(0).getPersonalID());
     assertEquals("Professor Y", course123.getProfessors().get(0).getName());
-    assertTrue(course123.getProfessors().get(0).getCourseids().contains("course123"));
+    assertTrue(course123.getProfessors().get(0).hasCourse("course123"));
 
     assertEquals(1, course123.getSessions().size());
 
@@ -69,10 +69,10 @@ public class FileHandlerTest {
     List<AttendanceRecord> attendanceRecords = testSession.getRecords();
     assertEquals(2, attendanceRecords.size());
 
-    assertEquals("s001", attendanceRecords.get(0).getStudent().getStudentID());
+    assertEquals("s001", attendanceRecords.get(0).getStudent().getPersonalID());
     assertEquals('p', attendanceRecords.get(0).getStatus().getStatus());
 
-    assertEquals("s002", attendanceRecords.get(1).getStudent().getStudentID());
+    assertEquals("s002", attendanceRecords.get(1).getStudent().getPersonalID());
     assertEquals('a', attendanceRecords.get(1).getStatus().getStatus());
   }
 
@@ -104,9 +104,9 @@ public class FileHandlerTest {
 
     assertFalse(cour.getStudents().isEmpty());
     assertEquals(2, cour.getStudents().size());
-    assertEquals("s003", cour.getStudents().get(0).getStudentID());
+    assertEquals("s003", cour.getStudents().get(0).getPersonalID());
     assertEquals("David", cour.getStudents().get(0).getDisplayName());
-    assertEquals("s004", cour.getStudents().get(1).getStudentID());
+    assertEquals("s004", cour.getStudents().get(1).getPersonalID());
   }
 
 }
