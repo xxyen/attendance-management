@@ -34,7 +34,7 @@ public class SessionTest {
 
     List<AttendanceRecord> records = session.getRecords();
     assertEquals(2, records.size());
-    assertEquals("zx123", records.get(0).getStudent().getStudentID());
+    assertEquals("zx123", records.get(0).getStudent().getPersonalID());
     assertEquals('a', records.get(1).getStatus().getStatus());
     assertEquals(cur, session.getTime());
   }

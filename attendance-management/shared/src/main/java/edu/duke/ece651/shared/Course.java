@@ -59,7 +59,7 @@ public class Course {
   }
 
   public void removeStudent(String id) {
-    this.students.removeIf(student -> student.getStudentID().equals(id));
+    this.students.removeIf(student -> student.getPersonalID().equals(id));
   }
 
   public String getCourseid() {

@@ -238,7 +238,7 @@ public class FileHandler {
                 String professorId = professorsArray.getString(i); // array of professorIDs
                 Professor professor = globalProfessors.get(professorId);
                 if (professor != null) {
-                    if (!professor.getCourseids().contains(courseId)) {
+                    if (!professor.hasCourse(courseId)) {
                         professor.addCourse(courseId);
                     }
                     professors.add(professor);
@@ -326,12 +326,12 @@ public class FileHandler {
         // }
         // }
         Map<String, Student> students = loadGlobalStudents();
-        students.put(student.getStudentID(), student);
+        students.put(student.getPersonalID(), student);
 
         JSONArray studentsArray = new JSONArray();
         for (Student s : students.values()) {
             JSONObject studentObj = new JSONObject();
-            studentObj.put("studentID", s.getStudentID());
+            studentObj.put("studentID", s.getPersonalID());
             studentObj.put("legalName", s.getLegalName());
             studentObj.put("displayName", s.getDisplayName());
             if (s.getEmailAddr() != null) {
@@ -368,12 +368,12 @@ public class FileHandler {
                     if (!existingStudent.equals(newStudent)) {
                         // Update the global list with the new student details
                         updateOrAddStudentInGlobalList(newStudent);
-                        globalStudents.put(newStudent.getStudentID(), newStudent);
+                        globalStudents.put(newStudent.getPersonalID(), newStudent);
                     }
                 } else {
                     // Student does not exist in global list, add new student
                     updateOrAddStudentInGlobalList(newStudent);
-                    globalStudents.put(newStudent.getStudentID(), newStudent);
+                    globalStudents.put(newStudent.getPersonalID(), newStudent);
                 }
 
                 course.addStudent(newStudent);
