@@ -1,4 +1,7 @@
-arguments=--init-script /home/az161/.emacs.d/.cache/lsp/eclipse.jdt.ls/config_linux/org.eclipse.osgi/51/0/.cp/gradle/init/init.gradle --init-script /home/az161/.emacs.d/.cache/lsp/eclipse.jdt.ls/config_linux/org.eclipse.osgi/51/0/.cp/gradle/protobuf/init.gradle
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=main
+arguments=--init-script /home/xx98/.emacs.d/.cache/lsp/eclipse.jdt.ls/config_linux/org.eclipse.osgi/51/0/.cp/gradle/init/init.gradle --init-script /home/xx98/.emacs.d/.cache/lsp/eclipse.jdt.ls/config_linux/org.eclipse.osgi/51/0/.cp/gradle/protobuf/init.gradle
 auto.sync=true
 build.scans.enabled=false
 connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)

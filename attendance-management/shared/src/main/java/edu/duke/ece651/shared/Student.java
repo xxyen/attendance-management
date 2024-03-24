@@ -1,5 +1,7 @@
 package edu.duke.ece651.shared;
 
+import java.io.IOException;
+
 public class Student implements User {
     private String studentID;
 
@@ -16,11 +18,11 @@ public class Student implements User {
         this.emailAddr = emailAddr;
     }
 
-    public void setDisplayName(String displayName) {
+    public void setDisplayName(String displayName) throws IOException {
         this.displayName = displayName;
     }
 
-    public void setEmailAddr(Email emailAddr) {
+    public void setEmailAddr(Email emailAddr) throws IOException {
         this.emailAddr = emailAddr;
     }
 
