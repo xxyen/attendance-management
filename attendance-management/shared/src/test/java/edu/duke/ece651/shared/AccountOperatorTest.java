@@ -24,7 +24,6 @@ public class AccountOperatorTest {
     jsonObject.put("unique_id", "PROF001");
 
     // Call parseAccountObject with the JSONObject
-    //AccountOperator accountOperator = new AccountOperator();
     Account account = accountOperator.parseAccountObject(jsonObject);
 
     // Perform assertions on the returned account
@@ -32,7 +31,7 @@ public class AccountOperatorTest {
     assertEquals("john123", account.getUserid());
     assertTrue(account.isCorrectPassword("password123"));
     assertEquals("professor", account.getAccountType());
-    assertEquals("PROF001", account.getPersonalid());
+    assertEquals("PROF001", account.getPersonalID());
   }
 
   @Test
@@ -44,7 +43,6 @@ public class AccountOperatorTest {
     jsonObject.put("unique_id", "PROF001");
 
     // Call parseAccountObject with the JSONObject
-    //AccountOperator accountOperator = new AccountOperator();
     Account account = accountOperator.parseAccountObject(jsonObject);
 
     // Perform assertions on the returned account
@@ -52,12 +50,11 @@ public class AccountOperatorTest {
     assertEquals("john123", account.getUserid());
     assertTrue(account.isCorrectPassword("password"));
     assertEquals("professor", account.getAccountType());
-    assertEquals("PROF001", account.getPersonalid());
+    assertEquals("PROF001", account.getPersonalID());
   }
 
   @Test
   public void test_setUp() {
-    //AccountOperator accountOperator = new AccountOperator();
     ArrayList<String> expected = new ArrayList<>();
     expected.add("Tyler");
     expected.add("something123");
@@ -77,7 +74,7 @@ public class AccountOperatorTest {
       cnt++;
       assertTrue(account.isCorrectPassword(expected.get(cnt)));
       cnt++;
-      assertEquals(expected.get(cnt), account.getPersonalid());
+      assertEquals(expected.get(cnt), account.getPersonalID());
       assertEquals("professor", account.getAccountType());
       cnt ++;
     }

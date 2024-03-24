@@ -1,16 +1,27 @@
 package edu.duke.ece651.shared;
 
+import java.util.Base64;
+
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
 public class ProfessorAccount implements Account{
   private String userid;
   private String password;
   private String profid;
   
-  protected ProfessorAccount(String userid, String password, String profid) { //now just a list of accounts, not allowed to create new ones
+  private static final String ALGORITHM = "AES";
+  private static final String KEY = "39edh*huis$iuh5yf@jf95";
+
+
+  
+  public ProfessorAccount(String userid, String password, String profid) { //now just a list of accounts, not allowed to create new ones
     if(password == ""){
       password = "password";
     }
     this.userid = userid;
-    this.password = hashPassword(password);
+    this.password = password;
     this.profid = profid;
   }
 
@@ -23,14 +34,21 @@ public class ProfessorAccount implements Account{
   }
 
   @Override
-  public String getPersonalid() {
+  public String getPersonalID() {
     return profid;
   }
+
   
-  public String hashPassword(String password) {
-    return password;
-    // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method 'hashPassword'");
+  
+  @Override
+  public String getEncryptedPwd() {
+    try {
+      return encrypt(password);
+    } catch (Exception e) {
+      // e.printStackTrace();
+      System.out.println("Failed to encrypt account password: " + e.getMessage());
+      return null;
+    }
   }
   
   @Override
@@ -49,8 +67,19 @@ public class ProfessorAccount implements Account{
     return false;
   }
 
-  @Override
-  public void saveAccounts() {
-    
+  private static String encrypt(String strToEncrypt) throws Exception {
+    Cipher cipher = Cipher.getInstance(ALGORITHM);
+    SecretKeySpec keySpec = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
+    cipher.init(Cipher.ENCRYPT_MODE, keySpec);
+    byte[] encryptedBytes = cipher.doFinal(strToEncrypt.getBytes());
+    return Base64.getEncoder().encodeToString(encryptedBytes);
+  }
+  
+  private static String decrypt(String strToDecrypt) throws Exception {
+    Cipher cipher = Cipher.getInstance(ALGORITHM);
+    SecretKeySpec keySpec = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
+    cipher.init(Cipher.DECRYPT_MODE, keySpec);
+    byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(strToDecrypt));
+    return new String(decryptedBytes);
   }
 }

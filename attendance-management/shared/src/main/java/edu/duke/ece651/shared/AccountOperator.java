@@ -10,7 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
- 
+import java.io.FileWriter;
 
 public class AccountOperator {
   private ArrayList<Account> accounts;
@@ -45,7 +45,8 @@ public class AccountOperator {
       // Close the reader
       reader.close();
     } catch (IOException | JSONException e) {
-      e.printStackTrace();
+      //e.printStackTrace();
+      System.out.println("Error occurs when importing accounts from the file: " + e.getMessage());
     }
     return importedAccounts;
   }
@@ -86,6 +87,22 @@ public class AccountOperator {
   }
   
   private void saveAccounts() {
+    JSONArray jsonArray = new JSONArray();
+    for(Account account: accounts) {
+      JSONObject accountObj = new JSONObject();
+      accountObj.put("userid", account.getUserid());
+      accountObj.put("password", account.getEncryptedPwd());
+      accountObj.put("type", account.getAccountType());
+      accountObj.put("unique_id", account.getPersonalID());
+      jsonArray.put(accountObj);
+    }
+
+    try (FileWriter fileWriter = new FileWriter(filePath)) {
+      fileWriter.write(jsonArray.toString(4)); // Use 4 spaces for indentation
+      System.out.println("JSON file created successfully.");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     
   }
 
@@ -98,7 +115,7 @@ public class AccountOperator {
     else {
       if(account.isCorrectPassword(password)){
         //find the professor in json file
-        Optional<Map.Entry<String, User>> userEntryOptional = userList.entrySet().stream().filter(entry -> entry.getKey().equals(account.getPersonalid())).findFirst();
+        Optional<Map.Entry<String, User>> userEntryOptional = userList.entrySet().stream().filter(entry -> entry.getKey().equals(account.getPersonalID())).findFirst();
         if(userEntryOptional.isPresent()) {
           return userEntryOptional.get().getValue();
         }
