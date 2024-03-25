@@ -319,16 +319,22 @@ public class FileHandler {
         }
     }
 
-    public static void addStudentToCourse(Student student, String courseId) throws IOException {
+    public static Student addStudentToCourse(String studentID, String courseId) throws IOException {
         // if the student is not in gloabal student list, then add it to gloabal student
         // list, and write StudentList.json
-        updateOrAddStudentInGlobalList(student);
+        //updateOrAddStudentInGlobalList(student);
+        Map<String, Student> students = loadGlobalStudents();
+        Student student = students.get(studentID);
+        if (student == null){
+            throw new IllegalArgumentException("There is no student with this ID in the school!");
+        }
 
         List<Student> studentsInCourse = loadCourseStudents(courseId, loadGlobalStudents());
         if (studentsInCourse.stream().noneMatch(s -> s.getPersonalID().equals(student.getPersonalID()))) {
             studentsInCourse.add(student);
             writeStudentsToCourseFile(studentsInCourse, courseId);
         }
+        return student;
     }
 
     public static void removeStudentFromCourse(String studentID, String courseId) throws IOException {

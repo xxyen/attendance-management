@@ -176,6 +176,8 @@ public class TextPlayer {
             stu.setDisplayName(s);
             //to-do
             //change display name in src file
+            FileHandler.updateCoursesForStudent(stu);
+            FileHandler.updateOrAddStudentInGlobalList(stu);
         }
         else {
             throw new IllegalArgumentException("Sorry, you cannot change student's display name!");
@@ -190,13 +192,27 @@ public class TextPlayer {
         out.println("--------------------------------------------------------------------------------\n");
         //to-do
         //change student list in src file
+        FileHandler.removeStudentFromCourse(stu.getPersonalID(), course.getCourseid());
     }
 
-    public void addStudent(Student s) throws IOException{
-        course.addStudent(s);
+    public void addStudent() throws IOException{
+        out.print("--------------------------------------------------------------------------------\n");
+        out.print("Please type in the student's id:\n");
+        out.println("--------------------------------------------------------------------------------\n");
+        String s = inputReader.readLine();
+        if (s == null){
+            throw new EOFException(
+                    "You didn't type in any instruction!\n"
+            );
+        }
+        Student stu = FileHandler.addStudentToCourse(s, course.getCourseid());
+        course.addStudent(stu);
         //to-do
         //where to get the new student info: construct a new one or search from main student list?
+
     }
+
+
 
 
 }
