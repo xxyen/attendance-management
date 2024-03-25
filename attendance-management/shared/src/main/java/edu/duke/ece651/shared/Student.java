@@ -1,6 +1,7 @@
 package edu.duke.ece651.shared;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Student implements User {
     private String studentID;
@@ -41,4 +42,18 @@ public class Student implements User {
     public Email getEmailAddr() {
         return emailAddr;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(studentID, student.studentID) && Objects.equals(legalName, student.legalName) && Objects.equals(displayName, student.displayName) && Objects.equals(emailAddr, student.emailAddr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentID, legalName, displayName, emailAddr);
+    }
+
 }
