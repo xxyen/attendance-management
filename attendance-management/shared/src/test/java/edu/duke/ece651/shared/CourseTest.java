@@ -2,6 +2,7 @@ package edu.duke.ece651.shared;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -41,7 +42,7 @@ public class CourseTest {
   }
 
   @Test
-  public void test_addStudent() {
+  public void test_addStudent() throws IOException {
     createCourse();
     assertEquals(1, course.getStudents().size());
     course.addStudent(stud2);
@@ -49,7 +50,7 @@ public class CourseTest {
   }
 
   @Test
-  public void test_removeStudent() {
+  public void test_removeStudent() throws IOException {
     createCourse();
     course.addStudent(stud2);
     assertEquals(2, course.getStudents().size());
@@ -74,7 +75,7 @@ public class CourseTest {
   }
 
   @Test
-  public void test_getStudents() {
+  public void test_getStudents() throws IOException {
     createCourse();
     course.addStudent(stud2);
     List<Student> students = course.getStudents();
