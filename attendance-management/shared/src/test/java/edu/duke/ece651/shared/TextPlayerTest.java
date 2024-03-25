@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 class TextPlayerTest {
@@ -21,6 +22,8 @@ class TextPlayerTest {
         Student[] studentArray = {new Student("1", "test stu1", "test disstu1", new Email("stu1@gmail.com")),
                 new Student("2", "test stu2", "test disstu2", new Email("stu2@gmail.com"))};
         Course c = new Course("c1", professorsArray, studentArray, true);
+        c.addSession(new Session(c.getCourseid(), new Date()));
+        c.addSession(new Session(c.getCourseid(), new Date()));
         AttendanceOperator ope = new BasicAttendanceOperator();
         FileHandler f = new FileHandler();
 
@@ -54,7 +57,7 @@ class TextPlayerTest {
     void test_takeAttendance() throws IOException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         TextPlayer player = createTextPlayer("a\nx\n8\nC8H\np\n", bytes);
-        String prompt = "Please type in the attendance status of this student. ('p' for present, 'a' for absent)\n";
+        String prompt = "Please type in the attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)\n";
 
         StringBuilder s = new StringBuilder("--------------------------------------------------------------------------------\n");
         s.append("test disstu1\n");
@@ -106,5 +109,46 @@ class TextPlayerTest {
         assertEquals(records.get(1).getStatus().getStatus() , 'p');
         assertEquals(records.get(1).getStudent().getDisplayName(), "test disstu2");
         System.out.println(ses.getTime());
+    }
+    @Test
+    void test_searchStudent(){
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        TextPlayer player = createTextPlayer("a\nx\n8\nC8H\np\n", bytes);
+        Student test1 = new Student("1", "test stu1", "test disstu1", new Email("stu1@gmail.com"));
+        assertEquals(test1, player.searchStudent("1"));
+        assertEquals(null, player.searchStudent("abc"));
+    }
+
+    @Test
+    void test_dosearchStudent() throws IOException {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        TextPlayer player = createTextPlayer("2\ncx\n8\n", bytes);
+        Student test1 = new Student("2", "test stu2", "test disstu2", new Email("stu2@gmail.com"));
+        assertEquals(test1, player.doSearchStudent());
+
+        String prompt = "Please type in the student's id:\n";
+
+        StringBuilder s = new StringBuilder("--------------------------------------------------------------------------------\n");
+        s.append(prompt);
+        s.append("--------------------------------------------------------------------------------\n");
+        s.append("\n");
+        assertEquals(s.toString(), bytes.toString());
+        assertThrows(IllegalArgumentException.class, () -> player.doSearchStudent());
+        assertThrows(IllegalArgumentException.class, () -> player.doSearchStudent());
+
+    }
+
+    @Test
+    void test_chooseSession() throws IOException{
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        TextPlayer player = createTextPlayer("a\np\n3\n8\n-1\nxyz\n", bytes);
+        Session ses = player.takeAttendance();
+        assertEquals(ses, player.chooseSession());
+        System.out.println(bytes.toString());
+        assertThrows(IllegalArgumentException.class, ()->player.chooseSession());
+        assertThrows(IllegalArgumentException.class, ()->player.chooseSession());
+
+        assertThrows(IllegalArgumentException.class, ()->player.chooseSession());
+
     }
 }
