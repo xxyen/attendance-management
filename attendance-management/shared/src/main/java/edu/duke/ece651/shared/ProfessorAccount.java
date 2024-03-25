@@ -12,12 +12,19 @@ public class ProfessorAccount implements Account{
   private String profid;
   
   private static final String ALGORITHM = "AES";
-  private static final String KEY = "39edh*huis$iuh5yf@jf95";
+  private static final String KEY = "39edh*huis$iuh5yf@jf95jd";
 
 
   
-  public ProfessorAccount(String userid, String password, String profid) { //now just a list of accounts, not allowed to create new ones
-    if(password == ""){
+  public ProfessorAccount(String userid, String password, String profid, boolean pwdIsEncrypted) {
+    if(pwdIsEncrypted) {
+      try {
+        password = decrypt(password);
+      } catch (Exception e) {
+        System.out.println("Failed to create a professor account when decrypting the encrypted password: " + e.getMessage());
+      }
+    }
+    if(password.equals("")){
       password = "password";
     }
     this.userid = userid;
@@ -25,8 +32,8 @@ public class ProfessorAccount implements Account{
     this.profid = profid;
   }
 
-  public ProfessorAccount(String userid, String profid) {
-    this(userid, "password", profid);
+  public ProfessorAccount(String userid, String profid, boolean pwdIsEncrypted) {
+    this(userid, "password", profid, pwdIsEncrypted);
   }
 
   public String getUserid() {
@@ -67,7 +74,7 @@ public class ProfessorAccount implements Account{
     return false;
   }
 
-  private static String encrypt(String strToEncrypt) throws Exception {
+  public String encrypt(String strToEncrypt) throws Exception {
     Cipher cipher = Cipher.getInstance(ALGORITHM);
     SecretKeySpec keySpec = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
     cipher.init(Cipher.ENCRYPT_MODE, keySpec);
@@ -75,7 +82,7 @@ public class ProfessorAccount implements Account{
     return Base64.getEncoder().encodeToString(encryptedBytes);
   }
   
-  private static String decrypt(String strToDecrypt) throws Exception {
+  public String decrypt(String strToDecrypt) throws Exception {
     Cipher cipher = Cipher.getInstance(ALGORITHM);
     SecretKeySpec keySpec = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
     cipher.init(Cipher.DECRYPT_MODE, keySpec);
