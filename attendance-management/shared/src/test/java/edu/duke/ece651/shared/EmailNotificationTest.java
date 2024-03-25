@@ -13,7 +13,7 @@ public class EmailNotificationTest {
     Email eF = new Email("jzsun00@gmail.com");
     Email eT = new Email("jzsun00@gmail.com");
     EmailNotification sender = new EmailNotification(eF, eT);
-    sender.sendEmail("Subject of the Test", "Body of the test email.");
+    sender.sendEmail("Subject of the Test.", "Body of the test email.");
   }
 
 }
