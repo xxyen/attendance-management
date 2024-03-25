@@ -16,7 +16,7 @@ public class BasicAttendanceOperatorTest {
     AttendanceRecord expected = new AttendanceRecord(s1, status);
     AttendanceOperator basicOp = new BasicAttendanceOperator();
     AttendanceRecord returned = basicOp.takeAttendance(s1, status);
-    assertEquals(expected.getStudent().getStudentID(), returned.getStudent().getStudentID());
+    assertEquals(expected.getStudent().getPersonalID(), returned.getStudent().getPersonalID());
     assertEquals(expected.getStatus().getStatus(), returned.getStatus().getStatus());
   }
 
@@ -35,7 +35,7 @@ public class BasicAttendanceOperatorTest {
     basicOp.changeSingleRecord(session, s2, status2);
     List<AttendanceRecord> records = session.getRecords();
     assertEquals(2, records.size());
-    assertEquals("zx123", records.get(1).getStudent().getStudentID());
+    assertEquals("zx123", records.get(1).getStudent().getPersonalID());
     assertEquals('p', records.get(0).getStatus().getStatus());
     assertEquals('a', records.get(1).getStatus().getStatus());
     assertEquals(cur, session.getTime());

@@ -53,7 +53,7 @@ public class TextPlayer {
         for (Student s: course.getStudents()){
             out.print("--------------------------------------------------------------------------------\n");
             out.println(s.getDisplayName());
-            out.println(s.getStudentID());
+            out.println(s.getPersonalID());
             out.println("--------------------------------------------------------------------------------\n");
 
             boolean flag = true;

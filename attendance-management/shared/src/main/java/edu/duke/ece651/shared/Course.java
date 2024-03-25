@@ -1,5 +1,6 @@
 package edu.duke.ece651.shared;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -46,8 +47,10 @@ public class Course {
     return students;
   }
 
-  public void addStudent(Student newStudent) {
-    this.students.add(newStudent);
+  public void addStudent(Student newStudent) throws IOException {
+    if (!this.students.contains(newStudent)) {
+      this.students.add(newStudent);
+    }
   }
 
   public List<Professor> getProfessors() {
@@ -56,19 +59,16 @@ public class Course {
 
   public void addProfessor(Professor newProfessor) {
     this.professors.add(newProfessor);
+    newProfessor.addCourse(this.courseid);
   }
 
-  public void removeStudent(String id) {
-    this.students.removeIf(student -> student.getStudentID().equals(id));
+  public void removeStudent(String id) throws IOException {
+    this.students.removeIf(student -> student.getPersonalID().equals(id));
   }
 
   public String getCourseid() {
     return courseid;
   }
-
-  // public List<Professor> getProfessors() {
-  // return professors;
-  // }
 
   public List<Session> getSessions() {
     return sessions;

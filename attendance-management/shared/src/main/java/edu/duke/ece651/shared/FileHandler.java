@@ -9,54 +9,50 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 // shared/data/
-// ├── StudentList.csv
-// ├── ProfessorList.csv
+// ├── StudentList.json
+// ├── ProfessorList.json
 // ├── courses_manifest.txt    // Lists all courses
 // └── course123/
-// │   ├── StudentList_course123.csv
-// │   ├── professor_course123.csv
+// │   ├── StudentList_course123.json
+// │   ├── professor_course123.json
 // │   └── sessions/
 // │       ├── manifest.txt    // Lists all session files for course123
-// │       └── 2024-03-21_22-00.csv
+// │       └── 2024-03-21_22-00.txt
+
+// Decrypt file:
+// String decryptedPath = path + ".decrypted";
+// FileEncryptorDecryptor.decrypt(path, decryptedPath);
+// use the decryptedPath to read file
+// new File(decryptedPath).delete();
+
+// Encrypt file:
+// String tempPath = path + ".temp";
+// FileEncryptorDecryptor.encrypt(tempPath, path);
+// use the tempPath to write file
+// new File(tempPath).delete();
 
 public class FileHandler {
     private static final String workingDir = System.getProperty("user.dir");
     private static final String DATA_PATH = workingDir + "/data/";
 
     public static Map<String, Student> loadGlobalStudents() throws FileNotFoundException {
-        // Map<String, Student> students = new HashMap<>();
-        // String path = "StudentList.csv";
-        // InputStream inputStream =
-        // FileHandler.class.getClassLoader().getResourceAsStream(path);
-        // if (inputStream == null) {
-        // throw new FileNotFoundException("Resource not found: " + path);
-        // }
-        // String path = DATA_PATH + "StudentList.csv";
-        // try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-        // String line;
-        // while ((line = br.readLine()) != null) {
-        // String[] values = line.split(",");
-        // // Assuming CSV format: studentID, legalName, displayName, email
-        // Student student = new Student(values[0], values[1], values[2], new
-        // Email(values[3]));
-        // students.put(student.getStudentID(), student);
-        // }
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
-        // return students;
         Map<String, Student> students = new HashMap<>();
         String path = DATA_PATH + "StudentList.json";
         try (FileReader reader = new FileReader(path)) {
@@ -80,21 +76,6 @@ public class FileHandler {
     }
 
     public static Map<String, Professor> loadGlobalProfessors() {
-        // Map<String, Professor> professors = new HashMap<>();
-        // String path = DATA_PATH + "ProfessorList.csv";
-        // try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-        // String line;
-        // while ((line = br.readLine()) != null) {
-        // String[] values = line.split(",");
-        // // Assuming CSV format: name, professorID, email
-        // Professor professor = new Professor(values[0], values[1], new
-        // Email(values[2]));
-        // professors.put(professor.getProfessorID(), professor);
-        // }
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
-        // return professors;
         Map<String, Professor> professors = new HashMap<>();
         String path = DATA_PATH + "ProfessorList.json";
         try (FileReader reader = new FileReader(path)) {
@@ -126,11 +107,6 @@ public class FileHandler {
 
     private static List<String> loadManifest(String manifestPath) throws FileNotFoundException {
         List<String> items = new ArrayList<>();
-        // InputStream inputStream =
-        // FileHandler.class.getClassLoader().getResourceAsStream(manifestPath);
-        // if (inputStream == null) {
-        // throw new FileNotFoundException("Resource not found: " + manifestPath);
-        // }
         try (BufferedReader br = new BufferedReader(new FileReader(manifestPath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -162,22 +138,6 @@ public class FileHandler {
     }
 
     private static List<Student> loadCourseStudents(String courseId, Map<String, Student> globalStudents) {
-        // List<Student> students = new ArrayList<>();
-        // String path = DATA_PATH + courseId + "/StudentList_" + courseId + ".csv";
-        // try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-        // String line;
-        // while ((line = br.readLine()) != null) {
-        // String[] values = line.split(",");
-        // // Use studentID to fetch the Student object from global list
-        // Student student = globalStudents.get(values[0]);
-        // if (student != null) {
-        // students.add(student);
-        // }
-        // }
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
-        // return students;
         List<Student> students = new ArrayList<>();
         String path = DATA_PATH + courseId + "/StudentList_" + courseId + ".json";
         try (FileReader reader = new FileReader(path)) {
@@ -199,23 +159,6 @@ public class FileHandler {
     }
 
     private static List<Professor> loadCourseProfessors(String courseId, Map<String, Professor> globalProfessors) {
-        // List<Professor> professors = new ArrayList<>();
-        // String path = DATA_PATH + courseId + "/Professor_" + courseId + ".csv";
-        // try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-        // String line;
-        // while ((line = br.readLine()) != null) {
-        // String[] values = line.split(",");
-        // // Use professorID to fetch the Professor object from global list
-        // Professor professor = globalProfessors.get(values[0]);
-        // if (professor != null) {
-        // professor.addCourse(courseId);
-        // professors.add(professor);
-        // }
-        // }
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
-        // return professors;
         List<Professor> professors = new ArrayList<>();
         String path = DATA_PATH + courseId + "/Professor_" + courseId + ".json";
         try (FileReader reader = new FileReader(path)) {
@@ -226,7 +169,7 @@ public class FileHandler {
                 String professorId = professorsArray.getString(i); // array of professorIDs
                 Professor professor = globalProfessors.get(professorId);
                 if (professor != null) {
-                    if (!professor.getCourseids().contains(courseId)) {
+                    if (!professor.hasCourse(courseId)) {
                         professor.addCourse(courseId);
                     }
                     professors.add(professor);
@@ -281,45 +224,14 @@ public class FileHandler {
         return records;
     }
 
-    private static void updateOrAddStudentInGlobalList(Student student) throws IOException {
-        // File file = new File(DATA_PATH + "StudentList.csv");
-        // List<Student> allStudents = new ArrayList<>();
-        // boolean studentFound = false;
-
-        // try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-        // String line;
-        // while ((line = br.readLine()) != null) {
-        // String[] values = line.split(",");
-        // if (values[0].equals(student.getStudentID())) {
-        // studentFound = true;
-        // allStudents.add(student);
-        // } else {
-        // allStudents.add(new Student(values[0], values[1], values[2], new
-        // Email(values[3])));
-        // }
-        // }
-        // }
-
-        // if (!studentFound) {
-        // allStudents.add(student);
-        // }
-
-        // try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-        // for (Student s : allStudents) {
-        // String line = s.getStudentID() + "," + s.getLegalName() + "," +
-        // s.getDisplayName() + ","
-        // + s.getEmailAddr().getEmailAddr();
-        // bw.write(line);
-        // bw.newLine();
-        // }
-        // }
+    static void updateOrAddStudentInGlobalList(Student student) throws IOException {
         Map<String, Student> students = loadGlobalStudents();
-        students.put(student.getStudentID(), student);
+        students.put(student.getPersonalID(), student);
 
         JSONArray studentsArray = new JSONArray();
         for (Student s : students.values()) {
             JSONObject studentObj = new JSONObject();
-            studentObj.put("studentID", s.getStudentID());
+            studentObj.put("studentID", s.getPersonalID());
             studentObj.put("legalName", s.getLegalName());
             studentObj.put("displayName", s.getDisplayName());
             if (s.getEmailAddr() != null) {
@@ -356,12 +268,12 @@ public class FileHandler {
                     if (!existingStudent.equals(newStudent)) {
                         // Update the global list with the new student details
                         updateOrAddStudentInGlobalList(newStudent);
-                        globalStudents.put(newStudent.getStudentID(), newStudent);
+                        globalStudents.put(newStudent.getPersonalID(), newStudent);
                     }
                 } else {
                     // Student does not exist in global list, add new student
                     updateOrAddStudentInGlobalList(newStudent);
-                    globalStudents.put(newStudent.getStudentID(), newStudent);
+                    globalStudents.put(newStudent.getPersonalID(), newStudent);
                 }
 
                 course.addStudent(newStudent);
@@ -381,18 +293,206 @@ public class FileHandler {
                 file.write(courseStudentsArray.toString());
             }
         }
+    }
 
-        // Update course-specific student list file
-        // String courseRosterPath = DATA_PATH + courseId + "/StudentList_" + courseId +
-        // ".csv";
-        // File file = new File(courseRosterPath);
-        // try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-        // for (Student student : course.getStudents()) {
-        // String line = student.getStudentID() + "," + student.getLegalName() + "," +
-        // student.getDisplayName() + "," + student.getEmailAddr().getEmailAddr();
-        // bw.write(line);
-        // bw.newLine();
-        // }
-        // }
+    //////////////////////////
+    // Student file operation
+    /////////////////////////
+    public static void writeStudentsToCourseFile(List<Student> studentsInCourse, String courseId) {
+        JSONArray studentsArray = new JSONArray();
+        for (Student student : studentsInCourse) {
+            JSONObject studentObj = new JSONObject();
+            studentObj.put("studentID", student.getPersonalID());
+            studentObj.put("legalName", student.getLegalName());
+            studentObj.put("displayName", student.getDisplayName());
+            if (student.getEmailAddr() != null) {
+                studentObj.put("emailAddr", student.getEmailAddr().getEmailAddr());
+            }
+            studentsArray.put(studentObj);
+        }
+
+        String studentsFilePath = DATA_PATH + courseId + "/StudentList_" + courseId + ".json";
+        try (FileWriter file = new FileWriter(studentsFilePath)) {
+            file.write(studentsArray.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addStudentToCourse(Student student, String courseId) throws IOException {
+        // if the student is not in gloabal student list, then add it to gloabal student
+        // list, and write StudentList.json
+        updateOrAddStudentInGlobalList(student);
+
+        List<Student> studentsInCourse = loadCourseStudents(courseId, loadGlobalStudents());
+        if (studentsInCourse.stream().noneMatch(s -> s.getPersonalID().equals(student.getPersonalID()))) {
+            studentsInCourse.add(student);
+            writeStudentsToCourseFile(studentsInCourse, courseId);
+        }
+    }
+
+    public static void removeStudentFromCourse(String studentID, String courseId) throws IOException {
+        List<Student> studentsInCourse = loadCourseStudents(courseId, loadGlobalStudents());
+        studentsInCourse.removeIf(s -> s.getPersonalID().equals(studentID));
+
+        writeStudentsToCourseFile(studentsInCourse, courseId);
+    }
+
+    public static void updateCoursesForStudent(Student student) throws IOException {
+        List<Course> courses = loadCourses(loadGlobalStudents(), loadGlobalProfessors());
+
+        for (Course course : courses) {
+            boolean isInCourse = course.getStudents().stream()
+                    .anyMatch(s -> s.getPersonalID().equals(student.getPersonalID()));
+            if (isInCourse) {
+                updateStudentInCourse(student, course.getCourseid());
+            }
+        }
+    }
+
+    private static void updateStudentInCourse(Student student, String courseId) throws IOException {
+        List<Student> studentsInCourse = loadCourseStudents(courseId, loadGlobalStudents());
+
+        studentsInCourse = studentsInCourse.stream()
+                .map(s -> s.getPersonalID().equals(student.getPersonalID()) ? student : s)
+                .collect(Collectors.toList());
+
+        writeStudentsToCourseFile(studentsInCourse, courseId);
+    }
+
+    ////////////////////////
+    // Course file operation
+    ///////////////////////
+    public static void createCourse(String courseId, String professorId) {
+        try {
+            new File(DATA_PATH + "/" + courseId).mkdirs();
+            new File(DATA_PATH + "/" + courseId + "/sessions").mkdirs();
+            new FileWriter(DATA_PATH + "/" + courseId + "/sessions/manifest.txt", false).close();
+            new FileWriter(DATA_PATH + "/" + courseId + "/StudentList_" + courseId + ".json", false).close();
+            try (FileWriter writer = new FileWriter(DATA_PATH + "/" + courseId + "/Professor_" + courseId + ".json",
+                    false)) {
+                writer.write("[\"" + professorId + "\"]");
+            }
+            updateCoursesManifest(courseId, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteCourse(String courseId) {
+        deleteDirectory(new File(DATA_PATH + "/" + courseId));
+
+        updateCoursesManifest(courseId, false);
+    }
+
+    private static void deleteDirectory(File directory) {
+        if (directory.isDirectory()) {
+            File[] entries = directory.listFiles();
+            if (entries != null) {
+                for (File entry : entries) {
+                    deleteDirectory(entry);
+                }
+            }
+        }
+        directory.delete();
+    }
+
+    private static void updateCoursesManifest(String courseId, boolean add) {
+        File manifestFile = new File(DATA_PATH + "/course_manifest.txt");
+        List<String> courseIds = new ArrayList<>();
+
+        if (manifestFile.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(manifestFile))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (!line.trim().isEmpty()) {
+                        courseIds.add(line.trim());
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        // add or remove course
+        if (add) {
+            if (!courseIds.contains(courseId)) {
+                courseIds.add(courseId);
+            }
+        } else {
+            courseIds.remove(courseId);
+        }
+        // write course_manifest.txt
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(manifestFile, false))) {
+            for (String id : courseIds) {
+                writer.write(id);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //////////////////////////////////
+    // Professor_courseid.json operation
+    //////////////////////////////////
+    public static void addProfessorToCourse(String professorId, String courseId) {
+        String path = DATA_PATH + "/" + courseId + "/Professor_" + courseId + ".json";
+        File file = new File(path);
+        JSONArray professorsArray = new JSONArray();
+
+        if (file.exists()) {
+            String content;
+            try {
+                content = new String(Files.readAllBytes(Paths.get(path)));
+                professorsArray = new JSONArray(content);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+
+        Set<String> professorsSet = new HashSet<>();
+        for (int i = 0; i < professorsArray.length(); i++) {
+            professorsSet.add(professorsArray.getString(i));
+        }
+
+        if (!professorsSet.contains(professorId)) {
+            professorsSet.add(professorId);
+
+            JSONArray updatedProfessorsArray = new JSONArray();
+            for (String id : professorsSet) {
+                updatedProfessorsArray.put(id);
+            }
+
+            try (FileWriter writer = new FileWriter(path, false)) {
+                writer.write(updatedProfessorsArray.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //////////////////////////
+    // sessions file operation
+    //////////////////////////
+    public static void addSessionToCourse(String courseId, Date sessionTime) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
+        String sessionFileName = dateFormat.format(sessionTime) + ".txt";
+        String sessionFilePath = DATA_PATH + "/" + courseId + "/sessions/" + sessionFileName;
+
+        try {
+            File sessionFile = new File(sessionFilePath);
+            sessionFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String manifestPath = DATA_PATH + "/" + courseId + "/sessions/manifest.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(manifestPath, true))) {
+            writer.write(sessionFileName);
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
