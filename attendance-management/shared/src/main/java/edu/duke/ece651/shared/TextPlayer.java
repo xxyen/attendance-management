@@ -11,6 +11,8 @@ public class TextPlayer {
     //private Textview textview;
     private FileHandler fileHandler;
 
+  private ExportService export;
+  
     private final BufferedReader inputReader;
     private final PrintStream out;
 
@@ -69,5 +71,11 @@ public class TextPlayer {
         }
         return newSes;
     }
+
+  ////////////////////////////////////////////////////////////////////
+  public void exportData() throws IOException {
+    export.exportToFile(course.getSessions(), "JSON", null, null);
+  }
+  ///////////////////////////////////////////////////////////////////
 
 }
