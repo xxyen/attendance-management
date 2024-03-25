@@ -169,7 +169,7 @@ public class FileHandlerTest {
 
     FileHandler.createCourse(COURSE_ID, PROFESSOR_ID);
 
-    FileHandler.addStudentToCourse(testStudent, COURSE_ID);
+    FileHandler.addStudentToCourse(testStudent.getPersonalID(), COURSE_ID);
 
     String studentListPath = DATA_PATH + "/" + COURSE_ID + "/StudentList_" + COURSE_ID + ".json";
     File studentListFile = new File(studentListPath);
