@@ -1,5 +1,6 @@
 package edu.duke.ece651.shared;
 
+import java.util.Objects;
 import java.util.regex.*;
 
 public class Email {
@@ -32,4 +33,18 @@ public class Email {
     public String getEmailAddr() {
         return emailAddr;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Email email = (Email) o;
+        return Objects.equals(emailAddr, email.emailAddr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(emailAddr);
+    }
+
 }
