@@ -50,7 +50,8 @@ import org.json.JSONTokener;
 
 public class FileHandler {
     private static final String workingDir = System.getProperty("user.dir");
-    private static final String DATA_PATH = workingDir + "/shared/data/";
+    private static final String DATA_PATH = workingDir + "/data/";
+    // private static final String DATA_PATH = workingDir + "/shared/data/";
 
     public static Map<String, Student> loadGlobalStudents() throws FileNotFoundException {
         Map<String, Student> students = new HashMap<>();
@@ -376,10 +377,10 @@ public class FileHandler {
     public static Student addStudentToCourse(String studentID, String courseId) throws IOException {
         // if the student is not in gloabal student list, then add it to gloabal student
         // list, and write StudentList.json
-        //updateOrAddStudentInGlobalList(student);
+        // updateOrAddStudentInGlobalList(student);
         Map<String, Student> students = loadGlobalStudents();
         Student student = students.get(studentID);
-        if (student == null){
+        if (student == null) {
             throw new IllegalArgumentException("There is no student with this ID in the school!");
         }
 
@@ -387,8 +388,7 @@ public class FileHandler {
         if (studentsInCourse.stream().noneMatch(s -> s.getPersonalID().equals(student.getPersonalID()))) {
             studentsInCourse.add(student);
             writeStudentsToCourseFile(studentsInCourse, courseId);
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("The student is already in this course!");
         }
         return student;

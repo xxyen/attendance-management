@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"sessionTime":"2024-03-26 14:06","courseId":"course01","attendanceRecords":[{"studentID":"s01","legalName":"Legal Name01","status":"p"},{"studentID":"s02","legalName":"Legal Name02","status":"a"}]},{"sessionTime":"2024-03-26 14:06","courseId":"course02","attendanceRecords":[{"studentID":"s03","legalName":"Legal Name03","status":"l"}]}]
+=======
+[{"sessionTime":"2024-03-26 10:35","courseId":"course01","attendanceRecords":[{"studentID":"s01","legalName":"Legal Name01","status":"p"},{"studentID":"s02","legalName":"Legal Name02","status":"a"}]},{"sessionTime":"2024-03-26 10:35","courseId":"course02","attendanceRecords":[{"studentID":"s03","legalName":"Legal Name03","status":"l"}]}]
+>>>>>>> c966e0183a8cbf29a9bdfdd3d8b2d20f36b137b1

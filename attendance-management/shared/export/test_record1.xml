@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sessions>
+<<<<<<< HEAD
 	<session courseId="course01" time="2024-03-26 14:06">
+=======
+	<session courseId="course01" time="2024-03-26 10:35">
+>>>>>>> c966e0183a8cbf29a9bdfdd3d8b2d20f36b137b1
 		<attendanceRecord>
 			<studentID>s01</studentID>
 			<legalName>Legal Name01</legalName>
@@ -16,7 +20,11 @@
 			<status>a</status>
 		</attendanceRecord>
 	</session>
+<<<<<<< HEAD
 	<session courseId="course02" time="2024-03-26 14:06">
+=======
+	<session courseId="course02" time="2024-03-26 10:35">
+>>>>>>> c966e0183a8cbf29a9bdfdd3d8b2d20f36b137b1
 		<attendanceRecord>
 			<studentID>s03</studentID>
 			<legalName>Legal Name03</legalName>

@@ -16,15 +16,17 @@ public class App {
 
   public static void main(String[] args) throws Exception {
     // load all data from files
-    //try {
-      BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-      AccountOperator accountOperator = new AccountOperator("shared/src/main/resources/");
-      Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
-      Map<String, Student> students = FileHandler.loadGlobalStudents();
-      Map<String, User> allUsers = new HashMap<>();
-      allUsers.putAll(professors);
-      allUsers.putAll(students);
-      List<Course> courses = FileHandler.loadCourses(students, professors);
+    // try {
+    BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+    // AccountOperator accountOperator = new
+    // AccountOperator("shared/src/main/resources/");
+    AccountOperator accountOperator = new AccountOperator("src/main/resources/");
+    Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
+    Map<String, Student> students = FileHandler.loadGlobalStudents();
+    Map<String, User> allUsers = new HashMap<>();
+    allUsers.putAll(professors);
+    allUsers.putAll(students);
+    List<Course> courses = FileHandler.loadCourses(students, professors);
 
       while (true) {
         User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
@@ -49,9 +51,9 @@ public class App {
 //    }
   }
 
-  public static int readPositiveInteger(BufferedReader reader){
+  public static int readPositiveInteger(BufferedReader reader) {
     try {
-      String line = reader.readLine(); 
+      String line = reader.readLine();
       int number = Integer.parseInt(line);
       if (number > 0) {
         return number;
@@ -59,10 +61,9 @@ public class App {
         return -1;
       }
     } catch (Exception e) {
-          return  -1;
-        }
+      return -1;
     }
-
+  }
 
   private static boolean professorActions(BufferedReader inputReader, PrintStream outputStream, List<Course> courses,
       Professor professor, Map<String, Student> allStudents) throws Exception {
@@ -115,7 +116,7 @@ public class App {
       outputStream.println("Course ID: ");
       try {
         String courseid = inputReader.readLine();
-        if(courses.stream().anyMatch(course -> course.getCourseid().equals(courseid))) {
+        if (courses.stream().anyMatch(course -> course.getCourseid().equals(courseid))) {
           outputStream.println("Course ID exists! Please try again!");
           continue;
         }
