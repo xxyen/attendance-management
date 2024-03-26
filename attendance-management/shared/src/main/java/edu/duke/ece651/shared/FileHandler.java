@@ -245,6 +245,60 @@ public class FileHandler {
         }
     }
 
+    public static void loadRosterFromCSVFile(String courseId, Course course, String rosterPath, List<Integer> order, boolean withHeader) throws IOException {
+        File rosterFile = new File(rosterPath);
+        if (!rosterFile.exists()) {
+            throw new FileNotFoundException("Roster file not found at: " + rosterPath);
+        }
+        Map<String, Student> globalStudents = loadGlobalStudents();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(rosterFile))) {
+            String line;
+            JSONArray courseStudentsArray = new JSONArray();
+            
+            if(withHeader){
+                br.readLine(); // get rid of the header row
+            }
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                
+                Student newStudent = new Student(values[order.get(0)], values[order.get(1)], values[order.get(2)], new Email(values[order.get(3)]));
+                Student existingStudent = globalStudents.get(values[order.indexOf(1)]);
+
+                if (existingStudent != null) {
+                    // Check if the existing student details match the new details
+                    if (!existingStudent.equals(newStudent)) {
+                        // Update the global list with the new student details
+                        updateOrAddStudentInGlobalList(newStudent);
+                        globalStudents.put(newStudent.getPersonalID(), newStudent);
+                    }
+                } else {
+                    // Student does not exist in global list, add new student
+                    updateOrAddStudentInGlobalList(newStudent);
+                    globalStudents.put(newStudent.getPersonalID(), newStudent);
+                }
+
+                course.addStudent(newStudent);
+
+                JSONObject studentObj = new JSONObject();
+                studentObj.put("studentID", values[0]);
+                studentObj.put("legalName", values[1]);
+                studentObj.put("displayName", values[2]);
+                if (values[3] != null) {
+                    studentObj.put("emailAddr", newStudent.getEmailAddr().getEmailAddr());
+                }
+                courseStudentsArray.put(studentObj);
+            }
+            // Write to the course-specific StudentList_courseid.json
+            String courseStudentListPath = DATA_PATH + courseId + "/StudentList_" + courseId + ".json";
+            try (FileWriter file = new FileWriter(courseStudentListPath)) {
+                file.write(courseStudentsArray.toString());
+            }
+        }
+    }
+
+
+
     // To do this, must make sure the course has been created (the course folder and
     // sessions/manifest.txtexist).
     public static void loadRosterFromCsv(String courseId, Course course, String rosterPath) throws IOException {

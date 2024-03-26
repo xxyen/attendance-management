@@ -20,6 +20,16 @@ public class Course {
     this.canChangeName = canChangeName;
   }
 
+  public Course(String courseid, Professor professor, boolean canChangeName) {
+    this.courseid = courseid;
+    professors = new ArrayList<>();
+    professors.add(professor);
+    students = new ArrayList<>();
+    sessions = new ArrayList<>();
+    this.canChangeName = canChangeName;
+  }
+
+
   public Course(String courseid, Professor[] professorsArray, Student[] studentsArray, boolean canChangeName) {
     this.courseid = courseid;
     this.professors = new ArrayList<>(Arrays.asList(professorsArray));
