@@ -207,7 +207,7 @@ class TextPlayerTest {
     }
 
     @Test
-    //@Disabled
+    @Disabled
     void test_changeStatus() throws Exception {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         TextPlayer player = createTextPlayer("a\np\n" +

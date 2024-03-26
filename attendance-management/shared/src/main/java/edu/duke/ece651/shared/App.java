@@ -17,42 +17,44 @@ public class App {
 
   public static void main(String[] args) throws Exception {
     // load all data from files
-    //try {
-      BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-      AccountOperator accountOperator = new AccountOperator("shared/src/main/resources/");
-      Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
-      Map<String, Student> students = FileHandler.loadGlobalStudents();
-      Map<String, User> allUsers = new HashMap<>();
-      allUsers.putAll(professors);
-      allUsers.putAll(students);
-      List<Course> courses = FileHandler.loadCourses(students, professors);
+    // try {
+    BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+    // AccountOperator accountOperator = new
+    // AccountOperator("shared/src/main/resources/");
+    AccountOperator accountOperator = new AccountOperator("src/main/resources/");
+    Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
+    Map<String, Student> students = FileHandler.loadGlobalStudents();
+    Map<String, User> allUsers = new HashMap<>();
+    allUsers.putAll(professors);
+    allUsers.putAll(students);
+    List<Course> courses = FileHandler.loadCourses(students, professors);
 
-      while (true) {
-        User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
-        if (currentUser.getUserType().equals("professor")) {
-          // it returns false means logout option is chosen.
-          while (true) {
-            try {
-              boolean stayLoggedIn = professorActions(inputReader, System.out, courses, (Professor) currentUser);
-              if (!stayLoggedIn) {
-                System.out.println("Logged out.");
-                //continue;
-                break;
-              }
-            } catch (Exception e) {
-              System.out.println(e.getMessage());
+    while (true) {
+      User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
+      if (currentUser.getUserType().equals("professor")) {
+        // it returns false means logout option is chosen.
+        while (true) {
+          try {
+            boolean stayLoggedIn = professorActions(inputReader, System.out, courses, (Professor) currentUser);
+            if (!stayLoggedIn) {
+              System.out.println("Logged out.");
+              // continue;
+              break;
             }
+          } catch (Exception e) {
+            System.out.println(e.getMessage());
           }
         }
       }
-//    } catch (Exception e) {
-//      System.out.println(e.getMessage());
-//    }
+    }
+    // } catch (Exception e) {
+    // System.out.println(e.getMessage());
+    // }
   }
 
-  public static int readPositiveInteger(BufferedReader reader){
+  public static int readPositiveInteger(BufferedReader reader) {
     try {
-      String line = reader.readLine(); 
+      String line = reader.readLine();
       int number = Integer.parseInt(line);
       if (number > 0) {
         return number;
@@ -60,65 +62,65 @@ public class App {
         return -1;
       }
     } catch (Exception e) {
-          return  -1;
-        }
+      return -1;
     }
-
+  }
 
   private static boolean professorActions(BufferedReader inputReader, PrintStream outputStream, List<Course> courses,
       Professor professor) throws Exception {
-    //try {
-        //while (true) {
-        outputStream.println(
-            "What would you like to do?\n    1. Manage an existing course\n    2. Create a new course and manage it\n    3. Log out");
-        outputStream.println("Enter the number to choose your action: ");
-        int choice = readPositiveInteger(inputReader);
-        if (choice == 1) {
-          Course currentCourse = chooseCourse(inputReader, outputStream,
-              courses.stream().filter(course -> course.getProfessors().contains(professor)).collect(Collectors.toList()));
-          AttendanceOperator attendanceOperator = new BasicAttendanceOperator();
-          TextPlayer textPlayer = new TextPlayer(professor, currentCourse, attendanceOperator, inputReader, outputStream);
-          textPlayer.loop();
-          return true;
-        } else if (choice == 2) {
-          Course currentCourse = createCourse(inputReader, outputStream, courses);
-          AttendanceOperator attendanceOperator = new BasicAttendanceOperator();
-          TextPlayer textPlayer = new TextPlayer(professor, currentCourse, attendanceOperator, inputReader, outputStream);
-          return true;
-        } else if (choice == 3) {
-          return false;
-        } else {
-          //outputStream.println("Invalid input! Please try again!");
-          //continue;
-          throw new IllegalArgumentException("Invalid input! Please try again!");
-        }
-      //}
-//      } catch (Exception e) {
-//        outputStream.println(e.getMessage());
-//      }
-      //return true;
+    // try {
+    // while (true) {
+    outputStream.println(
+        "What would you like to do?\n    1. Manage an existing course\n    2. Create a new course and manage it\n    3. Log out");
+    outputStream.println("Enter the number to choose your action: ");
+    int choice = readPositiveInteger(inputReader);
+    if (choice == 1) {
+      Course currentCourse = chooseCourse(inputReader, outputStream,
+          courses.stream().filter(course -> course.getProfessors().contains(professor)).collect(Collectors.toList()));
+      AttendanceOperator attendanceOperator = new BasicAttendanceOperator();
+      TextPlayer textPlayer = new TextPlayer(professor, currentCourse, attendanceOperator, inputReader, outputStream);
+      textPlayer.loop();
+      return true;
+    } else if (choice == 2) {
+      Course currentCourse = createCourse(inputReader, outputStream, courses);
+      AttendanceOperator attendanceOperator = new BasicAttendanceOperator();
+      TextPlayer textPlayer = new TextPlayer(professor, currentCourse, attendanceOperator, inputReader, outputStream);
+      return true;
+    } else if (choice == 3) {
+      return false;
+    } else {
+      // outputStream.println("Invalid input! Please try again!");
+      // continue;
+      throw new IllegalArgumentException("Invalid input! Please try again!");
     }
+    // }
+    // } catch (Exception e) {
+    // outputStream.println(e.getMessage());
+    // }
+    // return true;
+  }
 
-  
   private static Course createCourse(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
     outputStream.println("You are creating a new course! Please enter the information required below.");
     try {
-      while(true) {
+      while (true) {
         outputStream.println("Course ID: ");
         String courseid = inputReader.readLine();
-        if(courses.stream().anyMatch(course -> course.getCourseid().equals(courseid))) {
+        if (courses.stream().anyMatch(course -> course.getCourseid().equals(courseid))) {
           outputStream.println("Course ID exists! Please try again!");
-         continue;
+          continue;
         }
-        outputStream.println("Do you");  
+        outputStream.println("Do you");
       }
-      
-      //return new Course(courseid, [professors], Student[] studentsArray, boolean canChangeName)
-      //String courseid, Professor[] professorsArray, Student[] studentsArray, boolean canChangeName
-      } catch (Exception e) {
-        outputStream.println(e.getMessage());
-      }
-      return null;
+
+      // return new Course(courseid, [professors], Student[] studentsArray, boolean
+      // canChangeName)
+      // String courseid, Professor[] professorsArray, Student[] studentsArray,
+      // boolean canChangeName
+    } catch (Exception e) {
+      outputStream.println(e.getMessage());
+    }
+    return null;
   }
 
   private static Course chooseCourse(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
