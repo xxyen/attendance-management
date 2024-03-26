@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * An implementation of the Exporter interface for exporting session data to XML
+ * format.
+ */
 public class XMLExporter implements Exporter {
     @Override
     public void export(List<Session> sessions, List<String> fields, String filePath) throws IOException {
