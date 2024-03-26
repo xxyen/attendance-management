@@ -84,7 +84,7 @@ public class AccountOperator {
     return null;
   }
   
-  private boolean useridExists(String userid) {
+  public boolean useridExists(String userid) {
     if (accounts == null) {
       return false;
     }
@@ -126,7 +126,14 @@ public class AccountOperator {
     
   }
 
-  // return user???
+  public String getAccountPersonalID(String userid, String password) {
+    Account account = accounts.stream().filter(acc -> acc.getUserid().equals(userid)).findFirst().orElse(null);
+    if(account != null && account.isCorrectPassword(password)){
+      return account.getPersonalID();
+    }
+    return null;
+  }
+  
   public User signIn(String userid, String password, Map<String, User> userList) {
     Account account = accounts.stream().filter(acc -> acc.getUserid().equals(userid)).findFirst().orElse(null);
     if(account == null) {
