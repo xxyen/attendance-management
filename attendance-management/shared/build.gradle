@@ -9,7 +9,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-    id 'com.bmuschko.clover' version '2.2.3'
+    // id 'com.bmuschko.clover' version '2.2.3'
 }
 
 repositories {
