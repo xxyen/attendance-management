@@ -81,6 +81,7 @@ public class App {
           outputStream.println("Invalid input! Please try again!");
           continue;
         }
+      } 
       } catch (Exception e) {
         outputStream.println(e.getMessage());
       }
