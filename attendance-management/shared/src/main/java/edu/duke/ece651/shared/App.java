@@ -83,18 +83,21 @@ public class App {
   
   private static Course createCourse(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
     outputStream.println("You are creating a new course! Please enter the information required below.");
-    while(true) {
-      outputStream.println("Course ID: ");
-      String courseid = inputReader.readLine();
-      if(courses.stream().anyMatch(course -> course.getCourseid().equals(courseid))) {
-        outputStream.println("Course ID exists! Please try again!");
-        continue;
+    try {
+      while(true) {
+        outputStream.println("Course ID: ");
+        String courseid = inputReader.readLine();
+        if(courses.stream().anyMatch(course -> course.getCourseid().equals(courseid))) {
+          outputStream.println("Course ID exists! Please try again!");
+         continue;
+        }
+        outputStream.println("Do you");  
       }
-      outputStream.println("Do you");  
-      
       
       //return new Course(courseid, [professors], Student[] studentsArray, boolean canChangeName)
       //String courseid, Professor[] professorsArray, Student[] studentsArray, boolean canChangeName
+      } catch (Exception e) {
+        outputStream.println(e.getMessage());
       }
   }
 
