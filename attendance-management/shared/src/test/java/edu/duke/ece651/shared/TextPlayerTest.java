@@ -31,7 +31,7 @@ class TextPlayerTest {
         AttendanceOperator ope = new BasicAttendanceOperator();
         FileHandler f = new FileHandler();
 
-        TextPlayer t = new TextPlayer(p, c, ope, f, input, output);
+        TextPlayer t = new TextPlayer(p, c, ope, input, output);
         return t;
     }
 
