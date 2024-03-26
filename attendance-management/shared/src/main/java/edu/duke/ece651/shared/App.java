@@ -86,7 +86,6 @@ public class App {
         outputStream.println(e.getMessage());
       }
     }
-  }
 
   
   private static Course createCourse(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
