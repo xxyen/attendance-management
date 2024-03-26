@@ -12,18 +12,18 @@ public class TextPlayer {
     private Course course;
     private AttendanceOperator attendance;
     //private Textview textview;
-    private FileHandler fileHandler;
+    //private FileHandler fileHandler;
 
     private final BufferedReader inputReader;
     private final PrintStream out;
 
     private final int actNums;
 
-    public TextPlayer(Professor professor, Course course, AttendanceOperator attendance, FileHandler fileHandler, BufferedReader inputReader, PrintStream out) {
+    public TextPlayer(Professor professor, Course course, AttendanceOperator attendance, BufferedReader inputReader, PrintStream out) {
         this.professor = professor;
         this.course = course;
         this.attendance = attendance;
-        this.fileHandler = fileHandler;
+        //this.fileHandler = fileHandler;
         this.inputReader = inputReader;
         this.out = out;
 
