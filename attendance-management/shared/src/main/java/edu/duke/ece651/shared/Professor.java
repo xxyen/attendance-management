@@ -14,6 +14,11 @@ public class Professor implements User {
     this.email = email;
     this.courseids = courseids;
   }
+
+  @Override
+  public String getUserType() {
+    return "professor";
+  }
   
   public Professor(String name, String professorID, Email email) {
     this(name, professorID, email, new ArrayList<>());
