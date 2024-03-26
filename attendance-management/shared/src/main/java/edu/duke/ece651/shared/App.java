@@ -25,18 +25,19 @@ public class App {
       allUsers.putAll(professors);
       allUsers.putAll(students);
       List<Course> courses = FileHandler.loadCourses(students, professors);
-    } catch (Exception e) {
-      outputStream.println(e.getMessage());
-    }
-    while (true) {
-      User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
-      if (currentUser.getUserType().equals("professor")) {
-        // it returns false means logout option is chosen.
-        if (!professorActions(inputReader, System.out, courses, (Professor)currentUser)) {
-          System.out.println("Logged out.");
-          continue;
+
+      while (true) {
+        User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
+        if (currentUser.getUserType().equals("professor")) {
+          // it returns false means logout option is chosen.
+          if (!professorActions(inputReader, System.out, courses, (Professor)currentUser)) {
+            System.out.println("Logged out.");
+            continue;
+          }
         }
       }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
     }
   }
 
