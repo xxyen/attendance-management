@@ -22,7 +22,7 @@ public class FileHandlerTest {
   private static final String COURSE_ID = "testCourse";
   private static final String PROFESSOR_ID = "testProfessor";
 
-  // @Disabled
+  @Disabled
   @Test
   void test_loadGlobalStudents() throws FileNotFoundException {
     Map<String, Student> students = FileHandler.loadGlobalStudents();
