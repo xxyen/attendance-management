@@ -30,7 +30,8 @@ public class App {
         User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
         if (currentUser.getUserType().equals("professor")) {
           // it returns false means logout option is chosen.
-          if (!professorActions(inputReader, System.out, courses, (Professor)currentUser)) {
+          boolean stayLoggedIn = professorActions(inputReader, System.out, courses, (Professor)currentUser);
+          if (!stayLoggedIn) {
             System.out.println("Logged out.");
             continue;
           }
@@ -50,7 +51,7 @@ public class App {
       } else {
         return -1;
       }
-    } catch (NumberFormatException e) {
+    } catch (Exception e) {
           return  -1;
         }
     }
@@ -86,6 +87,7 @@ public class App {
       } catch (Exception e) {
         outputStream.println(e.getMessage());
       }
+      return true;
     }
 
   
@@ -107,6 +109,7 @@ public class App {
       } catch (Exception e) {
         outputStream.println(e.getMessage());
       }
+      return null;
   }
 
   private static Course chooseCourse(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
