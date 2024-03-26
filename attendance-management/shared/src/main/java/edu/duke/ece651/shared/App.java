@@ -16,15 +16,18 @@ public class App {
 
   public static void main(String[] args) {
     // load all data from files
-    BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-    AccountOperator accountOperator = new AccountOperator("src/main/resources/");
-    Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
-    Map<String, Student> students = FileHandler.loadGlobalStudents();
-    Map<String, User> allUsers = new HashMap<>();
-    allUsers.putAll(professors);
-    allUsers.putAll(students);
-    List<Course> courses = FileHandler.loadCourses(students, professors);
-
+    try {
+      BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+      AccountOperator accountOperator = new AccountOperator("src/main/resources/");
+      Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
+      Map<String, Student> students = FileHandler.loadGlobalStudents();
+      Map<String, User> allUsers = new HashMap<>();
+      allUsers.putAll(professors);
+      allUsers.putAll(students);
+      List<Course> courses = FileHandler.loadCourses(students, professors);
+    } catch (Exception e) {
+      outputStream.println(e.getMessage());
+    }
     while (true) {
       User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
       if (currentUser.getUserType().equals("professor")) {
@@ -38,15 +41,15 @@ public class App {
   }
 
   public static int readPositiveInteger(BufferedReader reader){
-        String line = reader.readLine(); 
-        try {
-            int number = Integer.parseInt(line); 
-            if (number > 0) {
-                return number;
-            } else {
-              return -1;
-            }
-        } catch (NumberFormatException e) {
+    try {
+      String line = reader.readLine(); 
+      int number = Integer.parseInt(line);
+      if (number > 0) {
+        return number;
+      } else {
+        return -1;
+      }
+    } catch (NumberFormatException e) {
           return  -1;
         }
     }
@@ -54,28 +57,32 @@ public class App {
 
   private static boolean professorActions(BufferedReader inputReader, PrintStream outputStream, List<Course> courses,
       Professor professor) {
-    while (true) {
-      outputStream.println(
-          "What would you like to do?\n    1. Manage an existing course/n    2. Create a new course and manage it\n    3. Log out");
-      outputStream.println("Enter the number to choose your action: ");
-      int choice = readPositiveInteger(inputReader);
-      if (choice == 1) {
-        Course currentCourse = chooseCourse(inputReader, outputStream,
-            courses.stream().filter(course -> course.getProfessors().contains(professor)).collect(Collectors.toList()));
-        AttendanceOperator attendanceOperator = new BasicAttendanceOperator();
-        TextPlayer textPlayer = new TextPlayer(professor, currentCourse, attendanceOperator, inputReader, outputStream);
-        textPlayer.loop();
-        return true;
-      } else if (choice == 2) {
-        Course currentCourse = createCourse(inputReader, outputStream, courses);
-        AttendanceOperator attendanceOperator = new BasicAttendanceOperator();
-        TextPlayer textPlayer = new TextPlayer(professor, currentCourse, attendanceOperator, inputReader, outputStream);
-        return true;
-      } else if (choice == 3) {
-        return false;
-      } else {
-        outputStream.println("Invalid input! Please try again!");
-        continue;
+    try {
+        while (true) {
+        outputStream.println(
+            "What would you like to do?\n    1. Manage an existing course/n    2. Create a new course and manage it\n    3. Log out");
+        outputStream.println("Enter the number to choose your action: ");
+        int choice = readPositiveInteger(inputReader);
+        if (choice == 1) {
+          Course currentCourse = chooseCourse(inputReader, outputStream,
+              courses.stream().filter(course -> course.getProfessors().contains(professor)).collect(Collectors.toList()));
+          AttendanceOperator attendanceOperator = new BasicAttendanceOperator();
+          TextPlayer textPlayer = new TextPlayer(professor, currentCourse, attendanceOperator, inputReader, outputStream);
+          textPlayer.loop();
+          return true;
+        } else if (choice == 2) {
+          Course currentCourse = createCourse(inputReader, outputStream, courses);
+          AttendanceOperator attendanceOperator = new BasicAttendanceOperator();
+          TextPlayer textPlayer = new TextPlayer(professor, currentCourse, attendanceOperator, inputReader, outputStream);
+          return true;
+        } else if (choice == 3) {
+          return false;
+        } else {
+          outputStream.println("Invalid input! Please try again!");
+          continue;
+        }
+      } catch (Exception e) {
+        outputStream.println(e.getMessage());
       }
     }
   }
