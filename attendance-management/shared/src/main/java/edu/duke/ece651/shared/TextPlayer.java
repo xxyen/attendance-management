@@ -261,6 +261,10 @@ public class TextPlayer {
         }
         Student stu = FileHandler.addStudentToCourse(s, course.getCourseid());
         course.addStudent(stu);
+        out.print("--------------------------------------------------------------------------------\n");
+        out.print("Successfully added the student to the course!\n");
+        out.println("--------------------------------------------------------------------------------\n");
+
         //to-do
         //where to get the new student info: construct a new one or search from main student list?
 
@@ -285,7 +289,7 @@ public class TextPlayer {
     public void exportSessions() throws IOException {
         String format = readFormat("Please choose the format (json or xml): \n");
         out.print("--------------------------------------------------------------------------------\n");
-        out.print("Please type in the file path that you want to export to (including file name): ");
+        out.print("Please type in the file path that you want to export to (including file name): \n");
         out.println("--------------------------------------------------------------------------------\n");
         String path = inputReader.readLine();
         List<String> fields = new ArrayList<>();
@@ -296,6 +300,10 @@ public class TextPlayer {
         fields.add("status");
 
         ExportService.exportToFile(course.getSessions(), format, fields, path);
+        out.print("--------------------------------------------------------------------------------\n");
+        out.print("Successfully exported course attendance records!\n");
+        out.println("--------------------------------------------------------------------------------\n");
+
     }
 
     public void loop() throws Exception {
@@ -334,6 +342,7 @@ public class TextPlayer {
                 else if (index == 6){
                     //todo
                     //add export method
+                    exportSessions();
                 }
                 else if (index == 7){
                     out.print("--------------------------------------------------------------------------------\n");

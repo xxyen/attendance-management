@@ -4,6 +4,7 @@
 package edu.duke.ece651.shared;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.HashMap;
@@ -14,11 +15,11 @@ import java.util.stream.Collectors;
 
 public class App {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     // load all data from files
-    try {
+    //try {
       BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-      AccountOperator accountOperator = new AccountOperator("src/main/resources/");
+      AccountOperator accountOperator = new AccountOperator("shared/src/main/resources/");
       Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
       Map<String, Student> students = FileHandler.loadGlobalStudents();
       Map<String, User> allUsers = new HashMap<>();
@@ -30,16 +31,23 @@ public class App {
         User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
         if (currentUser.getUserType().equals("professor")) {
           // it returns false means logout option is chosen.
-          boolean stayLoggedIn = professorActions(inputReader, System.out, courses, (Professor)currentUser);
-          if (!stayLoggedIn) {
-            System.out.println("Logged out.");
-            continue;
+          while (true) {
+            try {
+              boolean stayLoggedIn = professorActions(inputReader, System.out, courses, (Professor) currentUser);
+              if (!stayLoggedIn) {
+                System.out.println("Logged out.");
+                //continue;
+                break;
+              }
+            } catch (Exception e) {
+              System.out.println(e.getMessage());
+            }
           }
         }
       }
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+//    } catch (Exception e) {
+//      System.out.println(e.getMessage());
+//    }
   }
 
   public static int readPositiveInteger(BufferedReader reader){
@@ -58,11 +66,11 @@ public class App {
 
 
   private static boolean professorActions(BufferedReader inputReader, PrintStream outputStream, List<Course> courses,
-      Professor professor) {
-    try {
-        while (true) {
+      Professor professor) throws Exception {
+    //try {
+        //while (true) {
         outputStream.println(
-            "What would you like to do?\n    1. Manage an existing course/n    2. Create a new course and manage it\n    3. Log out");
+            "What would you like to do?\n    1. Manage an existing course\n    2. Create a new course and manage it\n    3. Log out");
         outputStream.println("Enter the number to choose your action: ");
         int choice = readPositiveInteger(inputReader);
         if (choice == 1) {
@@ -80,14 +88,15 @@ public class App {
         } else if (choice == 3) {
           return false;
         } else {
-          outputStream.println("Invalid input! Please try again!");
-          continue;
+          //outputStream.println("Invalid input! Please try again!");
+          //continue;
+          throw new IllegalArgumentException("Invalid input! Please try again!");
         }
-      } 
-      } catch (Exception e) {
-        outputStream.println(e.getMessage());
-      }
-      return true;
+      //}
+//      } catch (Exception e) {
+//        outputStream.println(e.getMessage());
+//      }
+      //return true;
     }
 
   

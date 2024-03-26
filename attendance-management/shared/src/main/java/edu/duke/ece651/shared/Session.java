@@ -55,10 +55,11 @@ public class Session {
 
     public void saveAttendanceRecords() throws Exception {
         String workingDir = System.getProperty("user.dir");
-        String DATA_PATH = workingDir + "/data/" + courseid + "/sessions/";
+        String DATA_PATH = workingDir + "/shared/data/" + courseid + "/sessions/";
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
         String fileName = dateFormat.format(time) + ".txt";
-        // File file = new File(DATA_PATH + fileName);
+        //for test only
+        File file = new File(DATA_PATH + fileName);
 
         // try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
         // for (AttendanceRecord record : records) {
@@ -67,17 +68,20 @@ public class Session {
         // writer.newLine();
         // }
         // }
-        String tempPath = DATA_PATH + fileName + ".temp";
 
-        File file = new File(tempPath);
+        //comment 2 lines for test
+        //String tempPath = DATA_PATH + fileName + ".temp";
+
+        //File file = new File(tempPath);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (AttendanceRecord record : records) {
-                writer.write(record.getStudent().getPersonalID() + ", " + record.getStatus().getStatus());
+                writer.write(record.getStudent().getPersonalID() + "," + record.getStatus().getStatus());
                 writer.newLine();
             }
         }
 
-        FileEncryptorDecryptor.encrypt(tempPath, DATA_PATH + fileName);
+        //comment 1 line for test
+        //FileEncryptorDecryptor.encrypt(tempPath, DATA_PATH + fileName);
 
         // Uncomment this line when go to production !!!
         // new File(tempPath).delete();
