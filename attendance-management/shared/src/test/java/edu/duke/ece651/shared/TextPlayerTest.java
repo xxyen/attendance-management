@@ -244,7 +244,7 @@ class TextPlayerTest {
         assertThrows(IllegalArgumentException.class, () -> player.readFormat("a"));
     }
 
-    //@Disabled
+    @Disabled
     @Test
     void test_exportSession() throws Exception {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();

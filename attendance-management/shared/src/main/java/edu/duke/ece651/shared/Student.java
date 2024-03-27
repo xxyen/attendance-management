@@ -65,7 +65,7 @@ public class Student implements User {
 
   @Override
   public String getUserType() {
-    return "professor";
+    return "student";
   }
   
   @Override
