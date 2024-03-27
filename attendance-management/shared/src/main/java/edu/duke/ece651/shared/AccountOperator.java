@@ -11,21 +11,34 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+/**
+ * This class is for managing all accounts of this system.
+ * Including import accounts from file and some other account interaction for the system
+ */
 public class AccountOperator {
   private ArrayList<Account> accounts;
   private String filePath;
   private static final String ALGORITHM = "AES";                                                                                                                                                                                                                         
   private static final String KEY = "39edh*huis$iuh5yf@jf95jd";
-  
+
+  /**
+   * Construct an account operator by loading from a encrypted file
+   */
   public AccountOperator(String importPath){                                                                    
     this.filePath = importPath;
     this.accounts = importAccountsfromFile();
   }
 
+  /**
+   * get all accounts
+   */
   public Iterable<Account> getAccounts(){
     return accounts;
   }
 
+  /**
+   * Import all accounts from a encrypted file
+   */
   public ArrayList<Account> importAccountsfromFile() {
     ArrayList<Account> importedAccounts = new ArrayList<>();
     
@@ -55,7 +68,11 @@ public class AccountOperator {
     }
     return importedAccounts;
   }
-  
+
+
+  /**
+   * Parse an Json object to an account pbject
+   */
   public Account parseAccountObject(JSONObject obj) {
     try {
       JSONObject jsonObject = (JSONObject) obj;
@@ -72,7 +89,10 @@ public class AccountOperator {
     }
     throw new IllegalArgumentException("Something went wrong when parsing the account object!");
   }
-  
+
+  /**
+   * Create an account
+   */
   public Account createAccount(String userid, String password, String type, String id, boolean encryptedPwd) {
     if (useridExists(userid)) {
       throw new IllegalArgumentException("userid exists!");
@@ -83,7 +103,10 @@ public class AccountOperator {
     //no other type of account for now
     return null;
   }
-  
+
+  /**
+   * Check if one userid exists
+   */
   public boolean useridExists(String userid) {
     if (accounts == null) {
       return false;
@@ -127,31 +150,15 @@ public class AccountOperator {
     
     }*/
 
+
+  /**
+   * Get the user personal ID of an account if the userid and password are verified correct
+   */
   public String getAccountPersonalID(String userid, String password) {
     Account account = accounts.stream().filter(acc -> acc.getUserid().equals(userid)).findFirst().orElse(null);
     if(account != null && account.isCorrectPassword(password)){
       return account.getPersonalID();
     }
     return null;
-  }
-  
-  public User signIn(String userid, String password, Map<String, User> userList) {
-    Account account = accounts.stream().filter(acc -> acc.getUserid().equals(userid)).findFirst().orElse(null);
-    if(account == null) {
-      throw new IllegalArgumentException("This account doesn't exist!");
-    }
-    else {
-      if(account.isCorrectPassword(password)){
-        //find the professor in json file
-        Optional<Map.Entry<String, User>> userEntryOptional = userList.entrySet().stream().filter(entry -> entry.getKey().equals(account.getPersonalID())).findFirst();
-        if(userEntryOptional.isPresent()) {
-          return userEntryOptional.get().getValue();
-        }
-        throw new IllegalArgumentException("User not found in userList map!");
-      }
-      else {
-        throw new IllegalArgumentException("Incorrect password!");
-      }
-    }
   }
 }

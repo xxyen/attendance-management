@@ -7,6 +7,8 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 
+import jdk.jfr.Timestamp;
+
 public class ProfessorAccountTest {
   @Test
   public void test_isCorrectPassword() {
@@ -26,6 +28,11 @@ public class ProfessorAccountTest {
     assertEquals("nmydbJUzifJafqZnlx/6OA==", acc.getEncryptedPwd());
   }
 
+  @Test
+  public void test_createProfessorAccount_Exception() {
+    Account acc = new ProfessorAccount("userid", "aaa", "profid", true);
+  }
+  
     
   /*
    * @Test
