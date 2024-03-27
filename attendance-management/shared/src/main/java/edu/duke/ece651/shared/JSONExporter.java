@@ -7,6 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import org.json.*;
 
+/**
+ * An implementation of the Exporter interface for exporting session data to
+ * JSON format.
+ */
 public class JSONExporter implements Exporter {
     @Override
     public void export(List<Session> sessions, List<String> fields, String filePath) throws IOException {
