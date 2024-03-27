@@ -28,13 +28,10 @@ import com.google.api.services.gmail.model.Message;
 public class EmailNotification implements Notification {
   private Email fromAddress;
   private Email toAddress;
+
   public EmailNotification(Email fromAddress, Email toAddress) {
     this.fromAddress = fromAddress;
     this.toAddress = toAddress;
-  }
-  @Override
-  public boolean sendNotification() {
-    return false;
   }
 
   /**
@@ -57,6 +54,11 @@ public class EmailNotification implements Notification {
   //private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_LABELS);
   private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_SEND);
   private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+
+  @Override
+  public boolean sendNotification() {
+    return false;
+  }
 
   /**
    * Creates an authorized Credential object.
