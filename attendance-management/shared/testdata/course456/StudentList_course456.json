@@ -1,14 +1,1 @@
-[
-    {
-        "studentID": "s003",
-        "legalName": "David Smith",
-        "displayName": "David",
-        "emailAddr": "s003@duke.edu"
-    },
-    {
-        "studentID": "s004",
-        "legalName": "Cary Wilson",
-        "displayName": "Cary",
-        "emailAddr": "s004@gmail.com"
-    }
-]
+[{"studentID":"s003","legalName":"David Smith","displayName":"David","emailAddr":"s003@duke.edu"},{"studentID":"s004","legalName":"Cary Wilson","displayName":"Cary","emailAddr":"s004@gmail.com"}]

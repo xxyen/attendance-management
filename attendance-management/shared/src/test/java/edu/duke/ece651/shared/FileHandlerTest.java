@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -92,9 +93,9 @@ public class FileHandlerTest {
     assertEquals('a', attendanceRecords.get(1).getStatus().getStatus());
   }
 
-  @Disabled
+  // @Disabled
   @Test
-  void test_loadRosterFromCsv() throws IOException {
+  void test_loadRosterFromCSVFile() throws IOException {
     String workingDir = System.getProperty("user.dir");
     String path = workingDir + "/roster/";
     String rosterPath = path + "roster_course456.csv";
@@ -113,8 +114,8 @@ public class FileHandlerTest {
       }
     }
     // Course cour = new Course("course456", null, null, true);
-
-    FileHandler.loadRosterFromCsv(cour.getCourseid(), cour, rosterPath);
+    List<Integer> order = Arrays.asList(0, 1, 2, 3);
+    FileHandler.loadRosterFromCSVFile(cour.getCourseid(), cour, rosterPath, order, false);
 
     assertFalse(cour.getStudents().isEmpty());
     assertEquals(2, cour.getStudents().size());
