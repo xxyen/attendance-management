@@ -33,6 +33,15 @@ public class Course {
     this.canChangeName = canChangeName;
   }
 
+  public Course(String courseid, Professor professor, boolean canChangeName) {
+    this.courseid = courseid;
+    professors = new ArrayList<>();
+    professors.add(professor);
+    students = new ArrayList<>();
+    sessions = new ArrayList<>();
+    this.canChangeName = canChangeName;
+  }
+
   /**
    * Creates a course instance with specific course ID, list of professors,
    * students, and name change policy.
