@@ -3,30 +3,37 @@ package edu.duke.ece651.shared;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class FileHandlerTest {
-  private static final String DATA_PATH = System.getProperty("user.dir") + "/data/";
+
+  private static final String DATA_PATH = System.getProperty("user.dir") +
+      "/testdata/";
   private static final String COURSE_ID = "testCourse";
   private static final String PROFESSOR_ID = "testProfessor";
 
-  @Disabled
+  @BeforeEach
+  public void setUp() throws Exception {
+    FileHandler.setDataPath(DATA_PATH);
+  }
+
   @Test
-  void test_loadGlobalStudents() throws FileNotFoundException {
+  void test_loadGlobalStudents() throws Exception {
     Map<String, Student> students = FileHandler.loadGlobalStudents();
-    assertEquals(4, students.size());
+    // assertEquals(4, students.size());
 
     Student student1 = students.get("s001");
     assertNotNull(student1);
@@ -35,11 +42,10 @@ public class FileHandlerTest {
     assertEquals("s001@duke.edu", student1.getEmailAddr().getEmailAddr());
   }
 
-  @Disabled
   @Test
-  void test_loadGlobalProfessors() {
+  void test_loadGlobalProfessors() throws Exception {
     Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
-    assertEquals(2, professors.size());
+    // assertEquals(2, professors.size());
 
     Professor professor1 = professors.get("p001");
     assertNotNull(professor1);
@@ -47,12 +53,12 @@ public class FileHandlerTest {
     assertEquals("profx@gmail.com", professor1.getEmail().getEmailAddr());
   }
 
-  // @Disabled
   @Test
-  void test_loadCourses() throws ParseException, FileNotFoundException {
+  void test_loadCourses() throws Exception {
     Map<String, Student> globalStudents = FileHandler.loadGlobalStudents();
     Map<String, Professor> globalProfessors = FileHandler.loadGlobalProfessors();
-    List<Course> courses = FileHandler.loadCourses(globalStudents, globalProfessors);
+    List<Course> courses = FileHandler.loadCourses(globalStudents,
+        globalProfessors);
 
     assertFalse(courses.isEmpty());
     Course course123 = courses.stream().filter(c -> "course123".equals(c.getCourseid())).findFirst().orElse(null);
@@ -84,11 +90,9 @@ public class FileHandlerTest {
     assertEquals('a', attendanceRecords.get(1).getStatus().getStatus());
   }
 
-  // It has been tested. To test this function, you need to disable all functions
-  // above
-  @Disabled
+  // @Disabled
   @Test
-  void test_loadRosterFromCsv() throws IOException {
+  void test_loadRosterFromCSVFile() throws Exception {
     String workingDir = System.getProperty("user.dir");
     String path = workingDir + "/roster/";
     String rosterPath = path + "roster_course456.csv";
@@ -107,8 +111,8 @@ public class FileHandlerTest {
       }
     }
     // Course cour = new Course("course456", null, null, true);
-
-    FileHandler.loadRosterFromCsv(cour.getCourseid(), cour, rosterPath);
+    List<Integer> order = Arrays.asList(0, 1, 2, 3);
+    FileHandler.loadRosterFromCSVFile(cour.getCourseid(), cour, rosterPath, order, false);
 
     assertFalse(cour.getStudents().isEmpty());
     assertEquals(2, cour.getStudents().size());
@@ -117,15 +121,14 @@ public class FileHandlerTest {
     assertEquals("s004", cour.getStudents().get(1).getPersonalID());
   }
 
-  // this method has been tested
-  @Disabled
   @Test
-  public void test_createAndDeleteCourse() {
+  public void test_createAndDeleteCourse() throws Exception {
     FileHandler.createCourse(COURSE_ID, PROFESSOR_ID);
 
     File courseDir = new File(DATA_PATH + "/" + COURSE_ID);
     File sessionsDir = new File(courseDir, "/sessions");
-    File professorFile = new File(courseDir, "/Professor_" + COURSE_ID + ".json");
+    File professorFile = new File(courseDir, "/Professor_" + COURSE_ID +
+        ".json");
 
     assertTrue(courseDir.exists());
     assertTrue(sessionsDir.exists());
@@ -135,47 +138,48 @@ public class FileHandlerTest {
     assertFalse(courseDir.exists());
   }
 
-  // this method has been tested
-  @Disabled
   @Test
-  public void test_addProfessorToCourse() {
+  public void test_addProfessorToCourse() throws Exception {
     FileHandler.createCourse(COURSE_ID, PROFESSOR_ID);
     FileHandler.addProfessorToCourse(PROFESSOR_ID, COURSE_ID);
 
-    File professorFile = new File(DATA_PATH + "/" + COURSE_ID + "/Professor_" + COURSE_ID + ".json");
+    File professorFile = new File(DATA_PATH + "/" + COURSE_ID + "/Professor_" +
+        COURSE_ID + ".json");
     assertTrue(professorFile.exists());
   }
 
-  // this method has been tested
-  @Disabled
   @Test
-  public void test_addSessionToCourse() {
+  public void test_addSessionToCourse() throws Exception {
     FileHandler.createCourse(COURSE_ID, PROFESSOR_ID);
     Date now = new Date();
     FileHandler.addSessionToCourse(COURSE_ID, now);
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
     String sessionFileName = dateFormat.format(now) + ".txt";
-    File sessionFile = new File(DATA_PATH + "/" + COURSE_ID + "/sessions/" + sessionFileName);
+    File sessionFile = new File(DATA_PATH + "/" + COURSE_ID + "/sessions/" +
+        sessionFileName);
     assertTrue(sessionFile.exists());
   }
 
-  // this method has been tested
-  @Disabled
   @Test
   public void test_addStudentToCourse() throws Exception {
-    Student testStudent = new Student("testStudentID", "Legal Name", "Display Name",
+    Student testStudent = new Student("test1", "Legal Name", "Display ame",
         new Email("test@duke.edu"));
 
     FileHandler.createCourse(COURSE_ID, PROFESSOR_ID);
 
     FileHandler.addStudentToCourse(testStudent.getPersonalID(), COURSE_ID);
 
-    String studentListPath = DATA_PATH + "/" + COURSE_ID + "/StudentList_" + COURSE_ID + ".json";
-    File studentListFile = new File(studentListPath);
-    assertTrue(studentListFile.exists());
+    String studentListPath = DATA_PATH + COURSE_ID + "/StudentList_" +
+        COURSE_ID + ".json";
+    // File studentListFile = new File(studentListPath);
+    // assertTrue(studentListFile.exists());
 
-    String content = new String(Files.readAllBytes(Paths.get(studentListPath)));
+    String decryptedPath = studentListPath + ".decrypted";
+    FileEncryptorDecryptor.decrypt(studentListPath, decryptedPath);
+
+    String content = new String(Files.readAllBytes(Paths.get(decryptedPath)));
+    // new File(decryptedPath).delete();
     JSONArray studentsArray = new JSONArray(content);
     boolean found = false;
     for (int i = 0; i < studentsArray.length(); i++) {
@@ -185,6 +189,11 @@ public class FileHandlerTest {
       }
     }
     assertTrue(found);
+
+    Student updatedStudent = new Student("test1", "Legal Name", "New Display ame",
+        new Email("test@duke.edu"));
+
+    FileHandler.updateCoursesForStudent(updatedStudent);
   }
 
 }

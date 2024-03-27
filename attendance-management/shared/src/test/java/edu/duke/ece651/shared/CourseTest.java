@@ -3,6 +3,7 @@ package edu.duke.ece651.shared;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -82,6 +83,36 @@ public class CourseTest {
     assertEquals(2, students.size());
     assertTrue(containsStudent(students, stud1));
     assertTrue(containsStudent(students, stud2));
+  }
+
+  @Test
+  public void test_addProfessor() {
+    createCourse();
+    Professor prof2 = new Professor("Alice", "al456", new Email("alice@duke.edu"));
+    course.addProfessor(prof2);
+    assertEquals(2, course.getProfessors().size());
+    assertTrue(course.getProfessors().contains(prof2));
+  }
+
+  @Test
+  public void test_setProfessors() {
+    createCourse();
+    Professor prof2 = new Professor("Alice", "al456", new Email("alice@duke.edu"));
+    Professor prof3 = new Professor("Bob", "bb789", new Email("bob@duke.edu"));
+    List<Professor> newProfessors = Arrays.asList(prof2, prof3);
+    course.setProfessors(newProfessors);
+    assertEquals(2, course.getProfessors().size());
+    assertTrue(course.getProfessors().containsAll(newProfessors));
+  }
+
+  @Test
+  public void test_setStudents() throws IOException {
+    createCourse();
+    Student stud3 = new Student("bb789", "Bob B", "Bobby", new Email("bob.b@duke.edu"));
+    List<Student> newStudents = Arrays.asList(stud1, stud2, stud3);
+    course.setStudents(newStudents);
+    assertEquals(3, course.getStudents().size());
+    assertTrue(course.getStudents().containsAll(newStudents));
   }
 
   private boolean containsStudent(List<Student> students, Student expectedStudent) {

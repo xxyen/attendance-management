@@ -28,6 +28,12 @@ public class App {
     allUsers.putAll(students);
     List<Course> courses = FileHandler.loadCourses(students, professors);
 
+    // 创建任务
+    WeeklyReporter task = new WeeklyReporter(courses);
+    // 在新线程中启动任务
+    Thread thread = new Thread(task);
+    thread.start();
+
       while (true) {
         User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
         if (currentUser.getUserType().equals("professor")) {
