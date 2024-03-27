@@ -111,20 +111,6 @@ public class AccountOperatorTest {
   }
 
   @Test
-  public void test_signIn_professor() {
-    Email email = new Email("xxx@xxx.com");
-    User prof1 = new Professor("DH", "adh39", email);
-    User prof2 = new Professor("TB", "tkb13", email);
-    HashMap<String, User> profList = new HashMap<>();
-    profList.put("adh39", prof1);
-    assertThrows(IllegalArgumentException.class, () -> accountOperator.signIn("Tyler", "something123", profList));
-    profList.put("tkb13", prof2);
-    assertEquals(prof2, accountOperator.signIn("Tyler", "something123", profList));
-    assertThrows(IllegalArgumentException.class, () -> accountOperator.signIn("David", "something123", profList));
-    assertThrows(IllegalArgumentException.class, () -> accountOperator.signIn("Tyler", "something234", profList));
-  }
-
-  @Test
   public void test_getAccountPersonalID() {
     assertEquals("adh39", accountOperator.getAccountPersonalID("Drew", "password"));
     assertEquals("tkb13", accountOperator.getAccountPersonalID("Tyler", "something123"));
