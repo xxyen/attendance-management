@@ -14,7 +14,7 @@ class TextPlayerTest {
     private TextPlayer createTextPlayer(String inputData, OutputStream bytes, boolean canChangeName) {
         BufferedReader input = new BufferedReader(new StringReader(inputData));
         PrintStream output = new PrintStream(bytes, true);
-        Professor p = new Professor("test Prof", "abc123", new Email("test@gmail.com"));
+        Professor p = new Professor("test Prof", "adh39", new Email("test@gmail.com"));
         // ArrayList<Professor> professorsArray = new ArrayList<Professor>();
         Professor[] professorsArray = { p };
         // ArrayList<Student> studentArray = new ArrayList<>();
@@ -209,6 +209,7 @@ class TextPlayerTest {
     @Test
     @Disabled
     void test_changeStatus() throws Exception {
+
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         TextPlayer player = createTextPlayer("a\np\n" +
                 "1\n1\nl\n" +
@@ -244,13 +245,20 @@ class TextPlayerTest {
         assertThrows(IllegalArgumentException.class, () -> player.readFormat("a"));
     }
 
-    @Disabled
+    //@Disabled
     @Test
     void test_exportSession() throws Exception {
+        String workingDir = System.getProperty("user.dir");
+        String path = workingDir + "/export/";
+
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         TextPlayer player = createTextPlayer(
-                "json\n/home/wille/Desktop/test1.json\n" +
-                "xml\n/home/wille/Desktop/test2.xml\n", bytes, true);
+                "json\n" +
+                        path +
+                        "test1.json\n" +
+                "xml\n/" +
+                        path +
+                        "test2.xml\n", bytes, true);
         //player.full_takeAttendance();
         player.exportSessions();
         player.exportSessions();
