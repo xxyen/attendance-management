@@ -51,7 +51,7 @@ class StudentTest {
         assertFalse(s1.equals(s8));
 
         assertEquals(s1.hashCode(), s2.hashCode());
-        assertEquals(s1.getUserType(), "professor");
+        assertEquals(s1.getUserType(), "student");
     }
 
 }
