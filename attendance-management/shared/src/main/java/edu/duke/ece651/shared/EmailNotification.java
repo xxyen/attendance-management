@@ -87,6 +87,11 @@ public class EmailNotification implements Notification {
     return credential;
   }
 
+  /**
+   * Send a single Email
+   * @param subject is the subject of the Email
+   * @param bodyText is the body contents of the Email
+   */
   public void sendEmail(String subject, String bodyText) throws IOException, GeneralSecurityException {
     final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
     Gmail service = new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
@@ -98,6 +103,14 @@ public class EmailNotification implements Notification {
     sendMessage(service, "me", message);
   }
 
+  /**
+   * Create a String containing the entire Email
+   * @param to is the receiver Email
+   * @param from is the sender Email
+   * @param subject is the subject of the Email
+   * @param body is the body contents of the Email
+   * @return the String containing all information
+   */
   private static String createRawEmailString(String to, String from, String subject, String body) {
     String bodyText = "Content-Type: text/plain; charset=\"UTF-8\"\n" +
             "MIME-Version: 1.0\n" +
@@ -110,12 +123,22 @@ public class EmailNotification implements Notification {
     return Base64.getUrlEncoder().encodeToString(bodyText.getBytes(StandardCharsets.UTF_8));
   }
 
+  /**
+   * Create a Message from the raw Email String
+   * @param rawEmail is the String containing the entire Email
+   * @return the formatted Message to send
+   */
   private static Message createMessage(String rawEmail) {
     Message message = new Message();
     message.setRaw(rawEmail);
     return message;
   }
 
+  /**
+   * Perform the sending Email operation
+   * @param userId is the ID of the sender
+   * @param email is the Email to send in Message format
+   */
   private static void sendMessage(Gmail service, String userId, Message email) throws IOException {
     service.users().messages().send(userId, email).execute();
   }
