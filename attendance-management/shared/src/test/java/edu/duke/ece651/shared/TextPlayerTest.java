@@ -36,7 +36,7 @@ class TextPlayerTest {
     }
 
     @Test
-    void test_changeDisplayName() throws IOException {
+    void test_changeDisplayName() throws Exception {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         TextPlayer player = createTextPlayer("1\nfk\n1\ntest disstu1\n2\n", bytes, true);
         player.changeDisplayName();
@@ -189,7 +189,7 @@ class TextPlayerTest {
     }
 
     @Test
-    void test_addAndRemoveStudent() throws IOException {
+    void test_addAndRemoveStudent() throws Exception {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         TextPlayer player = createTextPlayer("test1\ntest1\n", bytes, true);
         player.addStudent();

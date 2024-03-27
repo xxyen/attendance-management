@@ -11,23 +11,24 @@ public class TextPlayer {
     private Professor professor;
     private Course course;
     private AttendanceOperator attendance;
-    //private Textview textview;
-    //private FileHandler fileHandler;
+    // private Textview textview;
+    // private FileHandler fileHandler;
 
     private final BufferedReader inputReader;
     private final PrintStream out;
 
     private final int actNums;
 
-    public TextPlayer(Professor professor, Course course, AttendanceOperator attendance, BufferedReader inputReader, PrintStream out) {
+    public TextPlayer(Professor professor, Course course, AttendanceOperator attendance, BufferedReader inputReader,
+            PrintStream out) {
         this.professor = professor;
         this.course = course;
         this.attendance = attendance;
-        //this.fileHandler = fileHandler;
+        // this.fileHandler = fileHandler;
         this.inputReader = inputReader;
         this.out = out;
 
-        //need to change if number of actions increases
+        // need to change if number of actions increases
         this.actNums = 7;
     }
 
@@ -40,23 +41,23 @@ public class TextPlayer {
         }
     }
 
-    public Status readStatus(String prompt) throws IOException{
+    public Status readStatus(String prompt) throws IOException {
         out.print("--------------------------------------------------------------------------------\n");
         out.print(prompt);
         out.println("--------------------------------------------------------------------------------\n");
-//        String s = inputReader.readLine();
-//        if (s == null){
-//            throw new EOFException(
-//                    "You didn't type in any instruction!\n"
-//            );
-//        }
+        // String s = inputReader.readLine();
+        // if (s == null){
+        // throw new EOFException(
+        // "You didn't type in any instruction!\n"
+        // );
+        // }
         char status = readSingleLetter(inputReader);
         return new Status(status);
     }
 
-    public Session takeAttendance() throws IOException{
+    public Session takeAttendance() throws IOException {
         Session newSes = new Session(course.getCourseid(), new Date());
-        for (Student s: course.getStudents()){
+        for (Student s : course.getStudents()) {
             out.print("--------------------------------------------------------------------------------\n");
             out.println(s.getDisplayName());
             out.println(s.getPersonalID());
@@ -65,13 +66,14 @@ public class TextPlayer {
             boolean flag = true;
             while (flag) {
                 try {
-                    Status newStatus = readStatus("Please type in the attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)\n");
-                    AttendanceRecord tempR =new AttendanceRecord(s, newStatus);
+                    Status newStatus = readStatus(
+                            "Please type in the attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)\n");
+                    AttendanceRecord tempR = new AttendanceRecord(s, newStatus);
                     newSes.addRecord(tempR);
                     flag = false;
                 } catch (IllegalArgumentException e) {
                     out.println(e.getMessage());
-                    //doOnePlacement(s, this.shipCreationFns.get(s));
+                    // doOnePlacement(s, this.shipCreationFns.get(s));
                 }
             }
         }
@@ -80,8 +82,8 @@ public class TextPlayer {
 
     public void addSession(Session s) throws Exception {
         course.addSession(s);
-        //to-do
-        //update src file: add a new session file
+        // to-do
+        // update src file: add a new session file
         FileHandler.addSessionToCourse(course.getCourseid(), s.getTime());
         s.saveAttendanceRecords();
     }
@@ -91,9 +93,10 @@ public class TextPlayer {
         addSession(s);
 
     }
-    public Student searchStudent(String id){
-        for (Student s: course.getStudents()){
-            if(s.getPersonalID().equals(id)){
+
+    public Student searchStudent(String id) {
+        for (Student s : course.getStudents()) {
+            if (s.getPersonalID().equals(id)) {
                 return s;
             }
         }
@@ -101,18 +104,17 @@ public class TextPlayer {
         return null;
     }
 
-    public Student doSearchStudent() throws IOException{
+    public Student doSearchStudent() throws IOException {
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Please type in the student's id:\n");
         out.println("--------------------------------------------------------------------------------\n");
         String s = inputReader.readLine();
-        if (s == null){
+        if (s == null) {
             throw new EOFException(
-                    "You didn't type in any instruction!\n"
-            );
+                    "You didn't type in any instruction!\n");
         }
         Student ans = searchStudent(s);
-        if (ans == null){
+        if (ans == null) {
             throw new IllegalArgumentException("Invalid input: there is no student with this id in this course!");
         }
         return ans;
@@ -133,21 +135,22 @@ public class TextPlayer {
         }
     }
 
-    public Session chooseSession() throws IOException{
+    public Session chooseSession() throws IOException {
         List<Session> sessionList = course.getSessions();
         int size = sessionList.size();
 
-        for (int i = 0; i < size; i++){
-            out.println(Integer.toString(i+1) + ": Date " + sessionList.get(i).getTime());
+        for (int i = 0; i < size; i++) {
+            out.println(Integer.toString(i + 1) + ": Date " + sessionList.get(i).getTime());
         }
         out.print("--------------------------------------------------------------------------------\n");
-        out.println("The above is a list of all the sessions, please enter the serial number of the session you want to choose.");
+        out.println(
+                "The above is a list of all the sessions, please enter the serial number of the session you want to choose.");
         out.println("--------------------------------------------------------------------------------\n");
         int index = readPositiveInteger(inputReader);
-        if (index > size){
+        if (index > size) {
             throw new IllegalArgumentException("Invalid input: there is no such a session!");
         }
-        return sessionList.get(index-1);
+        return sessionList.get(index - 1);
     }
 
     public void sendNotification(Email target, String sub, String body) throws GeneralSecurityException, IOException {
@@ -156,7 +159,8 @@ public class TextPlayer {
         sender.sendEmail(sub, body);
     }
 
-    public void sendStatusChangeNotification(Student s, Session ses, Status sta) throws GeneralSecurityException, IOException {
+    public void sendStatusChangeNotification(Student s, Session ses, Status sta)
+            throws GeneralSecurityException, IOException {
         String sub = "Attendance Status Changed";
         StringBuilder body = new StringBuilder("To ");
         body.append(s.getLegalName());
@@ -179,11 +183,12 @@ public class TextPlayer {
 
         Student s = doSearchStudent();
 
-        Status newSta = readStatus("Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)\n");
+        Status newSta = readStatus(
+                "Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)\n");
 
         Boolean flag = false;
-        for (AttendanceRecord record: target.getRecords()){
-            if (record.getStudent().equals(s)){
+        for (AttendanceRecord record : target.getRecords()) {
+            if (record.getStudent().equals(s)) {
                 record.changeRecord(newSta);
                 target.saveAttendanceRecords();
                 flag = true;
@@ -191,23 +196,22 @@ public class TextPlayer {
             }
         }
 
-        if (flag == true){
+        if (flag == true) {
             out.print("--------------------------------------------------------------------------------\n");
             out.print("Successfully update the record!\n");
             out.println("--------------------------------------------------------------------------------\n");
-            //to-do
-            //send email notification
+            // to-do
+            // send email notification
             sendStatusChangeNotification(s, target, newSta);
 
-        }
-        else {
+        } else {
             out.print("--------------------------------------------------------------------------------\n");
             out.print("Sorry, there is no record of this student in chosen session!\n");
             out.println("--------------------------------------------------------------------------------\n");
         }
     }
 
-    public void changeDisplayName() throws IOException{
+    public void changeDisplayName() throws Exception {
         if (course.isCanChangeName()) {
             Student stu = doSearchStudent();
             out.print("--------------------------------------------------------------------------------\n");
@@ -216,48 +220,45 @@ public class TextPlayer {
             String s = inputReader.readLine();
             if (s == null) {
                 throw new EOFException(
-                        "You didn't type in any instruction!\n"
-                );
+                        "You didn't type in any instruction!\n");
             }
 
             stu.setDisplayName(s);
-            //to-do
-            //change display name in src file
+            // to-do
+            // change display name in src file
             FileHandler.updateCoursesForStudent(stu);
             FileHandler.updateOrAddStudentInGlobalList(stu);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Sorry, you cannot change student's display name!");
         }
     }
 
-    public void removeStudent() throws IOException {
+    public void removeStudent() throws Exception {
         Student stu = doSearchStudent();
         course.removeStudent(stu.getPersonalID());
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Successfully removed the student from the course!\n");
         out.println("--------------------------------------------------------------------------------\n");
-        //to-do
-        //change student list in src file
+        // to-do
+        // change student list in src file
         FileHandler.removeStudentFromCourse(stu.getPersonalID(), course.getCourseid());
     }
 
-    public List<Student> getStudent(){
+    public List<Student> getStudent() {
         return course.getStudents();
     }
-//    public List<Session> getSession(){
-//        return course.getSessions();
-//    }
+    // public List<Session> getSession(){
+    // return course.getSessions();
+    // }
 
-    public void addStudent() throws IOException{
+    public void addStudent() throws Exception {
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Please type in the student's id:\n");
         out.println("--------------------------------------------------------------------------------\n");
         String s = inputReader.readLine();
-        if (s == null){
+        if (s == null) {
             throw new EOFException(
-                    "You didn't type in any instruction!\n"
-            );
+                    "You didn't type in any instruction!\n");
         }
         Student stu = FileHandler.addStudentToCourse(s, course.getCourseid());
         course.addStudent(stu);
@@ -265,8 +266,9 @@ public class TextPlayer {
         out.print("Successfully added the student to the course!\n");
         out.println("--------------------------------------------------------------------------------\n");
 
-        //to-do
-        //where to get the new student info: construct a new one or search from main student list?
+        // to-do
+        // where to get the new student info: construct a new one or search from main
+        // student list?
 
     }
 
@@ -275,12 +277,11 @@ public class TextPlayer {
         out.print(prompt);
         out.println("--------------------------------------------------------------------------------\n");
         String s = inputReader.readLine();
-        if (s == null){
+        if (s == null) {
             throw new EOFException(
-                    "You didn't type in any instruction!\n"
-            );
+                    "You didn't type in any instruction!\n");
         }
-        if (!(s.equals("xml") || s.equals("json"))){
+        if (!(s.equals("xml") || s.equals("json"))) {
             throw new IllegalArgumentException("Invalid format! You should only choose json or xml!");
         }
         return s;
@@ -309,7 +310,7 @@ public class TextPlayer {
     public void loop() throws Exception {
         boolean flag = true;
 
-        while (flag){
+        while (flag) {
             try {
                 out.print("--------------------------------------------------------------------------------\n");
                 out.print("1. Start a new session and take attendance.\n" +
@@ -324,27 +325,21 @@ public class TextPlayer {
 
                 int index = readPositiveInteger(inputReader);
 
-                if(index == 1){
+                if (index == 1) {
                     full_takeAttendance();
-                }
-                else if (index == 2){
+                } else if (index == 2) {
                     changeStatus();
-                }
-                else if (index == 3){
+                } else if (index == 3) {
                     changeDisplayName();
-                }
-                else if (index == 4){
+                } else if (index == 4) {
                     addStudent();
-                }
-                else if (index == 5){
+                } else if (index == 5) {
                     removeStudent();
-                }
-                else if (index == 6){
-                    //todo
-                    //add export method
+                } else if (index == 6) {
+                    // todo
+                    // add export method
                     exportSessions();
-                }
-                else if (index == 7){
+                } else if (index == 7) {
                     out.print("--------------------------------------------------------------------------------\n");
                     out.print("You have exited from course: " +
                             course.getCourseid() +
@@ -354,19 +349,14 @@ public class TextPlayer {
 
                     flag = false;
                     break;
-                }
-                else {
+                } else {
                     throw new IllegalArgumentException("Invalid action number, please choose your action again!");
                 }
 
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 out.println(e.getMessage());
             }
         }
     }
-
-
-
 
 }
