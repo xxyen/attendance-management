@@ -13,6 +13,20 @@
 - [Software Requirement Specification](https://docs.google.com/document/d/1BmGDtEHoRCYQkmHLyiF8WV6RpLguR_O_DUgDduOC_k8/edit?usp=sharing)
 - [Design Decisions](https://docs.google.com/document/d/1FBVVgQG5NuhJiVPFZ6_UGbxQSVVlhQ0qq4QHH8zTm9Q/edit?addon_store)
 
+## Before You Run This System...
+
+Accounts are **prestored** for now. They are read from an encrypted file. There are three prestored accounts available for you to use.
+<details><summary>Prestored Accounts</summary>
+
+1. userid: Tyler         password: something123
+2. userid: Brian         password: something234
+3. userid: Drew          password: password
+</details>
+
+
+
+
+
 ## Team #6
 
 ## Team Members
