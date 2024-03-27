@@ -244,14 +244,14 @@ class TextPlayerTest {
         assertThrows(IllegalArgumentException.class, () -> player.readFormat("a"));
     }
 
-    @Disabled
+    //@Disabled
     @Test
     void test_exportSession() throws Exception {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer("a\np\n" +
+        TextPlayer player = createTextPlayer(
                 "json\n/home/wille/Desktop/test1.json\n" +
                 "xml\n/home/wille/Desktop/test2.xml\n", bytes, true);
-        player.full_takeAttendance();
+        //player.full_takeAttendance();
         player.exportSessions();
         player.exportSessions();
     }

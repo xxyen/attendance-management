@@ -31,6 +31,7 @@ class EmailTest {
         assertFalse(e1.equals(e3));
         assertFalse(e1.equals(e4));
         assertFalse(e1.equals(e5));
+        assertEquals(e1.hashCode(), e2.hashCode());
 
 
 

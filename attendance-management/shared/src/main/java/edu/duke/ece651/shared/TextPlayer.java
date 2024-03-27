@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This class is used to display information to user
+ * and take action from user.
+ * @author Can Pei
+ * @version 1.0
+ */
 public class TextPlayer {
     private Professor professor;
     private Course course;
@@ -19,6 +25,9 @@ public class TextPlayer {
 
     private final int actNums;
 
+    /**
+     * Constructor
+     */
     public TextPlayer(Professor professor, Course course, AttendanceOperator attendance, BufferedReader inputReader,
             PrintStream out) {
         this.professor = professor;
@@ -32,6 +41,11 @@ public class TextPlayer {
         this.actNums = 7;
     }
 
+    /**
+     * Read one single letter from input,
+     * used for readStatus.
+     */
+
     public static char readSingleLetter(BufferedReader reader) throws IOException {
         String line = reader.readLine();
         if (line != null && line.length() == 1 && Character.isLetter(line.charAt(0))) {
@@ -41,6 +55,9 @@ public class TextPlayer {
         }
     }
 
+    /**
+     * Read a status from input.
+     */
     public Status readStatus(String prompt) throws IOException {
         out.print("--------------------------------------------------------------------------------\n");
         out.print(prompt);
@@ -55,6 +72,10 @@ public class TextPlayer {
         return new Status(status);
     }
 
+    /**
+     * Take attendance record for all the student of this course.
+     * @return a Session of the records
+     */
     public Session takeAttendance() throws IOException {
         Session newSes = new Session(course.getCourseid(), new Date());
         for (Student s : course.getStudents()) {
@@ -80,6 +101,9 @@ public class TextPlayer {
         return newSes;
     }
 
+    /**
+     * Add a new session to the course.
+     */
     public void addSession(Session s) throws Exception {
         course.addSession(s);
         // to-do
@@ -88,12 +112,19 @@ public class TextPlayer {
         s.saveAttendanceRecords();
     }
 
+    /**
+     * Full action of take attendance of a new session.
+     */
     public void full_takeAttendance() throws Exception {
         Session s = takeAttendance();
         addSession(s);
 
     }
 
+    /**
+     * Search student with given ID.
+     * @param id is the student's ID.
+     */
     public Student searchStudent(String id) {
         for (Student s : course.getStudents()) {
             if (s.getPersonalID().equals(id)) {
@@ -104,6 +135,9 @@ public class TextPlayer {
         return null;
     }
 
+    /**
+     * Full action of searching a student.
+     */
     public Student doSearchStudent() throws IOException {
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Please type in the student's id:\n");
@@ -120,6 +154,10 @@ public class TextPlayer {
         return ans;
     }
 
+    /**
+     * Read a positive integer from input.
+     * Used for choosing action or session.
+     */
     public int readPositiveInteger(BufferedReader reader) throws IOException {
         String line = reader.readLine(); // 从BufferedReader读取一行
         try {
@@ -135,6 +173,9 @@ public class TextPlayer {
         }
     }
 
+    /**
+     * Choose a session from the list.
+     */
     public Session chooseSession() throws IOException {
         List<Session> sessionList = course.getSessions();
         int size = sessionList.size();
@@ -153,12 +194,18 @@ public class TextPlayer {
         return sessionList.get(index - 1);
     }
 
+    /**
+     * Send email to a given email address.
+     */
     public void sendNotification(Email target, String sub, String body) throws GeneralSecurityException, IOException {
         Email eF = new Email("jzsun00@gmail.com");
         EmailNotification sender = new EmailNotification(eF, target);
         sender.sendEmail(sub, body);
     }
 
+    /**
+     * Send notification to student when their attendance status is changed.
+     */
     public void sendStatusChangeNotification(Student s, Session ses, Status sta)
             throws GeneralSecurityException, IOException {
         String sub = "Attendance Status Changed";
@@ -178,6 +225,9 @@ public class TextPlayer {
         sendNotification(s.getEmailAddr(), sub, body.toString());
     }
 
+    /**
+     * Full action of changing attendance status of a student.
+     */
     public void changeStatus() throws Exception {
         Session target = chooseSession();
 
@@ -211,6 +261,9 @@ public class TextPlayer {
         }
     }
 
+    /**
+     * Change display name of a student.
+     */
     public void changeDisplayName() throws Exception {
         if (course.isCanChangeName()) {
             Student stu = doSearchStudent();
@@ -233,6 +286,9 @@ public class TextPlayer {
         }
     }
 
+    /**
+     * Remove a student from the course.
+     */
     public void removeStudent() throws Exception {
         Student stu = doSearchStudent();
         course.removeStudent(stu.getPersonalID());
@@ -244,6 +300,9 @@ public class TextPlayer {
         FileHandler.removeStudentFromCourse(stu.getPersonalID(), course.getCourseid());
     }
 
+    /**
+     * Get the student list of the course.
+     */
     public List<Student> getStudent() {
         return course.getStudents();
     }
@@ -251,6 +310,9 @@ public class TextPlayer {
     // return course.getSessions();
     // }
 
+    /**
+     * Add a new student to the course.
+     */
     public void addStudent() throws Exception {
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Please type in the student's id:\n");
@@ -272,6 +334,9 @@ public class TextPlayer {
 
     }
 
+    /**
+     * Read export file format from input.
+     */
     public String readFormat(String prompt) throws IOException {
         out.print("--------------------------------------------------------------------------------\n");
         out.print(prompt);
@@ -287,6 +352,9 @@ public class TextPlayer {
         return s;
     }
 
+    /**
+     * Export attendance record of a session.
+     */
     public void exportSessions() throws IOException {
         String format = readFormat("Please choose the format (json or xml): \n");
         out.print("--------------------------------------------------------------------------------\n");
@@ -307,6 +375,9 @@ public class TextPlayer {
 
     }
 
+    /**
+     * Loop of all the actions.
+     */
     public void loop() throws Exception {
         boolean flag = true;
 

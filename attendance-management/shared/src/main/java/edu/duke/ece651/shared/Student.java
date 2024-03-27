@@ -3,15 +3,35 @@ package edu.duke.ece651.shared;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * This class represent student.
+ * @author Can Pei
+ * @version 1.0
+ */
 public class Student implements User {
+  /**
+   * Student ID
+   */
   private String studentID;
 
+  /**
+   * Student's legal name
+   */
   private String legalName;
 
+  /**
+   * Student's display name
+   */
   private String displayName;
 
+  /**
+   * Student's email address
+   */
   private Email emailAddr;
 
+  /**
+   * Constructor
+   */
   public Student(String studentID, String legalName, String displayName, Email emailAddr) {
     this.studentID = studentID;
     this.legalName = legalName;
