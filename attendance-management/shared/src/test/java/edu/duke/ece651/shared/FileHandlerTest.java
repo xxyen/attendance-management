@@ -3,6 +3,8 @@ package edu.duke.ece651.shared;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -112,7 +114,11 @@ public class FileHandlerTest {
     }
     // Course cour = new Course("course456", null, null, true);
     List<Integer> order = Arrays.asList(0, 1, 2, 3);
+
     FileHandler.loadRosterFromCSVFile(cour.getCourseid(), cour, rosterPath, order, false);
+    Course courtemp = cour;
+    assertThrows(FileNotFoundException.class,
+        () -> FileHandler.loadRosterFromCSVFile(courtemp.getCourseid(), courtemp, rosterPath + "hhh", order, false));
 
     assertFalse(cour.getStudents().isEmpty());
     assertEquals(2, cour.getStudents().size());
@@ -169,6 +175,9 @@ public class FileHandlerTest {
     FileHandler.createCourse(COURSE_ID, PROFESSOR_ID);
 
     FileHandler.addStudentToCourse(testStudent.getPersonalID(), COURSE_ID);
+
+    assertThrows(IllegalArgumentException.class,
+        () -> FileHandler.addStudentToCourse(testStudent.getPersonalID(), COURSE_ID));
 
     String studentListPath = DATA_PATH + COURSE_ID + "/StudentList_" +
         COURSE_ID + ".json";
