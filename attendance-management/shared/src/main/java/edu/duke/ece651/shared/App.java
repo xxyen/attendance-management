@@ -34,8 +34,8 @@ public class App {
     Thread thread = new Thread(task);
     thread.start();
     
-    exitOrContinue(inputReader, System.out);
       while (true) {
+        exitOrContinue(inputReader, System.out);
         User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
         if (currentUser.getUserType().equals("professor")) {
           // it returns false means logout option is chosen.
