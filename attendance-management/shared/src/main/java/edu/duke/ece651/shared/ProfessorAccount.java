@@ -48,14 +48,8 @@ public class ProfessorAccount implements Account{
   
   
   @Override
-  public String getEncryptedPwd() {
-    try {
-      return encrypt(password);
-    } catch (Exception e) {
-      // e.printStackTrace();
-      System.out.println("Failed to encrypt account password: " + e.getMessage());
-      return null;
-    }
+  public String getEncryptedPwd() throws Exception{
+    return encrypt(password);
   }
   
   @Override

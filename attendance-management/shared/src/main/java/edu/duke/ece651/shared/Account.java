@@ -5,5 +5,5 @@ public interface Account {
   String getAccountType();
   String getPersonalID();
   boolean isCorrectPassword(String pwd);
-  String getEncryptedPwd();
+  String getEncryptedPwd() throws Exception;
 }

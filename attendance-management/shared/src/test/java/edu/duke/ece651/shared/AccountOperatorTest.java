@@ -72,6 +72,11 @@ public class AccountOperatorTest {
   }
 
   @Test
+  public void test_importAccountsfromFile_Exception() {
+    AccountOperator accountOperator = new AccountOperator("invalid/");
+  }
+  
+  @Test
   public void test_setUp() {
     ArrayList<String> expected = new ArrayList<>();
     expected.add("Tyler");

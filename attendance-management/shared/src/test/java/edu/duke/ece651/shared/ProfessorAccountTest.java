@@ -21,7 +21,7 @@ public class ProfessorAccountTest {
   }
 
   @Test
-  public void test_getEncryptedPwd() {
+  public void test_getEncryptedPwd() throws Exception{
     Account acc = new ProfessorAccount("userid", "profid", false);
     assertEquals("nmydbJUzifJafqZnlx/6OA==", acc.getEncryptedPwd());
   }
