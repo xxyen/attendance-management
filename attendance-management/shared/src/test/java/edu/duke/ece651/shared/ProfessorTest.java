@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class ProfessorTest {
+  Email email = new Email("aaaa@bbb.com");
+  Professor prof = new Professor("A", "aa123", email);
+
   @Test
   public void test_handleCourses() {
-    Email email = new Email("aaaa@bbb.com");
-    Professor prof = new Professor("A", "aa123", email);
     prof.addCourse("ECE651");
     assertTrue(prof.hasCourse("ECE651"));
     assertFalse(prof.hasCourse("ECE568"));
@@ -20,6 +21,16 @@ public class ProfessorTest {
     assertTrue(prof.hasCourse("ECE568"));
     assertThrows(IllegalArgumentException.class, ()->prof.addCourse("ECE568"));
     assertThrows(IllegalArgumentException.class, ()->prof.removeCourse("ECE651"));
+  }
+
+  @Test
+  public void test_getUserType() {
+    assertEquals("professor", prof.getUserType());
+  }
+
+  @Test
+  public void test_getEmail() {
+    assertEquals(email, prof.getEmail());
   }
 
 }

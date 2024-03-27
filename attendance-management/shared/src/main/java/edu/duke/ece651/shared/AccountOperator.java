@@ -100,6 +100,7 @@ public class AccountOperator {
   }
 
   // for accounts change late, not for evo1
+  /*
   private void saveAccounts() {
     JSONArray jsonArray = new JSONArray();
     for(Account account: accounts) {
@@ -124,7 +125,7 @@ public class AccountOperator {
       e.printStackTrace();
     }
     
-  }
+    }*/
 
   public String getAccountPersonalID(String userid, String password) {
     Account account = accounts.stream().filter(acc -> acc.getUserid().equals(userid)).findFirst().orElse(null);

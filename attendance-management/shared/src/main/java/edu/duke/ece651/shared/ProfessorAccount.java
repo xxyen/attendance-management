@@ -74,7 +74,7 @@ public class ProfessorAccount implements Account{
     return false;
   }
 
-  public String encrypt(String strToEncrypt) throws Exception {
+  private String encrypt(String strToEncrypt) throws Exception {
     Cipher cipher = Cipher.getInstance(ALGORITHM);
     SecretKeySpec keySpec = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
     cipher.init(Cipher.ENCRYPT_MODE, keySpec);
@@ -82,7 +82,7 @@ public class ProfessorAccount implements Account{
     return Base64.getEncoder().encodeToString(encryptedBytes);
   }
   
-  public String decrypt(String strToDecrypt) throws Exception {
+  private String decrypt(String strToDecrypt) throws Exception {
     Cipher cipher = Cipher.getInstance(ALGORITHM);
     SecretKeySpec keySpec = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
     cipher.init(Cipher.DECRYPT_MODE, keySpec);
