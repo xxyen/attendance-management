@@ -191,7 +191,7 @@ public class App {
     String courseid = getInputCourseID(inputReader, outputStream, courses);
     boolean allowChangeName = readInputYorN(inputReader, outputStream, "Are students allowed to change their display name?(Y/N)");
 
-    outputStream.println("You are loading the roaster from a csv file! Please enter the information required below.");
+    outputStream.println("You are loading the roster from a csv file! Please enter the information required below.");
     boolean withHeader = readInputYorN(inputReader, outputStream, "Does this csv file contain headers?(Y/N)");
     List<Integer> order = readInputOrder(inputReader, outputStream);
 
