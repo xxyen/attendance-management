@@ -36,6 +36,17 @@ public class CourseTest {
   }
 
   @Test
+  public void test_constructorWithProfessor() {
+    prof1 = new Professor("John", "jh123", new Email("jh123@duke.edu"));
+
+    course = new Course("ECE651", prof1, true);
+
+    List<Professor> professors = course.getProfessors();
+    assertEquals(1, professors.size());
+    assertTrue(professors.contains(prof1));
+  }
+
+  @Test
   public void test_properties() {
     createCourse();
     assertEquals("ECE651", course.getCourseid());

@@ -72,22 +72,19 @@ public class FileHandler {
         String decryptedPath = path + ".decrypted";
         FileEncryptorDecryptor.decrypt(path, decryptedPath);
 
-        try (FileReader reader = new FileReader(decryptedPath)) {
-            JSONTokener tokener = new JSONTokener(reader);
-            JSONArray studentsArray = new JSONArray(tokener);
+        FileReader reader = new FileReader(decryptedPath);
+        JSONTokener tokener = new JSONTokener(reader);
+        JSONArray studentsArray = new JSONArray(tokener);
 
-            for (int i = 0; i < studentsArray.length(); i++) {
-                JSONObject studentObj = studentsArray.getJSONObject(i);
-                String studentID = studentObj.getString("studentID");
-                String legalName = studentObj.getString("legalName");
-                String displayName = studentObj.optString("displayName", null);
-                Email emailAddr = studentObj.has("emailAddr") ? new Email(studentObj.getString("emailAddr")) : null;
+        for (int i = 0; i < studentsArray.length(); i++) {
+            JSONObject studentObj = studentsArray.getJSONObject(i);
+            String studentID = studentObj.getString("studentID");
+            String legalName = studentObj.getString("legalName");
+            String displayName = studentObj.optString("displayName", null);
+            Email emailAddr = studentObj.has("emailAddr") ? new Email(studentObj.getString("emailAddr")) : null;
 
-                Student student = new Student(studentID, legalName, displayName, emailAddr);
-                students.put(studentID, student);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            Student student = new Student(studentID, legalName, displayName, emailAddr);
+            students.put(studentID, student);
         }
         // new File(decryptedPath).delete();
         return students;
@@ -106,29 +103,26 @@ public class FileHandler {
         String decryptedPath = path + ".decrypted";
         FileEncryptorDecryptor.decrypt(path, decryptedPath);
 
-        try (FileReader reader = new FileReader(decryptedPath)) {
-            JSONTokener tokener = new JSONTokener(reader);
-            JSONArray professorsArray = new JSONArray(tokener);
+        FileReader reader = new FileReader(decryptedPath);
+        JSONTokener tokener = new JSONTokener(reader);
+        JSONArray professorsArray = new JSONArray(tokener);
 
-            for (int i = 0; i < professorsArray.length(); i++) {
-                JSONObject professorObj = professorsArray.getJSONObject(i);
-                String name = professorObj.getString("name");
-                String professorID = professorObj.getString("professorID");
-                Email email = professorObj.has("email") ? new Email(professorObj.getString("email")) : null;
+        for (int i = 0; i < professorsArray.length(); i++) {
+            JSONObject professorObj = professorsArray.getJSONObject(i);
+            String name = professorObj.getString("name");
+            String professorID = professorObj.getString("professorID");
+            Email email = professorObj.has("email") ? new Email(professorObj.getString("email")) : null;
 
-                ArrayList<String> courseids = new ArrayList<>();
-                if (professorObj.has("courseids")) {
-                    JSONArray courseIdsArray = professorObj.getJSONArray("courseids");
-                    for (int j = 0; j < courseIdsArray.length(); j++) {
-                        courseids.add(courseIdsArray.getString(j));
-                    }
+            ArrayList<String> courseids = new ArrayList<>();
+            if (professorObj.has("courseids")) {
+                JSONArray courseIdsArray = professorObj.getJSONArray("courseids");
+                for (int j = 0; j < courseIdsArray.length(); j++) {
+                    courseids.add(courseIdsArray.getString(j));
                 }
-
-                Professor professor = new Professor(name, professorID, email, courseids);
-                professors.put(professorID, professor);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            Professor professor = new Professor(name, professorID, email, courseids);
+            professors.put(professorID, professor);
         }
         // new File(decryptedPath).delete();
         return professors;
@@ -140,17 +134,14 @@ public class FileHandler {
      *
      * @param manifestPath Path to the manifest file.
      * @return A list of items read from the manifest file.
-     * @throws FileNotFoundException If the manifest file is not found.
+     * @throws IOException
      */
-    private static List<String> loadManifest(String manifestPath) throws FileNotFoundException {
+    private static List<String> loadManifest(String manifestPath) throws IOException {
         List<String> items = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(manifestPath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                items.add(line.trim());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        BufferedReader br = new BufferedReader(new FileReader(manifestPath));
+        String line;
+        while ((line = br.readLine()) != null) {
+            items.add(line.trim());
         }
         return items;
     }
@@ -197,20 +188,17 @@ public class FileHandler {
         String decryptedPath = path + ".decrypted";
         FileEncryptorDecryptor.decrypt(path, decryptedPath);
 
-        try (FileReader reader = new FileReader(decryptedPath)) {
-            JSONTokener tokener = new JSONTokener(reader);
-            JSONArray studentsArray = new JSONArray(tokener);
+        FileReader reader = new FileReader(decryptedPath);
+        JSONTokener tokener = new JSONTokener(reader);
+        JSONArray studentsArray = new JSONArray(tokener);
 
-            for (int i = 0; i < studentsArray.length(); i++) {
-                JSONObject studentObj = studentsArray.getJSONObject(i);
-                String studentID = studentObj.getString("studentID");
-                Student student = globalStudents.get(studentID);
-                if (student != null) {
-                    students.add(student);
-                }
+        for (int i = 0; i < studentsArray.length(); i++) {
+            JSONObject studentObj = studentsArray.getJSONObject(i);
+            String studentID = studentObj.getString("studentID");
+            Student student = globalStudents.get(studentID);
+            if (student != null) {
+                students.add(student);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         // new File(decryptedPath).delete();
         return students;
@@ -231,22 +219,19 @@ public class FileHandler {
         String decryptedPath = path + ".decrypted";
         FileEncryptorDecryptor.decrypt(path, decryptedPath);
 
-        try (FileReader reader = new FileReader(decryptedPath)) {
-            JSONTokener tokener = new JSONTokener(reader);
-            JSONArray professorsArray = new JSONArray(tokener);
+        FileReader reader = new FileReader(decryptedPath);
+        JSONTokener tokener = new JSONTokener(reader);
+        JSONArray professorsArray = new JSONArray(tokener);
 
-            for (int i = 0; i < professorsArray.length(); i++) {
-                String professorId = professorsArray.getString(i); // array of professorIDs
-                Professor professor = globalProfessors.get(professorId);
-                if (professor != null) {
-                    if (!professor.hasCourse(courseId)) {
-                        professor.addCourse(courseId);
-                    }
-                    professors.add(professor);
+        for (int i = 0; i < professorsArray.length(); i++) {
+            String professorId = professorsArray.getString(i); // array of professorIDs
+            Professor professor = globalProfessors.get(professorId);
+            if (professor != null) {
+                if (!professor.hasCourse(courseId)) {
+                    professor.addCourse(courseId);
                 }
+                professors.add(professor);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         // new File(decryptedPath).delete();
         return professors;
@@ -261,27 +246,22 @@ public class FileHandler {
      *                       lookup.
      * @return A list of Session objects containing attendance records for the
      *         specified course.
-     * @throws FileNotFoundException If the manifest file for the sessions is not
-     *                               found.
+     * @throws Exception
      */
     private static List<Session> loadSessions(String courseId, Map<String, Student> globalStudents)
-            throws FileNotFoundException {
+            throws Exception {
         List<Session> sessions = new ArrayList<>();
         List<String> sessionFiles = loadManifest(DATA_PATH + courseId + "/sessions/manifest.txt");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
 
         for (String fileName : sessionFiles) {
-            try {
-                Date sessionDate = format.parse(fileName.replace(".txt", ""));
-                Session session = new Session(courseId, sessionDate);
-                ArrayList<AttendanceRecord> records = loadAttendanceRecords(
-                        DATA_PATH + courseId + "/sessions/" + fileName,
-                        globalStudents);
-                session.setRecords(records);
-                sessions.add(session);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Date sessionDate = format.parse(fileName.replace(".txt", ""));
+            Session session = new Session(courseId, sessionDate);
+            ArrayList<AttendanceRecord> records = loadAttendanceRecords(
+                    DATA_PATH + courseId + "/sessions/" + fileName,
+                    globalStudents);
+            session.setRecords(records);
+            sessions.add(session);
         }
         return sessions;
     }
@@ -302,20 +282,17 @@ public class FileHandler {
         String decryptedPath = filePath + ".decrypted";
         FileEncryptorDecryptor.decrypt(filePath, decryptedPath);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(decryptedPath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                // Use studentID to fetch the Student object from global list
-                Student student = globalStudents.get(values[0]);
-                Status status = new Status(values[1].charAt(0));
-                if (student != null) {
-                    AttendanceRecord record = new AttendanceRecord(student, status);
-                    records.add(record);
-                }
+        BufferedReader br = new BufferedReader(new FileReader(decryptedPath));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(",");
+            // Use studentID to fetch the Student object from global list
+            Student student = globalStudents.get(values[0]);
+            Status status = new Status(values[1].charAt(0));
+            if (student != null) {
+                AttendanceRecord record = new AttendanceRecord(student, status);
+                records.add(record);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         // new File(decryptedPath).delete();
         return records;
@@ -671,15 +648,10 @@ public class FileHandler {
 
         if (file.exists()) {
             String content;
-            try {
-                FileEncryptorDecryptor.decrypt(path, decryptedPath);
-                content = new String(Files.readAllBytes(Paths.get(decryptedPath)));
-                professorsArray = new JSONArray(content);
-                // new File(decryptedPath).delete();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return;
-            }
+            FileEncryptorDecryptor.decrypt(path, decryptedPath);
+            content = new String(Files.readAllBytes(Paths.get(decryptedPath)));
+            professorsArray = new JSONArray(content);
+            // new File(decryptedPath).delete();
         }
 
         Set<String> professorsSet = new HashSet<>();
@@ -715,25 +687,20 @@ public class FileHandler {
      *
      * @param courseId    The ID of the course to which the session is being added.
      * @param sessionTime The date and time of the new session.
+     * @throws IOException
      */
-    public static void addSessionToCourse(String courseId, Date sessionTime) {
+    public static void addSessionToCourse(String courseId, Date sessionTime) throws IOException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
         String sessionFileName = dateFormat.format(sessionTime) + ".txt";
         String sessionFilePath = DATA_PATH + "/" + courseId + "/sessions/" + sessionFileName;
 
-        try {
-            File sessionFile = new File(sessionFilePath);
-            sessionFile.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        File sessionFile = new File(sessionFilePath);
+        sessionFile.createNewFile();
 
         String manifestPath = DATA_PATH + "/" + courseId + "/sessions/manifest.txt";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(manifestPath, true))) {
-            writer.write(sessionFileName);
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(manifestPath, true));
+        writer.write(sessionFileName);
+        writer.newLine();
+
     }
 }
