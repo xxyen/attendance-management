@@ -3,12 +3,9 @@ package edu.duke.ece651.shared;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -34,7 +31,7 @@ public class FileHandlerTest {
   }
 
   @Test
-  void test_loadGlobalStudents() throws FileNotFoundException {
+  void test_loadGlobalStudents() throws Exception {
     Map<String, Student> students = FileHandler.loadGlobalStudents();
     // assertEquals(4, students.size());
 
@@ -46,7 +43,7 @@ public class FileHandlerTest {
   }
 
   @Test
-  void test_loadGlobalProfessors() {
+  void test_loadGlobalProfessors() throws Exception {
     Map<String, Professor> professors = FileHandler.loadGlobalProfessors();
     // assertEquals(2, professors.size());
 
@@ -57,7 +54,7 @@ public class FileHandlerTest {
   }
 
   @Test
-  void test_loadCourses() throws ParseException, FileNotFoundException {
+  void test_loadCourses() throws Exception {
     Map<String, Student> globalStudents = FileHandler.loadGlobalStudents();
     Map<String, Professor> globalProfessors = FileHandler.loadGlobalProfessors();
     List<Course> courses = FileHandler.loadCourses(globalStudents,
@@ -95,7 +92,7 @@ public class FileHandlerTest {
 
   // @Disabled
   @Test
-  void test_loadRosterFromCSVFile() throws IOException {
+  void test_loadRosterFromCSVFile() throws Exception {
     String workingDir = System.getProperty("user.dir");
     String path = workingDir + "/roster/";
     String rosterPath = path + "roster_course456.csv";
@@ -125,7 +122,7 @@ public class FileHandlerTest {
   }
 
   @Test
-  public void test_createAndDeleteCourse() {
+  public void test_createAndDeleteCourse() throws Exception {
     FileHandler.createCourse(COURSE_ID, PROFESSOR_ID);
 
     File courseDir = new File(DATA_PATH + "/" + COURSE_ID);
@@ -142,7 +139,7 @@ public class FileHandlerTest {
   }
 
   @Test
-  public void test_addProfessorToCourse() {
+  public void test_addProfessorToCourse() throws Exception {
     FileHandler.createCourse(COURSE_ID, PROFESSOR_ID);
     FileHandler.addProfessorToCourse(PROFESSOR_ID, COURSE_ID);
 
@@ -152,7 +149,7 @@ public class FileHandlerTest {
   }
 
   @Test
-  public void test_addSessionToCourse() {
+  public void test_addSessionToCourse() throws Exception {
     FileHandler.createCourse(COURSE_ID, PROFESSOR_ID);
     Date now = new Date();
     FileHandler.addSessionToCourse(COURSE_ID, now);
@@ -173,12 +170,16 @@ public class FileHandlerTest {
 
     FileHandler.addStudentToCourse(testStudent.getPersonalID(), COURSE_ID);
 
-    String studentListPath = DATA_PATH + "/" + COURSE_ID + "/StudentList_" +
+    String studentListPath = DATA_PATH + COURSE_ID + "/StudentList_" +
         COURSE_ID + ".json";
-    File studentListFile = new File(studentListPath);
-    assertTrue(studentListFile.exists());
+    // File studentListFile = new File(studentListPath);
+    // assertTrue(studentListFile.exists());
 
-    String content = new String(Files.readAllBytes(Paths.get(studentListPath)));
+    String decryptedPath = studentListPath + ".decrypted";
+    FileEncryptorDecryptor.decrypt(studentListPath, decryptedPath);
+
+    String content = new String(Files.readAllBytes(Paths.get(decryptedPath)));
+    // new File(decryptedPath).delete();
     JSONArray studentsArray = new JSONArray(content);
     boolean found = false;
     for (int i = 0; i < studentsArray.length(); i++) {

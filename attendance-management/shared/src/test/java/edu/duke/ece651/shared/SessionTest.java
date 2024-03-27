@@ -75,9 +75,12 @@ public class SessionTest {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
     String fileName = dateFormat.format(session.getTime()) + ".txt";
-    File path = new File(testDir + fileName);
+    String path = testDir + fileName;
 
-    try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+    String decryptedPath = path + ".decrypted";
+    FileEncryptorDecryptor.decrypt(path, decryptedPath);
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(decryptedPath))) {
       String line1 = reader.readLine();
       String line2 = reader.readLine();
 

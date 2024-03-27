@@ -103,12 +103,12 @@ public class Session {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
         String fileName = dateFormat.format(time) + ".txt";
         // for test only
-        File file = new File(DATA_PATH + fileName);
+        // File file = new File(DATA_PATH + fileName);
 
         // comment 2 lines for test
-        // String tempPath = DATA_PATH + fileName + ".temp";
+        String tempPath = DATA_PATH + fileName + ".temp";
 
-        // File file = new File(tempPath);
+        File file = new File(tempPath);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (AttendanceRecord record : records) {
                 writer.write(record.getStudent().getPersonalID() + "," + record.getStatus().getStatus());
@@ -117,7 +117,7 @@ public class Session {
         }
 
         // comment 1 line for test
-        // FileEncryptorDecryptor.encrypt(tempPath, DATA_PATH + fileName);
+        FileEncryptorDecryptor.encrypt(tempPath, DATA_PATH + fileName);
 
         // Uncomment this line when go to production !!!
         // new File(tempPath).delete();

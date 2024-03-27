@@ -63,12 +63,16 @@ public class FileHandler {
      * Loads global student data from a JSON file.
      *
      * @return A map of student IDs to Student objects.
-     * @throws FileNotFoundException If the student list file is not found.
+     * @throws Exception
      */
-    public static Map<String, Student> loadGlobalStudents() throws FileNotFoundException {
+    public static Map<String, Student> loadGlobalStudents() throws Exception {
         Map<String, Student> students = new HashMap<>();
         String path = DATA_PATH + "StudentList.json";
-        try (FileReader reader = new FileReader(path)) {
+
+        String decryptedPath = path + ".decrypted";
+        FileEncryptorDecryptor.decrypt(path, decryptedPath);
+
+        try (FileReader reader = new FileReader(decryptedPath)) {
             JSONTokener tokener = new JSONTokener(reader);
             JSONArray studentsArray = new JSONArray(tokener);
 
@@ -85,6 +89,7 @@ public class FileHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // new File(decryptedPath).delete();
         return students;
     }
 
@@ -92,11 +97,16 @@ public class FileHandler {
      * Loads global professor data from a JSON file.
      *
      * @return A map of professor IDs to Professor objects.
+     * @throws Exception
      */
-    public static Map<String, Professor> loadGlobalProfessors() {
+    public static Map<String, Professor> loadGlobalProfessors() throws Exception {
         Map<String, Professor> professors = new HashMap<>();
         String path = DATA_PATH + "ProfessorList.json";
-        try (FileReader reader = new FileReader(path)) {
+        // String decryptedPath = DATA_PATH + "ProfessorListDecrypted.json";
+        String decryptedPath = path + ".decrypted";
+        FileEncryptorDecryptor.decrypt(path, decryptedPath);
+
+        try (FileReader reader = new FileReader(decryptedPath)) {
             JSONTokener tokener = new JSONTokener(reader);
             JSONArray professorsArray = new JSONArray(tokener);
 
@@ -120,6 +130,7 @@ public class FileHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // new File(decryptedPath).delete();
         return professors;
     }
 
@@ -151,11 +162,10 @@ public class FileHandler {
      * @param globalStudents   Map of global student IDs to Student objects.
      * @param globalProfessors Map of global professor IDs to Professor objects.
      * @return A list of Course objects.
-     * @throws FileNotFoundException If any required file is not found during
-     *                               loading.
+     * @throws Exception
      */
     public static List<Course> loadCourses(Map<String, Student> globalStudents,
-            Map<String, Professor> globalProfessors) throws FileNotFoundException {
+            Map<String, Professor> globalProfessors) throws Exception {
         List<Course> courses = new ArrayList<>();
         String path = DATA_PATH + "course_manifest.txt";
         List<String> courseIds = loadManifest(path);
@@ -178,11 +188,16 @@ public class FileHandler {
      * @param courseId       The ID of the course.
      * @param globalStudents A map of all students by their ID.
      * @return A list of Student objects enrolled in the specified course.
+     * @throws Exception
      */
-    private static List<Student> loadCourseStudents(String courseId, Map<String, Student> globalStudents) {
+    private static List<Student> loadCourseStudents(String courseId, Map<String, Student> globalStudents)
+            throws Exception {
         List<Student> students = new ArrayList<>();
         String path = DATA_PATH + courseId + "/StudentList_" + courseId + ".json";
-        try (FileReader reader = new FileReader(path)) {
+        String decryptedPath = path + ".decrypted";
+        FileEncryptorDecryptor.decrypt(path, decryptedPath);
+
+        try (FileReader reader = new FileReader(decryptedPath)) {
             JSONTokener tokener = new JSONTokener(reader);
             JSONArray studentsArray = new JSONArray(tokener);
 
@@ -197,6 +212,7 @@ public class FileHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // new File(decryptedPath).delete();
         return students;
     }
 
@@ -206,11 +222,16 @@ public class FileHandler {
      * @param courseId         The ID of the course.
      * @param globalProfessors A map of all professors by their ID.
      * @return A list of Professor objects teaching the specified course.
+     * @throws Exception
      */
-    private static List<Professor> loadCourseProfessors(String courseId, Map<String, Professor> globalProfessors) {
+    private static List<Professor> loadCourseProfessors(String courseId, Map<String, Professor> globalProfessors)
+            throws Exception {
         List<Professor> professors = new ArrayList<>();
         String path = DATA_PATH + courseId + "/Professor_" + courseId + ".json";
-        try (FileReader reader = new FileReader(path)) {
+        String decryptedPath = path + ".decrypted";
+        FileEncryptorDecryptor.decrypt(path, decryptedPath);
+
+        try (FileReader reader = new FileReader(decryptedPath)) {
             JSONTokener tokener = new JSONTokener(reader);
             JSONArray professorsArray = new JSONArray(tokener);
 
@@ -227,6 +248,7 @@ public class FileHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // new File(decryptedPath).delete();
         return professors;
     }
 
@@ -271,11 +293,16 @@ public class FileHandler {
      * @param globalStudents A map of all students by their ID for populating
      *                       attendance records.
      * @return An ArrayList of AttendanceRecord objects for the session.
+     * @throws Exception
      */
     private static ArrayList<AttendanceRecord> loadAttendanceRecords(String filePath,
-            Map<String, Student> globalStudents) {
+            Map<String, Student> globalStudents) throws Exception {
         ArrayList<AttendanceRecord> records = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+
+        String decryptedPath = filePath + ".decrypted";
+        FileEncryptorDecryptor.decrypt(filePath, decryptedPath);
+
+        try (BufferedReader br = new BufferedReader(new FileReader(decryptedPath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
@@ -290,6 +317,7 @@ public class FileHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // new File(decryptedPath).delete();
         return records;
     }
 
@@ -298,9 +326,9 @@ public class FileHandler {
      * to the StudentList.json file.
      *
      * @param student The student to update or add.
-     * @throws IOException If an error occurs during file writing.
+     * @throws Exception
      */
-    static void updateOrAddStudentInGlobalList(Student student) throws IOException {
+    static void updateOrAddStudentInGlobalList(Student student) throws Exception {
         Map<String, Student> students = loadGlobalStudents();
         students.put(student.getPersonalID(), student);
 
@@ -316,9 +344,12 @@ public class FileHandler {
             studentsArray.put(studentObj);
         }
 
-        try (FileWriter file = new FileWriter(DATA_PATH + "StudentList.json")) {
+        String tempPath = DATA_PATH + "StudentList.json" + ".temp";
+        try (FileWriter file = new FileWriter(tempPath)) {
             file.write(studentsArray.toString());
         }
+        FileEncryptorDecryptor.encrypt(tempPath, DATA_PATH + "StudentList.json");
+        // new File(tempPath).delete();
     }
 
     /**
@@ -334,12 +365,11 @@ public class FileHandler {
      *                   legalName, displayName, emailAddr).
      * @param withHeader A boolean indicating whether the CSV file contains a header
      *                   row.
-     * @throws IOException           if an I/O error occurs while reading the CSV
-     *                               file or writing to the student list JSON file.
+     * @throws Exception
      * @throws FileNotFoundException if the specified CSV file is not found.
      */
     public static void loadRosterFromCSVFile(String courseId, Course course, String rosterPath, List<Integer> order,
-            boolean withHeader) throws IOException {
+            boolean withHeader) throws Exception {
         File rosterFile = new File(rosterPath);
         if (!rosterFile.exists()) {
             throw new FileNotFoundException("Roster file not found at: " + rosterPath);
@@ -386,9 +416,12 @@ public class FileHandler {
             }
             // Write to the course-specific StudentList_courseid.json
             String courseStudentListPath = DATA_PATH + courseId + "/StudentList_" + courseId + ".json";
-            try (FileWriter file = new FileWriter(courseStudentListPath)) {
+            String tempPath = courseStudentListPath + ".temp";
+            try (FileWriter file = new FileWriter(tempPath)) {
                 file.write(courseStudentsArray.toString());
             }
+            FileEncryptorDecryptor.encrypt(tempPath, courseStudentListPath);
+            // new File(tempPath).delete();
         }
     }
 
@@ -400,8 +433,9 @@ public class FileHandler {
      *
      * @param studentsInCourse The list of students enrolled in the course.
      * @param courseId         The ID of the course.
+     * @throws Exception
      */
-    public static void writeStudentsToCourseFile(List<Student> studentsInCourse, String courseId) {
+    public static void writeStudentsToCourseFile(List<Student> studentsInCourse, String courseId) throws Exception {
         JSONArray studentsArray = new JSONArray();
         for (Student student : studentsInCourse) {
             JSONObject studentObj = new JSONObject();
@@ -415,11 +449,14 @@ public class FileHandler {
         }
 
         String studentsFilePath = DATA_PATH + courseId + "/StudentList_" + courseId + ".json";
-        try (FileWriter file = new FileWriter(studentsFilePath)) {
+        String tempPath = studentsFilePath + ".temp";
+        try (FileWriter file = new FileWriter(tempPath)) {
             file.write(studentsArray.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        FileEncryptorDecryptor.encrypt(tempPath, studentsFilePath);
+        // new File(tempPath).delete();
     }
 
     /**
@@ -429,9 +466,9 @@ public class FileHandler {
      * @param studentID The ID of the student to add.
      * @param courseId  The ID of the course to which the student is being added.
      * @return The Student object that was added to the course.
-     * @throws IOException If an error occurs during file operations.
+     * @throws Exception
      */
-    public static Student addStudentToCourse(String studentID, String courseId) throws IOException {
+    public static Student addStudentToCourse(String studentID, String courseId) throws Exception {
         // if the student is not in gloabal student list, then add it to gloabal student
         // list, and write StudentList.json
         // updateOrAddStudentInGlobalList(student);
@@ -458,9 +495,9 @@ public class FileHandler {
      * @param studentID The ID of the student to remove.
      * @param courseId  The ID of the course from which the student is being
      *                  removed.
-     * @throws IOException If an error occurs during file operations.
+     * @throws Exception
      */
-    public static void removeStudentFromCourse(String studentID, String courseId) throws IOException {
+    public static void removeStudentFromCourse(String studentID, String courseId) throws Exception {
         List<Student> studentsInCourse = loadCourseStudents(courseId, loadGlobalStudents());
         studentsInCourse.removeIf(s -> s.getPersonalID().equals(studentID));
 
@@ -472,9 +509,9 @@ public class FileHandler {
      * the student's information.
      *
      * @param student The updated Student object.
-     * @throws IOException If an error occurs during file operations.
+     * @throws Exception
      */
-    public static void updateCoursesForStudent(Student student) throws IOException {
+    public static void updateCoursesForStudent(Student student) throws Exception {
         List<Course> courses = loadCourses(loadGlobalStudents(), loadGlobalProfessors());
 
         for (Course course : courses) {
@@ -492,9 +529,9 @@ public class FileHandler {
      *
      * @param student  The Student object with updated information.
      * @param courseId The ID of the course to update.
-     * @throws IOException If an error occurs during file writing.
+     * @throws Exception
      */
-    private static void updateStudentInCourse(Student student, String courseId) throws IOException {
+    private static void updateStudentInCourse(Student student, String courseId) throws Exception {
         List<Student> studentsInCourse = loadCourseStudents(courseId, loadGlobalStudents());
 
         studentsInCourse = studentsInCourse.stream()
@@ -512,21 +549,36 @@ public class FileHandler {
      *
      * @param courseId    The ID of the new course.
      * @param professorId The ID of the professor associated with the new course.
+     * @throws Exception
      */
-    public static void createCourse(String courseId, String professorId) {
+    public static void createCourse(String courseId, String professorId) throws Exception {
         try {
             new File(DATA_PATH + "/" + courseId).mkdirs();
             new File(DATA_PATH + "/" + courseId + "/sessions").mkdirs();
             new FileWriter(DATA_PATH + "/" + courseId + "/sessions/manifest.txt", false).close();
-            new FileWriter(DATA_PATH + "/" + courseId + "/StudentList_" + courseId + ".json", false).close();
-            try (FileWriter writer = new FileWriter(DATA_PATH + "/" + courseId + "/Professor_" + courseId + ".json",
-                    false)) {
+
+            String studentListFilePath = DATA_PATH + "/" + courseId + "/StudentList_" + courseId + ".json";
+            String tempPathStu = studentListFilePath + ".temp";
+            try (FileWriter file = new FileWriter(tempPathStu, false)) {
+                file.write("[]");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            FileEncryptorDecryptor.encrypt(tempPathStu, studentListFilePath);
+            // new File(tempPath).delete();
+
+            String professorFilePath = DATA_PATH + "/" + courseId + "/Professor_" + courseId + ".json";
+            String tempPathProf = professorFilePath + ".temp";
+            try (FileWriter writer = new FileWriter(tempPathProf, false)) {
                 writer.write("[\"" + professorId + "\"]");
             }
+            FileEncryptorDecryptor.encrypt(tempPathProf, professorFilePath);
+            // new File(tempPath).delete();
             updateCoursesManifest(courseId, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     /**
@@ -609,17 +661,21 @@ public class FileHandler {
      * @param professorId The ID of the professor to add to the course.
      * @param courseId    The ID of the course to which the professor is being
      *                    added.
+     * @throws Exception
      */
-    public static void addProfessorToCourse(String professorId, String courseId) {
+    public static void addProfessorToCourse(String professorId, String courseId) throws Exception {
         String path = DATA_PATH + "/" + courseId + "/Professor_" + courseId + ".json";
         File file = new File(path);
         JSONArray professorsArray = new JSONArray();
+        String decryptedPath = path + ".decrypted";
 
         if (file.exists()) {
             String content;
             try {
-                content = new String(Files.readAllBytes(Paths.get(path)));
+                FileEncryptorDecryptor.decrypt(path, decryptedPath);
+                content = new String(Files.readAllBytes(Paths.get(decryptedPath)));
                 professorsArray = new JSONArray(content);
+                // new File(decryptedPath).delete();
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
@@ -639,8 +695,11 @@ public class FileHandler {
                 updatedProfessorsArray.put(id);
             }
 
-            try (FileWriter writer = new FileWriter(path, false)) {
+            String tempPath = path + ".temp";
+            try (FileWriter writer = new FileWriter(tempPath, false)) {
                 writer.write(updatedProfessorsArray.toString());
+                FileEncryptorDecryptor.encrypt(tempPath, path);
+                // new File(tempPath).delete();
             } catch (IOException e) {
                 e.printStackTrace();
             }
