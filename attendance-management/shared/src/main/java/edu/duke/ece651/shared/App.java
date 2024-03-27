@@ -33,7 +33,8 @@ public class App {
     // 在新线程中启动任务
     Thread thread = new Thread(task);
     thread.start();
-
+    
+    exitOrContinue(inputReader, System.out);
       while (true) {
         User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
         if (currentUser.getUserType().equals("professor")) {
@@ -43,7 +44,6 @@ public class App {
               boolean stayLoggedIn = professorActions(inputReader, System.out, courses, (Professor) currentUser, students);
               if (!stayLoggedIn) {
                 System.out.println("Logged out.");
-                //continue;
                 break;
               }
             } catch (Exception e) {
@@ -57,6 +57,18 @@ public class App {
 //    }
   }
 
+  public static void exitOrContinue(BufferedReader inputReader, PrintStream outputStream){
+    try {
+      outputStream.println("Enter end to exit the system, or type anything else to continue.");
+      if(inputReader.readLine().equals("end")) {
+        System.exit(0);
+      }
+    } catch(Exception e) {
+      outputStream.println(e.getMessage());
+    }
+  }
+
+  
   public static int readPositiveInteger(BufferedReader reader) {
     try {
       String line = reader.readLine();
