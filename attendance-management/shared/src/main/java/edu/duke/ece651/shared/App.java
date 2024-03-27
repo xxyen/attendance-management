@@ -35,7 +35,9 @@ public class App {
     thread.start();
     
       while (true) {
-        exitOrContinue(inputReader, System.out);
+        if (exitOrContinue(inputReader, System.out)){
+          break;
+        }
         User currentUser = signIn(inputReader, System.out, accountOperator, allUsers);
         if (currentUser.getUserType().equals("professor")) {
           // it returns false means logout option is chosen.
@@ -52,20 +54,30 @@ public class App {
           }
         }
       }
+    // 触发中断，请求线程停止
+    thread.interrupt();
+
+    // 等待线程终止
+    thread.join();
 //    } catch (Exception e) {
 //      System.out.println(e.getMessage());
 //    }
   }
 
-  public static void exitOrContinue(BufferedReader inputReader, PrintStream outputStream){
+  public static boolean exitOrContinue(BufferedReader inputReader, PrintStream outputStream){
     try {
       outputStream.println("Enter end to exit the system, or type anything else to continue.");
       if(inputReader.readLine().equals("end")) {
-        System.exit(0);
+        //System.exit(0);
+        return true;
+      }
+      else{
+        return false;
       }
     } catch(Exception e) {
       outputStream.println(e.getMessage());
     }
+    return false;
   }
 
   
