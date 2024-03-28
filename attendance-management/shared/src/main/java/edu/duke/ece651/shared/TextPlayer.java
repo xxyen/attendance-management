@@ -41,6 +41,10 @@ public class TextPlayer {
         this.actNums = 7;
     }
 
+    public BufferedReader getInputReader() {
+        return inputReader;
+    }
+
     /**
      * Read one single letter from input,
      * used for readStatus.

@@ -243,6 +243,16 @@ class TextPlayerTest {
         assertEquals("xml", player.readFormat("a"));
         assertEquals("json", player.readFormat("a"));
         assertThrows(IllegalArgumentException.class, () -> player.readFormat("a"));
+        assertThrows(IOException.class, () -> player.readFormat("a"));
+
+    }
+    @Test
+    void test_readSingleInt() throws IOException {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        TextPlayer player = createTextPlayer("-1\n", bytes, true);
+        BufferedReader input = player.getInputReader();
+        assertThrows(IllegalArgumentException.class, () -> player.readPositiveInteger(input));
+
     }
 
     //@Disabled
