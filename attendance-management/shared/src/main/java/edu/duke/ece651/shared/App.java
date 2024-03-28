@@ -167,7 +167,7 @@ public class App {
    * @param choiceStr A string for the choice.
    * @return True for yes, false for no.
    */
-  private static boolean getYorN(String choiceStr) {
+  public static boolean getYorN(String choiceStr) {
     if (choiceStr != null && choiceStr.length() == 1 && Character.isLetter(choiceStr.charAt(0))) {
       char choice = choiceStr.charAt(0);
       if ((choice == 'y') || (choice == 'Y')) {
@@ -187,7 +187,7 @@ public class App {
    * @param courses      The list of existing courses.
    * @return The input course ID.
    */
-  private static String getInputCourseID(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
+  public static String getInputCourseID(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
     while (true) {
       outputStream.println("Course ID: ");
       try {
@@ -211,7 +211,7 @@ public class App {
    * @param prompt       The prompt to display to the user.
    * @return True if the user input is 'y', false if 'n'.
    */
-  private static boolean readInputYorN(BufferedReader inputReader, PrintStream outputStream, String prompt) {
+  public static boolean readInputYorN(BufferedReader inputReader, PrintStream outputStream, String prompt) {
     while (true) {
       try {
         outputStream.println(prompt);
@@ -229,7 +229,7 @@ public class App {
    * @param value The value to search for.
    * @return True if the array contains the value, otherwise false.
    */
-  private static boolean arrayContains(String[] array, String value) {
+  public static boolean arrayContains(String[] array, String value) {
     for (String str : array) {
       if (str.equals(value)) {
         return true;
@@ -245,7 +245,7 @@ public class App {
    * @param value The value to find the index of.
    * @return The index of the value, or -1 if not found.
    */
-  private static int arrayIndexOf(String[] array, String value) {
+  public static int arrayIndexOf(String[] array, String value) {
     for (int i = 0; i < array.length; i++) {
       if (array[i].equals(value)) {
         return i;
@@ -261,7 +261,7 @@ public class App {
    * @param outputStream The PrintStream for output.
    * @return The list of indices representing the order of column data.
    */
-  private static List<Integer> readInputOrder(BufferedReader inputReader, PrintStream outputStream) {
+  public static List<Integer> readInputOrder(BufferedReader inputReader, PrintStream outputStream) {
     while (true) {
       outputStream.println("What is the order of column data in your file? Please use numbers to indicate the order.");
       outputStream.println(
@@ -272,7 +272,8 @@ public class App {
         String line = inputReader.readLine();
         String[] order = line.split(",");
         if (!arrayContains(order, "1") || !arrayContains(order, "2") || !arrayContains(order, "4")) {
-
+          outputStream.println("Data 1,2,4 are required. Please try again!");
+          continue;
         }
         List<Integer> indexInOrder = new ArrayList<>();
         indexInOrder.add(arrayIndexOf(order, "1"));
@@ -301,7 +302,7 @@ public class App {
    * @return The newly created course.
    */
   private static Course createCourse(BufferedReader inputReader, PrintStream outputStream, List<Course> courses,
-      Professor professor, Map<String, Student> allStudents) {
+                                     Professor professor, Map<String, Student> allStudents) {
     outputStream.println("You are creating a new course! Please enter the information required below.");
     String courseid = getInputCourseID(inputReader, outputStream, courses);
     boolean allowChangeName = readInputYorN(inputReader, outputStream,
@@ -338,7 +339,7 @@ public class App {
    * @param courses      The list of courses to choose from.
    * @return The chosen course.
    */
-  private static Course chooseCourse(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
+  public static Course chooseCourse(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
     while (true) {
       outputStream.println("Which course would you like to manage?");
       for (int i = 0; i < courses.size(); i++) {
