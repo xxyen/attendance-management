@@ -319,6 +319,8 @@ public class App {
         // load student list of the course
         outputStream.println("Please provide the absolute path of the csv file you wan to load the roster from:");
         FileHandler.loadRosterFromCSVFile(courseid, newCourse, inputReader.readLine(), order, withHeader);
+        newCourse.addProfessor(professor);
+        courses.add(newCourse);
         return newCourse;
       } catch (Exception e) {
         outputStream.println(e.getMessage() + " Please try again!");
