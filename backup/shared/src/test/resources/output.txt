@@ -1,0 +1,379 @@
+Enter end to exit the system, or type anything else to continue.
+Please enter your user ID: 
+This account doesn't exist! Please try again!
+Please enter your user ID: 
+Please enter your password: 
+Incorrect password! Please try again!
+Please enter your user ID: 
+Please enter your password: 
+What would you like to do?
+    1. Manage an existing course
+    2. Create a new course and manage it
+    3. Log out
+Enter the number to choose your action: 
+Invalid input! Please try again!
+What would you like to do?
+    1. Manage an existing course
+    2. Create a new course and manage it
+    3. Log out
+Enter the number to choose your action: 
+Invalid input! Please try again!
+What would you like to do?
+    1. Manage an existing course
+    2. Create a new course and manage it
+    3. Log out
+Enter the number to choose your action: 
+Which course would you like to manage?
+1. c1
+2. eee123
+Enter the number to choose a course: 
+Invalid input! Please try again!
+Which course would you like to manage?
+1. c1
+2. eee123
+Enter the number to choose a course: 
+Invalid input! Please try again!
+Which course would you like to manage?
+1. c1
+2. eee123
+Enter the number to choose a course: 
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+Invalid action number, please choose your action again!
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+Invalid input: it is not a positive integer!
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+1: Date Mon Mar 25 20:57:00 EDT 2024
+2: Date Tue Mar 26 00:26:00 EDT 2024
+3: Date Tue Mar 26 00:36:00 EDT 2024
+4: Date Wed Mar 27 11:17:00 EDT 2024
+5: Date Wed Mar 27 11:30:00 EDT 2024
+--------------------------------------------------------------------------------
+The above is a list of all the sessions, please enter the serial number of the session you want to choose.
+--------------------------------------------------------------------------------
+
+Invalid input: there is no such a session!
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+1: Date Mon Mar 25 20:57:00 EDT 2024
+2: Date Tue Mar 26 00:26:00 EDT 2024
+3: Date Tue Mar 26 00:36:00 EDT 2024
+4: Date Wed Mar 27 11:17:00 EDT 2024
+5: Date Wed Mar 27 11:30:00 EDT 2024
+--------------------------------------------------------------------------------
+The above is a list of all the sessions, please enter the serial number of the session you want to choose.
+--------------------------------------------------------------------------------
+
+Invalid input: it is not a positive integer!
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+1: Date Mon Mar 25 20:57:00 EDT 2024
+2: Date Tue Mar 26 00:26:00 EDT 2024
+3: Date Tue Mar 26 00:36:00 EDT 2024
+4: Date Wed Mar 27 11:17:00 EDT 2024
+5: Date Wed Mar 27 11:30:00 EDT 2024
+--------------------------------------------------------------------------------
+The above is a list of all the sessions, please enter the serial number of the session you want to choose.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+Invalid input: there is no student with this id in this course!
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+1: Date Mon Mar 25 20:57:00 EDT 2024
+2: Date Tue Mar 26 00:26:00 EDT 2024
+3: Date Tue Mar 26 00:36:00 EDT 2024
+4: Date Wed Mar 27 11:17:00 EDT 2024
+5: Date Wed Mar 27 11:30:00 EDT 2024
+--------------------------------------------------------------------------------
+The above is a list of all the sessions, please enter the serial number of the session you want to choose.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)
+--------------------------------------------------------------------------------
+
+Invalid status: t
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+1: Date Mon Mar 25 20:57:00 EDT 2024
+2: Date Tue Mar 26 00:26:00 EDT 2024
+3: Date Tue Mar 26 00:36:00 EDT 2024
+4: Date Wed Mar 27 11:17:00 EDT 2024
+5: Date Wed Mar 27 11:30:00 EDT 2024
+--------------------------------------------------------------------------------
+The above is a list of all the sessions, please enter the serial number of the session you want to choose.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)
+--------------------------------------------------------------------------------
+
+Invalid input: you should only type in one letter!
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+1: Date Mon Mar 25 20:57:00 EDT 2024
+2: Date Tue Mar 26 00:26:00 EDT 2024
+3: Date Tue Mar 26 00:36:00 EDT 2024
+4: Date Wed Mar 27 11:17:00 EDT 2024
+5: Date Wed Mar 27 11:30:00 EDT 2024
+--------------------------------------------------------------------------------
+The above is a list of all the sessions, please enter the serial number of the session you want to choose.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Successfully update the record!
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+Invalid input: there is no student with this id in this course!
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's preferred display name:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+There is no student with this ID in the school!
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Successfully added the student to the course!
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+1: Date Mon Mar 25 20:57:00 EDT 2024
+2: Date Tue Mar 26 00:26:00 EDT 2024
+3: Date Tue Mar 26 00:36:00 EDT 2024
+4: Date Wed Mar 27 11:17:00 EDT 2024
+5: Date Wed Mar 27 11:30:00 EDT 2024
+--------------------------------------------------------------------------------
+The above is a list of all the sessions, please enter the serial number of the session you want to choose.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Sorry, there is no record of this student in chosen session!
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+Invalid input: there is no student with this id in this course!
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Please type in the student's id:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Successfully removed the student from the course!
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+1. Start a new session and take attendance.
+2. Change attendance record of a student in one session.
+3. Change display name of a student.
+4. Add a student to this course.
+5. Remove a student from this course.
+6. Export attendance records of a session.
+7. Exit this course.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+You have exited from course: c1!
+--------------------------------------------------------------------------------
+
+What would you like to do?
+    1. Manage an existing course
+    2. Create a new course and manage it
+    3. Log out
+Enter the number to choose your action: 
+Logged out.
+Enter end to exit the system, or type anything else to continue.
