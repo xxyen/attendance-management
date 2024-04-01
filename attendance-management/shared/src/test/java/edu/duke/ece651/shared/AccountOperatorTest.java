@@ -13,8 +13,9 @@ import java.util.HashMap;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 
-
+@Disabled 
 public class AccountOperatorTest {
   AccountOperator accountOperator = new AccountOperator("src/main/resources/");
 

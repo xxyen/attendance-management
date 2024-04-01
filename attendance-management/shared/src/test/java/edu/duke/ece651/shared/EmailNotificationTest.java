@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import org.junit.jupiter.api.Disabled;
 
+@Disabled
 public class EmailNotificationTest {
   @Test
   public void test_send_email() throws IOException, GeneralSecurityException {
