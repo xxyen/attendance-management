@@ -7,9 +7,15 @@
 [Detailed coverage](https://project-team-6-kits-project-000-000-01-test-a2e7317917c61f386e2.pages.oit.duke.edu/dashboard.html)
 
 ## Documentation
-- [Task Breakdown](https://docs.google.com/spreadsheets/d/1x7Ri4QJ-Jm6Cy72xTA2OOKtt6kzGuaV_iuCRhnrZxEg/edit#gid=0)
+- [Task Breakdown](https://docs.google.com/spreadsheets/d/1x7Ri4QJ-Jm6Cy72xTA2OOKtt6kzGuaV_iuCRhnrZxEg/edit#gid=0)<br /> <br />
+
+**Evolution 2**
+- [Ev2 Notes](https://docs.google.com/document/d/1n1gmAWfFtEzDxdXGroxk5EqH-CfMxwwJ85f3w0ZP2Nk/edit)
+- [Ev2 DB Structure](https://docs.google.com/document/d/1s3EM3V6wiWx9IROGiIVDYF0NVr4GINPYGf9JzEkdxH4/edit)<br /> <br />  
+
+**Evolution 1**
 - [UML notes](https://docs.google.com/document/d/1iMrOiYFH6AFFYmwq5D3bl4LEW6iYUJkcECoWVfw-Ucc/edit) 
-- [Notes](https://docs.google.com/document/d/19UT7gxBy4_OIT_IGnYiJKJtE6IPL98P0elu3N3NwG6M/edit)
+- [Ev1 Notes](https://docs.google.com/document/d/19UT7gxBy4_OIT_IGnYiJKJtE6IPL98P0elu3N3NwG6M/edit)
 - [Software Requirement Specification](https://docs.google.com/document/d/1BmGDtEHoRCYQkmHLyiF8WV6RpLguR_O_DUgDduOC_k8/edit?usp=sharing)
 - [Design Decisions](https://docs.google.com/document/d/1FBVVgQG5NuhJiVPFZ6_UGbxQSVVlhQ0qq4QHH8zTm9Q/edit?addon_store)
 
