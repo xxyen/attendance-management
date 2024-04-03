@@ -15,7 +15,7 @@ class StudentTest {
         Student s1 = new Student("cp357", "Can Pei", "Alex Pei", e1);
 
         assertEquals(s1.getDisplayName(), "Alex Pei");
-        assertEquals(s1.getPersonalID(), "cp357");
+        assertEquals(s1.getUserid(), "cp357");
         assertEquals(s1.getEmailAddr(), e1);
         assertEquals(s1.getLegalName(), "Can Pei");
 

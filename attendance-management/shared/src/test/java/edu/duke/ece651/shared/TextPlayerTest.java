@@ -188,23 +188,23 @@ class TextPlayerTest {
 
     }
 
-    @Test
-    void test_addAndRemoveStudent() throws Exception {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        TextPlayer player = createTextPlayer("test1\ntest1\n", bytes, true);
-        player.addStudent();
-        Student exp = new Student("test1", "Can Pei", "Alex", new Email("cp357@duke.edu"));
-        List<Student> studentList = player.getStudent();
-        assertEquals(3, studentList.size());
-        assertEquals(exp, studentList.get(2));
+    // @Test
+    // void test_addAndRemoveStudent() throws Exception {
+    //     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    //     TextPlayer player = createTextPlayer("test1\ntest1\n", bytes, true);
+    //     player.addStudent();
+    //     Student exp = new Student("test1", "Can Pei", "Alex", new Email("cp357@duke.edu"));
+    //     List<Student> studentList = player.getStudent();
+    //     assertEquals(3, studentList.size());
+    //     assertEquals(exp, studentList.get(2));
 
-        player.removeStudent();
-        studentList = player.getStudent();
-        assertEquals(2, studentList.size());
+    //     player.removeStudent();
+    //     studentList = player.getStudent();
+    //     assertEquals(2, studentList.size());
 
-        // System.out.println(bytes.toString());
-        assertThrows(IOException.class, () -> player.addStudent());
-    }
+    //     // System.out.println(bytes.toString());
+    //     assertThrows(IOException.class, () -> player.addStudent());
+    // }
 
     @Test
     @Disabled

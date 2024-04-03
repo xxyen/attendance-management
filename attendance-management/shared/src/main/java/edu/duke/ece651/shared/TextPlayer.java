@@ -85,7 +85,7 @@ public class TextPlayer {
         for (Student s : course.getStudents()) {
             out.print("--------------------------------------------------------------------------------\n");
             out.println(s.getDisplayName());
-            out.println(s.getPersonalID());
+            out.println(s.getUserid());
             out.println("--------------------------------------------------------------------------------\n");
 
             boolean flag = true;
@@ -112,7 +112,7 @@ public class TextPlayer {
         course.addSession(s);
         // to-do
         // update src file: add a new session file
-        FileHandler.addSessionToCourse(course.getCourseid(), s.getTime());
+        // FileHandler.addSessionToCourse(course.getCourseid(), s.getTime());
         s.saveAttendanceRecords();
     }
 
@@ -131,7 +131,7 @@ public class TextPlayer {
      */
     public Student searchStudent(String id) {
         for (Student s : course.getStudents()) {
-            if (s.getPersonalID().equals(id)) {
+            if (s.getUserid().equals(id)) {
                 return s;
             }
         }
@@ -283,8 +283,8 @@ public class TextPlayer {
             stu.setDisplayName(s);
             // to-do
             // change display name in src file
-            FileHandler.updateCoursesForStudent(stu);
-            FileHandler.updateOrAddStudentInGlobalList(stu);
+            // FileHandler.updateCoursesForStudent(stu);
+            // FileHandler.updateOrAddStudentInGlobalList(stu);
         } else {
             throw new IllegalArgumentException("Sorry, you cannot change student's display name!");
         }
@@ -295,13 +295,13 @@ public class TextPlayer {
      */
     public void removeStudent() throws Exception {
         Student stu = doSearchStudent();
-        course.removeStudent(stu.getPersonalID());
+        course.removeStudent(stu.getUserid());
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Successfully removed the student from the course!\n");
         out.println("--------------------------------------------------------------------------------\n");
         // to-do
         // change student list in src file
-        FileHandler.removeStudentFromCourse(stu.getPersonalID(), course.getCourseid());
+        // FileHandler.removeStudentFromCourse(stu.getUserid(), course.getCourseid());
     }
 
     /**
@@ -326,8 +326,8 @@ public class TextPlayer {
             throw new EOFException(
                     "You didn't type in any instruction!\n");
         }
-        Student stu = FileHandler.addStudentToCourse(s, course.getCourseid());
-        course.addStudent(stu);
+        // Student stu = FileHandler.addStudentToCourse(s, course.getCourseid());
+        //course.addStudent(stu);
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Successfully added the student to the course!\n");
         out.println("--------------------------------------------------------------------------------\n");

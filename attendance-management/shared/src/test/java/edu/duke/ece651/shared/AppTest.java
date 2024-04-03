@@ -18,104 +18,104 @@ import org.junit.jupiter.api.Test;
 
 @Disabled 
 class AppTest {
-    @Test
-    //@Disabled
-    void appHasAGreeting() throws Exception {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        PrintStream out = new PrintStream(bytes, true);
-        InputStream input = getClass().getClassLoader().getResourceAsStream("input.txt");
-        //System.out.println(input.toString());
-        assertNotNull(input);
-        InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("output.txt");
-        assertNotNull(expectedStream);
+  //   @Test
+  //   //@Disabled
+  //   void appHasAGreeting() throws Exception {
+  //       ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+  //       PrintStream out = new PrintStream(bytes, true);
+  //       InputStream input = getClass().getClassLoader().getResourceAsStream("input.txt");
+  //       //System.out.println(input.toString());
+  //       assertNotNull(input);
+  //       InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("output.txt");
+  //       assertNotNull(expectedStream);
 
-        InputStream oldIn = System.in;
-        PrintStream oldOut = System.out;
+  //       InputStream oldIn = System.in;
+  //       PrintStream oldOut = System.out;
 
-        try {
-            System.setIn(input);
-            System.setOut(out);
-            App.main(new String[0]);
-        }
-        finally {
-            System.setIn(oldIn);
-            System.setOut(oldOut);
-        }
+  //       try {
+  //           System.setIn(input);
+  //           System.setOut(out);
+  //           App.main(new String[0]);
+  //       }
+  //       finally {
+  //           System.setIn(oldIn);
+  //           System.setOut(oldOut);
+  //       }
 
-        String expected = new String(expectedStream.readAllBytes());
-        String actual = bytes.toString();
-        //System.out.println(expected);
+  //       String expected = new String(expectedStream.readAllBytes());
+  //       String actual = bytes.toString();
+  //       //System.out.println(expected);
 
-        assertEquals(expected, actual);
-    }
+  //       assertEquals(expected, actual);
+  //   }
 
-  @Test
-  public void test_readPositiveInteger() {
-    StringReader stringReader = new StringReader("-3");
-    BufferedReader bufferedReader = new BufferedReader(stringReader);
-    assertEquals(-1, App.readPositiveInteger(bufferedReader));
-  }
+  // @Test
+  // public void test_readPositiveInteger() {
+  //   StringReader stringReader = new StringReader("-3");
+  //   BufferedReader bufferedReader = new BufferedReader(stringReader);
+  //   assertEquals(-1, App.readPositiveInteger(bufferedReader));
+  // }
 
-  @Test
-  public void test_getYorN() {
-    assertTrue(App.getYorN("y"));
-    assertFalse(App.getYorN("n"));
-    assertThrows(IllegalArgumentException.class, () -> App.getYorN("s"));
-    assertThrows(IllegalArgumentException.class, () -> App.getYorN("ss"));
-  }
+  // @Test
+  // public void test_getYorN() {
+  //   assertTrue(App.getYorN("y"));
+  //   assertFalse(App.getYorN("n"));
+  //   assertThrows(IllegalArgumentException.class, () -> App.getYorN("s"));
+  //   assertThrows(IllegalArgumentException.class, () -> App.getYorN("ss"));
+  // }
 
-  @Test
-  public void test_readInputYorN() {
-    StringReader stringReader = new StringReader("y");
-    BufferedReader bufferedReader = new BufferedReader(stringReader);
-    assertTrue(App.readInputYorN(bufferedReader, System.out, " "));
-  }
+  // @Test
+  // public void test_readInputYorN() {
+  //   StringReader stringReader = new StringReader("y");
+  //   BufferedReader bufferedReader = new BufferedReader(stringReader);
+  //   assertTrue(App.readInputYorN(bufferedReader, System.out, " "));
+  // }
 
-  @Test
-  public void test_getInputCourseID() {
-    StringReader stringReader = new StringReader("111\n222");
-    BufferedReader bufferedReader = new BufferedReader(stringReader);
-    Course course = new Course("222", new Professor("a", "aa", new Email("aa@bb.com")), true);
-    List<Course> courses = new ArrayList<>();
-    courses.add(course);
-    assertEquals("111", App.getInputCourseID(bufferedReader, System.out, courses));
-    assertEquals(null, App.getInputCourseID(bufferedReader, System.out, courses));
-  }
+  // @Test
+  // public void test_getInputCourseID() {
+  //   StringReader stringReader = new StringReader("111\n222");
+  //   BufferedReader bufferedReader = new BufferedReader(stringReader);
+  //   Course course = new Course("222", new Professor("a", "aa", new Email("aa@bb.com")), true);
+  //   List<Course> courses = new ArrayList<>();
+  //   courses.add(course);
+  //   assertEquals("111", App.getInputCourseID(bufferedReader, System.out, courses));
+  //   assertEquals(null, App.getInputCourseID(bufferedReader, System.out, courses));
+  // }
 
-  @Test
-  public void test_arrayOperations() {
-    String[] array = {"111", "222"};
-    assertTrue(App.arrayContains(array, "111"));
-    assertFalse(App.arrayContains(array, "333")); 
-    assertEquals(1, App.arrayIndexOf(array, "222"));
-    assertEquals(-1, App.arrayIndexOf(array, "333"));
-  }
+  // @Test
+  // public void test_arrayOperations() {
+  //   String[] array = {"111", "222"};
+  //   assertTrue(App.arrayContains(array, "111"));
+  //   assertFalse(App.arrayContains(array, "333")); 
+  //   assertEquals(1, App.arrayIndexOf(array, "222"));
+  //   assertEquals(-1, App.arrayIndexOf(array, "333"));
+  // }
 
-  @Test
-  public void test_readInputOrder() {
-    StringReader stringReader = new StringReader("0,1,2,3\n1,2,3,4\n1,2,4");
-    BufferedReader bufferedReader = new BufferedReader(stringReader);
-    List<Integer> expected = new ArrayList<>();
-    expected.add(0);
-    expected.add(1);
-    expected.add(2);
-    expected.add(3);
-    assertEquals(expected, App.readInputOrder(bufferedReader, System.out));
-    expected = new ArrayList<>();
-    expected.add(0);
-    expected.add(1);
-    expected.add(1);
-    expected.add(2);
-    assertEquals(expected, App.readInputOrder(bufferedReader, System.out));
-  }
+  // @Test
+  // public void test_readInputOrder() {
+  //   StringReader stringReader = new StringReader("0,1,2,3\n1,2,3,4\n1,2,4");
+  //   BufferedReader bufferedReader = new BufferedReader(stringReader);
+  //   List<Integer> expected = new ArrayList<>();
+  //   expected.add(0);
+  //   expected.add(1);
+  //   expected.add(2);
+  //   expected.add(3);
+  //   assertEquals(expected, App.readInputOrder(bufferedReader, System.out));
+  //   expected = new ArrayList<>();
+  //   expected.add(0);
+  //   expected.add(1);
+  //   expected.add(1);
+  //   expected.add(2);
+  //   assertEquals(expected, App.readInputOrder(bufferedReader, System.out));
+  // }
 
-  @Test
-  public void test_chooseCourse() {
-    StringReader stringReader = new StringReader("1");
-    BufferedReader bufferedReader = new BufferedReader(stringReader);
-    Course course = new Course("222", new Professor("a", "aa", new Email("aa@bb.com")), true);
-    List<Course> courses = new ArrayList<>();
-    courses.add(course);
-    assertEquals(course, App.chooseCourse(bufferedReader, System.out, courses));
-  }
+  // @Test
+  // public void test_chooseCourse() {
+  //   StringReader stringReader = new StringReader("1");
+  //   BufferedReader bufferedReader = new BufferedReader(stringReader);
+  //   Course course = new Course("222", new Professor("a", "aa", new Email("aa@bb.com")), true);
+  //   List<Course> courses = new ArrayList<>();
+  //   courses.add(course);
+  //   assertEquals(course, App.chooseCourse(bufferedReader, System.out, courses));
+  // }
 }

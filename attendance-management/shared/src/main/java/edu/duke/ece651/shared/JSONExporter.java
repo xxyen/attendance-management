@@ -27,7 +27,7 @@ public class JSONExporter implements Exporter {
             for (AttendanceRecord record : session.getRecords()) {
                 JSONObject recordObj = new JSONObject();
                 if (fields.contains("studentID")) {
-                    recordObj.put("studentID", record.getStudent().getPersonalID());
+                    recordObj.put("studentID", record.getStudent().getUserid());
                 }
                 if (fields.contains("legalName")) {
                     recordObj.put("legalName", record.getStudent().getLegalName());

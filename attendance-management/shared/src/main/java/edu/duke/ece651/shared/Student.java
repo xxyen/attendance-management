@@ -1,6 +1,8 @@
 package edu.duke.ece651.shared;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Objects;
 
 /**
@@ -12,7 +14,9 @@ public class Student implements User {
   /**
    * Student ID
    */
-  private String studentID;
+  private String userid;
+
+  private String password;
 
   /**
    * Student's legal name
@@ -27,28 +31,38 @@ public class Student implements User {
   /**
    * Student's email address
    */
-  private Email emailAddr;
+  private Email email;
 
   /**
    * Constructor
    */
-  public Student(String studentID, String legalName, String displayName, Email emailAddr) {
-    this.studentID = studentID;
+  public Student(String userid, String password, String legalName, String displayName, Email email) {
+    this.userid = userid;
+    this.password = password;
     this.legalName = legalName;
     this.displayName = displayName;
-    this.emailAddr = emailAddr;
+    this.email = email;
   }
+
+   /**
+   * Constructor (default password, which is the same as userid)
+   */
+  public Student(String userid, String legalName, String displayName, Email email) {
+    this(userid, userid, legalName, displayName, email);
+  }
+
 
   public void setDisplayName(String displayName) throws IOException {
     this.displayName = displayName;
   }
 
-  public void setEmailAddr(Email emailAddr) throws IOException {
-    this.emailAddr = emailAddr;
+  public void setEmailAddr(Email email) throws IOException {
+    this.email = email;
   }
 
-  public String getPersonalID() {
-    return studentID;
+  @Override
+  public String getUserid() {
+    return userid;
   }
 
   public String getLegalName() {
@@ -60,7 +74,7 @@ public class Student implements User {
   }
 
   public Email getEmailAddr() {
-    return emailAddr;
+    return email;
   }
 
   @Override
@@ -75,13 +89,50 @@ public class Student implements User {
     if (o == null || getClass() != o.getClass())
       return false;
     Student student = (Student) o;
-    return Objects.equals(studentID, student.studentID) && Objects.equals(legalName, student.legalName)
-        && Objects.equals(displayName, student.displayName) && Objects.equals(emailAddr, student.emailAddr);
+    return Objects.equals(userid, student.userid) && Objects.equals(legalName, student.legalName)
+        && Objects.equals(displayName, student.displayName) && Objects.equals(email, student.email);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(studentID, legalName, displayName, emailAddr);
+    return Objects.hash(userid, legalName, displayName, email);
+  }
+
+  /**
+   * check if the password is correct.
+   */
+  @Override
+  public boolean isCorrectPassword(String pwd) {
+    if(pwd == null) {
+      return false;
+    }
+    if(pwd.equals(password)) {
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public boolean saveToDB() {
+    try {
+      String sql = "INSERT INTO student (user_id, password_hash, email, legal_name, display_name) VALUES (?, ?, ?, ?, ?)";
+      PreparedStatement statement = JDBCUtils.getConnection().prepareStatement(sql);
+      statement.setString(1, userid);
+      statement.setString(2, password);
+      statement.setString(3, email.getEmailAddr());
+      statement.setString(4, legalName);
+      statement.setString(5, displayName);
+      
+      int rowsInserted = statement.executeUpdate();
+      if (rowsInserted > 0) {
+        return true;
+      }
+    } catch (SQLException e) {
+      System.out.println("Error inserting student: " + e.getMessage());
+    } finally {
+      //JDBCUtils.close(resultSet, statement, connection);
+      return false;
+    }
   }
 
 }
