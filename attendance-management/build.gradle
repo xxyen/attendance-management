@@ -31,7 +31,11 @@ subprojects{
         implementation 'com.google.guava:guava:30.1.1-jre'
         clover 'org.openclover:clover:4.4.1'
         implementation 'org.json:json:20210307'
-        
+        implementation 'com.jcraft:jsch:0.1.55'
+        implementation 'mysql:mysql-connector-java:8.0.19'
+        implementation 'com.alibaba:druid:1.1.10'
+        //  implementation 'org.apache.commons:commons-dbutils:1.6' 
+        implementation 'commons-dbutils:commons-dbutils:1.8.1'
     }
     clover{
         compiler{
