@@ -125,7 +125,7 @@ public class Course {
    * @throws IOException if there is an input or output exception.
    */
   public void removeStudent(String id) throws IOException {
-    this.students.removeIf(student -> student.getPersonalID().equals(id));
+    this.students.removeIf(student -> student.getUserid().equals(id));
   }
 
   /**

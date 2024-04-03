@@ -124,7 +124,7 @@ public class WeeklyReporter implements Runnable {
         for (AttendanceRecord r: s.getRecords()) {
             body.append(r.getStudent().getLegalName());
             body.append("  ");
-            body.append(r.getStudent().getPersonalID());
+            body.append(r.getStudent().getUserid());
             body.append("  ");
             body.append(r.getStatus().getStatus());
             body.append("\n");
@@ -157,7 +157,7 @@ public class WeeklyReporter implements Runnable {
 
             body.append(r.getStudent().getLegalName());
             body.append("  ");
-            body.append(r.getStudent().getPersonalID());
+            body.append(r.getStudent().getUserid());
             body.append("  ");
             body.append(r.getStatus().getStatus());
             body.append("\n");

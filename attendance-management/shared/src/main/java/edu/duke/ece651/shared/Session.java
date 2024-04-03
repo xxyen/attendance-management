@@ -111,7 +111,7 @@ public class Session {
         File file = new File(tempPath);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (AttendanceRecord record : records) {
-                writer.write(record.getStudent().getPersonalID() + "," + record.getStatus().getStatus());
+                writer.write(record.getStudent().getUserid() + "," + record.getStatus().getStatus());
                 writer.newLine();
             }
         }

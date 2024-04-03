@@ -25,7 +25,7 @@ public class XMLExporter implements Exporter {
                 xmlBuilder.append("\t\t<attendanceRecord>\n");
                 if (fields.contains("studentID")) {
                     xmlBuilder.append(
-                            String.format("\t\t\t<studentID>%s</studentID>\n", record.getStudent().getPersonalID()));
+                            String.format("\t\t\t<studentID>%s</studentID>\n", record.getStudent().getUserid()));
                 }
                 if (fields.contains("legalName")) {
                     xmlBuilder.append(
