@@ -226,7 +226,7 @@ public class TextPlayer {
         body.append("'. If there is any problem, please contact your professor.\n");
         body.append("\n");
         body.append("ECE 651 team 6");
-        sendNotification(s.getEmailAddr(), sub, body.toString());
+        sendNotification(s.getEmail(), sub, body.toString());
     }
 
     /**

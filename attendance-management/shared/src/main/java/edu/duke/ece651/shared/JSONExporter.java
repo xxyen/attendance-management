@@ -36,7 +36,7 @@ public class JSONExporter implements Exporter {
                     recordObj.put("displayName", record.getStudent().getDisplayName());
                 }
                 if (fields.contains("email")) {
-                    recordObj.put("email", record.getStudent().getEmailAddr().getEmailAddr());
+                    recordObj.put("email", record.getStudent().getEmail().getEmailAddr());
                 }
                 if (fields.contains("status")) {
                     recordObj.put("status", String.valueOf(record.getStatus().getStatus()));

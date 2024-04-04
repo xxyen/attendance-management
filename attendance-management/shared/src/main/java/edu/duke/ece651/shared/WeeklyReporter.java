@@ -164,7 +164,7 @@ public class WeeklyReporter implements Runnable {
             body.append("\nIf there is any problem, please contact us.\n");
             body.append("\n");
             body.append("ECE 651 team 6");
-            sendNotification(r.getStudent().getEmailAddr(), sub, body.toString());
+            sendNotification(r.getStudent().getEmail(), sub, body.toString());
         }
     }
 }

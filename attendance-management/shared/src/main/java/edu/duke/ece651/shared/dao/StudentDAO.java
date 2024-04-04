@@ -1,13 +1,15 @@
 package edu.duke.ece651.shared.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import edu.duke.ece651.shared.Student;
+import edu.duke.ece651.shared.dao.BasicDAO;
 
 public class StudentDAO extends BasicDAO<Student> {
-    public int addStudent(Student student) {
-        String sql = "INSERT INTO student (user_id, password_hash, email, legal_name, display_name) VALUES (?, ?, ?, ?, ?)";
-        return update(sql, student.getUserid(), student.getPassword(), student.getEmail().getEmailAddr(), student.getLegalName(), student.getDisplayName());
+    public int addStudent(Student student) throws Exception{
+        String sql = "INSERT INTO student (user_id, password_hash, legal_name, display_name, email) VALUES (?, ?, ?, ?, ?)";
+        return update(sql, student.getUserid(), student.getPassword(), student.getLegalName(), student.getDisplayName(), student.getEmail().getEmailAddr());
     }
 
     public int deleteStudent(String userid) {
@@ -16,8 +18,8 @@ public class StudentDAO extends BasicDAO<Student> {
     }
 
     public int updateStudent(Student student) {
-        String sql = "UPDATE student SET user_id = ?, password_hash = ?, email = ?, legal_name = ?, display_name = ? WHERE user_id = ?";
-        return update(sql, student.getUserid(), student.getPassword(), student.getEmail().getEmailAddr(), student.getLegalName(), student.getDisplayName());
+        String sql = "UPDATE student SET user_id = ?, password_hash = ?, legal_name = ?, display_name = ?, email = ? WHERE user_id = ?";
+        return update(sql, student.getUserid(), student.getPassword(), student.getLegalName(), student.getDisplayName(), student.getEmail().getEmailAddr(), student.getUserid());
     }
 
     public Student queryStudentById(String userid) {
