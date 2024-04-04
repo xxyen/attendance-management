@@ -10,7 +10,7 @@ public class FacultyDAO extends BasicDAO<Professor> {
         return update(sql, professor.getUserid(), professor.getPassword(), professor.getEmail().getEmailAddr(), professor.getName());
     }
 
-    public int deleteFaculty(Integer userid) {
+    public int deleteFaculty(String userid) {
         String sql = "DELETE FROM faculty WHERE user_id = ?";
         return update(sql, userid);
     }
@@ -20,7 +20,7 @@ public class FacultyDAO extends BasicDAO<Professor> {
         return update(sql, professor.getUserid(), professor.getPassword(), professor.getEmail().getEmailAddr(), professor.getName());
     }
 
-    public Professor queryFacultyById(Integer userid) {
+    public Professor queryFacultyById(String userid) {
         String sql = "SELECT * FROM faculty WHERE user_id = ?";
         return querySingle(sql, Professor.class, userid);
     }
