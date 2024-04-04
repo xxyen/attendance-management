@@ -19,5 +19,10 @@ public interface User {
    */
   boolean isCorrectPassword(String pwd);
 
-  boolean saveToDB();
+  /**
+   * get password of the user
+   */
+  String getPassword();
+
+  Email getEmail();
 }
