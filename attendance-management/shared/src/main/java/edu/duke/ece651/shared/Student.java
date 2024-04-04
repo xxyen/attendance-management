@@ -81,7 +81,7 @@ public class Student implements User {
   public String getUserType() {
     return "student";
   }
-  
+
   @Override
   public boolean equals(Object o) {
     if (this == o)
@@ -113,26 +113,15 @@ public class Student implements User {
   }
 
   @Override
-  public boolean saveToDB() {
-    try {
-      String sql = "INSERT INTO student (user_id, password_hash, email, legal_name, display_name) VALUES (?, ?, ?, ?, ?)";
-      PreparedStatement statement = JDBCUtils.getConnection().prepareStatement(sql);
-      statement.setString(1, userid);
-      statement.setString(2, password);
-      statement.setString(3, email.getEmailAddr());
-      statement.setString(4, legalName);
-      statement.setString(5, displayName);
-      
-      int rowsInserted = statement.executeUpdate();
-      if (rowsInserted > 0) {
-        return true;
-      }
-    } catch (SQLException e) {
-      System.out.println("Error inserting student: " + e.getMessage());
-    } finally {
-      //JDBCUtils.close(resultSet, statement, connection);
-      return false;
-    }
+  public String getPassword() {
+    return password;
   }
 
+  /**
+   * get email string
+   */
+  @Override
+  public Email getEmail() {
+    return email;
+  }
 }

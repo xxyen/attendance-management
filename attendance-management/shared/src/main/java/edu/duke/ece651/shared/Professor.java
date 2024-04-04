@@ -59,8 +59,9 @@ public class Professor implements User {
   }
 
   /**
-   * get email object
+   * get email string
    */
+  @Override
   public Email getEmail() {
     return email;
   }
@@ -136,25 +137,7 @@ public class Professor implements User {
   }
 
   @Override
-  public boolean saveToDB() {
-    try {
-      String sql = "INSERT INTO faculty (user_id, password_hash, email, faculty_name) VALUES (?, ?, ?, ?)";
-      PreparedStatement statement = JDBCUtils.getConnection().prepareStatement(sql);
-      statement.setString(1, userid);
-      statement.setString(2, password);
-      statement.setString(3, email.getEmailAddr());
-      statement.setString(4, name);
-      
-      int rowsInserted = statement.executeUpdate();
-      if (rowsInserted > 0) {
-        return true;
-      }
-    } catch (SQLException e) {
-      System.out.println("Error inserting faculty: " + e.getMessage());
-    } finally {
-      //JDBCUtils.close(resultSet, statement, connection);
-      return false;
-    }
+  public String getPassword() {
+    return password;
   }
-
 }
