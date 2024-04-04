@@ -6,8 +6,8 @@ import edu.duke.ece651.shared.Professor;
 
 public class FacultyDAO extends BasicDAO<Professor> {
     public int addFaculty(Professor professor) {
-        String sql = "INSERT INTO faculty (user_id, password_hash, email, faculty_name) VALUES (?, ?, ?, ?)";
-        return update(sql, professor.getUserid(), professor.getPassword(), professor.getEmail().getEmailAddr(), professor.getName());
+        String sql = "INSERT INTO faculty (user_id, password_hash, faculty_name, email) VALUES (?, ?, ?, ?)";
+        return update(sql, professor.getUserid(), professor.getPassword(), professor.getName(), professor.getEmail().getEmailAddr());
     }
 
     public int deleteFaculty(String userid) {
@@ -16,8 +16,8 @@ public class FacultyDAO extends BasicDAO<Professor> {
     }
 
     public int updateFaculty(Professor professor) {
-        String sql = "UPDATE faculty SET user_id = ?, password_hash = ?, email = ?, faculty_name = ? WHERE user_id = ?";
-        return update(sql, professor.getUserid(), professor.getPassword(), professor.getEmail().getEmailAddr(), professor.getName());
+        String sql = "UPDATE faculty SET user_id = ?, password_hash = ?, faculty_name = ?, email = ? WHERE user_id = ?";
+        return update(sql, professor.getUserid(), professor.getPassword(), professor.getName(), professor.getEmail().getEmailAddr(), professor.getUserid());
     }
 
     public Professor queryFacultyById(String userid) {

@@ -51,6 +51,13 @@ public class Student implements User {
     this(userid, userid, legalName, displayName, email);
   }
 
+  /**
+   * Constructor (email string)
+   */
+  public Student(String userid, String password, String legalName, String displayName, String email) {
+    this(userid, password, legalName, displayName, new Email(email));
+  }
+
 
   public void setDisplayName(String displayName) throws IOException {
     this.displayName = displayName;
@@ -73,9 +80,9 @@ public class Student implements User {
     return displayName;
   }
 
-  public Email getEmailAddr() {
-    return email;
-  }
+  // public Email getEmailAddr() {
+  //   return email;
+  // }
 
   @Override
   public String getUserType() {
@@ -123,5 +130,24 @@ public class Student implements User {
   @Override
   public Email getEmail() {
     return email;
+  }
+
+  /**
+   * set the password of the user
+   * setting fails and returns false if the newPwd is empty
+   * or contains any space
+   */
+  @Override
+  public boolean setPwd(String newPwd) {
+    if(newPwd.equals("") || newPwd.contains(" ")) {
+      return false;
+    }
+    this.password = newPwd;
+    return true;
+  }
+
+  @Override
+  public boolean isDefaultPwd() {
+    return userid.equals(password);
   }
 }

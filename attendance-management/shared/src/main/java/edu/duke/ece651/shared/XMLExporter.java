@@ -37,7 +37,7 @@ public class XMLExporter implements Exporter {
                 }
                 if (fields.contains("email")) {
                     xmlBuilder.append(String.format("\t\t\t<email>%s</email>\n",
-                            record.getStudent().getEmailAddr().getEmailAddr()));
+                            record.getStudent().getEmail().getEmailAddr()));
                 }
                 if (fields.contains("status")) {
                     xmlBuilder.append(String.format("\t\t\t<status>%s</status>\n", record.getStatus().getStatus()));

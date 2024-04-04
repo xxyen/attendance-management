@@ -16,15 +16,22 @@ class StudentTest {
 
         assertEquals(s1.getDisplayName(), "Alex Pei");
         assertEquals(s1.getUserid(), "cp357");
-        assertEquals(s1.getEmailAddr(), e1);
+        assertEquals(s1.getEmail(), e1);
         assertEquals(s1.getLegalName(), "Can Pei");
 
         s1.setDisplayName("Peter Pei");
         s1.setEmailAddr(e2);
 
         assertEquals(s1.getDisplayName(), "Peter Pei");
-        assertEquals(s1.getEmailAddr(), e2);
-
+        assertEquals(s1.getEmail(), e2);
+        assertTrue(s1.isCorrectPassword("cp357"));
+        assertTrue(s1.isDefaultPwd());
+        assertFalse(s1.isCorrectPassword("cp"));
+        assertFalse(s1.isCorrectPassword(null));
+        assertEquals(s1.getPassword(), "cp357");
+        assertTrue(s1.setPwd("aaa123"));
+        assertFalse(s1.setPwd(""));
+        assertFalse(s1.isDefaultPwd());
     }
 
     @Test

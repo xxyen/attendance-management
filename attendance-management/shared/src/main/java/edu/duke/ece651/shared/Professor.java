@@ -30,7 +30,7 @@ public class Professor implements User {
    * Construct a professor  with name, id and email.
    * The default password is set to be the same as their userid.
    */
-  public Professor(String name, String userid, Email email) {
+  public Professor(String userid, String name, Email email) {
     this(userid, userid, name, email);
   }
 
@@ -71,6 +71,7 @@ public class Professor implements User {
    * setting fails and returns false if the newPwd is empty
    * or contains any space
    */
+  @Override
   public boolean setPwd(String newPwd) {
     if(newPwd.equals("") || newPwd.contains(" ")) {
       return false;
@@ -139,5 +140,10 @@ public class Professor implements User {
   @Override
   public String getPassword() {
     return password;
+  }
+
+  @Override
+  public boolean isDefaultPwd() {
+    return userid.equals(password);
   }
 }

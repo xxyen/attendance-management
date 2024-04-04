@@ -24,5 +24,12 @@ public interface User {
    */
   String getPassword();
 
+  /**
+   * get email object
+   */
   Email getEmail();
+
+  boolean setPwd(String newPwd);
+
+  boolean isDefaultPwd();
 }

@@ -16,7 +16,7 @@
 			<status>a</status>
 		</attendanceRecord>
 	</session>
-	<session courseId="course02" time="2024-04-04 12:51">
+	<session courseId="course02" time="2024-04-04 14:41">
 		<attendanceRecord>
 			<studentID>s03</studentID>
 			<legalName>Legal Name03</legalName>
