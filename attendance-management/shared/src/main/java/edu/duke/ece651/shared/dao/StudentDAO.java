@@ -23,7 +23,9 @@ public class StudentDAO extends BasicDAO<Student> {
     }
 
     public Student queryStudentById(String userid) {
-        String sql = "SELECT * FROM student WHERE user_id = ?";
+        // String sql = "SELECT * FROM student WHERE user_id = ?";
+        String sql = " SELECT user_id AS userid, password_hash AS password, legal_name AS legalName, display_name AS displayName, email AS email FROM student WHERE user_id = ?";
+
         return querySingle(sql, Student.class, userid);
     }
 

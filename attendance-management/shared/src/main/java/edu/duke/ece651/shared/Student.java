@@ -33,9 +33,19 @@ public class Student implements User {
    */
   private Email email;
 
+  public Student() {
+  }
+
   /**
    * Constructor
    */
+  // public Student(String userid, String password, String legalName, String displayName, Email email) {
+  //   this.userId = userid;
+  //   this.passwordHash = password;
+  //   this.legalName = legalName;
+  //   this.displayName = displayName;
+  //   this.email = email;
+  // }
   public Student(String userid, String password, String legalName, String displayName, Email email) {
     this.userid = userid;
     this.password = password;
@@ -61,6 +71,10 @@ public class Student implements User {
 
   public void setDisplayName(String displayName) throws IOException {
     this.displayName = displayName;
+  }
+
+  public void setLegalName(String legalName) throws IOException {
+    this.legalName = legalName;
   }
 
   public void setEmailAddr(Email email) throws IOException {
@@ -150,4 +164,15 @@ public class Student implements User {
   public boolean isDefaultPwd() {
     return userid.equals(password);
   }
+
+  @Override
+public String toString() {
+    return "Student{" +
+            "userid='" + userid + '\'' +
+            ", password='" + password + '\'' +
+            ", legalName='" + legalName + '\'' +
+            ", displayName='" + displayName + '\'' +
+            ", email=" + email +
+            '}';
+}
 }
