@@ -1,7 +1,7 @@
 package edu.duke.ece651.shared.dao;
 
 import edu.duke.ece651.shared.JDBCUtils;
-import edu.duke.ece651.shared.model.Enrollment;
+import edu.duke.ece651.shared.Enrollment;
 import java.sql.SQLException;
 import java.util.List;
 

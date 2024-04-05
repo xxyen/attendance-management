@@ -4,45 +4,51 @@ package edu.duke.ece651.shared;
  * Represents an attendance record for a student in a specific session.
  */
 public class AttendanceRecord {
-    private Student student;
-    private Status status;
+    private int recordId;
+    private int sessionId;
+    private String studentId;
+    private Status status; 
 
-    /**
-     * Constructs an AttendanceRecord with the specified student and their
-     * attendance status.
-     *
-     * @param student the student this attendance record is for
-     * @param status  the attendance status of the student
-     */
-    public AttendanceRecord(Student student, Status status) {
-        this.student = student;
+    // Constructors, Getters, and Setters
+    public AttendanceRecord() {
+    }
+    
+    public AttendanceRecord(int recordId, int sectionId, String studentId, Status status){
+        this.recordId = recordId;
+        this.sessionId = sectionId;
+        this.studentId = studentId;
         this.status = status;
     }
 
-    /**
-     * Returns the student associated with this attendance record.
-     *
-     * @return the Student object
-     */
-    public Student getStudent() {
-        return student;
+    public int getRecordId() {
+        return recordId;
     }
 
-    /**
-     * Returns the attendance status of the student.
-     *
-     * @return the Status object
-     */
+    public void setRecordId(int recordId) {
+        this.recordId = recordId;
+    }
+
+    public int getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
     public Status getStatus() {
         return status;
     }
 
-    /**
-     * Updates the attendance status of the student.
-     *
-     * @param newStatus the new status to be set
-     */
-    public void changeRecord(Status newStatus) {
-        this.status = newStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

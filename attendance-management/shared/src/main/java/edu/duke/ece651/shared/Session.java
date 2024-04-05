@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.Time;
 import java.util.List;
 
 /**
@@ -13,113 +14,63 @@ import java.util.List;
  * records.
  */
 public class Session {
-    private final String courseid;
-    private final Date time;
-    private ArrayList<AttendanceRecord> records;
+    private int sessionId;
+    private int sectionId;
+    private Date sessionDate;
+    private Time startTime;
+    private Time endTime;
 
-    /**
-     * Constructs a Session object with specified course ID and time.
-     *
-     * @param courseid the unique identifier for the course
-     * @param time     the specific date and time the session occurs
-     */
-    public Session(String courseid, Date time) {
-        this.courseid = courseid;
-        this.time = time;
-        this.records = new ArrayList<>();
+    // Coustuctors
+    public Session(){}
+
+    public Session(int sessionId, int sectionId, Date sessionDate, Time startTime, Time endTime){
+        this.sessionId = sessionId;
+        this.sectionId = sectionId;
+        this.sessionDate = sessionDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
-    /**
-     * Returns the course ID associated with this session.
-     *
-     * @return a string representing the course ID
-     */
-    public String getCourseid() {
-        return courseid;
+    // Getters and Setters
+    public int getSessionId() {
+        return sessionId;
     }
 
-    /**
-     * Returns the time of the session.
-     *
-     * @return a Date object representing the session's date and time
-     */
-    public Date getTime() {
-        return time;
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
     }
 
-    /**
-     * Returns the list of attendance records for this session.
-     *
-     * @return a list of AttendanceRecord objects
-     */
-    public List<AttendanceRecord> getRecords() {
-        return records;
+    public int getSectionId() {
+        return sectionId;
     }
 
-    /**
-     * Adds a record to the session's list of attendance records.
-     *
-     * @param record the AttendanceRecord to add
-     */
-    public void addRecord(AttendanceRecord record) {
-        this.records.add(record);
+    public void setSectionId(int sectionId) {
+        this.sectionId = sectionId;
     }
 
-    /**
-     * Sets the list of attendance records for this session.
-     *
-     * @param records the list of AttendanceRecord objects to set
-     */
-    public void setRecords(ArrayList<AttendanceRecord> records) {
-        this.records = records;
+    public Date getSessionDate() {
+        return sessionDate;
     }
 
-    /**
-     * Changes the attendance status for a specified student in this session.
-     *
-     * @param student   the student whose attendance record is to be changed
-     * @param newStatus the new attendance status for the student
-     * @return true if the record was successfully changed, false otherwise
-     */
-    public boolean changeRecord(Student student, Status newStatus) {
-        Iterable<AttendanceRecord> result = records;
-        for (AttendanceRecord rec : result) {
-            if (rec.getStudent().equals(student)) {
-                rec.changeRecord(newStatus);
-                return true;
-            }
-        }
-        return false;
+    public void setSessionDate(Date sessionDate) {
+        this.sessionDate = sessionDate;
     }
 
-    /**
-     * Saves the session's attendance records to a file in a specified directory.
-     *
-     * @throws Exception if an error occurs during file writing
-     */
-    public void saveAttendanceRecords() throws Exception {
-        String workingDir = System.getProperty("user.dir");
-        String DATA_PATH = workingDir + "/data/" + courseid + "/sessions/";
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
-        String fileName = dateFormat.format(time) + ".txt";
-        // for test only
-        // File file = new File(DATA_PATH + fileName);
-
-        // comment 2 lines for test
-        String tempPath = DATA_PATH + fileName + ".temp";
-
-        File file = new File(tempPath);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (AttendanceRecord record : records) {
-                writer.write(record.getStudent().getUserid() + "," + record.getStatus().getStatus());
-                writer.newLine();
-            }
-        }
-
-        // comment 1 line for test
-        FileEncryptorDecryptor.encrypt(tempPath, DATA_PATH + fileName);
-
-        // Uncomment this line when go to production !!!
-        // new File(tempPath).delete();
+    public Time getStartTime() {
+        return startTime;
     }
+
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
+    }
+
+    public Time getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
+    }
+
+    
 }

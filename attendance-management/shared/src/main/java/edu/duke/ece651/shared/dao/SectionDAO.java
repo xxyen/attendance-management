@@ -1,7 +1,7 @@
 package edu.duke.ece651.shared.dao;
 
 import edu.duke.ece651.shared.JDBCUtils;
-import edu.duke.ece651.shared.model.Section;
+import edu.duke.ece651.shared.Section;
 import java.sql.SQLException;
 import java.util.List;
 
