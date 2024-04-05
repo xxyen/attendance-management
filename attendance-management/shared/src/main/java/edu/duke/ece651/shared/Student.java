@@ -54,9 +54,9 @@ public class Student implements User {
   /**
    * Constructor (email string)
    */
-  public Student(String userid, String password, String legalName, String displayName, String email) {
-    this(userid, password, legalName, displayName, new Email(email));
-  }
+  // public Student(String userid, String password, String legalName, String displayName, String email) {
+  //   this(userid, password, legalName, displayName, new Email(email));
+  // }
 
 
   public void setDisplayName(String displayName) throws IOException {
