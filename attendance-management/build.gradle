@@ -75,6 +75,16 @@ project (':client'){
 //        testImplementation project(path: ':shared', configuration: "testPkg")
     }
 }
+project (':userAdmin'){
+    dependencies {
+        implementation project(':shared')
+    }
+}
+project (':courseManage'){
+    dependencies {
+        implementation project(':shared')
+    }
+}
 clover {
     report{
         xml=true
@@ -94,6 +104,18 @@ tasks.register("run-client") {
     description = 'Run the Client'
 }
 
+tasks.register("run-userAdmin") {
+    dependsOn project('userAdmin').getTasksByName('run',false)
+    group = 'Run userAdmin'
+    description = 'Run the userAdmin'
+}
+
+tasks.register("run-courseManage") {
+    dependsOn project('courseManage').getTasksByName('run',false)
+    group = 'Run courseManager'
+    description = 'Run the courseManage'
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -101,6 +123,8 @@ java {
 tasks.register("resolveDependencies") {
     dependsOn project('server').getTasksByName('resolveDependencies',false)
     dependsOn project('client').getTasksByName('resolveDependencies',false)
+    dependsOn project('userAdmin').getTasksByName('resolveDependencies',false)
+    dependsOn project('courseManage').getTasksByName('resolveDependencies',false)
     group = 'Build'
     description = 'Resolve/Download Dependencies'
 }
