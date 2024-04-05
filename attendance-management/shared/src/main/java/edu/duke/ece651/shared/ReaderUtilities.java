@@ -2,6 +2,8 @@ package edu.duke.ece651.shared;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReaderUtilities {
     /**
@@ -61,7 +63,5 @@ public class ReaderUtilities {
     }
     throw new IllegalArgumentException("Invalid input: you should only type in y or n!");
   }
-
-
 
 }

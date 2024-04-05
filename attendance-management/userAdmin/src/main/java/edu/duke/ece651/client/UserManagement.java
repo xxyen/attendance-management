@@ -9,14 +9,8 @@ public class UserManagement {
     private static FacultyDAO facultyDAO = new FacultyDAO();
     private static StudentDAO studentDAO = new StudentDAO();
 
-    public static boolean facultySignUp(Professor faculty) {
-    try {
+    public static void facultySignUp(Professor faculty) throws Exception {
       facultyDAO.addFaculty(faculty);
-      return true;
-    } catch (Exception e) { // duplicat
-      System.out.println("Failed to sign up (faculty): " + e.getMessage());
-      return false;
-    }
   }
 
   public static boolean studentSignUp(Student student) {

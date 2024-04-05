@@ -33,4 +33,8 @@ public class StudentDAO extends BasicDAO<Student> {
         String sql = "SELECT * FROM student";
         return queryMulti(sql, Student.class);
     }
+
+    public boolean checkStudentExists(String userid) {
+        return false;
+    }
 }
