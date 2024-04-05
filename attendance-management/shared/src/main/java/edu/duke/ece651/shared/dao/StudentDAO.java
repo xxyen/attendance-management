@@ -7,7 +7,7 @@ import edu.duke.ece651.shared.Student;
 import edu.duke.ece651.shared.dao.BasicDAO;
 
 public class StudentDAO extends BasicDAO<Student> {
-    public int addStudent(Student student) throws Exception{
+    public int addStudent(Student student) {
         String sql = "INSERT INTO student (user_id, password_hash, legal_name, display_name, email) VALUES (?, ?, ?, ?, ?)";
         return update(sql, student.getUserid(), student.getPassword(), student.getLegalName(), student.getDisplayName(), student.getEmail().getEmailAddr());
     }
@@ -23,14 +23,12 @@ public class StudentDAO extends BasicDAO<Student> {
     }
 
     public Student queryStudentById(String userid) {
-        // String sql = "SELECT * FROM student WHERE user_id = ?";
         String sql = " SELECT user_id AS userid, password_hash AS password, legal_name AS legalName, display_name AS displayName, email AS email FROM student WHERE user_id = ?";
-
         return querySingle(sql, Student.class, userid);
     }
 
-    public List<Student> queryAllStudent() {
-        String sql = "SELECT * FROM student";
+    public List<Student> queryAllStudents() {
+        String sql = "SELECT user_id AS userid, password_hash AS password, legal_name AS legalName, display_name AS displayName, email AS email FROM student";
         return queryMulti(sql, Student.class);
     }
 }

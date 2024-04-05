@@ -3,12 +3,14 @@
  */
 package edu.duke.ece651.userAdmin;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World! from userAdmin";
-    }
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
+import edu.duke.ece651.client.AdminTextView;
+
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+        AdminTextView.start(inputReader, System.out);
     }
 }
