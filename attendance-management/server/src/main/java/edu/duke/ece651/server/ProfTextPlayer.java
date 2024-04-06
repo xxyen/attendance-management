@@ -3,6 +3,7 @@ package edu.duke.ece651.server;
 //package edu.duke.ece651.shared;
 
 import edu.duke.ece651.shared.*;
+import edu.duke.ece651.shared.model.*;
 
 import java.io.*;
 import java.security.GeneralSecurityException;
@@ -91,47 +92,48 @@ public class ProfTextPlayer {
      * @return a Session of the records
      */
     public Session takeAttendance(Date time) throws IOException {
-        Session newSes = new Session(course.getCourseid(), time);
-        for (Student s : course.getStudents()) {
-            out.print("--------------------------------------------------------------------------------\n");
-            out.println(s.getDisplayName());
-            out.println(s.getUserid());
-            out.println("--------------------------------------------------------------------------------\n");
+        // Session newSes = new Session(course.getCourseid(), time);
+        // for (Student s : course.getStudents()) {
+        //     out.print("--------------------------------------------------------------------------------\n");
+        //     out.println(s.getDisplayName());
+        //     out.println(s.getUserid());
+        //     out.println("--------------------------------------------------------------------------------\n");
 
-            boolean flag = true;
-            while (flag) {
-                try {
-                    Status newStatus = readStatus(
-                            "Please type in the attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)\n");
-                    AttendanceRecord tempR = new AttendanceRecord(s, newStatus);
-                    newSes.addRecord(tempR);
-                    flag = false;
-                } catch (IllegalArgumentException e) {
-                    out.println(e.getMessage());
-                    // doOnePlacement(s, this.shipCreationFns.get(s));
-                }
-            }
-        }
-        return newSes;
+        //     boolean flag = true;
+        //     while (flag) {
+        //         try {
+        //             Status newStatus = readStatus(
+        //                     "Please type in the attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)\n");
+        //             AttendanceRecord tempR = new AttendanceRecord(s, newStatus);
+        //             newSes.addRecord(tempR);
+        //             flag = false;
+        //         } catch (IllegalArgumentException e) {
+        //             out.println(e.getMessage());
+        //             // doOnePlacement(s, this.shipCreationFns.get(s));
+        //         }
+        //     }
+        // }
+        // return newSes;
+        return null;
     }
 
     /**
      * Add a new session to the course.
      */
     public void addSession(Session s) throws Exception {
-        course.addSession(s);
-        // to-do
-        // update src file: add a new session file
-        // FileHandler.addSessionToCourse(course.getCourseid(), s.getTime());
-        s.saveAttendanceRecords();
+        // course.addSession(s);
+        // // to-do
+        // // update src file: add a new session file
+        // // FileHandler.addSessionToCourse(course.getCourseid(), s.getTime());
+        // s.saveAttendanceRecords();
     }
 
     /**
      * Full action of take attendance of a new session.
      */
     public void full_takeAttendance(Date time) throws Exception {
-        Session s = takeAttendance(time);
-        addSession(s);
+        // Session s = takeAttendance(time);
+        // addSession(s);
 
     }
 
@@ -140,11 +142,11 @@ public class ProfTextPlayer {
      * @param id is the student's ID.
      */
     public Student searchStudent(String id) {
-        for (Student s : course.getStudents()) {
-            if (s.getUserid().equals(id)) {
-                return s;
-            }
-        }
+        // for (Student s : course.getStudents()) {
+        //     if (s.getUserid().equals(id)) {
+        //         return s;
+        //     }
+        // }
 
         return null;
     }
@@ -191,21 +193,22 @@ public class ProfTextPlayer {
      * Choose a session from the list.
      */
     public Session chooseSession() throws IOException {
-        List<Session> sessionList = course.getSessions();
-        int size = sessionList.size();
+        // List<Session> sessionList = course.getSessions();
+        // int size = sessionList.size();
 
-        for (int i = 0; i < size; i++) {
-            out.println(Integer.toString(i + 1) + ": Date " + sessionList.get(i).getTime());
-        }
-        out.print("--------------------------------------------------------------------------------\n");
-        out.println(
-                "The above is a list of all the sessions, please enter the serial number of the session you want to choose.");
-        out.println("--------------------------------------------------------------------------------\n");
-        int index = readPositiveInteger(inputReader);
-        if (index > size) {
-            throw new IllegalArgumentException("Invalid input: there is no such a session!");
-        }
-        return sessionList.get(index - 1);
+        // for (int i = 0; i < size; i++) {
+        //     out.println(Integer.toString(i + 1) + ": Date " + sessionList.get(i).getTime());
+        // }
+        // out.print("--------------------------------------------------------------------------------\n");
+        // out.println(
+        //         "The above is a list of all the sessions, please enter the serial number of the session you want to choose.");
+        // out.println("--------------------------------------------------------------------------------\n");
+        // int index = readPositiveInteger(inputReader);
+        // if (index > size) {
+        //     throw new IllegalArgumentException("Invalid input: there is no such a session!");
+        // }
+        // return sessionList.get(index - 1);
+        return null;
     }
 
     /**
@@ -228,9 +231,9 @@ public class ProfTextPlayer {
         body.append(": \n");
         body.append("\n");
         body.append("Notice: Your attendance status on the course: ");
-        body.append(course.getCourseid());
+        // body.append(course.getCourseid());
         body.append(" at date: ");
-        body.append(ses.getTime());
+        // body.append(ses.getTime());
         body.append(" has been changed to '");
         body.append(sta.getStatus());
         body.append("'. If there is any problem, please contact your professor.\n");
@@ -251,14 +254,14 @@ public class ProfTextPlayer {
                 "Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)\n");
 
         Boolean flag = false;
-        for (AttendanceRecord record : target.getRecords()) {
-            if (record.getStudent().equals(s)) {
-                record.changeRecord(newSta);
-                target.saveAttendanceRecords();
-                flag = true;
-                break;
-            }
-        }
+        // for (AttendanceRecord record : target.getRecords()) {
+        //     if (record.getStudent().equals(s)) {
+        //         record.changeRecord(newSta);
+        //         target.saveAttendanceRecords();
+        //         flag = true;
+        //         break;
+        //     }
+        // }
 
         if (flag == true) {
             out.print("--------------------------------------------------------------------------------\n");
@@ -279,36 +282,36 @@ public class ProfTextPlayer {
      * Change display name of a student.
      */
     public void changeDisplayName() throws Exception {
-        if (course.isCanChangeName()) {
-            Student stu = doSearchStudent();
-            out.print("--------------------------------------------------------------------------------\n");
-            out.print("Please type in the student's preferred display name:\n");
-            out.println("--------------------------------------------------------------------------------\n");
-            String s = inputReader.readLine();
-            if (s == null) {
-                throw new EOFException(
-                        "You didn't type in any instruction!\n");
-            }
+        // if (course.isCanChangeName()) {
+        //     Student stu = doSearchStudent();
+        //     out.print("--------------------------------------------------------------------------------\n");
+        //     out.print("Please type in the student's preferred display name:\n");
+        //     out.println("--------------------------------------------------------------------------------\n");
+        //     String s = inputReader.readLine();
+        //     if (s == null) {
+        //         throw new EOFException(
+        //                 "You didn't type in any instruction!\n");
+        //     }
 
-            stu.setDisplayName(s);
-            // to-do
-            // change display name in src file
-            // FileHandler.updateCoursesForStudent(stu);
-            // FileHandler.updateOrAddStudentInGlobalList(stu);
-        } else {
-            throw new IllegalArgumentException("Sorry, you cannot change student's display name!");
-        }
+        //     stu.setDisplayName(s);
+        //     // to-do
+        //     // change display name in src file
+        //     // FileHandler.updateCoursesForStudent(stu);
+        //     // FileHandler.updateOrAddStudentInGlobalList(stu);
+        // } else {
+        //     throw new IllegalArgumentException("Sorry, you cannot change student's display name!");
+        // }
     }
 
     /**
      * Remove a student from the course.
      */
     public void removeStudent() throws Exception {
-        Student stu = doSearchStudent();
-        course.removeStudent(stu.getUserid());
-        out.print("--------------------------------------------------------------------------------\n");
-        out.print("Successfully removed the student from the course!\n");
-        out.println("--------------------------------------------------------------------------------\n");
+        // Student stu = doSearchStudent();
+        // course.removeStudent(stu.getUserid());
+        // out.print("--------------------------------------------------------------------------------\n");
+        // out.print("Successfully removed the student from the course!\n");
+        // out.println("--------------------------------------------------------------------------------\n");
         // to-do
         // change student list in src file
         // FileHandler.removeStudentFromCourse(stu.getUserid(), course.getCourseid());
@@ -318,7 +321,8 @@ public class ProfTextPlayer {
      * Get the student list of the course.
      */
     public List<Student> getStudent() {
-        return course.getStudents();
+        // return course.getStudents();
+        return null;
     }
     // public List<Session> getSession(){
     // return course.getSessions();
@@ -382,7 +386,7 @@ public class ProfTextPlayer {
         fields.add("email");
         fields.add("status");
 
-        ExportService.exportToFile(course.getSessions(), format, fields, path);
+        // ExportService.exportToFile(course.getSessions(), format, fields, path);
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Successfully exported course attendance records!\n");
         out.println("--------------------------------------------------------------------------------\n");
@@ -427,7 +431,7 @@ public class ProfTextPlayer {
                 } else if (index == 7) {
                     out.print("--------------------------------------------------------------------------------\n");
                     out.print("You have exited from course: " +
-                            course.getCourseid() +
+                            // course.getCourseid() +
                             "!" +
                             "\n");
                     out.println("--------------------------------------------------------------------------------\n");

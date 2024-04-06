@@ -2,6 +2,8 @@ package edu.duke.ece651.shared.service;
 
 import edu.duke.ece651.shared.model.Session;
 import edu.duke.ece651.shared.dao.SessionDAO;
+import java.util.List;
+
 
 public class SessionService {
 
@@ -20,7 +22,7 @@ public class SessionService {
         sessionDAO.deleteSession(sessionId);
     }
 
-    public void listSessionsBySection(int sectionId) {
-        sessionDAO.listSessionsBySection(sectionId);
+    public List<Session> listSessionsBySection(int sectionId) {
+        return sessionDAO.listSessionsBySection(sectionId);
     }
 }
