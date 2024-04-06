@@ -3,12 +3,34 @@
  */
 package edu.duke.ece651.server;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.io.*;
+import java.net.*;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+public class App {
+    public static void main(String[] args) throws IOException {
+        ServerSocket serverSocket = new ServerSocket(1234); // 监听1234端口
+        System.out.println("Server is listening on port 1234");
+
+        while (true) {
+            Socket socket = serverSocket.accept(); // 接受客户端连接
+            System.out.println("Client connected");
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+
+            // 读取客户端发送的XML
+            StringBuilder xmlData = new StringBuilder();
+            String line;
+            while ((line = input.readLine()) != null && !line.isEmpty()) {
+                xmlData.append(line);
+            }
+            System.out.println("Received from client: " + xmlData);
+
+            // 假设我们简单地回复一个XML格式的消息
+            String response = "<response><message>Hello from Server</message></response>";
+            output.println(response);
+
+            socket.close(); // 关闭连接
+        }
     }
 }
