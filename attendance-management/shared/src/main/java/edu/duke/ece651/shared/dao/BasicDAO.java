@@ -5,10 +5,13 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
+import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class BasicDAO<T> { 
 
@@ -54,6 +57,31 @@ public class BasicDAO<T> {
             JDBCUtils.close(null, null, connection);
         }
     }
+
+    public Map<String, Object> querySingleMapped(String sql, Object... parameters) {
+        Connection connection = null;
+        try {
+            connection = JDBCUtils.getConnection();
+            return qr.query(connection, sql, new MapHandler(), parameters);
+        } catch (SQLException e) {
+            throw  new RuntimeException(e); 
+        } finally {
+            JDBCUtils.close(null, null, connection);
+        }
+    }
+
+    public List<Map<String, Object>> queryMultiMapped(String sql, Object... parameters) {
+        Connection connection = null;
+        try {
+            connection = JDBCUtils.getConnection();
+            return qr.query(connection, sql, new MapListHandler(), parameters);
+        } catch (SQLException e) {
+            throw  new RuntimeException(e); 
+        } finally {
+            JDBCUtils.close(null, null, connection);
+        }
+    }
+
 
     public Object queryScalar(String sql, Object... parameters) {
 
