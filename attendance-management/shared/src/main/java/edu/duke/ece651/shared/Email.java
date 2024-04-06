@@ -22,8 +22,6 @@ public class Email {
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
-    public Email() {}
-
     /**
      * Check if a string is of valid email address syntax.
      * @param email is the string to check.
