@@ -81,6 +81,14 @@ public class Student implements User {
     this.email = email;
   }
 
+  public void setEmail(String email) throws IOException {
+    this.email = new Email(email);
+  }
+
+  public void setUserid(String userid) {
+    this.userid = userid;
+  }
+
   @Override
   public String getUserid() {
     return userid;
@@ -94,9 +102,6 @@ public class Student implements User {
     return displayName;
   }
 
-  // public Email getEmailAddr() {
-  //   return email;
-  // }
 
   @Override
   public String getUserType() {
@@ -159,6 +164,7 @@ public class Student implements User {
     this.password = newPwd;
     return true;
   }
+
 
   @Override
   public boolean isDefaultPwd() {

@@ -21,7 +21,7 @@ public class FacultyDAO extends BasicDAO<Professor> {
     }
 
     public Professor queryFacultyById(String userid) {
-        String sql = "SELECT * FROM faculty WHERE user_id = ?";
+        String sql = "SELECT user_id AS userid, password_hash AS password, faculty_name AS name, email AS email FROM faculty WHERE user_id = ?";
         return querySingle(sql, Professor.class, userid);
     }
 

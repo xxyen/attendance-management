@@ -48,7 +48,6 @@ public class BasicDAO<T> {
         try {
             connection = JDBCUtils.getConnection();
             return  qr.query(connection, sql, new BeanHandler<T>(clazz), parameters);
-
         } catch (SQLException e) {
             throw  new RuntimeException(e); 
         } finally {
