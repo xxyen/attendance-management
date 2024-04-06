@@ -13,7 +13,7 @@ public class ReaderUtilities {
     * @return The positive integer read, or -1 if input is invalid.
     */
     public static int readPositiveInteger(BufferedReader reader) {
-        try {
+      try {
         String line = reader.readLine();
         int number = Integer.parseInt(line);
         if (number > 0) {
@@ -21,9 +21,9 @@ public class ReaderUtilities {
         } else {
             return -1;
         }
-        } catch (Exception e) {
+      } catch (Exception e) {
         return -1;
-        }
+      }
     }
 
     /**
