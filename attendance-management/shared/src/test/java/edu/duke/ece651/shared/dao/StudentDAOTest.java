@@ -2,7 +2,9 @@ package edu.duke.ece651.shared.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -73,7 +75,7 @@ public class StudentDAOTest {
     assertEquals("Sam Johnson", queriedStudent.getLegalName());
     assertEquals("user101", queriedStudent.getUserid());
     assertEquals("Sammy", queriedStudent.getDisplayName());
-    //assertEquals("sam.johnson@example.com", queriedStudent.getEmail().getEmailAddr());
+    assertEquals("sam.johnson@example.com", queriedStudent.getEmail().getEmailAddr());
     int result = studentDAO.deleteStudent("user101");
   }
 
@@ -83,8 +85,12 @@ public class StudentDAOTest {
     studentDAO.addStudent(stu1);
     studentDAO.addStudent(stu2);
     studentDAO.addStudent(stu3);
-    List<Student> students = studentDAO.queryAllStudents();
-    // assertEquals(students, stu1);
+    Set<Student> students = studentDAO.queryAllStudents();
+    Set<Student> expected = new HashSet<>();
+    expected.add(stu1);
+    expected.add(stu2);
+    expected.add(stu3); 
+    assertEquals(students, expected);
     int result = studentDAO.deleteStudent("user123");
     result = studentDAO.deleteStudent("user456");
     result = studentDAO.deleteStudent("user101");
