@@ -45,4 +45,12 @@ public class UserManagement {
   public static Professor getFacultyByID(String userid) {
     return facultyDAO.queryFacultyById(userid);
   }
+
+  public static boolean checkFacultyExists(String userid) {
+    if(facultyDAO.queryFacultyById(userid) == null) {
+        return false;
+    }
+    return true;
+}
+
 }

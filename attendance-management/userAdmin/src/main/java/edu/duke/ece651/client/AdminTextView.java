@@ -14,7 +14,7 @@ public class AdminTextView {
 
     public static void start(BufferedReader inputReader, PrintStream outputStream) {
         outputStream.println("Welcome to the user admini app!");
-        // chooseBasicAction(inputReader, outputStream);
+        chooseBasicAction(inputReader, outputStream);
     }
 
     public static void chooseBasicAction(BufferedReader inputReader, PrintStream outputStream) {
@@ -40,15 +40,19 @@ public class AdminTextView {
     }
 
     private static void addUser(BufferedReader inputReader, PrintStream outputStream){
-        outputStream.println("Which type of user would you like to create? Please enter the number to choose.\n1. a student\n2. a faculty member");
-        int choice = ReaderUtilities.readPositiveInteger(inputReader);
-        if(choice == 1) {
-            addStudent(inputReader, outputStream);
-        } else if(choice == 2) {
-            addFaculty(inputReader, outputStream);
-        }
-        else {
-            outputStream.println("Please enter a positive integer within the listed ones! (1/2)");
+        while(true) {
+            outputStream.println("Which type of user would you like to create? Please enter the number to choose.\n1. a student\n2. a faculty member");
+            int choice = ReaderUtilities.readPositiveInteger(inputReader);
+            if(choice == 1) {
+                addStudent(inputReader, outputStream);
+                break;
+            } else if(choice == 2) {
+                addFaculty(inputReader, outputStream);
+                break;
+            }
+            else {
+                outputStream.println("Please enter a positive integer within the listed ones! (1/2)");
+            }
         }
     }
 
@@ -58,14 +62,16 @@ public class AdminTextView {
             outputStream.println("userid(must be unique for everyone), legal name, email address");
             try {
                 String[] info = inputReader.readLine().split(",");
-                // !!! if can find info[0] in db: already exists
+                if(UserManagement.checkFacultyExists(info[0])) {
+                    throw new IllegalArgumentException("Faculty member with this userid exists already!");
+                }
                 if(!Email.checkValid(info[2])) {
                     throw new IllegalArgumentException("The email address you provide is invalid!");
                 }
                 Professor newFaculty = new Professor(info[0], info[1], new Email(info[2]));
                 UserManagement.facultySignUp(newFaculty);
             } catch(Exception e) {
-                outputStream.println("Failed to read faculty information: " + e.getMessage() + " Please try again!");
+                outputStream.println("Failed to add faculty member: " + e.getMessage() + " Please try again!");
             }
         }
         
