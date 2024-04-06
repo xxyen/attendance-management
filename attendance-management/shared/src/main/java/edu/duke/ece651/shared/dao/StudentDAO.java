@@ -13,7 +13,7 @@ import java.util.Set;
 import edu.duke.ece651.shared.Email;
 import edu.duke.ece651.shared.Student;
 import edu.duke.ece651.shared.dao.BasicDAO;
-import edu.duke.ece651.shared.JDBCUtils;
+import edu.duke.ece651.shared.dao.SectionDAO;
 
 public class StudentDAO extends BasicDAO<Student> {
     public int addStudent(Student student) {
