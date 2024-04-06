@@ -34,7 +34,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     testImplementation "org.mockito:mockito-core:2.28.2"
     implementation 'com.jcraft:jsch:0.1.55'
-    implementation 'mysql:mysql-connector-java:8.0.19'
+    implementation 'mysql:mysql-connector-java:5.1.37'
+    // implementation 'mysql:mysql-connector-java:8.0.19'
     implementation 'com.alibaba:druid:1.1.10'
     //  implementation 'org.apache.commons:commons-dbutils:1.6' 
      implementation 'commons-dbutils:commons-dbutils:1.8.1'

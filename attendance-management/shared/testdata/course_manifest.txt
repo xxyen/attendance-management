@@ -1,5 +1,0 @@
-c1
-course123
-course456
-eee123
-testCourse
