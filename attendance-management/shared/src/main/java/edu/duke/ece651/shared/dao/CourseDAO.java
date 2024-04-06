@@ -1,6 +1,6 @@
 package edu.duke.ece651.shared.dao;
 
-import edu.duke.ece651.shared.Course;
+import edu.duke.ece651.shared.model.Course;
 import java.util.List;
 
 public class CourseDAO extends BasicDAO<Course> {
@@ -23,5 +23,10 @@ public class CourseDAO extends BasicDAO<Course> {
     public int deleteCourse(String courseId) {
         String sql = "DELETE FROM course WHERE course_id = ?";
         return update(sql, courseId);
+    }
+
+    public int updateCourseName(String courseId, String newCourseName) {
+        String sql = "UPDATE course SET course_name = ? WHERE course_id = ?";
+        return update(sql, newCourseName, courseId);
     }
 }

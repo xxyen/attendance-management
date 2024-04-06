@@ -1,4 +1,4 @@
-package edu.duke.ece651.shared;
+package edu.duke.ece651.shared.model;
 
 /**
  * Represents the attendance status of a student.

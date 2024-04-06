@@ -1,7 +1,7 @@
 package edu.duke.ece651.shared.dao;
 
-import edu.duke.ece651.shared.AttendanceRecord;
-import edu.duke.ece651.shared.Status;
+import edu.duke.ece651.shared.model.AttendanceRecord;
+import edu.duke.ece651.shared.model.Status;
 
 import java.util.List;
 
@@ -20,6 +20,16 @@ public class AttendanceRecordDAO extends BasicDAO<AttendanceRecord> {
     public int updateAttendanceRecord(AttendanceRecord record) {
         String sql = "UPDATE attendance_record SET session_id = ?, student_id = ?, status = ? WHERE record_id = ?";
         return update(sql, record.getSessionId(), record.getStudentId(), record.getStatus().getStatus(), record.getRecordId());
+    }
+
+    public List<AttendanceRecord> listAttendanceBySession(int sessionId){
+        String sql = "SELECT * FROM attendance_record WHERE session_id = ?";
+        return queryMulti(sql, AttendanceRecord.class, sessionId);
+    }
+
+    public List<AttendanceRecord> listAttendanceByStudentInSection(String studentId, int sectionId){
+        String sql = "SELECT * FROM attendance_record WHERE student_id = ? AND section_id = ?";
+        return queryMulti(sql, AttendanceRecord.class, studentId, sectionId);
     }
 
 }

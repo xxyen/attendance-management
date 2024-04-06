@@ -1,4 +1,4 @@
-package edu.duke.ece651.shared;
+package edu.duke.ece651.shared.model;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -71,6 +71,5 @@ public class Session {
     public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
-
     
 }

@@ -1,4 +1,4 @@
-package edu.duke.ece651.shared;
+package edu.duke.ece651.shared.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,10 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Represents a course with its details such as course ID, professors, students,
- * and sessions.
- * Allows manipulation of these details including adding and removing students
- * and professors.
+ * Represents a course with its details such as course ID and course name.
  */
 public class Course {
   private String courseId;

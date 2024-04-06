@@ -1,4 +1,4 @@
-package edu.duke.ece651.shared;
+package edu.duke.ece651.shared.model;
 
 /**
  * Represents an attendance record for a student in a specific session.

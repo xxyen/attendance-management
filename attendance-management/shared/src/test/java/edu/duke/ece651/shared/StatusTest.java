@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.beans.Transient;
 
 import org.junit.jupiter.api.Test;
+import edu.duke.ece651.shared.model.*;
 
 public class StatusTest {
   @Test

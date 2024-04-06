@@ -1,13 +1,13 @@
 package edu.duke.ece651.shared.dao;
 
 import edu.duke.ece651.shared.JDBCUtils;
-import edu.duke.ece651.shared.Section;
+import edu.duke.ece651.shared.model.Section;
 import java.sql.SQLException;
 import java.util.List;
 
 public class SectionDAO extends BasicDAO<Section> {
     
-    public int addSection(Section section) {
+    public int addSectionToCourse(Section section) {
         String sql = "INSERT INTO section (course_id, faculty_id) VALUES (?, ?)";
         return update(sql, section.getCourseId(), section.getFacultyId());
     }
@@ -31,4 +31,16 @@ public class SectionDAO extends BasicDAO<Section> {
         String sql = "SELECT * FROM section";
         return queryMulti(sql, Section.class);
     }
+
+
+    public int updateSectionProfessor(int sectionId, String newFacultyId) {
+        String sql = "UPDATE section SET faculty_id = ? WHERE section_id = ?";
+        return update(sql, newFacultyId, sectionId);
+    }
+
+    public List<Section> listSectionsByCourse(String courseId) {
+        String sql = "SELECT * FROM section WHERE course_id = ?";
+        return queryMulti(sql, Section.class, courseId);
+    }
+    
 }

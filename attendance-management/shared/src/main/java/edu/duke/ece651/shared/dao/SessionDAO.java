@@ -1,6 +1,6 @@
 package edu.duke.ece651.shared.dao;
 
-import edu.duke.ece651.shared.Session;
+import edu.duke.ece651.shared.model.Session;
 import java.util.List;
 
 public class SessionDAO extends BasicDAO<Session> {
@@ -28,6 +28,11 @@ public class SessionDAO extends BasicDAO<Session> {
     public int updateSession(Session session) {
         String sql = "UPDATE session SET section_id = ?, session_date = ?, start_time = ?, end_time = ? WHERE session_id = ?";
         return update(sql, session.getSectionId(), session.getSessionDate(), session.getStartTime(), session.getEndTime(), session.getSessionId());
+    }
+
+    public List<Session> listSessionsBySection(int sectionId){
+        String sql = "SELECT * FROM session WHERE section_id = ?";
+        return queryMulti(sql, Session.class, sectionId);
     }
 
 }

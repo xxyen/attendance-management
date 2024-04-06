@@ -1,7 +1,7 @@
 package edu.duke.ece651.shared.dao;
 
 import edu.duke.ece651.shared.JDBCUtils;
-import edu.duke.ece651.shared.Enrollment;
+import edu.duke.ece651.shared.model.Enrollment;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -30,5 +30,15 @@ public class EnrollmentDAO extends BasicDAO<Enrollment> {
     public List<Enrollment> queryAllEnrollments() {
         String sql = "SELECT * FROM enrollment";
         return queryMulti(sql, Enrollment.class);
+    }
+
+    public Enrollment findEnrollmentByStudentAndSection(String studentId, int sectionId) {
+        String sql = "SELECT * FROM enrollment WHERE student_id = ? AND section_id = ?";
+        return querySingle(sql,Enrollment.class, studentId, sectionId);
+    }
+
+    public List<Enrollment> listEnrollmentsBySection(int section_id) {
+        String sql = "SELECT * FROM enrollment WHERE section_id = ?";
+        return queryMulti(sql, Enrollment.class, section_id);
     }
 }
