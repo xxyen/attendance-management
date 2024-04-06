@@ -8,8 +8,8 @@ import java.util.List;
 public class EnrollmentDAO extends BasicDAO<Enrollment> {
 
     public int addEnrollment(Enrollment enrollment) {
-        String sql = "INSERT INTO enrollment (section_id, student_id, enrollment_date, status) VALUES (?, ?, ?, ?)";
-        return update(sql, enrollment.getSectionId(), enrollment.getStudentId(), new java.sql.Date(enrollment.getEnrollmentDate().getTime()), enrollment.getStatus());
+        String sql = "INSERT INTO enrollment (section_id, student_id, enrollment_date, status, receive_notifications) VALUES (?, ?, ?, ?, ?)";
+        return update(sql, enrollment.getSectionId(), enrollment.getStudentId(), new java.sql.Date(enrollment.getEnrollmentDate().getTime()), enrollment.getStatus(), enrollment.isReceiveNotifications());
     }
 
     public int deleteEnrollment(Integer enrollmentId) {
@@ -18,8 +18,8 @@ public class EnrollmentDAO extends BasicDAO<Enrollment> {
     }
 
     public int updateEnrollment(Enrollment enrollment) {
-        String sql = "UPDATE enrollment SET section_id = ?, student_id = ?, enrollment_date = ?, status = ? WHERE enrollment_id = ?";
-        return update(sql, enrollment.getSectionId(), enrollment.getStudentId(), new java.sql.Date(enrollment.getEnrollmentDate().getTime()), enrollment.getStatus(), enrollment.getEnrollmentId());
+        String sql = "UPDATE enrollment SET section_id = ?, student_id = ?, enrollment_date = ?, status = ?, receive_notifications = ? WHERE enrollment_id = ?";
+        return update(sql, enrollment.getSectionId(), enrollment.getStudentId(), new java.sql.Date(enrollment.getEnrollmentDate().getTime()), enrollment.getStatus(), enrollment.isReceiveNotifications(), enrollment.getEnrollmentId());
     }
 
     public Enrollment queryEnrollmentById(Integer enrollmentId) {

@@ -37,4 +37,13 @@ public class AttendanceRecordDAO extends BasicDAO<AttendanceRecord> {
         return querySingle(sql, AttendanceRecord.class, sessionId, studentId);
     }    
 
+    public List<AttendanceRecord> listAttendanceByStudent(String studentId) {
+        String sql = "SELECT * FROM attendance_record WHERE student_id = ?";
+        return queryMulti(sql, AttendanceRecord.class, studentId);
+    }
+    
+    public List<AttendanceRecord> listAttendanceBySection(int sectionId) {
+        String sql = "SELECT * FROM attendance_record WHERE session_id IN (SELECT session_id FROM session WHERE section_id = ?)";
+        return queryMulti(sql, AttendanceRecord.class, sectionId);
+    }
 }
