@@ -2,6 +2,8 @@ package edu.duke.ece651.shared;
 
 import java.io.IOException;
 import java.util.List;
+import edu.duke.ece651.shared.model.*;
+
 
 /**
  * A service class for exporting session data into files.

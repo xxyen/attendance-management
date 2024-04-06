@@ -1,4 +1,4 @@
-package edu.duke.ece651.shared;
+package edu.duke.ece651.shared.model;
 
 /**
  * Represents the attendance status of a student.
@@ -30,12 +30,11 @@ public class Status {
     /**
      * Sets the status character if it is valid.
      *
-     * @param status the new status character to be set. Must be 'p', 'a', 'l', or
-     *               'n'.
+     * @param status the new status character to be set. Must be 'p', 'a' or 't'
      * @throws IllegalArgumentException if the status character is not valid.
      */
     public void setStatus(char status) {
-        if (status == 'p' || status == 'a' || status == 'l' || status == 'n') {
+        if (status == 'p' || status == 'a' || status == 't') {
             this.status = status;
         } else {
             throw new IllegalArgumentException("Invalid status: " + status);

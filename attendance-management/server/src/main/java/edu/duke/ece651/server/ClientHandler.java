@@ -1,7 +1,7 @@
 package edu.duke.ece651.server;
 
 import edu.duke.ece651.shared.AttendanceOperator;
-import edu.duke.ece651.shared.Course;
+import edu.duke.ece651.shared.model.Course;
 import edu.duke.ece651.shared.Professor;
 import edu.duke.ece651.shared.*;
 

@@ -31,4 +31,14 @@ public class EnrollmentDAO extends BasicDAO<Enrollment> {
         String sql = "SELECT * FROM enrollment";
         return queryMulti(sql, Enrollment.class);
     }
+
+    public Enrollment findEnrollmentByStudentAndSection(String studentId, int sectionId) {
+        String sql = "SELECT * FROM enrollment WHERE student_id = ? AND section_id = ?";
+        return querySingle(sql,Enrollment.class, studentId, sectionId);
+    }
+
+    public List<Enrollment> listEnrollmentsBySection(int section_id) {
+        String sql = "SELECT * FROM enrollment WHERE section_id = ?";
+        return queryMulti(sql, Enrollment.class, section_id);
+    }
 }
