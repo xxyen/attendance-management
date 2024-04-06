@@ -8,15 +8,17 @@ public class Enrollment {
     private String studentId;
     private Date enrollmentDate;
     private String status;
+    private boolean receiveNotifications; 
 
     public Enrollment() {}
 
-    public Enrollment(int enrollmentId, int sectionId, String studentId, Date enrollmentDate, String status) {
+    public Enrollment(int enrollmentId, int sectionId, String studentId, Date enrollmentDate, String status, boolean receiveNotifications) {
         this.enrollmentId = enrollmentId;
         this.sectionId = sectionId;
         this.studentId = studentId;
         this.enrollmentDate = enrollmentDate;
         this.status = status;
+        this.receiveNotifications = receiveNotifications;
     }
 
     public int getEnrollmentId() {
@@ -57,5 +59,13 @@ public class Enrollment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isReceiveNotifications() {
+        return receiveNotifications;
+    }
+
+    public void setReceiveNotifications(boolean receiveNotifications) {
+        this.receiveNotifications = receiveNotifications;
     }
 }

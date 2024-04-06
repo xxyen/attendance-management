@@ -34,4 +34,25 @@ public class EnrollmentService {
         }
         return students;
     }
+
+    public boolean doesStudentReceiveNotifications(String studentId, int sectionId) {
+        Enrollment enrollment = enrollmentDAO.findEnrollmentByStudentAndSection(studentId, sectionId);
+        if (enrollment != null) {
+            return enrollment.isReceiveNotifications();
+        } else {
+            throw new IllegalArgumentException("No enrollment found for the given student and section IDs.");
+        }
+    }
+
+    public void updateStudentNotificationPreference(String studentId, int sectionId, boolean receiveNotifications) {
+        Enrollment enrollment = enrollmentDAO.findEnrollmentByStudentAndSection(studentId, sectionId);
+        if (enrollment != null) {
+            enrollment.setReceiveNotifications(receiveNotifications);
+            enrollmentDAO.updateEnrollment(enrollment);
+        } else {
+            throw new IllegalArgumentException("No enrollment found for the given student and section IDs to update.");
+        }
+    }
+    
+    
 }
