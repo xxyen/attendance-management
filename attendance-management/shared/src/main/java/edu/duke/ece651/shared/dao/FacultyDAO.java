@@ -1,5 +1,6 @@
 package edu.duke.ece651.shared.dao;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +8,6 @@ import java.util.Set;
 
 import edu.duke.ece651.shared.Email;
 import edu.duke.ece651.shared.Professor;
-import edu.duke.ece651.shared.Student;
 import java.util.Set;
 
 public class FacultyDAO extends BasicDAO<Professor> {
@@ -33,6 +33,29 @@ public class FacultyDAO extends BasicDAO<Professor> {
             return null;
         }
         return new Professor((String)res.get("user_id"),(String)res.get("password_hash"), (String)res.get("faculty_name"), new Email((String)res.get("email")));
+    }
+
+    public Professor queryFacultyByEmail(String email) {
+        String sql = "SELECT user_id, password_hash, faculty_name, email FROM faculty WHERE email = ?";
+        Map<String, Object> res = querySingleMapped(sql, email);
+        if(res == null) {
+            return null;
+        }
+        return new Professor((String)res.get("user_id"),(String)res.get("password_hash"), (String)res.get("faculty_name"), new Email((String)res.get("email")));
+    }
+
+    public List<Professor> queryFacultyByLegalName(String legalName) {
+        String sql = " SELECT user_id, password_hash, faculty_name, email FROM faculty WHERE faculty_name = ?";
+        List<Map<String, Object>> res = queryMultiMapped(sql, legalName);
+        List<Professor> facultyList = new ArrayList<>();
+        if(res == null) {
+            return null;
+        }
+        for(Map<String, Object> map: res) {
+            Professor faculty = new Professor((String)map.get("user_id"),(String)map.get("password_hash"), (String)map.get("faculty_name"), new Email((String)map.get("email")));
+            facultyList.add(faculty);
+        }
+        return facultyList;
     }
 
     public Set<Professor> queryAllFaculty() {

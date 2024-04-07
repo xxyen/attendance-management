@@ -51,7 +51,7 @@ public class JDBCUtils {
 
         session.connect();
         session.setPortForwardingL(localPort, remoteHost, remotePort);
-        System.out.println("SSH Tunnel established.");
+        //System.out.println("SSH Tunnel established.");
     }
 
     public static Connection getConnection() throws SQLException {
@@ -78,7 +78,7 @@ public class JDBCUtils {
     public static void closeSSHTunnel() {
         if (session != null && session.isConnected()) {
             session.disconnect();
-            System.out.println("SSH Tunnel disconnected.");
+            //System.out.println("SSH Tunnel disconnected.");
         }
     }
 }
