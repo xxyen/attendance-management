@@ -1,4 +1,4 @@
-package edu.duke.ece651.client;
+package edu.duke.ece651.userAdmin;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
@@ -8,7 +8,7 @@ import edu.duke.ece651.shared.Email;
 import edu.duke.ece651.shared.Professor;
 import edu.duke.ece651.shared.Student;
 import edu.duke.ece651.shared.ReaderUtilities;
-import edu.duke.ece651.client.UserManagement;
+import edu.duke.ece651.userAdmin.UserManagement;
 
 
 public class AdminTextView {

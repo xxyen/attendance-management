@@ -1,4 +1,4 @@
-package edu.duke.ece651.client;
+package edu.duke.ece651.userAdmin;
 
 import java.util.List;
 
