@@ -3,12 +3,16 @@
  */
 package edu.duke.ece651.courseManage;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World! from courseManage";
-    }
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
+
+public class App {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+    courseManager CourseManager = new courseManager(inputReader, System.out);
+    CourseManager.loop();   
+  }
 }
