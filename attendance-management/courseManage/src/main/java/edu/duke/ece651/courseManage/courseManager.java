@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.logging.FileHandler;
 
 import edu.duke.ece651.shared.*;
+import edu.duke.ece651.shared.model.*;
 
 public class courseManager {
   
@@ -34,13 +35,13 @@ public class courseManager {
     
     while (true) {
       try {
-        Course newCourse = new Course(courseid, professor, allowChangeName);
+        Course newCourse = new Course();
         // create directory and files for the course
         //FileHandler.createCourse(courseid, professor.getPersonalID());
         // load student list of the course
         outputStream.println("Please provide the absolute path of the csv file you wan to load the roster from:");
         //FileHandler.loadRosterFromCSVFile(courseid, newCourse, inputReader.readLine(), order, withHeader);
-        newCourse.addProfessor(professor);
+        //newCourse.addProfessor(professor);
         courses.add(newCourse);
         return;// newCourse;
       } catch (Exception e) {
@@ -111,7 +112,7 @@ public class courseManager {
       outputStream.println("Course ID: ");
       try {
         String courseid = inputReader.readLine();
-        if (courses.stream().anyMatch(course -> course.getCourseid().equals(courseid))) {
+        if (courses.stream().anyMatch(course -> course.getCourseId().equals(courseid))) {
           outputStream.println("Course ID exists! Please try again!");
           continue;
         }
