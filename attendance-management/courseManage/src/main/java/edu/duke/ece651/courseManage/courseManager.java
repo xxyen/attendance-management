@@ -32,13 +32,26 @@ public class courseManager {
     while (true) {
       try {
         Course newCourse = new Course(courseId, courseName);
-        // create directory and files for the course
-        //FileHandler.createCourse(courseid, professor.getPersonalID());
-        // load student list of the course
-        //outputStream.println("Please provide the absolute path of the csv file you wan to load the roster from:");
-        //FileHandler.loadRosterFromCSVFile(courseid, newCourse, inputReader.readLine(), order, withHeader);
-        //newCourse.addProfessor(professor);
         courseIO.addCourse(newCourse);
+        return;// newCourse;
+      } catch (Exception e) {
+        outputStream.println(e.getMessage() + " Please try again!");
+      }
+    }
+  }
+
+  public static void removeCourse(BufferedReader inputReader, PrintStream outputStream) {
+    outputStream.println("You are removing an existing course! Please enter the information required below.");
+    CourseDAO courseIO = new CourseDAO();
+    List<Course> courses = courseIO.findAllCourses();
+    String courseId = getRemoveCourseID(inputReader, outputStream, courses);
+    while (true) {
+      try {
+        boolean deleteYN = readInputYorN(inputReader, outputStream, "DANGER!!! Remove a class will be destructive, do you want to continue?");
+        if (!deleteYN) {
+          return;
+        }
+        courseIO.deleteCourse(courseId);
         return;// newCourse;
       } catch (Exception e) {
         outputStream.println(e.getMessage() + " Please try again!");
@@ -46,9 +59,6 @@ public class courseManager {
         // directory
       }
     }
-  }
-
-  public static void removeCourse(BufferedReader inputReader, PrintStream outputStream) {
   }
   
   public static void updateCourse(BufferedReader inputReader, PrintStream outputStream) {
@@ -129,6 +139,22 @@ public class courseManager {
           continue;
         }
         return courseName;
+      } catch (Exception e) {
+        outputStream.println(e.getMessage() + " Please try again!");
+      }
+    }
+  }
+
+  private static String getRemoveCourseID(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
+    while (true) {
+      outputStream.println("Course ID: ");
+      try {
+        String courseid = inputReader.readLine();
+        if (!courses.stream().anyMatch(course -> course.getCourseId().equals(courseid))) {
+          outputStream.println("Course ID does not exist! Please try again!");
+          continue;
+        }
+        return courseid;
       } catch (Exception e) {
         outputStream.println(e.getMessage() + " Please try again!");
       }
