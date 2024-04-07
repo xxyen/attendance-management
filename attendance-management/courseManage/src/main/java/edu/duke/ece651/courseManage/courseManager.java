@@ -10,6 +10,7 @@ import java.util.logging.FileHandler;
 
 import edu.duke.ece651.shared.*;
 import edu.duke.ece651.shared.model.*;
+import edu.duke.ece651.shared.dao.*;
 
 public class courseManager {
   
@@ -24,25 +25,20 @@ public class courseManager {
   
   public static void createCourse(BufferedReader inputReader, PrintStream outputStream) {
     outputStream.println("You are creating a new course! Please enter the information required below.");
-    ArrayList<Course> courses = new ArrayList<>();
-    String courseid = getInputCourseID(inputReader, outputStream, courses);
-    Professor professor = new Professor("000", "Prof", new Email("abc@def.com"));
-    boolean allowChangeName = readInputYorN(inputReader, outputStream,
-                                            "Are students allowed to change their display name?(Y/N)");
-    outputStream.println("You are loading the roster from a csv file! Please enter the information required below.");
-    boolean withHeader = readInputYorN(inputReader, outputStream, "Does this csv file contain headers?(Y/N)");
-    List<Integer> order = readInputOrder(inputReader, outputStream);
-    
+    CourseDAO courseIO = new CourseDAO();
+    List<Course> courses = courseIO.findAllCourses();
+    String courseId = getInputCourseID(inputReader, outputStream, courses);
+    String courseName = getInputCourseName(inputReader, outputStream, courses);
     while (true) {
       try {
-        Course newCourse = new Course();
+        Course newCourse = new Course(courseId, courseName);
         // create directory and files for the course
         //FileHandler.createCourse(courseid, professor.getPersonalID());
         // load student list of the course
-        outputStream.println("Please provide the absolute path of the csv file you wan to load the roster from:");
+        //outputStream.println("Please provide the absolute path of the csv file you wan to load the roster from:");
         //FileHandler.loadRosterFromCSVFile(courseid, newCourse, inputReader.readLine(), order, withHeader);
         //newCourse.addProfessor(professor);
-        courses.add(newCourse);
+        courseIO.addCourse(newCourse);
         return;// newCourse;
       } catch (Exception e) {
         outputStream.println(e.getMessage() + " Please try again!");
@@ -117,6 +113,22 @@ public class courseManager {
           continue;
         }
         return courseid;
+      } catch (Exception e) {
+        outputStream.println(e.getMessage() + " Please try again!");
+      }
+    }
+  }
+
+  private static String getInputCourseName(BufferedReader inputReader, PrintStream outputStream, List<Course> courses) {
+    while (true) {
+      outputStream.println("Course Name: ");
+      try {
+        String courseName = inputReader.readLine();
+        if (courses.stream().anyMatch(course -> course.getCourseName().equals(courseName))) {
+          outputStream.println("Course Name exists! Please try again!");
+          continue;
+        }
+        return courseName;
       } catch (Exception e) {
         outputStream.println(e.getMessage() + " Please try again!");
       }
