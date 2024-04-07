@@ -4,11 +4,10 @@
 package edu.duke.ece651.courseManage;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World! from courseManage";
-    }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
+  public static void main(String[] args) {
+    BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+    courseManager CourseManager = new courseManager(inputReader, System.out);
+    CourseManager.loop();   
+  }
 }
