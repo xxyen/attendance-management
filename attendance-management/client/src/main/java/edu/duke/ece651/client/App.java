@@ -3,7 +3,10 @@
  */
 package edu.duke.ece651.client;
 
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
 public class App {
     public String getGreeting() {
@@ -11,18 +14,51 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
-        try {
-            ClientSocketHandler client = new ClientSocketHandler();
-            String host = "localhost";
-            int port = 1234;
-            String testxml = "<request><message>Hello from Can Pei</message></request>";
+//        try {
+//            ClientSocketHandler client = new ClientSocketHandler();
+//            String host = "localhost";
+//            int port = 12345;
+//            String testxml = "<request><message>Hello from Can Pei</message></request>";
+//
+//            client.connectToServer(host, port);
+//            client.sendXmlToServer(testxml);
+//            client.readResponseFromServer();
+//            client.closeConnection();
+//        } catch (Exception e){
+//            System.out.println(e.getMessage());
+//        }
+        String host = "localhost";
+        int port = 12345;
 
-            client.connectToServer(host, port);
-            client.sendXmlToServer(testxml);
-            client.readResponseFromServer();
-            client.closeConnection();
-        } catch (Exception e){
-            System.out.println(e.getMessage());
+        try (
+                Socket socket = new Socket(host, port);
+                BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                BufferedWriter output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+                Scanner scanner = new Scanner(System.in)
+        ) {
+            String fromServer;
+            boolean flag = true;
+            while (flag) {
+                while ((fromServer = input.readLine()) != null && !fromServer.isEmpty()) {
+                    System.out.println("Server says: " + fromServer);
+                    if ("endConnection".equalsIgnoreCase(fromServer)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag == false) break;
+                System.out.print("Enter response: ");
+                String userResponse = scanner.nextLine();
+                output.write(userResponse + "\n");
+                output.flush();
+
+                if ("endConnection".equalsIgnoreCase(userResponse)) {
+                    flag = false;
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

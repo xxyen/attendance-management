@@ -43,7 +43,7 @@ public class SectionDAO extends BasicDAO<Section> {
         return queryMulti(sql, Section.class, courseId);
     }
 
-    public List<Section> querySectionByFaculty(int facultyId) {
+    public List<Section> querySectionByFaculty(String facultyId) {
         String sql = "SELECT section_id AS sectionId, course_id AS courseId, faculty_id AS facultyId FROM section WHERE faculty_id = ?";
         return queryMulti(sql, Section.class, facultyId);
     }
