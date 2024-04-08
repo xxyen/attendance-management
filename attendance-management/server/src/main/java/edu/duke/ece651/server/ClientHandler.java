@@ -55,14 +55,14 @@ public class ClientHandler implements Runnable{
                     if (user.getUserType() == "professor"){
                         Professor p = (Professor) user;
                         output.println("Login successful. Welcome, Professor " + p.getName() + "!");
-                        output.println();
+                        //output.println();
                         profLoop(p, input, output);
                     }
 
                     else if (user.getUserType() == "student"){
                         Student s = (Student) user;
                         output.println("Login successful. Welcome, Student " + s.getDisplayName() + "!");
-                        output.println();
+                        //output.println();
                         stuLoop(input, output);
                     }
 
