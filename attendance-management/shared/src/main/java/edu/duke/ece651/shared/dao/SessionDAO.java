@@ -17,7 +17,10 @@ public class SessionDAO extends BasicDAO<Session> {
 
     public int addSession(Session session) {
         String sql = "INSERT INTO session (section_id, session_date, start_time, end_time) VALUES (?, ?, ?, ?)";
-        return update(sql, session.getSectionId(), session.getSessionDate(), session.getStartTime(), session.getEndTime());
+        // return update(sql, session.getSectionId(), session.getSessionDate(), session.getStartTime(), session.getEndTime());
+        long generatedId = insertAndGetGeneratedKey(sql, session.getSectionId(), session.getSessionDate(), session.getStartTime(), session.getEndTime());
+        session.setSessionId((int) generatedId);
+        return (int)generatedId;
     }
 
     public int deleteSession(int sessionId) {

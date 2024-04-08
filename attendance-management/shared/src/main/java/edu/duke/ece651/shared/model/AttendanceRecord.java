@@ -13,15 +13,15 @@ public class AttendanceRecord {
     public AttendanceRecord() {
     }
     
-    public AttendanceRecord(int recordId, int sectionId, String studentId, Status status){
+    public AttendanceRecord(int recordId, int sessionId, String studentId, Status status){
         this.recordId = recordId;
-        this.sessionId = sectionId;
+        this.sessionId = sessionId;
         this.studentId = studentId;
         this.status = status;
     }
 
-    public AttendanceRecord(int sectionId, String studentId, Status status){
-        this.sessionId = sectionId;
+    public AttendanceRecord(int sessionId, String studentId, Status status){
+        this.sessionId = sessionId;
         this.studentId = studentId;
         this.status = status;
     }
