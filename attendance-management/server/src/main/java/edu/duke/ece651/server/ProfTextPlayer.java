@@ -105,13 +105,14 @@ public class ProfTextPlayer {
     public Status readStatus(String prompt) throws IOException {
         out.print("--------------------------------------------------------------------------------\n");
         out.print(prompt);
-        out.println("--------------------------------------------------------------------------------\n");
+        out.print("--------------------------------------------------------------------------------\n");
         // String s = inputReader.readLine();
         // if (s == null){
         // throw new EOFException(
         // "You didn't type in any instruction!\n"
         // );
         // }
+        out.println();
         char status = readSingleLetter(inputReader);
         return new Status(status);
     }
@@ -128,7 +129,7 @@ public class ProfTextPlayer {
              out.print("--------------------------------------------------------------------------------\n");
              out.println(s.getDisplayName());
              out.println(s.getUserid());
-             out.println("--------------------------------------------------------------------------------\n");
+             out.print("--------------------------------------------------------------------------------\n");
 
              boolean flag = true;
              while (flag) {
@@ -170,7 +171,9 @@ public class ProfTextPlayer {
     public Date readDate() throws Exception {
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Please type in the date (MM/DD/YYYY) that you want to record attendance for:\n");
-        out.println("--------------------------------------------------------------------------------\n");
+        out.print("--------------------------------------------------------------------------------\n");
+        out.println();
+
         String s = inputReader.readLine();
 
         Date date = convertStringToDate(s);
@@ -191,7 +194,9 @@ public class ProfTextPlayer {
                 "1. Take attendance for today.\n" +
                 "2. Take attendance for a previous date.\n" +
                 "What do you want to do? Please type in the index number:\n");
-        out.println("--------------------------------------------------------------------------------\n");
+        out.print("--------------------------------------------------------------------------------\n");
+        out.println();
+
         int index = readPositiveInteger(inputReader);
         if (index == 1){
             takeAttendance(new Date());
@@ -225,7 +230,9 @@ public class ProfTextPlayer {
     public Student doSearchStudent() throws IOException {
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Please type in the student's id:\n");
-        out.println("--------------------------------------------------------------------------------\n");
+        out.print("--------------------------------------------------------------------------------\n");
+        out.println();
+
         String s = inputReader.readLine();
         if (s == null) {
             throw new EOFException(
@@ -270,8 +277,10 @@ public class ProfTextPlayer {
          out.print("--------------------------------------------------------------------------------\n");
          out.println(
                  "The above is a list of all the sessions, please enter the serial number of the session you want to choose.");
-         out.println("--------------------------------------------------------------------------------\n");
-         int index = readPositiveInteger(inputReader);
+         out.print("--------------------------------------------------------------------------------\n");
+        out.println();
+
+        int index = readPositiveInteger(inputReader);
          if (index > size) {
              throw new IllegalArgumentException("Invalid input: there is no such a session!");
          }
@@ -337,7 +346,7 @@ public class ProfTextPlayer {
             attendanceRecordDAO.updateAttendanceRecord(r);
             out.print("--------------------------------------------------------------------------------\n");
             out.print("Successfully update the record!\n");
-            out.println("--------------------------------------------------------------------------------\n");
+            out.print("--------------------------------------------------------------------------------\n");
             // to-do
             // send email notification
             if (enrollmentDAO.findEnrollmentByStudentAndSection(s.getUserid(), section.getSectionId()).isReceiveNotifications()) {
@@ -347,7 +356,7 @@ public class ProfTextPlayer {
         } else {
             out.print("--------------------------------------------------------------------------------\n");
             out.print("Sorry, there is no record of this student in chosen session!\n");
-            out.println("--------------------------------------------------------------------------------\n");
+            out.print("--------------------------------------------------------------------------------\n");
         }
     }
 
@@ -407,7 +416,9 @@ public class ProfTextPlayer {
     public void addStudent() throws Exception {
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Please type in the student's id:\n");
-        out.println("--------------------------------------------------------------------------------\n");
+        out.print("--------------------------------------------------------------------------------\n");
+        out.println();
+
         String s = inputReader.readLine();
         if (s == null) {
             throw new EOFException(
@@ -417,7 +428,7 @@ public class ProfTextPlayer {
         //course.addStudent(stu);
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Successfully added the student to the course!\n");
-        out.println("--------------------------------------------------------------------------------\n");
+        out.print("--------------------------------------------------------------------------------\n");
 
         // to-do
         // where to get the new student info: construct a new one or search from main
@@ -431,7 +442,9 @@ public class ProfTextPlayer {
     public String readFormat(String prompt) throws IOException {
         out.print("--------------------------------------------------------------------------------\n");
         out.print(prompt);
-        out.println("--------------------------------------------------------------------------------\n");
+        out.print("--------------------------------------------------------------------------------\n");
+        out.println();
+
         String s = inputReader.readLine();
         if (s == null) {
             throw new EOFException(
@@ -450,7 +463,9 @@ public class ProfTextPlayer {
         String format = readFormat("Please choose the format (json or xml): \n");
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Please type in the file path that you want to export to (including file name): \n");
-        out.println("--------------------------------------------------------------------------------\n");
+        out.print("--------------------------------------------------------------------------------\n");
+        out.println();
+
         String path = inputReader.readLine();
         List<String> fields = new ArrayList<>();
         fields.add("studentID");
@@ -462,7 +477,7 @@ public class ProfTextPlayer {
         // ExportService.exportToFile(course.getSessions(), format, fields, path);
         out.print("--------------------------------------------------------------------------------\n");
         out.print("Successfully exported course attendance records!\n");
-        out.println("--------------------------------------------------------------------------------\n");
+        out.print("--------------------------------------------------------------------------------\n");
 
     }
 
@@ -483,7 +498,8 @@ public class ProfTextPlayer {
                         "3. Export attendance records of a session.\n" +
                         "4. Exit this course.\n" +
                         "Above are all the available actions. What do you want to do? Please type in the index number:\n");
-                out.println("--------------------------------------------------------------------------------\n");
+                out.print("--------------------------------------------------------------------------------\n");
+                out.println();
 
                 int index = readPositiveInteger(inputReader);
 
@@ -509,7 +525,7 @@ public class ProfTextPlayer {
                             section.getSectionId() +
                             "!" +
                             "\n");
-                    out.println("--------------------------------------------------------------------------------\n");
+                    out.print("--------------------------------------------------------------------------------\n");
 
                     flag = false;
                     break;

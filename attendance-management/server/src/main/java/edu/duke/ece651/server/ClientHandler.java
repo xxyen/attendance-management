@@ -40,7 +40,7 @@ public class ClientHandler implements Runnable{
                         "1. Log in.\n" +
                         "2. Exit this program.\n" +
                         "What do you want to do? Please type in the index number:\n");
-                output.println("--------------------------------------------------------------------------------");
+                output.print("--------------------------------------------------------------------------------\n");
                 output.println();
 
                 int index = ReaderUtilities.readPositiveInteger(input);
@@ -78,7 +78,7 @@ public class ClientHandler implements Runnable{
 
             } catch (Exception e) {
                 output.println(e.getMessage());
-                output.println();
+                //output.println();
             }
         }
     }
@@ -109,7 +109,7 @@ public class ClientHandler implements Runnable{
         out.print("--------------------------------------------------------------------------------\n");
         out.println(
                 "The above is a list of all your sections, please enter the serial number of the section you want to choose.");
-        out.println("--------------------------------------------------------------------------------\n");
+        out.print("--------------------------------------------------------------------------------\n");
         out.println();
         int index = ReaderUtilities.readPositiveInteger(in);
         if (index > size) {
@@ -129,7 +129,7 @@ public class ClientHandler implements Runnable{
                         "1. Manipulate on your sections.\n" +
                         "2. Log out.\n" +
                         "What do you want to do? Please type in the index number:\n");
-                output.println("--------------------------------------------------------------------------------\n");
+                output.print("--------------------------------------------------------------------------------\n");
                 output.println();
 
                 int index = ReaderUtilities.readPositiveInteger(input);
@@ -143,7 +143,7 @@ public class ClientHandler implements Runnable{
                 }
                 else if (index == 2){
                     output.println("Successfully log out!");
-                    output.println();
+                    //output.println();
 
                     flag = false;
                     break;
@@ -154,7 +154,7 @@ public class ClientHandler implements Runnable{
 
             } catch (Exception e) {
                 output.println(e.getMessage());
-                output.println();
+                //output.println();
             }
         }
     }
@@ -169,7 +169,8 @@ public class ClientHandler implements Runnable{
                         "1. Manipulate on your sections.\n" +
                         "2. Log out.\n" +
                         "What do you want to do? Please type in the index number:\n");
-                output.println("--------------------------------------------------------------------------------\n");
+                output.print("--------------------------------------------------------------------------------\n");
+                output.println();
 
                 int index = ReaderUtilities.readPositiveInteger(input);
 
