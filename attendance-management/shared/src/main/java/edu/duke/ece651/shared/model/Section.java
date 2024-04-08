@@ -7,6 +7,11 @@ public class Section {
 
     public Section() {}
 
+    public Section(String courseId, String facultyId) {
+        this.courseId = courseId;
+        this.facultyId = facultyId;
+    }
+
     public Section(int sectionId, String courseId, String facultyId) {
         this.sectionId = sectionId;
         this.courseId = courseId;

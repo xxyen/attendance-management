@@ -14,6 +14,14 @@ public class Enrollment {
 
     public Enrollment() {}
 
+    public Enrollment(int sectionId, String studentId, Date enrollmentDate, String status, boolean receiveNotifications) {
+        this.sectionId = sectionId;
+        this.studentId = studentId;
+        this.enrollmentDate = enrollmentDate;
+        this.status = status;
+        this.receiveNotifications = receiveNotifications;
+    }
+
     public Enrollment(int enrollmentId, int sectionId, String studentId, Date enrollmentDate, String status, boolean receiveNotifications) {
         this.enrollmentId = enrollmentId;
         this.sectionId = sectionId;

@@ -20,6 +20,12 @@ public class AttendanceRecord {
         this.status = status;
     }
 
+    public AttendanceRecord(int sectionId, String studentId, Status status){
+        this.sessionId = sectionId;
+        this.studentId = studentId;
+        this.status = status;
+    }
+
     public int getRecordId() {
         return recordId;
     }

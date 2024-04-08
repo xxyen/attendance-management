@@ -23,6 +23,13 @@ public class Session {
     // Coustuctors
     public Session(){}
 
+    public Session(int sectionId, Date sessionDate, Time startTime, Time endTime){
+        this.sectionId = sectionId;
+        this.sessionDate = sessionDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     public Session(int sessionId, int sectionId, Date sessionDate, Time startTime, Time endTime){
         this.sessionId = sessionId;
         this.sectionId = sectionId;
