@@ -221,7 +221,14 @@ public class ProfTextPlayer {
         //     }
         // }
 
-        return studentDAO.queryStudentById(id);
+        //todo
+        //search student by id in the section
+        //return studentDAO.queryStudentById(id);
+        Enrollment e = enrollmentDAO.findEnrollmentByStudentAndSection(id, section.getSectionId());
+        if (e == null){
+            return null;
+        }
+        return studentDAO.queryStudentById(e.getStudentId());
     }
 
     /**

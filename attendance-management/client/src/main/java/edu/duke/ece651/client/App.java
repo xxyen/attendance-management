@@ -27,7 +27,7 @@ public class App {
 //        } catch (Exception e){
 //            System.out.println(e.getMessage());
 //        }
-        String host = "localhost";
+        String host = "vcm-37919.vm.duke.edu";
         int port = 12345;
 
         try (
