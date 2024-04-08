@@ -1,5 +1,6 @@
 package edu.duke.ece651.server;
 
+import edu.duke.ece651.shared.*;
 import edu.duke.ece651.shared.Professor;
 import edu.duke.ece651.shared.Student;
 import edu.duke.ece651.shared.User;
@@ -19,6 +20,9 @@ public class UserOperator {
     if((student != null) && student.isCorrectPassword(password)) {
       return student;
     }
+
+    System.out.println("test d");
+
     throw new IllegalArgumentException("The userid or password is invalid!");
   }
 

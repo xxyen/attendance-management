@@ -47,19 +47,21 @@ public class ClientHandler implements Runnable{
 
                 if (index == 1){
                     User user = signIn(input, output);
+                    output.println("test3");
+
                     //todo:
                     //do Prof or Stu action
 
                     if (user.getUserType() == "professor"){
                         Professor p = (Professor) user;
-                        output.println("Login successful. Welcome, Professor" + p.getName() + "!");
+                        output.println("Login successful. Welcome, Professor " + p.getName() + "!");
                         output.println();
                         profLoop(p, input, output);
                     }
 
                     else if (user.getUserType() == "student"){
                         Student s = (Student) user;
-                        output.println("Login successful. Welcome, Student" + s.getDisplayName() + "!");
+                        output.println("Login successful. Welcome, Student " + s.getDisplayName() + "!");
                         output.println();
                         stuLoop(input, output);
                     }
@@ -87,13 +89,19 @@ public class ClientHandler implements Runnable{
         output.println("Please enter your userid:");
         output.println();
         String userid = input.readLine();
+        System.out.println(userid);
+
         output.println("Please enter your password:");
         output.println();
         String password = input.readLine();
+        System.out.println(password);
 
+        output.println("test1");
         User user = userOperator.signIn(userid, password);
         // 登录成功，发送欢迎信息
         //output.println("Login successful. Welcome, " + user.getUserid() + "!");
+
+        output.println("test2");
 
         return user;
 
@@ -165,7 +173,7 @@ public class ClientHandler implements Runnable{
         while (flag) {
             try {
                 output.print("--------------------------------------------------------------------------------\n");
-                output.print("Below are all the available actions:" +
+                output.print("Below are all the available actions:\n" +
                         "1. Manipulate on your sections.\n" +
                         "2. Log out.\n" +
                         "What do you want to do? Please type in the index number:\n");
