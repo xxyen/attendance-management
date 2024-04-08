@@ -1,6 +1,8 @@
 package edu.duke.ece651.shared.model;
 
 import java.util.Date;
+import java.text.SimpleDateFormat;
+
 
 public class Enrollment {
     private int enrollmentId;
@@ -11,6 +13,14 @@ public class Enrollment {
     private boolean receiveNotifications; 
 
     public Enrollment() {}
+
+    public Enrollment(int sectionId, String studentId, Date enrollmentDate, String status, boolean receiveNotifications) {
+        this.sectionId = sectionId;
+        this.studentId = studentId;
+        this.enrollmentDate = enrollmentDate;
+        this.status = status;
+        this.receiveNotifications = receiveNotifications;
+    }
 
     public Enrollment(int enrollmentId, int sectionId, String studentId, Date enrollmentDate, String status, boolean receiveNotifications) {
         this.enrollmentId = enrollmentId;
@@ -67,5 +77,19 @@ public class Enrollment {
 
     public void setReceiveNotifications(boolean receiveNotifications) {
         this.receiveNotifications = receiveNotifications;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateStr = enrollmentDate != null ? dateFormat.format(enrollmentDate) : "N/A";
+        return "Enrollment{" +
+                "enrollmentId=" + enrollmentId +
+                ", sectionId=" + sectionId +
+                ", studentId='" + studentId + '\'' +
+                ", enrollmentDate=" + dateStr +
+                ", status='" + status + '\'' +
+                ", receiveNotifications=" + receiveNotifications +
+                '}';
     }
 }

@@ -7,6 +7,11 @@ public class Section {
 
     public Section() {}
 
+    public Section(String courseId, String facultyId) {
+        this.courseId = courseId;
+        this.facultyId = facultyId;
+    }
+
     public Section(int sectionId, String courseId, String facultyId) {
         this.sectionId = sectionId;
         this.courseId = courseId;
@@ -35,5 +40,14 @@ public class Section {
 
     public void setFacultyId(String facultyId) {
         this.facultyId = facultyId;
+    }
+    
+    @Override
+    public String toString() {
+        return "Section{" +
+                "sectionId=" + sectionId +
+                ", courseId='" + courseId + '\'' +
+                ", facultyId='" + facultyId + '\'' +
+                '}';
     }
 }

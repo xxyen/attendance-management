@@ -23,22 +23,22 @@ public class EnrollmentDAO extends BasicDAO<Enrollment> {
     }
 
     public Enrollment queryEnrollmentById(Integer enrollmentId) {
-        String sql = "SELECT * FROM enrollment WHERE enrollment_id = ?";
+        String sql = "SELECT enrollment_id AS enrollmentId, section_id AS sectionId, student_id AS studentId, enrollment_date AS enrollmentDate, status AS status, receive_notifications AS receiveNotifications WHERE enrollment_id = ? FROM enrollment WHERE enrollment_id = ?";
         return querySingle(sql, Enrollment.class, enrollmentId);
     }
 
     public List<Enrollment> queryAllEnrollments() {
-        String sql = "SELECT * FROM enrollment";
+        String sql = "SELECT enrollment_id AS enrollmentId, section_id AS sectionId, student_id AS studentId, enrollment_date AS enrollmentDate, status AS status, receive_notifications AS receiveNotifications FROM enrollment";
         return queryMulti(sql, Enrollment.class);
     }
 
     public Enrollment findEnrollmentByStudentAndSection(String studentId, int sectionId) {
-        String sql = "SELECT * FROM enrollment WHERE student_id = ? AND section_id = ?";
+        String sql = "SELECT enrollment_id AS enrollmentId, section_id AS sectionId, student_id AS studentId, enrollment_date AS enrollmentDate, status AS status, receive_notifications AS receiveNotifications FROM enrollment WHERE student_id = ? AND section_id = ?";
         return querySingle(sql,Enrollment.class, studentId, sectionId);
     }
 
     public List<Enrollment> listEnrollmentsBySection(int section_id) {
-        String sql = "SELECT * FROM enrollment WHERE section_id = ?";
+        String sql = "SELECT enrollment_id AS enrollmentId, section_id AS sectionId, student_id AS studentId, enrollment_date AS enrollmentDate, status AS status, receive_notifications AS receiveNotifications FROM enrollment WHERE section_id = ?";
         return queryMulti(sql, Enrollment.class, section_id);
     }
 }

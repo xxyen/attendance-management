@@ -20,6 +20,12 @@ public class AttendanceRecord {
         this.status = status;
     }
 
+    public AttendanceRecord(int sectionId, String studentId, Status status){
+        this.sessionId = sectionId;
+        this.studentId = studentId;
+        this.status = status;
+    }
+
     public int getRecordId() {
         return recordId;
     }
@@ -50,5 +56,15 @@ public class AttendanceRecord {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "AttendanceRecord{" +
+                "recordId=" + recordId +
+                ", sessionId=" + sessionId +
+                ", studentId='" + studentId + '\'' +
+                ", status=" + status.getStatus() +
+                '}';
     }
 }

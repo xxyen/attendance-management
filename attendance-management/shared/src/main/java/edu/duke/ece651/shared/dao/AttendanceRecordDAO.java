@@ -23,12 +23,12 @@ public class AttendanceRecordDAO extends BasicDAO<AttendanceRecord> {
     }
 
     public List<AttendanceRecord> listAttendanceBySession(int sessionId){
-        String sql = "SELECT * FROM attendance_record WHERE session_id = ?";
+        String sql = "SELECT record_id AS recordId, session_id AS sessionId, student_id AS studentId, status AS status FROM attendance_record WHERE session_id = ?";
         return queryMulti(sql, AttendanceRecord.class, sessionId);
     }
 
     public List<AttendanceRecord> listAttendanceByStudentInSection(String studentId, int sectionId){
-        String sql = "SELECT * FROM attendance_record WHERE student_id = ? AND section_id = ?";
+        String sql = "SELECT record_id AS recordId, session_id AS sessionId, student_id AS studentId, status AS status FROM attendance_record WHERE student_id = ? AND section_id = ?";
         return queryMulti(sql, AttendanceRecord.class, studentId, sectionId);
     }
 

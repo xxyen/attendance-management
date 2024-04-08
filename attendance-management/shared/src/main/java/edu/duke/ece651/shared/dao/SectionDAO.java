@@ -23,12 +23,12 @@ public class SectionDAO extends BasicDAO<Section> {
     }
 
     public Section querySectionById(int sectionId) {
-        String sql = "SELECT * FROM section WHERE section_id = ?";
+        String sql = "SELECT section_id AS sectionId, course_id AS courseId, faculty_id AS facultyId FROM section WHERE section_id = ?";
         return querySingle(sql, Section.class, sectionId);
     }
 
     public List<Section> queryAllSections() {
-        String sql = "SELECT * FROM section";
+        String sql = "SELECT section_id AS sectionId, course_id AS courseId, faculty_id AS facultyId FROM section";
         return queryMulti(sql, Section.class);
     }
 
@@ -39,12 +39,12 @@ public class SectionDAO extends BasicDAO<Section> {
     }
 
     public List<Section> listSectionsByCourse(String courseId) {
-        String sql = "SELECT * FROM section WHERE course_id = ?";
+        String sql = "SELECT section_id AS sectionId, course_id AS courseId, faculty_id AS facultyId FROM section WHERE course_id = ?";
         return queryMulti(sql, Section.class, courseId);
     }
 
     public List<Section> querySectionByFaculty(int facultyId) {
-        String sql = "SELECT * FROM section WHERE faculty_id = ?";
+        String sql = "SELECT section_id AS sectionId, course_id AS courseId, faculty_id AS facultyId FROM section WHERE faculty_id = ?";
         return queryMulti(sql, Section.class, facultyId);
     }
     

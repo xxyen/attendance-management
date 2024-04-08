@@ -6,7 +6,7 @@ import java.util.List;
 public class SessionDAO extends BasicDAO<Session> {
 
     public List<Session> findAllSessions() {
-        String sql = "SELECT * FROM session";
+        String sql = "SELECT session_id AS sessionId, section_id AS sectionId, session_date AS sessionDate, start_time AS startTime, end_time AS endTime FROM session";
         return queryMulti(sql, Session.class);
     }
 
@@ -31,7 +31,7 @@ public class SessionDAO extends BasicDAO<Session> {
     }
 
     public List<Session> listSessionsBySection(int sectionId){
-        String sql = "SELECT * FROM session WHERE section_id = ?";
+        String sql = "SELECT session_id AS sessionId, section_id AS sectionId, session_date AS sessionDate, start_time AS startTime, end_time AS endTime FROM session WHERE section_id = ?";
         return queryMulti(sql, Session.class, sectionId);
     }
 
