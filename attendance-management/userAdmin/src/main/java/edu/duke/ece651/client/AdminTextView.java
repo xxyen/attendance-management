@@ -19,7 +19,7 @@ public class AdminTextView {
         chooseBasicAction(inputReader, outputStream);
     }
 
-    public static boolean chooseBasicAction(BufferedReader inputReader, PrintStream outputStream) {
+    public static void chooseBasicAction(BufferedReader inputReader, PrintStream outputStream) {
         while(true){
             outputStream.println("What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.");
             outputStream.println("1. add a user\n2. remove a user\n3. modify a user\n4. Modify display name modification setting\n5. exit the system");
@@ -33,13 +33,11 @@ public class AdminTextView {
             } else if(choice == 4) {
                 setDisplayNamePermission(inputReader, outputStream);
             } else if(choice == 5) {
-                return false;
+                break;
             } else {
                 outputStream.println("Please enter a positive integer within the listed ones! (1/2/3/4/5)");
             }
-            return true;
         }
-
     }
 
     private static void setDisplayNamePermission(BufferedReader inputReader, PrintStream outputStream) {

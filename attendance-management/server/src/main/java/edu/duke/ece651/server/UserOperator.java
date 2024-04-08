@@ -1,6 +1,5 @@
 package edu.duke.ece651.server;
 
-import edu.duke.ece651.shared.AdminUser;
 import edu.duke.ece651.shared.Professor;
 import edu.duke.ece651.shared.Student;
 import edu.duke.ece651.shared.User;
@@ -12,13 +11,13 @@ public class UserOperator {
   private StudentDAO studentDAO = new StudentDAO();
 
   public User signIn(String userid, String password) {
-    User user = facultyDAO.queryFacultyById(userid);
-    if((user != null) && user.isCorrectPassword(password)) {
-      return user;
+    Professor faculty = facultyDAO.queryFacultyById(userid);
+    if((faculty != null) && faculty.isCorrectPassword(password)) {
+      return faculty;
     }
-    user = studentDAO.queryStudentById(userid);
-    if((user != null) && password.equals(user.getPassword())) {
-      return user;
+    Student student = studentDAO.queryStudentById(userid);
+    if((student != null) && student.isCorrectPassword(password)) {
+      return student;
     }
     throw new IllegalArgumentException("The userid or password is invalid!");
   }
