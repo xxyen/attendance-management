@@ -1,6 +1,8 @@
 package edu.duke.ece651.shared.model;
 
 import java.util.Date;
+import java.text.SimpleDateFormat;
+
 
 public class Enrollment {
     private int enrollmentId;
