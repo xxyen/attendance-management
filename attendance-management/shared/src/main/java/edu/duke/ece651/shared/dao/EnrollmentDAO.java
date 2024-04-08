@@ -9,7 +9,10 @@ public class EnrollmentDAO extends BasicDAO<Enrollment> {
 
     public int addEnrollment(Enrollment enrollment) {
         String sql = "INSERT INTO enrollment (section_id, student_id, enrollment_date, status, receive_notifications) VALUES (?, ?, ?, ?, ?)";
-        return update(sql, enrollment.getSectionId(), enrollment.getStudentId(), new java.sql.Date(enrollment.getEnrollmentDate().getTime()), enrollment.getStatus(), enrollment.isReceiveNotifications());
+        long generatedId = insertAndGetGeneratedKey(sql, enrollment.getSectionId(), enrollment.getStudentId(), new java.sql.Date(enrollment.getEnrollmentDate().getTime()), enrollment.getStatus(), enrollment.isReceiveNotifications());
+        enrollment.setEnrollmentId((int) generatedId);
+        return (int)generatedId;
+        // return update(sql, enrollment.getSectionId(), enrollment.getStudentId(), new java.sql.Date(enrollment.getEnrollmentDate().getTime()), enrollment.getStatus(), enrollment.isReceiveNotifications());
     }
 
     public int deleteEnrollment(Integer enrollmentId) {
@@ -23,7 +26,7 @@ public class EnrollmentDAO extends BasicDAO<Enrollment> {
     }
 
     public Enrollment queryEnrollmentById(Integer enrollmentId) {
-        String sql = "SELECT enrollment_id AS enrollmentId, section_id AS sectionId, student_id AS studentId, enrollment_date AS enrollmentDate, status AS status, receive_notifications AS receiveNotifications WHERE enrollment_id = ? FROM enrollment WHERE enrollment_id = ?";
+        String sql = "SELECT enrollment_id AS enrollmentId, section_id AS sectionId, student_id AS studentId, enrollment_date AS enrollmentDate, status AS status, receive_notifications AS receiveNotifications FROM enrollment WHERE enrollment_id = ?";
         return querySingle(sql, Enrollment.class, enrollmentId);
     }
 

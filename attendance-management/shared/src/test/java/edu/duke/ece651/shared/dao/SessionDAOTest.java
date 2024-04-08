@@ -17,13 +17,13 @@ public class SessionDAOTest {
       SectionDAO sectionDAO = new SectionDAO();
       FacultyDAO facultyDAO = new FacultyDAO();
       SessionDAO sessionDAO = new SessionDAO();
-      Course newCourse = new Course("CS102", "Introduction to CS");
+      Course newCourse = new Course("CS103", "Introduction to CS");
       int result = courseDAO.addCourse(newCourse);
 
-      Professor prof1 = new Professor("F001", "f01", new Email("f1@duke.edu"));
+      Professor prof1 = new Professor("F004", "f04", new Email("f4@duke.edu"));
       facultyDAO.addFaculty(prof1);
 
-      Section newSection = new Section("CS102", "F001");
+      Section newSection = new Section("CS103", "F004");
       sectionDAO.addSectionToCourse(newSection);
 
       Session newSession = new Session(newSection.getSectionId(), new Date(), Time.valueOf("10:00:00"), Time.valueOf("12:00:00"));
@@ -53,8 +53,8 @@ public class SessionDAOTest {
 
 
       sectionDAO.deleteSection(newSection.getSectionId());
-      courseDAO.deleteCourse("CS102");
-      facultyDAO.deleteFaculty("F001");
+      courseDAO.deleteCourse("CS103");
+      facultyDAO.deleteFaculty("F004");
     }
 
 }
