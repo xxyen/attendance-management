@@ -3,10 +3,13 @@ package edu.duke.ece651.server;
 //package edu.duke.ece651.shared;
 
 import edu.duke.ece651.shared.*;
+import edu.duke.ece651.shared.dao.*;
 import edu.duke.ece651.shared.model.*;
 
 import java.io.*;
 import java.security.GeneralSecurityException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,32 +23,58 @@ import java.util.List;
  */
 public class ProfTextPlayer {
     private Professor professor;
-    private Course course;
-    private AttendanceOperator attendance;
+    //private Course course;
+    private Section section;
+    //private AttendanceOperator attendance;
     // private Textview textview;
     // private FileHandler fileHandler;
 
     private final BufferedReader inputReader;
     private final PrintStream out;
 
-    //private final InputStream inputReader;
-    //private final OutputStream out;
-
     private final int actNums;
+
+    private static FacultyDAO facultyDAO = new FacultyDAO();
+    private static StudentDAO studentDAO = new StudentDAO();
+    private static GlobalSettingDAO gsDAO = new GlobalSettingDAO();
+    private static AttendanceRecordDAO attendanceRecordDAO= new AttendanceRecordDAO();
+    private static CourseDAO courseDAO = new CourseDAO();
+    private static SectionDAO sectionDAO = new SectionDAO();
+    private static EnrollmentDAO enrollmentDAO = new EnrollmentDAO();
+    private static SessionDAO sessionDAO = new SessionDAO();
+
 
     /**
      * Constructor
      */
-    public ProfTextPlayer(Professor professor, Course course, AttendanceOperator attendance, InputStream inputStream,
+    public ProfTextPlayer(Professor professor, Section section, InputStream inputStream,
                       OutputStream outputStream) {
         this.professor = professor;
-        this.course = course;
-        this.attendance = attendance;
+        //this.course = course;
+        this.section = section;
+        //this.attendance = attendance;
         // this.fileHandler = fileHandler;
 //        this.inputReader = inputReader;
 //        this.out = out;
         this.inputReader = new BufferedReader(new InputStreamReader(inputStream));
         this.out = new PrintStream(outputStream, true); // true for auto-flush on write
+
+
+        // need to change if number of actions increases
+        this.actNums = 7;
+    }
+
+    public ProfTextPlayer(Professor professor, Section section, BufferedReader inputReader,
+                          PrintStream out) {
+        this.professor = professor;
+        //this.course = course;
+        this.section = section;
+        //this.attendance = attendance;
+        // this.fileHandler = fileHandler;
+        this.inputReader = inputReader;
+        this.out = out;
+        //this.inputReader = new BufferedReader(new InputStreamReader(inputStream));
+        //this.out = new PrintStream(outputStream, true); // true for auto-flush on write
 
 
         // need to change if number of actions increases
@@ -92,29 +121,33 @@ public class ProfTextPlayer {
      * @return a Session of the records
      */
     public Session takeAttendance(Date time) throws IOException {
-        // Session newSes = new Session(course.getCourseid(), time);
-        // for (Student s : course.getStudents()) {
-        //     out.print("--------------------------------------------------------------------------------\n");
-        //     out.println(s.getDisplayName());
-        //     out.println(s.getUserid());
-        //     out.println("--------------------------------------------------------------------------------\n");
+         Session newSes = new Session(section.getSectionId(), time, new Time(time.getTime()), new Time(time.getTime()));
+         sessionDAO.addSession(newSes);
+         for (Enrollment e: enrollmentDAO.listEnrollmentsBySection(section.getSectionId())) {
+             Student s = studentDAO.queryStudentById(e.getStudentId());
+             out.print("--------------------------------------------------------------------------------\n");
+             out.println(s.getDisplayName());
+             out.println(s.getUserid());
+             out.println("--------------------------------------------------------------------------------\n");
 
-        //     boolean flag = true;
-        //     while (flag) {
-        //         try {
-        //             Status newStatus = readStatus(
-        //                     "Please type in the attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)\n");
-        //             AttendanceRecord tempR = new AttendanceRecord(s, newStatus);
-        //             newSes.addRecord(tempR);
-        //             flag = false;
-        //         } catch (IllegalArgumentException e) {
-        //             out.println(e.getMessage());
-        //             // doOnePlacement(s, this.shipCreationFns.get(s));
-        //         }
-        //     }
-        // }
-        // return newSes;
-        return null;
+             boolean flag = true;
+             while (flag) {
+                 try {
+                     Status newStatus = readStatus(
+                             "Please type in the attendance status of this student. ('p' for present, 'a' for absent, 't' for tardy)\n");
+                     //how to get new session's id?
+                     AttendanceRecord tempR = new AttendanceRecord(newSes.getSessionId(), s.getUserid(), newStatus);
+                     //newSes.addRecord(tempR);
+                     attendanceRecordDAO.addAttendanceRecord(tempR);
+                     flag = false;
+                 } catch (IllegalArgumentException ex) {
+                     out.println(ex.getMessage());
+                     // doOnePlacement(s, this.shipCreationFns.get(s));
+                 }
+             }
+         }
+         return newSes;
+        //return null;
     }
 
     /**
@@ -128,12 +161,47 @@ public class ProfTextPlayer {
         // s.saveAttendanceRecords();
     }
 
+    private static Date convertStringToDate(String inputDate) throws Exception {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        formatter.setLenient(false); // 设置解析日期的严格模式
+        return formatter.parse(inputDate); // 尝试解析输入的字符串
+    }
+
+    public Date readDate() throws Exception {
+        out.print("--------------------------------------------------------------------------------\n");
+        out.print("Please type in the date (MM/DD/YYYY) that you want to record attendance for:\n");
+        out.println("--------------------------------------------------------------------------------\n");
+        String s = inputReader.readLine();
+
+        Date date = convertStringToDate(s);
+        if (!date.before(new Date())) { // 检查日期是否早于当前日期
+            throw new IllegalArgumentException("Invalid date: the date you typed is not earlier than the current date!");
+        }
+        return date;
+    }
+
     /**
      * Full action of take attendance of a new session.
      */
-    public void full_takeAttendance(Date time) throws Exception {
+    public void full_takeAttendance() throws Exception {
         // Session s = takeAttendance(time);
         // addSession(s);
+        out.print("--------------------------------------------------------------------------------\n");
+        out.print("Below are all the available actions:\n" +
+                "1. Take attendance for today.\n" +
+                "2. Take attendance for a previous date.\n" +
+                "What do you want to do? Please type in the index number:\n");
+        out.println("--------------------------------------------------------------------------------\n");
+        int index = readPositiveInteger(inputReader);
+        if (index == 1){
+            takeAttendance(new Date());
+        }
+        else if (index == 2){
+            takeAttendance(readDate());
+        }
+        else {
+            throw new IllegalArgumentException("Invalid action number!");
+        }
 
     }
 
@@ -148,7 +216,7 @@ public class ProfTextPlayer {
         //     }
         // }
 
-        return null;
+        return studentDAO.queryStudentById(id);
     }
 
     /**
@@ -193,22 +261,22 @@ public class ProfTextPlayer {
      * Choose a session from the list.
      */
     public Session chooseSession() throws IOException {
-        // List<Session> sessionList = course.getSessions();
-        // int size = sessionList.size();
+         List<Session> sessionList = sessionDAO.listSessionsBySection(section.getSectionId());
+         int size = sessionList.size();
 
-        // for (int i = 0; i < size; i++) {
-        //     out.println(Integer.toString(i + 1) + ": Date " + sessionList.get(i).getTime());
-        // }
-        // out.print("--------------------------------------------------------------------------------\n");
-        // out.println(
-        //         "The above is a list of all the sessions, please enter the serial number of the session you want to choose.");
-        // out.println("--------------------------------------------------------------------------------\n");
-        // int index = readPositiveInteger(inputReader);
-        // if (index > size) {
-        //     throw new IllegalArgumentException("Invalid input: there is no such a session!");
-        // }
-        // return sessionList.get(index - 1);
-        return null;
+         for (int i = 0; i < size; i++) {
+             out.println(Integer.toString(i + 1) + ": Date " + sessionList.get(i).getSessionDate());
+         }
+         out.print("--------------------------------------------------------------------------------\n");
+         out.println(
+                 "The above is a list of all the sessions, please enter the serial number of the session you want to choose.");
+         out.println("--------------------------------------------------------------------------------\n");
+         int index = readPositiveInteger(inputReader);
+         if (index > size) {
+             throw new IllegalArgumentException("Invalid input: there is no such a session!");
+         }
+         return sessionList.get(index - 1);
+        //return null;
     }
 
     /**
@@ -251,7 +319,7 @@ public class ProfTextPlayer {
         Student s = doSearchStudent();
 
         Status newSta = readStatus(
-                "Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 'l' for late)\n");
+                "Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 't' for tardy)\n");
 
         Boolean flag = false;
         // for (AttendanceRecord record : target.getRecords()) {
@@ -262,14 +330,19 @@ public class ProfTextPlayer {
         //         break;
         //     }
         // }
+        AttendanceRecord r = attendanceRecordDAO.findAttendanceRecordBySessionAndStudent(target.getSessionId(), s.getUserid());
 
-        if (flag == true) {
+        if (r != null) {
+            r.setStatus(newSta);
+            attendanceRecordDAO.updateAttendanceRecord(r);
             out.print("--------------------------------------------------------------------------------\n");
             out.print("Successfully update the record!\n");
             out.println("--------------------------------------------------------------------------------\n");
             // to-do
             // send email notification
-            sendStatusChangeNotification(s, target, newSta);
+            if (enrollmentDAO.findEnrollmentByStudentAndSection(s.getUserid(), section.getSectionId()).isReceiveNotifications()) {
+                sendStatusChangeNotification(s, target, newSta);
+            }
 
         } else {
             out.print("--------------------------------------------------------------------------------\n");
@@ -404,34 +477,36 @@ public class ProfTextPlayer {
                 out.print("--------------------------------------------------------------------------------\n");
                 out.print("1. Start a new session and take attendance.\n" +
                         "2. Change attendance record of a student in one session.\n" +
-                        "3. Change display name of a student.\n" +
-                        "4. Add a student to this course.\n" +
-                        "5. Remove a student from this course.\n" +
-                        "6. Export attendance records of a session.\n" +
-                        "7. Exit this course.\n" +
+//                        "3. Change display name of a student.\n" +
+//                        "4. Add a student to this course.\n" +
+//                        "5. Remove a student from this course.\n" +
+                        "3. Export attendance records of a session.\n" +
+                        "4. Exit this course.\n" +
                         "Above are all the available actions. What do you want to do? Please type in the index number:\n");
                 out.println("--------------------------------------------------------------------------------\n");
 
                 int index = readPositiveInteger(inputReader);
 
                 if (index == 1) {
-                    full_takeAttendance(new Date());
+                    full_takeAttendance();
                 } else if (index == 2) {
                     changeStatus();
+//                } else if (index == 3) {
+//                    changeDisplayName();
+//                } else if (index == 4) {
+//                    addStudent();
+//                } else if (index == 5) {
+//                    removeStudent();
                 } else if (index == 3) {
-                    changeDisplayName();
-                } else if (index == 4) {
-                    addStudent();
-                } else if (index == 5) {
-                    removeStudent();
-                } else if (index == 6) {
                     // todo
                     // add export method
                     exportSessions();
-                } else if (index == 7) {
+                } else if (index == 4) {
                     out.print("--------------------------------------------------------------------------------\n");
                     out.print("You have exited from course: " +
                             // course.getCourseid() +
+                            section.getCourseId() +
+                            section.getSectionId() +
                             "!" +
                             "\n");
                     out.println("--------------------------------------------------------------------------------\n");

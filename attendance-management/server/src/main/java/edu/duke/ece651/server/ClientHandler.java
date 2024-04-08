@@ -1,17 +1,30 @@
 package edu.duke.ece651.server;
 
 import edu.duke.ece651.shared.AttendanceOperator;
+import edu.duke.ece651.shared.dao.*;
 import edu.duke.ece651.shared.model.Course;
 import edu.duke.ece651.shared.Professor;
 import edu.duke.ece651.shared.*;
+import edu.duke.ece651.shared.model.Section;
+import edu.duke.ece651.shared.model.Session;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.List;
 
 public class ClientHandler implements Runnable{
     private Socket clientSocket;
 
     private UserOperator userOperator = new UserOperator();
+
+    private static FacultyDAO facultyDAO = new FacultyDAO();
+    private static StudentDAO studentDAO = new StudentDAO();
+    private static GlobalSettingDAO gsDAO = new GlobalSettingDAO();
+    private static AttendanceRecordDAO attendanceRecordDAO= new AttendanceRecordDAO();
+    private static CourseDAO courseDAO = new CourseDAO();
+    private static SectionDAO sectionDAO = new SectionDAO();
+    private static EnrollmentDAO enrollmentDAO = new EnrollmentDAO();
+    private static SessionDAO sessionDAO = new SessionDAO();
 
     public ClientHandler(Socket socket) {
         this.clientSocket = socket;
@@ -23,11 +36,12 @@ public class ClientHandler implements Runnable{
         while (flag) {
             try {
                 output.print("--------------------------------------------------------------------------------\n");
-                output.print("Hello! Below are all the available actions:" +
+                output.print("Hello! Below are all the available actions:\n" +
                         "1. Log in.\n" +
                         "2. Exit this program.\n" +
                         "What do you want to do? Please type in the index number:\n");
-                output.println("--------------------------------------------------------------------------------\n");
+                output.println("--------------------------------------------------------------------------------");
+                output.println();
 
                 int index = ReaderUtilities.readPositiveInteger(input);
 
@@ -39,18 +53,22 @@ public class ClientHandler implements Runnable{
                     if (user.getUserType() == "professor"){
                         Professor p = (Professor) user;
                         output.println("Login successful. Welcome, Professor" + p.getName() + "!");
-                        profLoop(input, output);
+                        output.println();
+                        profLoop(p, input, output);
                     }
 
                     else if (user.getUserType() == "student"){
                         Student s = (Student) user;
                         output.println("Login successful. Welcome, Student" + s.getDisplayName() + "!");
+                        output.println();
                         stuLoop(input, output);
                     }
 
                 }
                 else if (index == 2){
                     output.println("Have a nice day! From ECE 651 team 6.");
+                    output.println("endConnection");
+                    output.println();
                     flag = false;
                     break;
                 }
@@ -60,14 +78,17 @@ public class ClientHandler implements Runnable{
 
             } catch (Exception e) {
                 output.println(e.getMessage());
+                output.println();
             }
         }
     }
 
     public User signIn(BufferedReader input, PrintStream output) throws Exception {
         output.println("Please enter your userid:");
+        output.println();
         String userid = input.readLine();
         output.println("Please enter your password:");
+        output.println();
         String password = input.readLine();
 
         User user = userOperator.signIn(userid, password);
@@ -78,27 +99,52 @@ public class ClientHandler implements Runnable{
 
     }
 
-    public void profLoop(BufferedReader input, PrintStream output){
+    public Section chooseSection(Professor p, BufferedReader in, PrintStream out) throws IOException {
+        List<Section> sectionList = sectionDAO.querySectionByFaculty(p.getUserid());
+        int size = sectionList.size();
+
+        for (int i = 0; i < size; i++) {
+            out.println(Integer.toString(i + 1) + ". Course:" + sectionList.get(i).getCourseId() + ", Sec: " + sectionList.get(i).getSectionId());
+        }
+        out.print("--------------------------------------------------------------------------------\n");
+        out.println(
+                "The above is a list of all your sections, please enter the serial number of the section you want to choose.");
+        out.println("--------------------------------------------------------------------------------\n");
+        out.println();
+        int index = ReaderUtilities.readPositiveInteger(in);
+        if (index > size) {
+            throw new IllegalArgumentException("Invalid input: there is no such a section!");
+        }
+        return sectionList.get(index - 1);
+        //return null;
+    }
+
+    public void profLoop(Professor p, BufferedReader input, PrintStream output){
         boolean flag = true;
 
         while (flag) {
             try {
                 output.print("--------------------------------------------------------------------------------\n");
-                output.print("Below are all the available actions:" +
+                output.print("Below are all the available actions:\n" +
                         "1. Manipulate on your sections.\n" +
                         "2. Log out.\n" +
                         "What do you want to do? Please type in the index number:\n");
                 output.println("--------------------------------------------------------------------------------\n");
+                output.println();
 
                 int index = ReaderUtilities.readPositiveInteger(input);
 
                 if (index == 1){
                     //todo:
                     //display section list and choose
-
+                    Section s = chooseSection(p, input, output);
+                    ProfTextPlayer player = new ProfTextPlayer(p, s, input, output);
+                    player.loop();
                 }
                 else if (index == 2){
                     output.println("Successfully log out!");
+                    output.println();
+
                     flag = false;
                     break;
                 }
@@ -108,6 +154,7 @@ public class ClientHandler implements Runnable{
 
             } catch (Exception e) {
                 output.println(e.getMessage());
+                output.println();
             }
         }
     }
