@@ -9,7 +9,11 @@ public class SectionDAO extends BasicDAO<Section> {
     
     public int addSectionToCourse(Section section) {
         String sql = "INSERT INTO section (course_id, faculty_id) VALUES (?, ?)";
-        return update(sql, section.getCourseId(), section.getFacultyId());
+        long generatedId = insertAndGetGeneratedKey(sql, section.getCourseId(), section.getFacultyId());
+        section.setSectionId((int) generatedId); 
+        return (int)generatedId;
+        // return section;
+        // return update(sql, section.getCourseId(), section.getFacultyId());
     }
 
     public int deleteSection(int sectionId) {

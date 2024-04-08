@@ -13,6 +13,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+
 public class BasicDAO<T> { 
 
     private QueryRunner qr =  new QueryRunner();
@@ -94,6 +98,33 @@ public class BasicDAO<T> {
             throw  new RuntimeException(e);
         } finally {
             JDBCUtils.close(null, null, connection);
+        }
+    }
+
+    public long insertAndGetGeneratedKey(String sql, Object... parameters) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet generatedKeys = null;
+        try {
+            connection = JDBCUtils.getConnection();
+            preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            for (int i = 0; i < parameters.length; i++) {
+                preparedStatement.setObject(i + 1, parameters[i]);
+            }
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating item failed, no rows affected.");
+            }
+            generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                return generatedKeys.getLong(1);
+            } else {
+                throw new SQLException("Creating item failed, no ID obtained.");
+            }
+        } catch (SQLException e) {
+           throw new RuntimeException(e);
+        } finally {
+            JDBCUtils.close(generatedKeys, preparedStatement, connection);
         }
     }
 
