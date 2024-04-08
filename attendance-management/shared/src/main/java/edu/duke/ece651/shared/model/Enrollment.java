@@ -68,4 +68,18 @@ public class Enrollment {
     public void setReceiveNotifications(boolean receiveNotifications) {
         this.receiveNotifications = receiveNotifications;
     }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateStr = enrollmentDate != null ? dateFormat.format(enrollmentDate) : "N/A";
+        return "Enrollment{" +
+                "enrollmentId=" + enrollmentId +
+                ", sectionId=" + sectionId +
+                ", studentId='" + studentId + '\'' +
+                ", enrollmentDate=" + dateStr +
+                ", status='" + status + '\'' +
+                ", receiveNotifications=" + receiveNotifications +
+                '}';
+    }
 }

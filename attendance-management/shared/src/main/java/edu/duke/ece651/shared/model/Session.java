@@ -71,5 +71,21 @@ public class Session {
     public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateStr = sessionDate != null ? dateFormat.format(sessionDate) : "N/A";
+        String startTimeStr = startTime != null ? startTime.toString() : "N/A";
+        String endTimeStr = endTime != null ? endTime.toString() : "N/A";
+        
+        return "Session{" +
+                "sessionId=" + sessionId +
+                ", sectionId=" + sectionId +
+                ", sessionDate=" + dateStr +
+                ", startTime=" + startTimeStr +
+                ", endTime=" + endTimeStr +
+                '}';
+    }
     
 }

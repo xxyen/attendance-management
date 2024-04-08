@@ -36,4 +36,13 @@ public class Section {
     public void setFacultyId(String facultyId) {
         this.facultyId = facultyId;
     }
+    
+    @Override
+    public String toString() {
+        return "Section{" +
+                "sectionId=" + sectionId +
+                ", courseId='" + courseId + '\'' +
+                ", facultyId='" + facultyId + '\'' +
+                '}';
+    }
 }

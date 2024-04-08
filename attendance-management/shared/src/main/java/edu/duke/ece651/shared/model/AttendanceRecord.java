@@ -51,4 +51,14 @@ public class AttendanceRecord {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "AttendanceRecord{" +
+                "recordId=" + recordId +
+                ", sessionId=" + sessionId +
+                ", studentId='" + studentId + '\'' +
+                ", status=" + status.getStatus() +
+                '}';
+    }
 }

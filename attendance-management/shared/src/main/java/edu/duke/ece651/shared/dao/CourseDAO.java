@@ -6,7 +6,7 @@ import java.util.List;
 public class CourseDAO extends BasicDAO<Course> {
 
     public List<Course> findAllCourses() {
-        String sql = "SELECT * FROM course";
+        String sql = "SELECT course_id AS courseId, course_name AS courseName FROM course";
         return queryMulti(sql, Course.class);
     }
 
