@@ -11,6 +11,6 @@ import edu.duke.ece651.userAdmin.AdminTextView;
 public class App {
     public static void main(String[] args) {
         BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-        AdminTextView.start(inputReader, System.out);
+        //AdminTextView.start(inputReader, System.out);
     }
 }
