@@ -9,7 +9,11 @@ public class SectionDAO extends BasicDAO<Section> {
     
     public int addSectionToCourse(Section section) {
         String sql = "INSERT INTO section (course_id, faculty_id) VALUES (?, ?)";
-        return update(sql, section.getCourseId(), section.getFacultyId());
+        long generatedId = insertAndGetGeneratedKey(sql, section.getCourseId(), section.getFacultyId());
+        section.setSectionId((int) generatedId); 
+        return (int)generatedId;
+        // return section;
+        // return update(sql, section.getCourseId(), section.getFacultyId());
     }
 
     public int deleteSection(int sectionId) {
@@ -43,7 +47,7 @@ public class SectionDAO extends BasicDAO<Section> {
         return queryMulti(sql, Section.class, courseId);
     }
 
-    public List<Section> querySectionByFaculty(int facultyId) {
+    public List<Section> querySectionByFaculty(String facultyId) {
         String sql = "SELECT section_id AS sectionId, course_id AS courseId, faculty_id AS facultyId FROM section WHERE faculty_id = ?";
         return queryMulti(sql, Section.class, facultyId);
     }

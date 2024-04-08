@@ -59,7 +59,8 @@ public class FacultyDAO extends BasicDAO<Professor> {
     }
 
     public Set<Professor> queryAllFaculty() {
-        String sql = "SELECT user_id, password_hash, legal_name, display_name, email FROM faculty";
+        // String sql = "SELECT user_id, password_hash, legal_name, display_name, email FROM faculty";
+        String sql = "SELECT user_id, password_hash, faculty_name, email FROM faculty";
         List<Map<String, Object>> res = queryMultiMapped(sql);
         Set<Professor> facultySet = new HashSet<>();
         if(res == null) {

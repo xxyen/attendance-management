@@ -11,7 +11,7 @@ public class CourseDAOTest {
   private CourseDAO courseDAO;
   @Test
     public void test_addAndFindCourse() {
-      courseDAO = new CourseDAO();
+        courseDAO = new CourseDAO();
         Course newCourse = new Course("TEST101", "Introduction to Testing");
         int result = courseDAO.addCourse(newCourse);
         assertEquals(1, result);
