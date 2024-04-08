@@ -28,7 +28,7 @@ public class JDBCUtils {
 
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream("shared/src/druid.properties"));
+            properties.load(new FileInputStream("src/druid.properties"));
             ds = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
             e.printStackTrace();
