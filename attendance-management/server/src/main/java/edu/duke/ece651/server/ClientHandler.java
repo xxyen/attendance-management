@@ -10,6 +10,7 @@ import edu.duke.ece651.shared.model.Session;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientHandler implements Runnable{
@@ -63,7 +64,7 @@ public class ClientHandler implements Runnable{
                         Student s = (Student) user;
                         output.println("Login successful. Welcome, Student " + s.getDisplayName() + "!");
                         //output.println();
-                        stuLoop(input, output);
+                        stuLoop(s, input, output);
                     }
 
                 }
@@ -107,8 +108,17 @@ public class ClientHandler implements Runnable{
 
     }
 
-    public Section chooseSection(Professor p, BufferedReader in, PrintStream out) throws IOException {
-        List<Section> sectionList = sectionDAO.querySectionByFaculty(p.getUserid());
+    public Section chooseSection(User u, BufferedReader in, PrintStream out) throws IOException {
+        List<Section> sectionList = new ArrayList<>();
+        if (u.getUserType() == "professor") {
+            sectionList = sectionDAO.querySectionByFaculty(u.getUserid());
+        }
+        else if(u.getUserType() == "student"){
+            sectionList = sectionDAO.listSectionsByStudentId(u.getUserid());
+        }
+        else {
+            throw new IllegalArgumentException("Invalid user: neither professor nor student!");
+        }
         int size = sectionList.size();
 
         for (int i = 0; i < size; i++) {
@@ -167,7 +177,7 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public void stuLoop(BufferedReader input, PrintStream output){
+    public void stuLoop(Student s, BufferedReader input, PrintStream output){
         boolean flag = true;
 
         while (flag) {
@@ -183,8 +193,9 @@ public class ClientHandler implements Runnable{
                 int index = ReaderUtilities.readPositiveInteger(input);
 
                 if (index == 1){
+                    Section ses = chooseSection(s, input, output);
                     //todo:
-                    //display section list and choose
+                    //run student loop
 
                 }
                 else if (index == 2){
