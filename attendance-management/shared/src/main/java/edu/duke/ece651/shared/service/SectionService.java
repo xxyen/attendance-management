@@ -10,7 +10,6 @@ public class SectionService {
     private SectionDAO sectionDAO = new SectionDAO();
 
     public void addSectionToCourse(String courseId, Section section) {
-        section.setCourseId(courseId);
         sectionDAO.addSectionToCourse(section);
     }
 
