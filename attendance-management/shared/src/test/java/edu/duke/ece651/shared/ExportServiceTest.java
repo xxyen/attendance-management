@@ -76,12 +76,16 @@ public class ExportServiceTest {
         assertEquals(newStatus.getStatus(), record.getStatus().getStatus());
 
         String workingDir = System.getProperty("user.dir");
-        String filePath1 = workingDir + "/export/" + "test_record1.json";
-        String filePath2 = workingDir + "/export/" + "test_record1.xml";
+        String filePath1 = workingDir + "/export/" + "test_professor_record1.json";
+        String filePath2 = workingDir + "/export/" + "test_professor_record1.xml";
+        String filePath3 = workingDir + "/export/" + "test_student_record1.json";
+        String filePath4 = workingDir + "/export/" + "test_student_record1.xml";
 
         ExportService exportFile = new ExportService();
-        exportFile.exportSectionAttendanceData(newSection.getSectionId(), "json", filePath1);
-        exportFile.exportSectionAttendanceData(newSection.getSectionId(), "xml", filePath2);
+        exportFile.exportSectionAttendanceDataForProfessor(newSection.getSectionId(), "json", filePath1);
+        exportFile.exportSectionAttendanceDataForProfessor(newSection.getSectionId(), "xml", filePath2);
+        exportFile.exportSectionAttendanceDataForStudent("S00A", newSection.getSectionId(), "json", filePath3);
+        exportFile.exportSectionAttendanceDataForStudent("S00A",newSection.getSectionId(), "xml", filePath4);
 
         attendanceRecordDAO.deleteAttendanceRecord(record.getRecordId());
         attendanceRecordDAO.deleteAttendanceRecord(record2.getRecordId());

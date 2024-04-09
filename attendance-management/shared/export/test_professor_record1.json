@@ -6,23 +6,22 @@
     "sessions": [
         {
             "sessionDate": "2024-04-09",
-            "sessionEndTime": "12:00:00",
-            "sessionStartTime": "10:00:00",
-            "sessionId": 163,
+            "sessionId": 205,
             "attendanceRecords": [{
                 "studentId": "S00A",
+                "studentDisplayName": "display stud0A",
                 "status": "p"
             }]
         },
         {
             "sessionDate": "2024-04-09",
-            "sessionEndTime": "15:00:00",
-            "sessionStartTime": "13:00:00",
-            "sessionId": 164,
+            "sessionId": 206,
             "attendanceRecords": [{
                 "studentId": "S00A",
+                "studentDisplayName": "display stud0A",
                 "status": "a"
             }]
         }
-    ]
+    ],
+    "sectionId": 218
 }

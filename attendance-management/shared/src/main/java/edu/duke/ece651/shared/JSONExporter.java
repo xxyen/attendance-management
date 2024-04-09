@@ -19,16 +19,19 @@ import edu.duke.ece651.shared.*;
  */
 public class JSONExporter implements Exporter {
     @Override
-    public void exportAttendanceData(int sectionId, String filePath) throws IOException {
+    public void exportAttendanceDataForProfessor(int sectionId, String filePath) throws IOException {
         AttendanceRecordService service = new AttendanceRecordService();
         SessionDAO sessionDAO = new SessionDAO();
         AttendanceRecordDAO attendanceRecordDAO = new AttendanceRecordDAO();
+        StudentDAO studentDAO = new StudentDAO();
 
         Map<String, Double> attendanceScores = service.calculateSectionScores(sectionId);
         List<Session> sessions = sessionDAO.listSessionsBySection(sectionId);
         
         JSONObject exportObj = new JSONObject();
         JSONArray scoresArray = new JSONArray();
+
+        exportObj.put("sectionId", sectionId);
         
         for(Map.Entry<String, Double> entry : attendanceScores.entrySet()) {
             JSONObject scoreObj = new JSONObject();
@@ -43,14 +46,17 @@ public class JSONExporter implements Exporter {
             JSONObject sessionObj = new JSONObject();
             sessionObj.put("sessionId", session.getSessionId());
             sessionObj.put("sessionDate", session.getSessionDate().toString());
-            sessionObj.put("sessionStartTime", session.getStartTime().toString());
-            sessionObj.put("sessionEndTime", session.getEndTime().toString());
+            // sessionObj.put("sessionStartTime", session.getStartTime().toString());
+            // sessionObj.put("sessionEndTime", session.getEndTime().toString());
             List<AttendanceRecord> records = attendanceRecordDAO.listAttendanceBySession(session.getSessionId());
             
             JSONArray recordsArray = new JSONArray();
             for(AttendanceRecord record : records) {
                 JSONObject recordObj = new JSONObject();
+
+                Student findStud = studentDAO.queryStudentById(record.getStudentId());
                 recordObj.put("studentId", record.getStudentId());
+                recordObj.put("studentDisplayName", findStud.getDisplayName());
                 recordObj.put("status", String.valueOf(record.getStatus().getStatus()));
                 recordsArray.put(recordObj);
             }
@@ -63,4 +69,37 @@ public class JSONExporter implements Exporter {
             writer.write(exportObj.toString(4));
         }
     }
+
+    @Override
+    public void exportAttendanceDataForStudent(String studentId, int sectionId, String filePath) throws IOException {
+        StudentDAO studentDAO = new StudentDAO();
+        AttendanceRecordService service = new AttendanceRecordService();
+        AttendanceRecordDAO attendanceRecordDAO = new AttendanceRecordDAO();
+        SessionDAO sessionDAO = new SessionDAO();
+        
+        Student student = studentDAO.queryStudentById(studentId);
+        double totalScore = service.calculateStudentSectionScore(studentId, sectionId);
+        List<AttendanceRecord> records = attendanceRecordDAO.listAttendanceByStudentInSection(studentId, sectionId);
+
+        JSONObject exportObj = new JSONObject();
+        exportObj.put("studentId", studentId);
+        exportObj.put("studentDisplayName", student.getDisplayName());
+        exportObj.put("attendanceScore", totalScore);
+
+        JSONArray sessionsArray = new JSONArray();
+        for (AttendanceRecord record : records) {
+            Session session = sessionDAO.findSessionById(record.getSessionId());
+            JSONObject sessionObj = new JSONObject();
+            sessionObj.put("sessionId", session.getSessionId());
+            sessionObj.put("sessionDate", session.getSessionDate().toString());
+            sessionObj.put("status", String.valueOf(record.getStatus().getStatus()));
+            sessionsArray.put(sessionObj);
+        }
+        exportObj.put("sessions", sessionsArray);
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(exportObj.toString(4));
+        }
+    }
+
 }
