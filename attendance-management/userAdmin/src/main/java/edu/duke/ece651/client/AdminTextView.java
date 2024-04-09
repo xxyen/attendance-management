@@ -3,6 +3,7 @@ package edu.duke.ece651.userAdmin;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Set;
 
 import edu.duke.ece651.shared.Email;
 import edu.duke.ece651.shared.Professor;
@@ -19,10 +20,10 @@ public class AdminTextView {
         chooseBasicAction(inputReader, outputStream);
     }
 
-    public static void chooseBasicAction(BufferedReader inputReader, PrintStream outputStream) {
+     public static void chooseBasicAction(BufferedReader inputReader, PrintStream outputStream) {
         while(true){
             outputStream.println("What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.");
-            outputStream.println("1. add a user\n2. remove a user\n3. modify a user\n4. Modify display name modification setting\n5. exit the system");
+            outputStream.println("1. add a user\n2. remove a user\n3. modify a user\n4. View all users\n5. Modify display name modification setting\n6. exit the system");
             int choice = ReaderUtilities.readPositiveInteger(inputReader);
             if(choice == 1) {
                 addUser(inputReader, outputStream);
@@ -31,13 +32,31 @@ public class AdminTextView {
             } else if(choice == 3) {
                 modifyUser(inputReader, outputStream);
             } else if(choice == 4) {
-                setDisplayNamePermission(inputReader, outputStream);
+                viewAllUsers(outputStream);
             } else if(choice == 5) {
+                setDisplayNamePermission(inputReader, outputStream);
+            } else if(choice == 6) {
                 break;
             } else {
-                outputStream.println("Please enter a positive integer within the listed ones! (1/2/3/4/5)");
+                outputStream.println("Please enter a positive integer within the listed ones! (1/2/3/4/5/6)");
             }
         }
+    }
+
+    private static void viewAllUsers(PrintStream outputStream) {
+        Set<Student> studentSet = UserManagement.getAllStudent();
+        Set<Professor> facultySet = UserManagement.getAllFaculty();
+        boolean permission = UserManagement.getDisplayNamePermission();
+        outputStream.println("-----------------All Faculty members-----------------");
+        for(Professor faculty: facultySet) {
+            outputStream.println("userid: " + faculty.getUserid() + ",  name: " + faculty.getName() + ",  email: " + faculty.getEmail().getEmailAddr());
+        }
+        outputStream.println("\n--------------------All Students--------------------");
+        for(Student student: studentSet) {
+            String name = permission ? student.getDisplayName() : student.getLegalName();
+            outputStream.println("userid: " + student.getUserid() + ",  name: " + name + ",  email: " + student.getEmail().getEmailAddr());
+        }
+        outputStream.println("-----------------------------------------------------");
     }
 
     private static void setDisplayNamePermission(BufferedReader inputReader, PrintStream outputStream) {
@@ -54,7 +73,7 @@ public class AdminTextView {
 
     private static void addUser(BufferedReader inputReader, PrintStream outputStream){
         while(true) {
-            outputStream.println("Which type of user would you like to create? Please enter the number to choose.\n1. a student\n2. a faculty member");
+            outputStream.println("Which type of user would you like to create? Please enter the number to choose.\n1. a student\n2. a faculty member\n3. back to the previous menu");
             int choice = ReaderUtilities.readPositiveInteger(inputReader);
             if(choice == 1) {
                 addStudent(inputReader, outputStream);
@@ -62,9 +81,10 @@ public class AdminTextView {
             } else if(choice == 2) {
                 addFaculty(inputReader, outputStream);
                 break;
-            }
-            else {
-                outputStream.println("Please enter a positive integer within the listed ones! (1/2)");
+            } else if(choice == 3) {
+                break;
+            } else {
+                outputStream.println("Please enter a positive integer within the listed ones! (1/2/3)");
             }
         }
     }
@@ -133,7 +153,7 @@ public class AdminTextView {
 
     private static void removeUser(BufferedReader inputReader, PrintStream outputStream) {
         while(true) {
-            outputStream.println("Which type of user would you like to remove? Please enter the number to choose.\n1. a student\n2. a faculty member");
+            outputStream.println("Which type of user would you like to remove? Please enter the number to choose.\n1. a student\n2. a faculty member\n3. back to the previous menu");
             int choice = ReaderUtilities.readPositiveInteger(inputReader);
             if(choice == 1) {
                 removeStudent(inputReader, outputStream);
@@ -141,9 +161,11 @@ public class AdminTextView {
             } else if(choice == 2) {
                 removeFaculty(inputReader, outputStream);
                 break;
+            } else if(choice == 3) {
+                break;
             }
             else {
-                outputStream.println("Please enter a positive integer within the listed ones! (1/2)");
+                outputStream.println("Please enter a positive integer within the listed ones! (1/2/3)");
             }
         }
     }
@@ -188,6 +210,7 @@ public class AdminTextView {
             outputStream.println("Which type of user would you like to modify? How would you prefer to search for the faculty member? Please enter the number to choose.");
             outputStream.println("1. search for a student by user id, and modify it\n2. get student(s) info by legal name, and search by user id to modify it");
             outputStream.println("3. search for a faculty member by user id, and modify it\n4. get faculty member(s) info by legal name, and search by user id to modify it");
+            outputStream.println("5. back to the previous menu");
 
             int choice = ReaderUtilities.readPositiveInteger(inputReader);
             if(choice == 1) {
@@ -208,8 +231,9 @@ public class AdminTextView {
                 Professor faculty = getFacultyByID(inputReader, outputStream);
                 modifyFaculty(inputReader, outputStream, faculty);
                 break;
-            }
-            else {
+            } else if(choice == 5) {
+                break;
+            } else {
                 outputStream.println("Please enter a positive integer within the listed ones! (1/2/3/4)");
             }
         }

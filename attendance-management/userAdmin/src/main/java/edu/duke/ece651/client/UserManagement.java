@@ -1,6 +1,7 @@
 package edu.duke.ece651.userAdmin;
 
 import java.util.List;
+import java.util.Set;
 
 import edu.duke.ece651.shared.Professor;
 import edu.duke.ece651.shared.Student;
@@ -106,6 +107,14 @@ public static boolean checkFacultyExistsByLegalName(String legalName) {
 
   public static boolean getDisplayNamePermission() {
     return gsDAO.queryDisplayNamePermission();
+  }
+
+  public static Set<Professor> getAllFaculty() {
+    return facultyDAO.queryAllFaculty();
+  }
+
+  public static Set<Student> getAllStudent() {
+    return studentDAO.queryAllStudents();
   }
 
 }
