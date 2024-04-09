@@ -13,10 +13,10 @@ public class ExporterFactory {
      */
     public static Exporter getExporter(String format) {
         switch (format.toLowerCase()) {
-            // case "json":
-            //     return new JSONExporter();
-            // case "xml":
-            //     return new XMLExporter();
+            case "json":
+                return new JSONExporter();
+            case "xml":
+                return new XMLExporter();
             case "custom":
                 return new CustomExporter();
             default:

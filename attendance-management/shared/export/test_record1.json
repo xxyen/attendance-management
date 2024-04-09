@@ -1,1 +1,28 @@
-[{"sessionTime":"2024-03-26 19:00","courseId":"course01","attendanceRecords":[{"studentID":"s01","legalName":"Legal Name01","displayName":"name01","email":"email1@qq.com","status":"p"},{"studentID":"s02","legalName":"Legal Name02","displayName":"name02","email":"email2@gmail.com","status":"a"}]},{"sessionTime":"2024-04-06 10:58","courseId":"course02","attendanceRecords":[{"studentID":"s03","legalName":"Legal Name03","displayName":"name03","email":"email3@duke.edu","status":"l"}]}]
+{
+    "attendanceScores": [{
+        "studentId": "S00A",
+        "score": 50
+    }],
+    "sessions": [
+        {
+            "sessionDate": "2024-04-09",
+            "sessionEndTime": "12:00:00",
+            "sessionStartTime": "10:00:00",
+            "sessionId": 163,
+            "attendanceRecords": [{
+                "studentId": "S00A",
+                "status": "p"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-09",
+            "sessionEndTime": "15:00:00",
+            "sessionStartTime": "13:00:00",
+            "sessionId": 164,
+            "attendanceRecords": [{
+                "studentId": "S00A",
+                "status": "a"
+            }]
+        }
+    ]
+}
