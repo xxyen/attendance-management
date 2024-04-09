@@ -10,7 +10,6 @@ public class SessionService {
     private SessionDAO sessionDAO = new SessionDAO();
 
     public void addSessionToSection(int sectionId, Session session) {
-        session.setSectionId(sectionId);
         sessionDAO.addSession(session);
     }
 
