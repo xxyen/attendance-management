@@ -1,5 +1,4 @@
-# ECE 651 - Spring 24 - Team Project - Evolution 1
-
+# ECE 651 - Spring 24 - Team Project 
 ![pipeline status](https://gitlab.oit.duke.edu/kits/project-000-000-01-test/project-team-6/badges/main/pipeline.svg)
 ![coverage](https://gitlab.oit.duke.edu/kits/project-000-000-01-test/project-team-6/badges/main/coverage.svg?job=test)
 
@@ -11,8 +10,11 @@
 
 **Evolution 2**
 - [Ev2 Notes](https://docs.google.com/document/d/1n1gmAWfFtEzDxdXGroxk5EqH-CfMxwwJ85f3w0ZP2Nk/edit)
-- [Ev2 DB Structure](https://docs.google.com/document/d/1s3EM3V6wiWx9IROGiIVDYF0NVr4GINPYGf9JzEkdxH4/edit)<br /> <br />  
-
+- [Ev2 DB Structure](https://docs.google.com/document/d/1s3EM3V6wiWx9IROGiIVDYF0NVr4GINPYGf9JzEkdxH4/edit) 
+- [Ev2 Updated Requirement](https://docs.google.com/document/d/12cTEOJAgQbkcVx8hm-igk4xoXqORXWpVe4DROh9elPo/edit) 
+- [Sprint doc](https://docs.google.com/document/d/14vmW9kvCKqBFkDx4q56aUbnF37EKbb_w0X9_Wf7EJJs/edit)
+- [Changes Impact Report](https://docs.google.com/document/d/1Aj05t52vhAgV1OzjY7sMaJfvsRG0x4VEunI0mw1tJl8/edit)<br /> <br />
+ 
 **Evolution 1**
 - [UML notes](https://docs.google.com/document/d/1iMrOiYFH6AFFYmwq5D3bl4LEW6iYUJkcECoWVfw-Ucc/edit) 
 - [Ev1 Notes](https://docs.google.com/document/d/19UT7gxBy4_OIT_IGnYiJKJtE6IPL98P0elu3N3NwG6M/edit)
