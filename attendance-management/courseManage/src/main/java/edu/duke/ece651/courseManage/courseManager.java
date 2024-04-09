@@ -1,6 +1,12 @@
 package edu.duke.ece651.courseManage;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -127,7 +133,19 @@ public class courseManager {
     outputStream.print("--------------------------------------------------------------------------------\n\n");
   }
   
-
+  public static void viewStudentsInSection(BufferedReader inputReader, PrintStream outputStream) {
+    EnrollmentDAO enrollIO = new EnrollmentDAO();
+    SectionDAO sectionIO = new SectionDAO();
+    List<Section> sections = sectionIO.queryAllSections();
+    int sectionId = getRemoveSectionID(inputReader, outputStream, sections);
+    List<Enrollment> enrolls = enrollIO.listEnrollmentsBySection(sectionId);
+    outputStream.print("--------------------------------------------------------------------------------\n");
+    outputStream.println("Here is the list of all enrolled students:");
+    for (Enrollment enro : enrolls) {
+      outputStream.println(enro.toString());
+    }
+    outputStream.print("--------------------------------------------------------------------------------\n\n");
+  }
 
   public static void viewSection(BufferedReader inputReader, PrintStream outputStream) {
     outputStream.println("Please enter the course information required below to view sections.");
@@ -198,6 +216,52 @@ public class courseManager {
     }
   }
 
+  public static void addStudentToSection(BufferedReader inputReader, PrintStream outputStream) {
+    outputStream.println("You are adding a new studnet to a section! Please enter the information required below.");
+    SectionDAO sectionIO = new SectionDAO();
+    List<Section> sections = sectionIO.queryAllSections();
+    int sectionId = getRemoveSectionID(inputReader, outputStream, sections);
+    StudentDAO studentIO = new StudentDAO();
+    Set<Student> students = studentIO.queryAllStudents();
+    String studentId = getInputStuID(inputReader, outputStream, students);
+    boolean notifyYN = readInputYorN(inputReader, outputStream, "Do you want to receive notifications? [Y/N]");
+    Enrollment newEnroll = new Enrollment(sectionId, studentId, new Date(), "Enrolled", notifyYN);
+    EnrollmentDAO enrollIO = new EnrollmentDAO();
+    enrollIO.addEnrollment(newEnroll);
+    outputStream.println("Successfully added a new student!\n");
+  }
+
+  public static void loadStudentsToSection(BufferedReader inputReader, PrintStream outputStream) throws Exception {
+    outputStream.println("You are adding new studnets to a section! Please enter the information required below.");
+    SectionDAO sectionIO = new SectionDAO();
+    List<Section> sections = sectionIO.queryAllSections();
+    int sectionId = getRemoveSectionID(inputReader, outputStream, sections);
+    boolean notifyYN = readInputYorN(inputReader, outputStream, "Do you want to receive notifications? [Y/N]");
+    outputStream.println("CSV File Path:");
+    while (true) {
+      try {
+        String path = inputReader.readLine();
+        List<Student> students = readStudentsFromFile(inputReader, outputStream, path, true);
+        outputStream.print("--------------------------------------------------------------------------------\n");
+        outputStream.println("Here is the list of students to be added to the section:");
+        for (Student stu : students) {
+          outputStream.println(stu.toString());
+        }
+        outputStream.print("--------------------------------------------------------------------------------\n\n");
+        EnrollmentDAO enrollIO = new EnrollmentDAO();
+        for (Student stu : students) {
+          Enrollment newEnroll = new Enrollment(sectionId, stu.getUserid(), new Date(), "Enrolled", notifyYN);
+          enrollIO.addEnrollment(newEnroll);
+        }
+        outputStream.println("Successfully added a new student!\n");
+        return;
+      }
+      catch (Exception e) {
+        outputStream.println(e.getMessage() + " Please try again!");
+      }
+    }
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////////
   
   public static void updateCourse(BufferedReader inputReader, PrintStream outputStream) throws Exception {
@@ -235,6 +299,15 @@ public class courseManager {
         }
         else if (index == 6) {
           viewAllStudents(inputReader, outputStream);
+        }
+        else if (index == 7) {
+          viewStudentsInSection(inputReader, outputStream);
+        }
+        else if (index == 8) {
+          addStudentToSection(inputReader, outputStream);
+        }
+        else if (index == 9) {
+          loadStudentsToSection(inputReader, outputStream);
         }
         else if (index == 10) {
           outputStream.print("--------------------------------------------------------------------------------\n");
@@ -417,6 +490,47 @@ public class courseManager {
     }
   }
 
+  private static String getInputStuID(BufferedReader inputReader, PrintStream outputStream, Set<Student> stus) {
+    while (true) {
+      outputStream.println("Student ID: ");
+      try {
+        String stuId = inputReader.readLine();
+        if (!stus.stream().anyMatch(stu -> stu.getUserid().equals(stuId))) {
+          outputStream.println("Student ID does not exist! Please try again!");
+          continue;
+        }
+        outputStream.println("Student ID = " + stuId);
+        return stuId;
+      } catch (Exception e) {
+        outputStream.println(e.getMessage() + " Please try again!");
+      }
+    }
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  private static List<Student> readStudentsFromFile(BufferedReader inputReader, PrintStream outputStream, String rosterPath, boolean withHeader) throws Exception {
+    File rosterFile = new File(rosterPath);
+    if (!rosterFile.exists()) {
+      throw new FileNotFoundException("Roster file not found at: " + rosterPath);
+    }
+    List<Student> students = new ArrayList<>();
+    try (BufferedReader br = new BufferedReader(new FileReader(rosterFile))) {
+      String line;
+      if (withHeader) {
+        br.readLine();
+      }
+      while ((line = br.readLine()) != null) {
+        String[] values = line.split(",");
+        Student newStudent = new Student(values[0], values[1], values[2], new Email(values[3]));
+        students.add(newStudent);
+      }
+    }
+    return students;
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
   private static boolean readInputYorN(BufferedReader inputReader, PrintStream outputStream, String prompt) {
     while (true) {
       try {
