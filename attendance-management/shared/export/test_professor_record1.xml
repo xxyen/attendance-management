@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sectionData>
+	<sectionId>218</sectionId>
+	<attendanceScores>
+		<score>
+			<studentId>S00A</studentId>
+			<value>50.00</value>
+		</score>
+	</attendanceScores>
+	<sessions>
+		<session id="205">
+			<date>2024-04-09</date>
+			<attendanceRecord>
+				<studentId>S00A</studentId>
+				<studentDisplayName>display stud0A</studentDisplayName>
+				<status>p</status>
+			</attendanceRecord>
+		</session>
+		<session id="206">
+			<date>2024-04-09</date>
+			<attendanceRecord>
+				<studentId>S00A</studentId>
+				<studentDisplayName>display stud0A</studentDisplayName>
+				<status>a</status>
+			</attendanceRecord>
+		</session>
+	</sessions>
+</sectionData>

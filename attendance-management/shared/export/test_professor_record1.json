@@ -1,0 +1,27 @@
+{
+    "attendanceScores": [{
+        "studentId": "S00A",
+        "score": 50
+    }],
+    "sessions": [
+        {
+            "sessionDate": "2024-04-09",
+            "sessionId": 205,
+            "attendanceRecords": [{
+                "studentId": "S00A",
+                "studentDisplayName": "display stud0A",
+                "status": "p"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-09",
+            "sessionId": 206,
+            "attendanceRecords": [{
+                "studentId": "S00A",
+                "studentDisplayName": "display stud0A",
+                "status": "a"
+            }]
+        }
+    ],
+    "sectionId": 218
+}

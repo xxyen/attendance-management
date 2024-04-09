@@ -10,7 +10,11 @@ import edu.duke.ece651.shared.model.*;
  */
 public class CustomExporter implements Exporter {
     @Override
-    public void export(List<Session> sessions, List<String> fields, String filePath) throws IOException {
+    public void exportAttendanceDataForProfessor(int sectionId, String filePath) throws IOException {
         // custom export format
+    }
+
+    @Override
+    public void exportAttendanceDataForStudent(String studentId, int sectionId, String filePath) throws IOException {
     }
 }
