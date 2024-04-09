@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.FileHandler;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import edu.duke.ece651.shared.*;
 import edu.duke.ece651.shared.model.*;
@@ -104,15 +106,28 @@ public class courseManager {
   }
 
   public static void viewProfessor(BufferedReader inputReader, PrintStream outputStream) {
-     FacultyDAO profIO = new FacultyDAO();
-     Set<Professor> professors = profIO.queryAllFaculty();
-     outputStream.print("--------------------------------------------------------------------------------\n");
-     outputStream.println("Here is the list of all professors:");
-     for (Professor prof : professors) {
-       outputStream.println("ID: " + prof.getUserid() + "     Name: " + prof.getName());
-     }
-     outputStream.print("--------------------------------------------------------------------------------\n\n");
+    FacultyDAO profIO = new FacultyDAO();
+    Set<Professor> professors = profIO.queryAllFaculty();
+    outputStream.print("--------------------------------------------------------------------------------\n");
+    outputStream.println("Here is the list of all professors:");
+    for (Professor prof : professors) {
+      outputStream.println("ID: " + prof.getUserid() + "     Name: " + prof.getName());
+    }
+    outputStream.print("--------------------------------------------------------------------------------\n\n");
    }
+  
+  public static void viewAllStudents(BufferedReader inputReader, PrintStream outputStream) {
+    StudentDAO stuIO = new StudentDAO();
+    Set<Student> students = stuIO.queryAllStudents();
+    outputStream.print("--------------------------------------------------------------------------------\n");
+    outputStream.println("Here is the list of all students:");
+    for (Student stu : students) {
+      outputStream.println(stu.toString());
+    }
+    outputStream.print("--------------------------------------------------------------------------------\n\n");
+  }
+  
+
 
   public static void viewSection(BufferedReader inputReader, PrintStream outputStream) {
     outputStream.println("Please enter the course information required below to view sections.");
@@ -189,13 +204,17 @@ public class courseManager {
     while (true) {
       try {
         outputStream.print("--------------------------------------------------------------------------------\n");
-        outputStream.print("UPDATE COURSE OPTIONS MENU\n" +
-                           "1. Change course name.\n" +
-                           "2. View the list of all professors.\n" +
-                           "3. View the list of current sections.\n" +
-                           "4. Add a new section.\n" +
-                           "5. Remove an existing section.\n" +
-                           "6. Exit to main menu.\n" +
+        outputStream.print("UPDATE COURSE MENU\n" +
+                           "1.  Change course name.\n" +
+                           "2.  View the list of all professors.\n" +
+                           "3.  View the list of current sections.\n" +
+                           "4.  Add a new section.\n" +
+                           "5.  Remove an existing section.\n" +
+                           "6.  View the list of all students.\n" +
+                           "7.  View the list of students in a section.\n" +
+                           "8.  Add one student to a section.\n" +
+                           "9.  Add a list of students to a section.\n" +
+                           "10. Exit to MAIN MENU.\n" +
                            "Above are all the available actions. What do you want to do? Please type in the index number:\n");
         outputStream.println("--------------------------------------------------------------------------------\n");
         int index = readPositiveInteger(inputReader);
@@ -215,6 +234,9 @@ public class courseManager {
           removeSection(inputReader, outputStream);
         }
         else if (index == 6) {
+          viewAllStudents(inputReader, outputStream);
+        }
+        else if (index == 10) {
           outputStream.print("--------------------------------------------------------------------------------\n");
           outputStream.print("You are back to the main menu!\n");
           outputStream.println("--------------------------------------------------------------------------------\n");
@@ -237,11 +259,11 @@ public class courseManager {
       try {
         out.print("--------------------------------------------------------------------------------\n");
         out.print("MAIN MENU\n" +
-                  "1. View the list of all courses.\n" +
-                  "2. Add a new course.\n" +
-                  "3. Remove an existing course.\n" +
-                  "4. Update an existing course.\n" +
-                  "5. Exit the system.\n" +
+                  "1.  View the list of all courses.\n" +
+                  "2.  Add a new course.\n" +
+                  "3.  Remove an existing course.\n" +
+                  "4.  Update an existing course.\n" +
+                  "5.  Exit the system.\n" +
                   "Above are all the available actions. What do you want to do? Please type in the index number:\n");
         out.println("--------------------------------------------------------------------------------\n");
         int index = readPositiveInteger(inputReader);
@@ -272,6 +294,11 @@ public class courseManager {
     }
   }
 
+
+
+
+
+  
   /////////////////////////////////////////////////////////////////////////////////
 
   private static boolean getYorN(String choiceStr) {
