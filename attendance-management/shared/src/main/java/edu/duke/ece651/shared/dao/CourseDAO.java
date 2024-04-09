@@ -29,4 +29,11 @@ public class CourseDAO extends BasicDAO<Course> {
         String sql = "UPDATE course SET course_name = ? WHERE course_id = ?";
         return update(sql, newCourseName, courseId);
     }
+
+    public Course findCourseBySectionId(int sectionId) {
+        String sql = "SELECT c.course_id AS courseId, c.course_name AS courseName " +
+                     "FROM course c JOIN section s ON c.course_id = s.course_id " +
+                     "WHERE s.section_id = ?";
+        return querySingle(sql, Course.class, sectionId);
+    }
 }

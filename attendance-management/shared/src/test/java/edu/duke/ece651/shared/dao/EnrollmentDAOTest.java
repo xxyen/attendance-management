@@ -34,6 +34,13 @@ public class EnrollmentDAOTest {
     Enrollment enrollment = new Enrollment(newSection.getSectionId(), "S001", new Date(), "enrolled", true);
     int addResult = enrollmentDAO.addEnrollment(enrollment);
     assertNotEquals(0, addResult);
+
+    List<Section> sections = sectionDAO.listSectionsByStudentId("S001");
+    assertEquals(sections.get(0).getCourseId(), "CS105");
+
+    Course findCourse = courseDAO.findCourseBySectionId(newSection.getSectionId());
+    assertEquals(findCourse.getCourseId(), "CS105");
+
     
     Enrollment queriedEnrollment = enrollmentDAO.queryEnrollmentById(enrollment.getEnrollmentId());
     assertEquals(queriedEnrollment.getStudentId(), "S001");
