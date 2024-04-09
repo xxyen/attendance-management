@@ -315,9 +315,9 @@ public class ProfTextPlayer {
         body.append(": \n");
         body.append("\n");
         body.append("Notice: Your attendance status on the course: ");
-        // body.append(course.getCourseid());
+        body.append(section.getCourseId());
         body.append(" at date: ");
-        // body.append(ses.getTime());
+        body.append(ses.getSessionDate());
         body.append(" has been changed to '");
         body.append(sta.getStatus());
         body.append("'. If there is any problem, please contact your professor.\n");

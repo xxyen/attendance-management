@@ -15,3 +15,7 @@ application {
     // Define the main class for the application.
     mainClass = 'edu.duke.ece651.client.App'
 }
+
+run {
+    standardInput = System.in
+}
