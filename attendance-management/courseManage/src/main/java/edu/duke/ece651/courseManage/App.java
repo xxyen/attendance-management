@@ -11,11 +11,14 @@ import java.io.InputStreamReader;
 public class App {
 
   public static void main(String[] args) throws Exception {
-    System.out.println("Welcome to the Course Management App!\n");
+    System.out.println("\n******************************************\n" +
+                       "Welcome to the Course Management App!\n" +
+                       "******************************************\n");
     BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
     courseManager CourseManager = new courseManager(inputReader, System.out);
     //CourseManager.createCourse(inputReader, System.out);
-    CourseManager.loop();   
+    CourseManager.loop();
+    System.exit(0);
   }
 }
 

@@ -57,7 +57,9 @@ public class courseManager {
       try {
         Course newCourse = new Course(courseId, courseName);
         courseIO.addCourse(newCourse);
-        outputStream.println("Successfully created a new course!\nNow back to the main menu.\n");
+        outputStream.print("--------------------------------------------------------------------------------\n");
+        outputStream.println("Successfully created a new course!\nNow back to the MAIN MENU.");
+        outputStream.print("--------------------------------------------------------------------------------\n");
         return;// newCourse;
       } catch (Exception e) {
         outputStream.println(e.getMessage() + " Please try again!");
@@ -72,12 +74,19 @@ public class courseManager {
     String courseId = getRemoveCourseID(inputReader, outputStream, courses);
     while (true) {
       try {
+        outputStream.print("********************************************************************************\n");
         boolean deleteYN = readInputYorN(inputReader, outputStream, "DANGER!!! Remove a class will be destructive, do you want to continue? [Y/N]");
+        outputStream.print("********************************************************************************\n");
         if (!deleteYN) {
+          outputStream.print("--------------------------------------------------------------------------------\n");
+          outputStream.println("Removal cancelled! Nothing is removed.\nNow back to the UPDATE COURSE MENU.");
+          outputStream.print("--------------------------------------------------------------------------------\n");
           return;
         }
         courseIO.deleteCourse(courseId);
-        outputStream.println("Successfully removed an existing course!\nNow back to the main menu.\n");
+        outputStream.print("--------------------------------------------------------------------------------\n");
+        outputStream.println("Successfully removed an existing course!\nNow back to the main menu.");
+        outputStream.print("--------------------------------------------------------------------------------\n");
         return;// newCourse;
       } catch (Exception e) {
         outputStream.println(e.getMessage() + " Please try again!");
@@ -103,7 +112,9 @@ public class courseManager {
       try {
         //Course newCourse = new Course(courseId, courseName);
         courseIO.updateCourseName(courseId, newName);
-        outputStream.println("Successfully changed course name!\n");
+        outputStream.print("--------------------------------------------------------------------------------\n");
+        outputStream.println("Successfully changed course name!\nNow back to the UPDATE COURSE MENU.\n");
+        outputStream.print("--------------------------------------------------------------------------------\n");
         return;// newCourse;
       } catch (Exception e) {
         outputStream.println(e.getMessage() + " Please try again!");
@@ -183,7 +194,9 @@ public class courseManager {
         Section newSection = new Section(1, courseId, profId);
         outputStream.println("newSection  courseId = " + courseId + " profId = " + profId);
         sectionIO.addSectionToCourse(newSection);
-        outputStream.println("Successfully created a new section!\n");
+        outputStream.print("--------------------------------------------------------------------------------\n");
+        outputStream.println("Successfully created a new section!\nNow back to the UPDATE COURSE MENU.");
+        outputStream.print("--------------------------------------------------------------------------------\n");
         return;// newCourse;
       } catch (Exception e) {
         outputStream.println(e.getMessage() + " Please try again!");
@@ -204,11 +217,19 @@ public class courseManager {
     int sectionId = getRemoveSectionID(inputReader, outputStream, sections);
     while (true) {
       try {
+        outputStream.print("********************************************************************************\n");
         boolean deleteYN = readInputYorN(inputReader, outputStream, "DANGER!!! Remove a section will be destructive, do you want to continue? [Y/N]");
+        outputStream.print("********************************************************************************\n");
         if (!deleteYN) {
+          outputStream.print("--------------------------------------------------------------------------------\n");
+          outputStream.println("Removal cancelled! Nothing is removed.\nNow back to the UPDATE COURSE MENU.");
+          outputStream.print("--------------------------------------------------------------------------------\n");
           return;
         }
         sectionIO.deleteSection(sectionId);
+        outputStream.print("--------------------------------------------------------------------------------\n");
+        outputStream.println("Successfully removed an existing section!\nNow back to the UPDATE COURSE MENU.");
+        outputStream.print("--------------------------------------------------------------------------------\n");
         return;// newCourse;
       } catch (Exception e) {
         outputStream.println(e.getMessage() + " Please try again!");
@@ -228,7 +249,9 @@ public class courseManager {
     Enrollment newEnroll = new Enrollment(sectionId, studentId, new Date(), "Enrolled", notifyYN);
     EnrollmentDAO enrollIO = new EnrollmentDAO();
     enrollIO.addEnrollment(newEnroll);
-    outputStream.println("Successfully added a new student!\n");
+    outputStream.print("--------------------------------------------------------------------------------\n");
+    outputStream.println("Successfully added a new student!\nNow back to the UPDATE COURSE MENU.");
+    outputStream.print("--------------------------------------------------------------------------------\n");
   }
 
   public static void loadStudentsToSection(BufferedReader inputReader, PrintStream outputStream) throws Exception {
@@ -253,7 +276,9 @@ public class courseManager {
           Enrollment newEnroll = new Enrollment(sectionId, stu.getUserid(), new Date(), "Enrolled", notifyYN);
           enrollIO.addEnrollment(newEnroll);
         }
-        outputStream.println("Successfully added a new student!\n");
+        outputStream.print("--------------------------------------------------------------------------------\n");
+        outputStream.println("Successfully added new students from file!\nNow back to the UPDATE COURSE MENU.\n");
+        outputStream.print("--------------------------------------------------------------------------------\n");
         return;
       }
       catch (Exception e) {
@@ -311,7 +336,7 @@ public class courseManager {
         }
         else if (index == 10) {
           outputStream.print("--------------------------------------------------------------------------------\n");
-          outputStream.print("You are back to the main menu!\n");
+          outputStream.print("You are back to the MAIN MENU!\n");
           outputStream.println("--------------------------------------------------------------------------------\n");
           return;
         }
