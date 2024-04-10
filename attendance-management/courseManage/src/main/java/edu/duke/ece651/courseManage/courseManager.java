@@ -79,13 +79,13 @@ public class courseManager {
         outputStream.print("********************************************************************************\n");
         if (!deleteYN) {
           outputStream.print("--------------------------------------------------------------------------------\n");
-          outputStream.println("Removal cancelled! Nothing is removed.\nNow back to the UPDATE COURSE MENU.");
+          outputStream.println("Removal cancelled! Nothing is removed.\nNow back to the MAIN MENU.");
           outputStream.print("--------------------------------------------------------------------------------\n");
           return;
         }
         courseIO.deleteCourse(courseId);
         outputStream.print("--------------------------------------------------------------------------------\n");
-        outputStream.println("Successfully removed an existing course!\nNow back to the main menu.");
+        outputStream.println("Successfully removed an existing course!\nNow back to the MAIN MENU.");
         outputStream.print("--------------------------------------------------------------------------------\n");
         return;// newCourse;
       } catch (Exception e) {
@@ -113,7 +113,7 @@ public class courseManager {
         //Course newCourse = new Course(courseId, courseName);
         courseIO.updateCourseName(courseId, newName);
         outputStream.print("--------------------------------------------------------------------------------\n");
-        outputStream.println("Successfully changed course name!\nNow back to the UPDATE COURSE MENU.\n");
+        outputStream.println("Successfully changed course name!\nNow back to the UPDATE COURSE MENU.");
         outputStream.print("--------------------------------------------------------------------------------\n");
         return;// newCourse;
       } catch (Exception e) {
@@ -303,7 +303,8 @@ public class courseManager {
                            "7.  View the list of students in a section.\n" +
                            "8.  Add one student to a section.\n" +
                            "9.  Add a list of students to a section.\n" +
-                           "10. Exit to MAIN MENU.\n" +
+                           "10. Remove one student from a section." +
+                           "11. Exit to MAIN MENU.\n" +
                            "Above are all the available actions. What do you want to do? Please type in the index number:\n");
         outputStream.println("--------------------------------------------------------------------------------\n");
         int index = readPositiveInteger(inputReader);
@@ -334,7 +335,7 @@ public class courseManager {
         else if (index == 9) {
           loadStudentsToSection(inputReader, outputStream);
         }
-        else if (index == 10) {
+        else if (index == 11) {
           outputStream.print("--------------------------------------------------------------------------------\n");
           outputStream.print("You are back to the MAIN MENU!\n");
           outputStream.println("--------------------------------------------------------------------------------\n");
