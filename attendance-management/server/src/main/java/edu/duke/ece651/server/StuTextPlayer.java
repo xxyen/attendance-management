@@ -69,7 +69,8 @@ public class StuTextPlayer {
                             ", sec: " +
                             section.getSectionId() +
                             " is: " +
-                            preference);
+                            preference +
+                            "\n");
                     out.print("--------------------------------------------------------------------------------\n");
                     changePreference(e);
                 } else if (index == 2) {
@@ -98,7 +99,7 @@ public class StuTextPlayer {
 
     private void getReport() throws Exception {
         out.print("--------------------------------------------------------------------------------\n");
-        out.print("Do you want a summary or detailed report? (type in 's' for summary or 'd' for detailed)");
+        out.print("Do you want a summary or detailed report? (type in 's' for summary or 'd' for detailed)\n");
         out.print("--------------------------------------------------------------------------------\n");
         out.println();
 
@@ -112,7 +113,8 @@ public class StuTextPlayer {
                     ", section: " + 
                     section.getSectionId() + 
                     " is : " +
-                    s.calculateStudentSectionScore(student.getUserid(), section.getSectionId()));
+                    s.calculateStudentSectionScore(student.getUserid(), section.getSectionId()) +
+                    "\n");
             out.print("--------------------------------------------------------------------------------\n");
         }
         else if (choice == 'd' || choice == 'D'){
@@ -136,7 +138,7 @@ public class StuTextPlayer {
 
     private void changePreference(Enrollment e) throws Exception {
         out.print("--------------------------------------------------------------------------------\n");
-        out.print("Do you want to change your preference? (type in 'y' for yes or 'n' for no)");
+        out.print("Do you want to change your preference? (type in 'y' for yes or 'n' for no)\n");
         out.print("--------------------------------------------------------------------------------\n");
         out.println();
 
@@ -164,7 +166,8 @@ public class StuTextPlayer {
                 ", sec: " +
                 section.getSectionId() +
                 " is: " +
-                preference);
+                preference +
+                "\n");
         out.print("--------------------------------------------------------------------------------\n");
 
     }
