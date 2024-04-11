@@ -8,6 +8,7 @@ import java.util.Set;
 import edu.duke.ece651.shared.Email;
 import edu.duke.ece651.shared.Professor;
 import edu.duke.ece651.shared.Student;
+import edu.duke.ece651.shared.model.Section;
 import edu.duke.ece651.shared.ReaderUtilities;
 import edu.duke.ece651.userAdmin.UserManagement;
 
@@ -36,7 +37,7 @@ public class AdminTextView {
             } else if(choice == 5) {
                 setDisplayNamePermission(inputReader, outputStream);
             } else if(choice == 6) {
-                break;
+                System.exit(0);
             } else {
                 outputStream.println("Please enter a positive integer within the listed ones! (1/2/3/4/5/6)");
             }
@@ -178,6 +179,9 @@ public class AdminTextView {
                 if(!UserManagement.checkFacultyExistsByID(useridToRemove)) {
                     throw new IllegalArgumentException("No such faculty member with this user id!");
                 }
+                if (!ReaderUtilities.readInputYorN(inputReader, outputStream, "Are you sure to remove faculty " + useridToRemove + "? (Y/n)")){
+                    break;
+                }
                 UserManagement.removeFaculty(useridToRemove);
                 outputStream.println("Faculty member " + useridToRemove + " removed successfully!");
                 break;
@@ -186,6 +190,44 @@ public class AdminTextView {
             }
         }
     }
+
+//     private static void loadStudentsFromCSV(BufferedReader inputReader, PrintStream outputStream) throws Exception {
+//     outputStream.println("CSV File Path:");
+//     while (true) {
+//       try {
+//         String path = inputReader.readLine();
+//         List<Student> students = readStudentsFromFile(inputReader, outputStream, path, true);
+//         outputStream.print("--------------------------------------------------------------------------------\n");
+//         outputStream.println("Here is the list of students to be added to the section:");
+//         for (Student stu : students) {
+//           outputStream.println(stu.toString());
+//         }
+//         outputStream.print("--------------------------------------------------------------------------------\n\n");
+//         StudentDAO studentIO = new StudentDAO();
+//         Set<Student> allStudents = studentIO.queryAllStudents();
+//         for (Student stu : students) {
+//           if (enrolls.stream().anyMatch(enro -> enro.getStudentId().equals(stu.getUserid()))) {
+//             outputStream.println("Student " + stu.getUserid() + " is already enrolled! This enrollment will be skipped.");
+//             continue;
+//           }
+//           if (!allStudents.stream().anyMatch(student -> student.getUserid().equals(stu.getUserid()))) {
+//             outputStream.println("Student " + stu.getUserid() + " does not exist! This enrollment will be skipped.");
+//             continue;
+//           }
+//           Enrollment newEnroll = new Enrollment(sectionId, stu.getUserid(), new Date(), "Enrolled", notifyYN);
+//           enrollIO.addEnrollment(newEnroll);
+//         }
+//         outputStream.print("\n--------------------------------------------------------------------------------\n");
+//         outputStream.println("Successfully added new students from csv file!");
+//         outputStream.print("--------------------------------------------------------------------------------\n");
+//         return;
+//       }
+//       catch (Exception e) {
+//         outputStream.println(e.getMessage() + " Please try again!");
+//       }
+//     }
+//   }
+
     
 
     private static void removeStudent(BufferedReader inputReader, PrintStream outputStream) {
@@ -195,6 +237,9 @@ public class AdminTextView {
                 String useridToRemove = inputReader.readLine();
                 if(!UserManagement.checkStudentExistsByID(useridToRemove)) {
                     throw new IllegalArgumentException("No such student with this user id!");
+                }
+                if (!ReaderUtilities.readInputYorN(inputReader, outputStream, "Are you sure to remove student " + useridToRemove + "? (Y/n)")){
+                    break;
                 }
                 UserManagement.removeStudent(useridToRemove);
                 outputStream.println("Student " + useridToRemove + " removed successfully!");
