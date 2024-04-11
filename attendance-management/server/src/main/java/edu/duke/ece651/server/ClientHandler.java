@@ -225,6 +225,8 @@ public class ClientHandler implements Runnable{
                     Section ses = chooseSection(s, input, output);
                     //todo:
                     //run student loop
+                    StuTextPlayer player = new StuTextPlayer(input, output, ses, s);
+                    player.loop();
 
                 }
                 else if (index == 2){
