@@ -1,6 +1,8 @@
 package edu.duke.ece651.shared;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +64,35 @@ public class ReaderUtilities {
       }
     }
     throw new IllegalArgumentException("Invalid input: you should only type in y or n!");
+  }
+
+  public static char readSingleLetter(BufferedReader reader) throws IOException {
+    String line = reader.readLine();
+    if (line != null && line.length() == 1 && Character.isLetter(line.charAt(0))) {
+      return line.charAt(0);
+    } else {
+      throw new IllegalArgumentException("Invalid input: you should only type in one letter!");
+    }
+  }
+
+  /**
+   * Read export file format from input.
+   */
+  public static String readFormat(String prompt, BufferedReader inputReader, PrintStream out) throws IOException {
+    out.print("--------------------------------------------------------------------------------\n");
+    out.print(prompt);
+    out.print("--------------------------------------------------------------------------------\n");
+    out.println();
+
+    String s = inputReader.readLine();
+    if (s == null) {
+      throw new EOFException(
+              "You didn't type in any instruction!\n");
+    }
+    if (!(s.equals("xml") || s.equals("json"))) {
+      throw new IllegalArgumentException("Invalid format! You should only choose json or xml!");
+    }
+    return s;
   }
 
 }

@@ -463,29 +463,29 @@ public class ProfTextPlayer {
         return s;
     }
 
-    public void sendFile(PrintStream output, String filePath) throws Exception{
-        output.println("startOfFile");
-
-        //String filePath = "/home/wille/Desktop/test2.xml"; // 根据请求确定文件路径
-
-        // 发送文件名给客户端
-        File file = new File(filePath);
-        output.println(file.getName());
-        //output.flush();
-
-        // 发送文件内容
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = fileReader.readLine()) != null) {
-                output.println(line);
-            }
-            //output.flush();
-        }
-
-        // 发送结束信号
-        output.println("endOfFile");
-        //output.flush();
-    }
+//    public void sendFile(PrintStream output, String filePath) throws Exception{
+//        output.println("startOfFile");
+//
+//        //String filePath = "/home/wille/Desktop/test2.xml"; // 根据请求确定文件路径
+//
+//        // 发送文件名给客户端
+//        File file = new File(filePath);
+//        output.println(file.getName());
+//        //output.flush();
+//
+//        // 发送文件内容
+//        try (BufferedReader fileReader = new BufferedReader(new FileReader(file))) {
+//            String line;
+//            while ((line = fileReader.readLine()) != null) {
+//                output.println(line);
+//            }
+//            //output.flush();
+//        }
+//
+//        // 发送结束信号
+//        output.println("endOfFile");
+//        //output.flush();
+//    }
 
     /**
      * Export attendance record of a session.
@@ -499,7 +499,7 @@ public class ProfTextPlayer {
 //
 //        String path = inputReader.readLine();
         Date date = new Date();
-        String path = "src/profExportReport/" + date.toString();
+        String path = "src/profExportReport/" + section.getSectionId() + "_" + date.toString() + "." + format;
 //        List<String> fields = new ArrayList<>();
 //        fields.add("studentID");
 //        fields.add("legalName");
@@ -507,7 +507,7 @@ public class ProfTextPlayer {
 //        fields.add("email");
 //        fields.add("status");
         ExportService.exportSectionAttendanceDataForProfessor(section.getSectionId(), format, path);
-        sendFile(out, path);
+        sendFileService.sendFile(out, path);
         // ExportService.exportToFile(course.getSessions(), format, fields, path);
 //        out.print("--------------------------------------------------------------------------------\n");
 //        out.print("Successfully exported course attendance records!\n");
