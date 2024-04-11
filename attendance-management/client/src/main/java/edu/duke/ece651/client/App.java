@@ -13,6 +13,27 @@ public class App {
         return "Hello World!";
     }
 
+    public static void reveiveFile(BufferedReader input, Scanner scanner) throws Exception {
+        // 读取服务器发来的文件名
+        String fileName = input.readLine();
+        System.out.println("File to receive: " + fileName);
+
+        // 读取用户指定的保存路径
+        System.out.println("Enter the path to save the file: ");
+        String savePath = scanner.nextLine();
+
+        // 接收文件内容并保存
+        try (BufferedWriter fileWriter = new BufferedWriter(new FileWriter(savePath + File.separator + fileName))) {
+            String line;
+            while (!(line = input.readLine()).equals("endOfFile")) {
+                // 注意：如果文件是二进制的，这里需要进行相应的处理，如base64解码
+                fileWriter.write(line);
+                fileWriter.newLine();
+            }
+            System.out.println("File has been received and saved to " + savePath);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
 //        try {
 //            ClientSocketHandler client = new ClientSocketHandler();
@@ -27,7 +48,8 @@ public class App {
 //        } catch (Exception e){
 //            System.out.println(e.getMessage());
 //        }
-        String host = "vcm-37924.vm.duke.edu";
+        //String host = "vcm-37924.vm.duke.edu";
+        String host = "localhost";
         int port = 12345;
 
         try (
@@ -45,6 +67,13 @@ public class App {
                         flag = false;
                         break;
                     }
+                    if(fromServer.equals("startOfFile")){
+                        try {
+                            reveiveFile(input, scanner);
+                        } catch (Exception e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
                 }
                 if (flag == false) break;
                 System.out.print("Enter response: ");
@@ -58,6 +87,7 @@ public class App {
                 }
             }
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
 
