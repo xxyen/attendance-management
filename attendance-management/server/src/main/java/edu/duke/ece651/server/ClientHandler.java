@@ -72,7 +72,7 @@ public class ClientHandler implements Runnable{
 
                 if (index == 1){
                     User user = signIn(input, output);
-                    output.println("test3");
+                    //output.println("test3");
 
                     //todo:
                     //do Prof or Stu action
@@ -101,9 +101,9 @@ public class ClientHandler implements Runnable{
                 }
 
                 //for file sending test
-                else if (index == 3){
-                    trySendFile(output);
-                }
+//                else if (index == 3){
+//                    trySendFile(output);
+//                }
                 else {
                     throw new IllegalArgumentException("Invalid action number, please choose your action again!");
                 }
@@ -126,12 +126,12 @@ public class ClientHandler implements Runnable{
         String password = input.readLine();
         System.out.println(password);
 
-        output.println("test1");
+        //output.println("test1");
         User user = userOperator.signIn(userid, password);
         // 登录成功，发送欢迎信息
         //output.println("Login successful. Welcome, " + user.getUserid() + "!");
 
-        output.println("test2");
+        //output.println("test2");
 
         return user;
 

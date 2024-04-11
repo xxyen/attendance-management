@@ -27,20 +27,20 @@ public class FacultyDAO extends BasicDAO<Professor> {
     }
 
     public Professor queryFacultyById(String userid) {
-        System.out.println("test a1");
+        //System.out.println("test a1");
 
         String sql = "SELECT user_id, password_hash, faculty_name, email FROM faculty WHERE user_id = ?";
-        System.out.println("test a2");
+        //System.out.println("test a2");
 
         Map<String, Object> res = querySingleMapped(sql, userid);
-        System.out.println("test a3");
+        //System.out.println("test a3");
 
         if(res == null) {
-            System.out.println("test a4");
+            //System.out.println("test a4");
 
             return null;
         }
-        System.out.println("test a5");
+        //System.out.println("test a5");
 
         return new Professor((String)res.get("user_id"),(String)res.get("password_hash"), (String)res.get("faculty_name"), new Email((String)res.get("email")));
     }

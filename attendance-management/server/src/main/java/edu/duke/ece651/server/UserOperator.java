@@ -21,7 +21,7 @@ public class UserOperator {
       return student;
     }
 
-    System.out.println("test d");
+    //System.out.println("test d");
 
     throw new IllegalArgumentException("The userid or password is invalid!");
   }
