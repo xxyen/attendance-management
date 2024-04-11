@@ -6,6 +6,13 @@ import edu.duke.ece651.shared.*;
 
 public class Server {
     public static void main(String[] args) {
+        // 创建任务
+        WeeklyReporter task = new WeeklyReporter();
+        // 在新线程中启动任务
+        Thread thread = new Thread(task);
+        thread.start();
+
+
         final int port = 12345; // 服务器监听的端口号
         try (ServerSocket serverSocket = new ServerSocket(port)) { // 使用try-with-resources确保资源被正确关闭
             System.out.println("Server listening on port " + port);
