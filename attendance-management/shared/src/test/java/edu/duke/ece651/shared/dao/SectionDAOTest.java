@@ -32,7 +32,8 @@ public class SectionDAOTest {
       assertFalse(sections.isEmpty());
       Section queriedSection = sections.get(0);
       assertEquals("F001", queriedSection.getFacultyId());
-
+      sectionDAO.updateSection(queriedSection);
+      
       int updateResult = sectionDAO.updateSectionProfessor(queriedSection.getSectionId(), "F002");
       assertEquals(1, updateResult);
       Section updatedSection = sectionDAO.querySectionById(queriedSection.getSectionId());

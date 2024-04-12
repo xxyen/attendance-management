@@ -80,48 +80,6 @@ public class Professor implements User {
     return true;
   }
 
-  /**
-   * check if a course is in the professor's course list
-   */
-  public boolean hasCourse(String courseid) {
-    return false;
-    // ??? access DB
-  }
-
-  /**
-   * add a course to the professor's course list
-   * 
-   * @throws IllegalArgumentException if this course already exists in the course
-   *                                  list
-   */
-  public void addCourse(String courseid) {
-    // ??? access DB
-    // find this course in db, if found and the falculty already has this course, throw
-    // if not found, create it
-    // if found and not "has", add it 
-
-    // if (courseids.contains(courseid)) {
-    //   throw new IllegalArgumentException(courseid + " exists!");
-    // }
-    // courseids.add(courseid);
-  }
-
-  /**
-   * remove a course from the professor's course list
-   * 
-   * @throws IllegalArgumentException if this course is not in the course list
-   */
-  public void removeCourse(String courseid) {
-    // ??? access DB
-    // find this course in db, if found and the falculty already has this course, remove it
-    // if not found, or found but not "has", throw
-    
-    // if (courseids.contains(courseid)) {
-    //   courseids.remove(courseid);
-    //   return;
-    // }
-    throw new IllegalArgumentException(name + " doesn't teach " + courseid + "!");
-  }
 
   /**
    * check if the password is correct.

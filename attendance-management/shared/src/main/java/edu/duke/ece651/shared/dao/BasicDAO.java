@@ -87,19 +87,19 @@ public class BasicDAO<T> {
     }
 
 
-    public Object queryScalar(String sql, Object... parameters) {
+    // public Object queryScalar(String sql, Object... parameters) {
 
-        Connection connection = null;
-        try {
-            connection = JDBCUtils.getConnection();
-            return  qr.query(connection, sql, new ScalarHandler(), parameters);
+    //     Connection connection = null;
+    //     try {
+    //         connection = JDBCUtils.getConnection();
+    //         return  qr.query(connection, sql, new ScalarHandler(), parameters);
 
-        } catch (SQLException e) {
-            throw  new RuntimeException(e);
-        } finally {
-            JDBCUtils.close(null, null, connection);
-        }
-    }
+    //     } catch (SQLException e) {
+    //         throw  new RuntimeException(e);
+    //     } finally {
+    //         JDBCUtils.close(null, null, connection);
+    //     }
+    // }
 
     public long insertAndGetGeneratedKey(String sql, Object... parameters) {
         Connection connection = null;
