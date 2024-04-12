@@ -13,7 +13,8 @@
 - [Ev2 DB Structure](https://docs.google.com/document/d/1s3EM3V6wiWx9IROGiIVDYF0NVr4GINPYGf9JzEkdxH4/edit) 
 - [Ev2 Updated Requirement](https://docs.google.com/document/d/12cTEOJAgQbkcVx8hm-igk4xoXqORXWpVe4DROh9elPo/edit) 
 - [Sprint doc](https://docs.google.com/document/d/14vmW9kvCKqBFkDx4q56aUbnF37EKbb_w0X9_Wf7EJJs/edit)
-- [Changes Impact Report](https://docs.google.com/document/d/1Aj05t52vhAgV1OzjY7sMaJfvsRG0x4VEunI0mw1tJl8/edit)<br /> <br />
+- [Changes Impact Report](https://docs.google.com/document/d/1Aj05t52vhAgV1OzjY7sMaJfvsRG0x4VEunI0mw1tJl8/edit)
+- [Updated class diagram (in the uml directory)]<br /> <br />
  
 **Evolution 1**
 - [UML notes](https://docs.google.com/document/d/1iMrOiYFH6AFFYmwq5D3bl4LEW6iYUJkcECoWVfw-Ucc/edit) 
