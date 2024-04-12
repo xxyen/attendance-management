@@ -54,9 +54,9 @@ public class StudentDAO extends BasicDAO<Student> {
         String sql = " SELECT user_id, password_hash, legal_name, display_name, email FROM student WHERE legal_name = ?";
         List<Map<String, Object>> res = queryMultiMapped(sql, legalName);
         List<Student> studentList = new ArrayList<>();
-        if(res == null) {
-            return null;
-        }
+        // if(res == null) {
+        //     return null;
+        // }
         for(Map<String, Object> map: res) {
             Student student = new Student((String)map.get("user_id"),(String)map.get("password_hash"), (String)map.get("legal_name"), (String)map.get("display_name"), new Email((String)map.get("email")));
             studentList.add(student);
@@ -68,9 +68,9 @@ public class StudentDAO extends BasicDAO<Student> {
         String sql = "SELECT user_id, password_hash, legal_name, display_name, email FROM student";
         List<Map<String, Object>> res = queryMultiMapped(sql);
         Set<Student> studentSet = new HashSet<>();
-        if(res == null) {
-            return null;
-        }
+        // if(res == null) {
+        //     return null;
+        // }
         for(Map<String, Object> map: res) {
             Student student = new Student((String)map.get("user_id"),(String)map.get("password_hash"), (String)map.get("legal_name"), (String)map.get("display_name"), new Email((String)map.get("email")));
             studentSet.add(student);

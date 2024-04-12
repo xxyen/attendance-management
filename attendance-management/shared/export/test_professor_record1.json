@@ -6,7 +6,7 @@
     "sessions": [
         {
             "sessionDate": "2024-04-11",
-            "sessionId": 273,
+            "sessionId": 483,
             "attendanceRecords": [{
                 "studentId": "S00A",
                 "studentDisplayName": "display stud0A",
@@ -15,7 +15,7 @@
         },
         {
             "sessionDate": "2024-04-11",
-            "sessionId": 274,
+            "sessionId": 484,
             "attendanceRecords": [{
                 "studentId": "S00A",
                 "studentDisplayName": "display stud0A",
@@ -23,5 +23,5 @@
             }]
         }
     ],
-    "sectionId": 287
+    "sectionId": 501
 }
