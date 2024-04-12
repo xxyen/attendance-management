@@ -69,41 +69,74 @@ public class Student implements User {
   // }
 
 
-  public void setDisplayName(String displayName) throws IOException {
+  /**
+   * set the display name of the user
+   * @param displayName
+   */
+  public void setDisplayName(String displayName){
     this.displayName = displayName;
   }
 
-  public void setEmailAddr(Email email) throws IOException {
+  /**
+   * set email address of the user
+   * @param email (object)
+   */
+  public void setEmailAddr(Email email){
     this.email = email;
   }
 
+  /**
+   * set email address of the user
+   * @param email (String)
+   * @throws IOException if the email address is invalid
+   */
   public void setEmail(String email) throws IOException {
     this.email = new Email(email);
   }
 
+  /**
+   * set userid of the student
+   * @param userid
+   */
   public void setUserid(String userid) {
     this.userid = userid;
   }
 
+  /**
+   * get userid of the student
+   */
   @Override
   public String getUserid() {
     return userid;
   }
 
+  /**
+   * get legal name of the student
+   * @return legal name of the student
+   */
   public String getLegalName() {
     return legalName;
   }
 
+  /**
+   * get display name of the student
+   * @return display name of the student
+   */
   public String getDisplayName() {
     return displayName;
   }
 
-
+  /**
+   * get user type, always return "student" for this class
+   */
   @Override
   public String getUserType() {
     return "student";
   }
 
+  /**
+   * equals
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o)
@@ -115,6 +148,9 @@ public class Student implements User {
         && Objects.equals(displayName, student.displayName) && Objects.equals(email, student.email);
   }
 
+  /**
+   * hashcode
+   */
   @Override
   public int hashCode() {
     return Objects.hash(userid, legalName, displayName, email);
@@ -134,6 +170,9 @@ public class Student implements User {
     return false;
   }
 
+  /**
+   * get password of the student
+   */
   @Override
   public String getPassword() {
     return password;
@@ -162,11 +201,17 @@ public class Student implements User {
   }
 
 
+  /**
+   * check if the password is the default one
+   */
   @Override
   public boolean isDefaultPwd() {
     return userid.equals(password);
   }
 
+  /**
+   * to string
+   */
   @Override
 public String toString() {
     return "Student{" +

@@ -67,7 +67,7 @@ public class Professor implements User {
   }
 
   /**
-   * set the password of the user
+   * set the password of the faculty member
    * setting fails and returns false if the newPwd is empty
    * or contains any space
    */
@@ -95,11 +95,17 @@ public class Professor implements User {
     return false;
   }
 
+  /**
+   * get password of the faculty member
+   */
   @Override
   public String getPassword() {
     return password;
   }
 
+  /**
+   * check if the password is the default one (same as their userid)
+   */
   @Override
   public boolean isDefaultPwd() {
     return userid.equals(password);
