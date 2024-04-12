@@ -26,8 +26,8 @@ public class JDBCUtils {
         try {
             setupSSHTunnel();
         } catch (Exception e) {
-            System.err.println("Error setting up SSH tunnel: " + e.getMessage());
-            e.printStackTrace();
+            //System.err.println("Error setting up SSH tunnel: " + e.getMessage());
+            //e.printStackTrace();
         }
 
         Properties properties = new Properties();
@@ -35,7 +35,7 @@ public class JDBCUtils {
             properties.load(new FileInputStream("src/druid.properties"));
             ds = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
