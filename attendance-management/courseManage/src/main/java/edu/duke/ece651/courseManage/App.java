@@ -23,6 +23,7 @@ public class App {
     catch(Exception e) {
       System.exit(0);
     }
+    System.exit(0);
   }
 }
 

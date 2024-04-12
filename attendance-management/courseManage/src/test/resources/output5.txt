@@ -13,16 +13,18 @@ MAIN MENU
 Above are all the available actions. What do you want to do? Please type in the index number:
 --------------------------------------------------------------------------------
 
-You are creating a new course! Please enter the information required below.
-Course ID: 
-Course ID exists! Please try again!
-Course ID: 
-Course ID = 5t
-Course Name: 
 --------------------------------------------------------------------------------
-Successfully created a new course!
-Now back to the MAIN MENU.
+Here is the list of current courses:
+ID: 1     Name: Course1
+ID: 1q     Name: 1Q
+ID: 2w     Name: 4r
+ID: 3e     Name: 11
+ID: 4r     Name: 4R
+ID: ece651     Name: Software Engineer
+ID: test001     Name: Testing
+ID: test002     Name: TesingCourse
 --------------------------------------------------------------------------------
+
 --------------------------------------------------------------------------------
 MAIN MENU
 1.  View the list of all courses.
