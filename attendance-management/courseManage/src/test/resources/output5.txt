@@ -1,0 +1,39 @@
+
+******************************************
+Welcome to the Course Management App!
+******************************************
+
+--------------------------------------------------------------------------------
+MAIN MENU
+1.  View the list of all courses.
+2.  Add a new course.
+3.  Remove an existing course.
+4.  Update an existing course.
+5.  Exit the system.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are creating a new course! Please enter the information required below.
+Course ID: 
+Course ID exists! Please try again!
+Course ID: 
+Course ID = 5t
+Course Name: 
+--------------------------------------------------------------------------------
+Successfully created a new course!
+Now back to the MAIN MENU.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MAIN MENU
+1.  View the list of all courses.
+2.  Add a new course.
+3.  Remove an existing course.
+4.  Update an existing course.
+5.  Exit the system.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+You have exited the system!
+--------------------------------------------------------------------------------
+
