@@ -8,6 +8,10 @@ import java.io.InputStreamReader;
 
 import edu.duke.ece651.userAdmin.AdminTextView;
 
+
+/**
+ * Main class to run the user admin application.
+ */
 public class App {
     public static void main(String[] args) {
         BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
