@@ -9,16 +9,30 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
+/**
+ * Service class that manages operations related to attendance records.
+ * This class provides methods for recording, updating, listing, and analyzing attendance records associated with sessions and sections.
+ */
 public class AttendanceRecordService {
 
     private AttendanceRecordDAO attendanceRecordDAO = new AttendanceRecordDAO();
     private SessionDAO sessionDAO = new SessionDAO();
 
+    /**
+     * Records a new attendance entry in the database.
+     * @param record The attendance record to be added.
+     */
     public void recordAttendance(AttendanceRecord record) {
         attendanceRecordDAO.addAttendanceRecord(record);
     }
 
+     /**
+     * Updates an existing attendance record.
+     * @param sessionId The session ID associated with the record.
+     * @param studentId The student ID associated with the record.
+     * @param newStatus The new status to update in the attendance record.
+     * @throws Exception if no attendance record is found for the provided session ID and student ID.
+     */
     public void updateAttendanceRecord(int sessionId, String studentId, Status newStatus) throws Exception {
         AttendanceRecord record = attendanceRecordDAO.findAttendanceRecordBySessionAndStudent(sessionId, studentId);
         if (record != null) {
@@ -29,14 +43,30 @@ public class AttendanceRecordService {
         }
     }
 
+     /**
+     * Lists all attendance records for a given session.
+     * @param sessionId The ID of the session for which attendance is to be listed.
+     * @return A list of attendance records for the specified session.
+     */
     public List<AttendanceRecord> listAttendanceBySession(int sessionId) {
         return attendanceRecordDAO.listAttendanceBySession(sessionId);
     }
 
+    /**
+     * Lists all attendance records for a student within a specific section.
+     * @param studentId The ID of the student.
+     * @param sectionId The ID of the section.
+     * @return A list of attendance records for the specified student and section.
+     */
     public List<AttendanceRecord> listAttendanceByStudentInSection(String studentId, int sectionId) {
         return attendanceRecordDAO.listAttendanceByStudentInSection(studentId, sectionId);
     }
 
+     /**
+     * Calculates the average attendance score for a student across all sections.
+     * @param studentId The ID of the student.
+     * @return A map containing section IDs and the corresponding average attendance scores.
+     */
     // Calculate the average attendance score for a specific student in each section
     public Map<Integer, Double> calculateStudentScoreBySection(String studentId) {
         List<AttendanceRecord> records = attendanceRecordDAO.listAttendanceByStudent(studentId);
@@ -67,7 +97,11 @@ public class AttendanceRecordService {
         return averageScoresBySection;
     }
 
-    // Calculate the average attendance score for all students in a specific section
+    /**
+     * Calculates the average attendance score for all students in a specific section.
+     * @param sectionId The ID of the section.
+     * @return A map of student IDs and their corresponding average scores.
+     */
     public Map<String, Double> calculateSectionScores(int sectionId) {
         List<AttendanceRecord> records = attendanceRecordDAO.listAttendanceBySection(sectionId);
         Map<String, Double> studentScores = new HashMap<>();

@@ -13,6 +13,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+/**
+ * Utility class for managing database connections and SSH tunnels.
+ * This class initializes a connection pool using Alibaba's Druid and sets up an SSH tunnel for secure database access.
+ */
 public class JDBCUtils {
 
     private static DataSource ds;
@@ -35,6 +39,11 @@ public class JDBCUtils {
         }
     }
 
+    /**
+     * Sets up an SSH tunnel to allow secure access to a remote MySQL server.
+     * This method uses JSch to establish a connection to the SSH server and forwards a local port to the remote MySQL server port.
+     * @throws Exception if any error occurs during the setup of SSH tunnel.
+     */
     private static void setupSSHTunnel() throws Exception {
         int localPort = 5656; // Local port to forward through SSH tunnel
         String remoteHost = "localhost"; // MySQL host, accessible from SSH server
@@ -54,10 +63,22 @@ public class JDBCUtils {
         //System.out.println("SSH Tunnel established.");
     }
 
+    /**
+     * Obtains a database connection from the connection pool.
+     * @return an object to interact with the database.
+     * @throws SQLException if a database access error occurs or the connection is closed.
+     */
     public static Connection getConnection() throws SQLException {
         return ds.getConnection();
     }
 
+    /**
+     * Closes the provided ResultSet, Statement, and Connection resources.
+     * This method ensures that all database resources are closed to avoid resource leaks.
+     * @param resultSet the ResultSet to close.
+     * @param statement the Statement to close.
+     * @param connection the Connection to close.
+     */
     public static void close(ResultSet resultSet, Statement statement, Connection connection) {
         try {
             if (resultSet != null) {
@@ -74,6 +95,10 @@ public class JDBCUtils {
         }
     }
 
+    /**
+     * Closes the SSH tunnel when the application stops.
+     * This method should be called to properly disconnect and release resources associated with the SSH tunnel.
+     */
     // Call this method to close SSH tunnel when application stops
     public static void closeSSHTunnel() {
         if (session != null && session.isConnected()) {
