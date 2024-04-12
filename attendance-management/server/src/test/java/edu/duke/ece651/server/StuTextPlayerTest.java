@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,40 +35,42 @@ class StuTextPlayerTest {
 
     @Test
     void test_loop() throws Exception {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        StuTextPlayer player = createTextPlayer("abc\n" +
-                "9\n" +
-                "1\n" +
-                "asdf\n" +
-                "1\n" +
-                "t\n" +
-                "1\n" +
-                "y\n" +
-                "1\n" +
-                "Y\n" +
-                "1\n" +
-                "n\n" +
-                "1\n" +
-                "N\n" +
-                "2\n" +
-                "afwed\n" +
-                "2\n" +
-                "k\n" +
-                "2\n" +
-                "s\n" +
-                "2\n" +
-                "S\n" +
-                "2\n" +
-                "d\n" +
-                "asdfsd\n" +
-                "2\n" +
-                "d\n" +
-                "xml\n" +
-                "2\n" +
-                "D\n" +
-                "json\n" +
-                "3\n", bytes);
-        player.loop();
+        assertTimeout(Duration.ofMinutes(1), () -> {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            StuTextPlayer player = createTextPlayer("abc\n" +
+                    "9\n" +
+                    "1\n" +
+                    "asdf\n" +
+                    "1\n" +
+                    "t\n" +
+                    "1\n" +
+                    "y\n" +
+                    "1\n" +
+                    "Y\n" +
+                    "1\n" +
+                    "n\n" +
+                    "1\n" +
+                    "N\n" +
+                    "2\n" +
+                    "afwed\n" +
+                    "2\n" +
+                    "k\n" +
+                    "2\n" +
+                    "s\n" +
+                    "2\n" +
+                    "S\n" +
+                    "2\n" +
+                    "d\n" +
+                    "asdfsd\n" +
+                    "2\n" +
+                    "d\n" +
+                    "xml\n" +
+                    "2\n" +
+                    "D\n" +
+                    "json\n" +
+                    "3\n", bytes);
+            player.loop();
+        });
 
     }
 
