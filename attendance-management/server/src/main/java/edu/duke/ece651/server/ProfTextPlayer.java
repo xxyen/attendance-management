@@ -25,14 +25,10 @@ public class ProfTextPlayer {
     private Professor professor;
     //private Course course;
     private Section section;
-    //private AttendanceOperator attendance;
-    // private Textview textview;
-    // private FileHandler fileHandler;
 
     private final BufferedReader inputReader;
     private final PrintStream out;
 
-    private final int actNums;
 
     private static FacultyDAO facultyDAO = new FacultyDAO();
     private static StudentDAO studentDAO = new StudentDAO();
@@ -47,43 +43,17 @@ public class ProfTextPlayer {
     /**
      * Constructor
      */
-    public ProfTextPlayer(Professor professor, Section section, InputStream inputStream,
-                      OutputStream outputStream) {
-        this.professor = professor;
-        //this.course = course;
-        this.section = section;
-        //this.attendance = attendance;
-        // this.fileHandler = fileHandler;
-//        this.inputReader = inputReader;
-//        this.out = out;
-        this.inputReader = new BufferedReader(new InputStreamReader(inputStream));
-        this.out = new PrintStream(outputStream, true); // true for auto-flush on write
-
-
-        // need to change if number of actions increases
-        this.actNums = 7;
-    }
 
     public ProfTextPlayer(Professor professor, Section section, BufferedReader inputReader,
                           PrintStream out) {
         this.professor = professor;
         //this.course = course;
         this.section = section;
-        //this.attendance = attendance;
-        // this.fileHandler = fileHandler;
         this.inputReader = inputReader;
         this.out = out;
-        //this.inputReader = new BufferedReader(new InputStreamReader(inputStream));
-        //this.out = new PrintStream(outputStream, true); // true for auto-flush on write
 
-
-        // need to change if number of actions increases
-        this.actNums = 7;
     }
 
-//    public BufferedReader getInputReader() {
-//        return inputReader;
-//    }
 
     /**
      * Read one single letter from input,
@@ -151,16 +121,6 @@ public class ProfTextPlayer {
         //return null;
     }
 
-    /**
-     * Add a new session to the course.
-     */
-    public void addSession(Session s) throws Exception {
-        // course.addSession(s);
-        // // to-do
-        // // update src file: add a new session file
-        // // FileHandler.addSessionToCourse(course.getCourseid(), s.getTime());
-        // s.saveAttendanceRecords();
-    }
 
     private static Date convertStringToDate(String inputDate) throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
@@ -215,12 +175,6 @@ public class ProfTextPlayer {
      * @param id is the student's ID.
      */
     public Student searchStudent(String id) {
-        // for (Student s : course.getStudents()) {
-        //     if (s.getUserid().equals(id)) {
-        //         return s;
-        //     }
-        // }
-
         //todo
         //search student by id in the section
         //return studentDAO.queryStudentById(id);
@@ -338,14 +292,7 @@ public class ProfTextPlayer {
                 "Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 't' for tardy)\n");
 
         Boolean flag = false;
-        // for (AttendanceRecord record : target.getRecords()) {
-        //     if (record.getStudent().equals(s)) {
-        //         record.changeRecord(newSta);
-        //         target.saveAttendanceRecords();
-        //         flag = true;
-        //         break;
-        //     }
-        // }
+
         AttendanceRecord r = attendanceRecordDAO.findAttendanceRecordBySessionAndStudent(target.getSessionId(), s.getUserid());
 
         if (r != null) {
@@ -367,81 +314,6 @@ public class ProfTextPlayer {
         }
     }
 
-    /**
-     * Change display name of a student.
-     */
-    public void changeDisplayName() throws Exception {
-        // if (course.isCanChangeName()) {
-        //     Student stu = doSearchStudent();
-        //     out.print("--------------------------------------------------------------------------------\n");
-        //     out.print("Please type in the student's preferred display name:\n");
-        //     out.println("--------------------------------------------------------------------------------\n");
-        //     String s = inputReader.readLine();
-        //     if (s == null) {
-        //         throw new EOFException(
-        //                 "You didn't type in any instruction!\n");
-        //     }
-
-        //     stu.setDisplayName(s);
-        //     // to-do
-        //     // change display name in src file
-        //     // FileHandler.updateCoursesForStudent(stu);
-        //     // FileHandler.updateOrAddStudentInGlobalList(stu);
-        // } else {
-        //     throw new IllegalArgumentException("Sorry, you cannot change student's display name!");
-        // }
-    }
-
-    /**
-     * Remove a student from the course.
-     */
-    public void removeStudent() throws Exception {
-        // Student stu = doSearchStudent();
-        // course.removeStudent(stu.getUserid());
-        // out.print("--------------------------------------------------------------------------------\n");
-        // out.print("Successfully removed the student from the course!\n");
-        // out.println("--------------------------------------------------------------------------------\n");
-        // to-do
-        // change student list in src file
-        // FileHandler.removeStudentFromCourse(stu.getUserid(), course.getCourseid());
-    }
-
-    /**
-     * Get the student list of the course.
-     */
-    public List<Student> getStudent() {
-        // return course.getStudents();
-        return null;
-    }
-    // public List<Session> getSession(){
-    // return course.getSessions();
-    // }
-
-    /**
-     * Add a new student to the course.
-     */
-    public void addStudent() throws Exception {
-        out.print("--------------------------------------------------------------------------------\n");
-        out.print("Please type in the student's id:\n");
-        out.print("--------------------------------------------------------------------------------\n");
-        out.println();
-
-        String s = inputReader.readLine();
-        if (s == null) {
-            throw new EOFException(
-                    "You didn't type in any instruction!\n");
-        }
-        // Student stu = FileHandler.addStudentToCourse(s, course.getCourseid());
-        //course.addStudent(stu);
-        out.print("--------------------------------------------------------------------------------\n");
-        out.print("Successfully added the student to the course!\n");
-        out.print("--------------------------------------------------------------------------------\n");
-
-        // to-do
-        // where to get the new student info: construct a new one or search from main
-        // student list?
-
-    }
 
     /**
      * Read export file format from input.
@@ -492,27 +364,12 @@ public class ProfTextPlayer {
      */
     public void exportSessions() throws Exception {
         String format = readFormat("Please choose the format (json or xml): \n");
-//        out.print("--------------------------------------------------------------------------------\n");
-//        out.print("Please type in the file path that you want to export to (including file name): \n");
-//        out.print("--------------------------------------------------------------------------------\n");
-//        out.println();
-//
-//        String path = inputReader.readLine();
+
         Date date = new Date();
         String path = "src/profExportReport/" + section.getSectionId() + "_" + date.toString() + "." + format;
-//        List<String> fields = new ArrayList<>();
-//        fields.add("studentID");
-//        fields.add("legalName");
-//        fields.add("displayName");
-//        fields.add("email");
-//        fields.add("status");
+
         ExportService.exportSectionAttendanceDataForProfessor(section.getSectionId(), format, path);
         sendFileService.sendFile(out, path);
-        // ExportService.exportToFile(course.getSessions(), format, fields, path);
-//        out.print("--------------------------------------------------------------------------------\n");
-//        out.print("Successfully exported course attendance records!\n");
-//        out.print("--------------------------------------------------------------------------------\n");
-
     }
 
     /**
@@ -526,9 +383,6 @@ public class ProfTextPlayer {
                 out.print("--------------------------------------------------------------------------------\n");
                 out.print("1. Start a new session and take attendance.\n" +
                         "2. Change attendance record of a student in one session.\n" +
-//                        "3. Change display name of a student.\n" +
-//                        "4. Add a student to this course.\n" +
-//                        "5. Remove a student from this course.\n" +
                         "3. Export attendance records of a session.\n" +
                         "4. Exit this course.\n" +
                         "Above are all the available actions. What do you want to do? Please type in the index number:\n");
@@ -541,12 +395,6 @@ public class ProfTextPlayer {
                     full_takeAttendance();
                 } else if (index == 2) {
                     changeStatus();
-//                } else if (index == 3) {
-//                    changeDisplayName();
-//                } else if (index == 4) {
-//                    addStudent();
-//                } else if (index == 5) {
-//                    removeStudent();
                 } else if (index == 3) {
                     // todo
                     // add export method
@@ -573,5 +421,8 @@ public class ProfTextPlayer {
         }
     }
 
+    public BufferedReader getInputReader() {
+        return inputReader;
+    }
 }
 

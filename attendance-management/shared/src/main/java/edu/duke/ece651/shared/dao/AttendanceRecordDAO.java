@@ -36,9 +36,9 @@ public class AttendanceRecordDAO extends BasicDAO<AttendanceRecord> {
 
         List<Map<String, Object>> res = queryMultiMapped(sql, sessionId);
         List<AttendanceRecord> recordList = new ArrayList<>();
-        if(res == null) {
-            return null;
-        }
+        // if(res == null) {
+        //     return null;
+        // }
         for(Map<String, Object> map: res) {
             AttendanceRecord record =  new AttendanceRecord((int)map.get("record_id"), (int)map.get("session_id"), (String)map.get("student_id"), new Status(((String)map.get("status")).charAt(0)));
             recordList.add(record);
@@ -56,9 +56,9 @@ public class AttendanceRecordDAO extends BasicDAO<AttendanceRecord> {
 
         List<Map<String, Object>> res = queryMultiMapped(sql, studentId, sectionId);
         List<AttendanceRecord> recordList = new ArrayList<>();
-        if(res == null) {
-            return null;
-        }
+        // if(res == null) {
+        //     return null;
+        // }
         for(Map<String, Object> map: res) {
             AttendanceRecord record =  new AttendanceRecord((int)map.get("record_id"), (int)map.get("session_id"), (String)map.get("student_id"), new Status(((String)map.get("status")).charAt(0)));
             recordList.add(record);
@@ -71,9 +71,9 @@ public class AttendanceRecordDAO extends BasicDAO<AttendanceRecord> {
         // return querySingle(sql, AttendanceRecord.class, sessionId, studentId);
 
         Map<String, Object> res = querySingleMapped(sql, sessionId, studentId);
-        if(res == null) {
-            return null;
-        }
+        // if(res == null) {
+        //     return null;
+        // }
         return new AttendanceRecord((int)res.get("record_id"), (int)res.get("session_id"), (String)res.get("student_id"), new Status(((String)res.get("status")).charAt(0)));
     }    
 
@@ -83,9 +83,9 @@ public class AttendanceRecordDAO extends BasicDAO<AttendanceRecord> {
 
         List<Map<String, Object>> res = queryMultiMapped(sql, studentId);
         List<AttendanceRecord> recordList = new ArrayList<>();
-        if(res == null) {
-            return null;
-        }
+        // if(res == null) {
+        //     return null;
+        // }
         for(Map<String, Object> map: res) {
             AttendanceRecord record =  new AttendanceRecord((int)map.get("record_id"), (int)map.get("session_id"), (String)map.get("student_id"), new Status(((String)map.get("status")).charAt(0)));
             recordList.add(record);
@@ -102,9 +102,9 @@ public class AttendanceRecordDAO extends BasicDAO<AttendanceRecord> {
 
         List<Map<String, Object>> res = queryMultiMapped(sql, sectionId);
         List<AttendanceRecord> recordList = new ArrayList<>();
-        if(res == null) {
-            return null;
-        }
+        // if(res == null) {
+        //     return null;
+        // }
         for(Map<String, Object> map: res) {
             AttendanceRecord record =  new AttendanceRecord((int)map.get("record_id"), (int)map.get("session_id"), (String)map.get("student_id"), new Status(((String)map.get("status")).charAt(0)));
             recordList.add(record);

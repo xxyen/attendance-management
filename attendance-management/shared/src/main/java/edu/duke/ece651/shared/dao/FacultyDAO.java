@@ -58,9 +58,9 @@ public class FacultyDAO extends BasicDAO<Professor> {
         String sql = " SELECT user_id, password_hash, faculty_name, email FROM faculty WHERE faculty_name = ?";
         List<Map<String, Object>> res = queryMultiMapped(sql, legalName);
         List<Professor> facultyList = new ArrayList<>();
-        if(res == null) {
-            return null;
-        }
+        // if(res == null) {
+        //     return null;
+        // }
         for(Map<String, Object> map: res) {
             Professor faculty = new Professor((String)map.get("user_id"),(String)map.get("password_hash"), (String)map.get("faculty_name"), new Email((String)map.get("email")));
             facultyList.add(faculty);
@@ -73,9 +73,9 @@ public class FacultyDAO extends BasicDAO<Professor> {
         String sql = "SELECT user_id, password_hash, faculty_name, email FROM faculty";
         List<Map<String, Object>> res = queryMultiMapped(sql);
         Set<Professor> facultySet = new HashSet<>();
-        if(res == null) {
-            return null;
-        }
+        // if(res == null) {
+        //     return null;
+        // }
         for(Map<String, Object> map: res) {
             Professor faculty = new Professor((String)map.get("user_id"),(String)map.get("password_hash"), (String)map.get("faculty_name"), new Email((String)map.get("email")));
             facultySet.add(faculty);

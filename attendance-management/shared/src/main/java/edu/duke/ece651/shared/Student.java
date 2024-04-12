@@ -73,10 +73,6 @@ public class Student implements User {
     this.displayName = displayName;
   }
 
-  public void setLegalName(String legalName) throws IOException {
-    this.legalName = legalName;
-  }
-
   public void setEmailAddr(Email email) throws IOException {
     this.email = email;
   }

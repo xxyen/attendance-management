@@ -32,6 +32,10 @@ class StudentTest {
         assertTrue(s1.setPwd("aaa123"));
         assertFalse(s1.setPwd(""));
         assertFalse(s1.isDefaultPwd());
+
+        s1.setEmail("abc@gmail.com");
+        s1.setUserid("111");
+        s1.toString();
     }
 
     @Test

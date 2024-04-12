@@ -15,21 +15,26 @@ public class GlobalSettingDAO extends BasicDAO<Object> {
     return update(sql, permissionString, cnt);
   }
 
+  public int updateDisplayNamePermissionAll(String permission, int cnt) {
+    String sql = "UPDATE global_settings SET setting_value = ?, modify_count = ? WHERE setting_name = 'allow_modify_display_name'";
+    return update(sql, permission, cnt);
+  }
+
   public int queryModificationCount(String settingName) {
     String sql = " SELECT modify_count FROM global_settings WHERE setting_name = ?";
     Map<String, Object> res = querySingleMapped(sql, settingName);
-    if (res == null) {
-      throw new NullPointerException("Failed to query display name permission!");
-    }
+    // if (res == null) {
+    //   throw new NullPointerException("Failed to query display name permission!");
+    // }
     return (int) res.get("modify_count");
   }
 
   public boolean queryDisplayNamePermission() {
     String sql = " SELECT setting_value FROM global_settings WHERE setting_name = 'allow_modify_display_name'";
     Map<String, Object> res = querySingleMapped(sql);
-    if (res == null) {
-      throw new NullPointerException("Failed to query display name permission!");
-    }
+    // if (res == null) {
+    //   throw new NullPointerException("Failed to query display name permission!");
+    // }
     String ans = (String) res.get("setting_value");
     if (ans.equals("true")) {
       return true;
