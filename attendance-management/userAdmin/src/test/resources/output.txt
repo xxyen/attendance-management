@@ -1,0 +1,124 @@
+Welcome to the user admini app!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to create? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+Please enter a positive integer within the listed ones! (1/2/3)
+Which type of user would you like to create? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to remove? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+Please enter a positive integer within the listed ones! (1/2/3)
+Which type of user would you like to remove? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to remove? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+Please enter a positive integer within the listed ones! (1/2/3)
+Which type of user would you like to remove? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+-----------------All Faculty members-----------------
+userid: prof002,  name: Susan L,  email: sue@duke.edu
+userid: prof001,  name: John W,  email: john@gmail.com
+
+--------------------All Students--------------------
+userid: az161,  name: Aoli Zhou,  email: az161@duke.edu
+userid: stu003,  name: Mike F,  email: mike@gmail.com
+userid: stu002,  name: Jane Doe,  email: jane@gmail.com
+userid: stu001,  name: John Smith,  email: cp357@duke.edu
+userid: 111,  name: 222,  email: abc@def.com
+-----------------------------------------------------
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Current setting DOES NOT allow students to have display names different from their legal names.
+Please enter Y or N to specify if you would like to allow it. Warning: this is a global setting, not specific to any student.
+Setting updated successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Current setting allows students to have display names different from their legal names.
+Please enter Y or N to specify if you would like to allow it. Warning: this is a global setting, not specific to any student.
+Setting updated successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Please enter a positive integer within the listed ones! (1/2/3/4/5/6)
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Current setting DOES NOT allow students to have display names different from their legal names.
+Please enter Y or N to specify if you would like to allow it. Warning: this is a global setting, not specific to any student.
+Invalid input: you should only type in y or n! Please try again!
+Please enter Y or N to specify if you would like to allow it. Warning: this is a global setting, not specific to any student.
+Setting updated successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Current setting allows students to have display names different from their legal names.
+Please enter Y or N to specify if you would like to allow it. Warning: this is a global setting, not specific to any student.
+Setting updated successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system

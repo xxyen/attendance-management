@@ -1,0 +1,266 @@
+Welcome to the user admini app!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Please enter a positive integer within the listed ones! (1/2/3/4/5/6)
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to create? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to create? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+You are creating a student. Their display names are the same as their legal names for now. You may modify those later if it is allowed.
+Please provide listed information separated by comma, no space(unless it is part of the information):
+userid(must be unique for everyone), legal name, email address
+Student testUserStu001 added successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to modify? How would you prefer to search for the faculty member? Please enter the number to choose.
+1. search for a student by user id, and modify it
+2. get student(s) info by legal name, and search by user id to modify it
+3. search for a faculty member by user id, and modify it
+4. get faculty member(s) info by legal name, and search by user id to modify it
+5. back to the previous menu
+Please enter a positive integer within the listed ones! (1/2/3/4)
+Which type of user would you like to modify? How would you prefer to search for the faculty member? Please enter the number to choose.
+1. search for a student by user id, and modify it
+2. get student(s) info by legal name, and search by user id to modify it
+3. search for a faculty member by user id, and modify it
+4. get faculty member(s) info by legal name, and search by user id to modify it
+5. back to the previous menu
+Please provide user id of the student you would like to modify:
+Failed to find the faculty member: No such student with this user id found! Please try again!
+Please provide user id of the student you would like to modify:
+You are modifying this student:
+userid: testUserStu001
+legal name: Test Stu
+display name: Test Stu
+email: teststu@duke.edu
+Please provide listed information:
+display name, email address  (separated by comma, no space, unless it is part of the information)
+Student testUserStu001 modified successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to modify? How would you prefer to search for the faculty member? Please enter the number to choose.
+1. search for a student by user id, and modify it
+2. get student(s) info by legal name, and search by user id to modify it
+3. search for a faculty member by user id, and modify it
+4. get faculty member(s) info by legal name, and search by user id to modify it
+5. back to the previous menu
+Please provide legal name of the student you would like to modify:
+Please check the result:
+1. userid: testUserStu001,  email: teststumodify@duke.edu
+Please provide user id of the student you would like to modify:
+Failed to find the faculty member: No such student with this user id found! Please try again!
+Please provide user id of the student you would like to modify:
+You are modifying this student:
+userid: testUserStu001
+legal name: Test Stu
+display name: Test Stu
+email: teststumodify@duke.edu
+Please provide listed information:
+display name, email address  (separated by comma, no space, unless it is part of the information)
+Student testUserStu001 modified successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+-----------------All Faculty members-----------------
+userid: prof002,  name: Susan L,  email: sue@duke.edu
+userid: prof001,  name: John W,  email: john@gmail.com
+
+--------------------All Students--------------------
+userid: az161,  name: Aoli Zhou,  email: az161@duke.edu
+userid: stu003,  name: Mike,  email: mike@gmail.com
+userid: stu002,  name: Jane,  email: jane@gmail.com
+userid: stu001,  name: John,  email: cp357@duke.edu
+userid: testUserStu001,  name: Test Stu,  email: teststu@duke.edu
+userid: 111,  name: 223,  email: abc@def.com
+-----------------------------------------------------
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to remove? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to remove? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+Please enter a positive integer within the listed ones! (1/2/3)
+Which type of user would you like to remove? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+Please enter the userid of the student to be removed:
+Are you sure to remove student testUserStu001? (Y/n)
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to remove? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+Please enter the userid of the student to be removed:
+Are you sure to remove student testUserStu001? (Y/n)
+Student testUserStu001 removed successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to create? Please enter the number to choose.
+1. a student
+2. a faculty member
+3. back to the previous menu
+You are creating a faculty member. Please provide listed information separated by comma, no space(unless it is part of the information):
+userid(must be unique for everyone), legal name, email address
+Faculty memeber testUserProf001 added successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to modify? How would you prefer to search for the faculty member? Please enter the number to choose.
+1. search for a student by user id, and modify it
+2. get student(s) info by legal name, and search by user id to modify it
+3. search for a faculty member by user id, and modify it
+4. get faculty member(s) info by legal name, and search by user id to modify it
+5. back to the previous menu
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to modify? How would you prefer to search for the faculty member? Please enter the number to choose.
+1. search for a student by user id, and modify it
+2. get student(s) info by legal name, and search by user id to modify it
+3. search for a faculty member by user id, and modify it
+4. get faculty member(s) info by legal name, and search by user id to modify it
+5. back to the previous menu
+Please provide user id of the faculty member you would like to modify:
+You are modifying this faculty member:
+userid: testUserProf001
+legal name: Test Prof
+testprof@duke.edu
+Please provide listed information:
+email address
+Faculty member testUserProf001 modified successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Which type of user would you like to modify? How would you prefer to search for the faculty member? Please enter the number to choose.
+1. search for a student by user id, and modify it
+2. get student(s) info by legal name, and search by user id to modify it
+3. search for a faculty member by user id, and modify it
+4. get faculty member(s) info by legal name, and search by user id to modify it
+5. back to the previous menu
+Please provide legal name of the faculty member you would like to modify:
+Please check the result:
+1. userid: testUserProf001,  email: testprofmodigy@duke.edu
+Please provide user id of the faculty member you would like to modify:
+Failed to find the faculty member: No such faculty member with this user id found! Please try again!
+Please provide user id of the faculty member you would like to modify:
+You are modifying this faculty member:
+userid: testUserProf001
+legal name: Test Prof
+testprofmodigy@duke.edu
+Please provide listed information:
+email address
+Faculty member testUserProf001 modified successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Current setting allows students to have display names different from their legal names.
+Please enter Y or N to specify if you would like to allow it. Warning: this is a global setting, not specific to any student.
+Setting updated successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Current setting DOES NOT allow students to have display names different from their legal names.
+Please enter Y or N to specify if you would like to allow it. Warning: this is a global setting, not specific to any student.
+Invalid input: you should only type in y or n! Please try again!
+Please enter Y or N to specify if you would like to allow it. Warning: this is a global setting, not specific to any student.
+Setting updated successfully!
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system
+Please enter a positive integer within the listed ones! (1/2/3/4/5/6)
+What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.
+1. add a user
+2. remove a user
+3. modify a user
+4. View all users
+5. Modify display name modification setting
+6. exit the system

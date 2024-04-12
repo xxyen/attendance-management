@@ -1,26 +1,32 @@
 {
-    "attendanceScores": [{
-        "studentId": "S00A",
-        "score": 50
-    }],
+    "attendanceScores": [
+        {
+            "studentId": "S00A",
+            "score": 50
+        }
+    ],
     "sessions": [
         {
             "sessionDate": "2024-04-11",
             "sessionId": 494,
-            "attendanceRecords": [{
-                "studentId": "S00A",
-                "studentDisplayName": "display stud0A",
-                "status": "p"
-            }]
+            "attendanceRecords": [
+                {
+                    "studentId": "S00A",
+                    "studentDisplayName": "display stud0A",
+                    "status": "p"
+                }
+            ]
         },
         {
             "sessionDate": "2024-04-11",
             "sessionId": 495,
-            "attendanceRecords": [{
-                "studentId": "S00A",
-                "studentDisplayName": "display stud0A",
-                "status": "a"
-            }]
+            "attendanceRecords": [
+                {
+                    "studentId": "S00A",
+                    "studentDisplayName": "display stud0A",
+                    "status": "a"
+                }
+            ]
         }
     ],
     "sectionId": 507
