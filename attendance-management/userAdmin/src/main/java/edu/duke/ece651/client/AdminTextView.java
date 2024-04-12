@@ -12,15 +12,32 @@ import edu.duke.ece651.shared.model.Section;
 import edu.duke.ece651.shared.ReaderUtilities;
 import edu.duke.ece651.userAdmin.UserManagement;
 
-
+/**
+ * This class provides a text-based interface for managing users, including adding, removing, modifying users,
+ * viewing all users, and modifying display name permission settings.
+ */
 public class AdminTextView {
     private static UserManagement admin = new UserManagement();
 
+    /**
+     * Starts the text-based user admin app.
+     *
+     * @param inputReader   BufferedReader object for reading user input
+     * @param outputStream  PrintStream object for displaying output
+     */
     public static void start(BufferedReader inputReader, PrintStream outputStream) {
         outputStream.println("Welcome to the user admini app!");
         chooseBasicAction(inputReader, outputStream);
     }
 
+    /**
+ * Allows the user to choose a basic action from a menu.
+ * The user can add a user, remove a user, modify a user, view all users,
+ * modify the display name modification setting, or exit the system.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
      public static void chooseBasicAction(BufferedReader inputReader, PrintStream outputStream) {
         while(true){
             outputStream.println("What would you like to do? Please enter the number to choose.  Hint: the user could be either a faculty member or a student.");
@@ -44,6 +61,11 @@ public class AdminTextView {
         }
     }
 
+    /**
+ * Displays information about all users (both faculty members and students).
+ * 
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void viewAllUsers(PrintStream outputStream) {
         Set<Student> studentSet = UserManagement.getAllStudent();
         Set<Professor> facultySet = UserManagement.getAllFaculty();
@@ -60,6 +82,12 @@ public class AdminTextView {
         outputStream.println("-----------------------------------------------------");
     }
 
+    /**
+ * Sets the permission for students to have display names different from their legal names.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void setDisplayNamePermission(BufferedReader inputReader, PrintStream outputStream) {
         if (UserManagement.getDisplayNamePermission()) {
             outputStream.println("Current setting allows students to have display names different from their legal names.");
@@ -72,6 +100,12 @@ public class AdminTextView {
         outputStream.println("Setting updated successfully!");
     }
 
+    /**
+ * Adds a new user, either a student or a faculty member.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void addUser(BufferedReader inputReader, PrintStream outputStream){
         while(true) {
             outputStream.println("Which type of user would you like to create? Please enter the number to choose.\n1. a student\n2. a faculty member\n3. back to the previous menu");
@@ -90,6 +124,12 @@ public class AdminTextView {
         }
     }
 
+    /**
+ * Adds a new faculty member.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void addFaculty(BufferedReader inputReader, PrintStream outputStream) {
         while(true) {
             outputStream.println("You are creating a faculty member. Please provide listed information separated by comma, no space(unless it is part of the information):");
@@ -119,6 +159,12 @@ public class AdminTextView {
         
     }
 
+    /**
+ * Adds a new student.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void addStudent(BufferedReader inputReader, PrintStream outputStream) {
         if(UserManagement.getDisplayNamePermissionModificationCount() == 0) {
             String prompt = "By default, students are not allowed to have display names different from their legal names. Would you like to allow this? (Y/N)";
@@ -152,6 +198,12 @@ public class AdminTextView {
         }
     }
 
+    /**
+ * Removes a user, either a student or a faculty member.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void removeUser(BufferedReader inputReader, PrintStream outputStream) {
         while(true) {
             outputStream.println("Which type of user would you like to remove? Please enter the number to choose.\n1. a student\n2. a faculty member\n3. back to the previous menu");
@@ -171,6 +223,12 @@ public class AdminTextView {
         }
     }
 
+    /**
+ * Removes a faculty member.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void removeFaculty(BufferedReader inputReader, PrintStream outputStream) {
         while(true) {
             try{
@@ -229,7 +287,12 @@ public class AdminTextView {
 //   }
 
     
-
+    /**
+ * Removes a student.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void removeStudent(BufferedReader inputReader, PrintStream outputStream) {
         while(true) {
             try{
@@ -250,6 +313,12 @@ public class AdminTextView {
         }
     }
 
+    /**
+ * Modifies a user, either a student or a faculty member.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void modifyUser(BufferedReader inputReader, PrintStream outputStream) {
         while(true) {
             outputStream.println("Which type of user would you like to modify? How would you prefer to search for the faculty member? Please enter the number to choose.");
@@ -284,6 +353,13 @@ public class AdminTextView {
         }
     }
 
+    /**
+ * Retrieves a student by their user ID.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ * @return              The Student object corresponding to the provided user ID
+ */
     private static Student getStudentByID(BufferedReader inputReader, PrintStream outputStream) {
         while(true) {
             try {
@@ -299,6 +375,12 @@ public class AdminTextView {
         }
     }
 
+    /**
+ * Searches for students by their legal name.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void findStudentByLegalName(BufferedReader inputReader, PrintStream outputStream) {
         while(true) {
             try {
@@ -321,6 +403,13 @@ public class AdminTextView {
         }
     }
 
+    /**
+ * Retrieves a faculty member by their user ID.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ * @return              The Professor object corresponding to the provided user ID
+ */
     private static Professor getFacultyByID(BufferedReader inputReader, PrintStream outputStream) {
         while(true) {
             try {
@@ -336,6 +425,12 @@ public class AdminTextView {
         }
     }
 
+    /**
+ * Searches for faculty members by their legal name.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ */
     private static void findFacultyByLegalName(BufferedReader inputReader, PrintStream outputStream) {
         while(true) {
             try {
@@ -358,7 +453,13 @@ public class AdminTextView {
         }
     }
 
-
+    /**
+ * Modifies a faculty member.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ * @param faculty       The Professor object representing the faculty member to be modified
+ */
     private static void modifyFaculty(BufferedReader inputReader, PrintStream outputStream, Professor faculty) {
         while(true) {
             outputStream.println("You are modifying this faculty member:");
@@ -383,6 +484,13 @@ public class AdminTextView {
     }
 
 
+    /**
+ * Modifies a student.
+ * 
+ * @param inputReader   BufferedReader object for reading user input
+ * @param outputStream  PrintStream object for displaying output to the user
+ * @param student       The Student object representing the student to be modified
+ */
     private static void modifyStudent(BufferedReader inputReader, PrintStream outputStream, Student student) {
         while(true) {
             outputStream.println("You are modifying this student:");
