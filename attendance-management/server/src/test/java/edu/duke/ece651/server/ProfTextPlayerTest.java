@@ -72,6 +72,23 @@ class ProfTextPlayerTest {
         ProfTextPlayer player = createTextPlayer("abc\n" +
                 "9\n" +
                 "1\n" +
+                "wef\n" +
+                "1\n" +
+                "8\n" +
+                "1\n" +
+                "2\n" +
+                "fwegasg\n" +
+                "1\n" +
+                "2\n" +
+                "12/31/2042\n" +
+                "1\n" +
+                "2\n" +
+                "12/31/2020\n" +
+                "awaf\n" +
+                "y\n" +
+                "a\n" +
+                "1\n" +
+                "1\n" +
                 "afwe\n" +
                 "e\n" +
                 "a\n" +
