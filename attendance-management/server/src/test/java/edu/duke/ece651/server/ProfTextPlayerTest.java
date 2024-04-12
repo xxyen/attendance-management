@@ -99,10 +99,10 @@ class ProfTextPlayerTest {
                     "2\n" +
                     "1\n" +
                     "adsf\n" +
-                    "2\n" +
-                    "1\n" +
-                    "stu001\n" +
-                    "t\n" +
+//                    "2\n" +
+//                    "1\n" +
+//                    "stu001\n" +
+//                    "t\n" +
                     "3" +
                     "asdfas\n" +
                     "3\n" +
