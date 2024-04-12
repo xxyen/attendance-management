@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sectionData>
-	<sectionId>501</sectionId>
+	<sectionId>507</sectionId>
 	<attendanceScores>
 		<score>
 			<studentId>S00A</studentId>
@@ -8,7 +8,7 @@
 		</score>
 	</attendanceScores>
 	<sessions>
-		<session id="483">
+		<session id="494">
 			<date>2024-04-11</date>
 			<attendanceRecord>
 				<studentId>S00A</studentId>
@@ -16,7 +16,7 @@
 				<status>p</status>
 			</attendanceRecord>
 		</session>
-		<session id="484">
+		<session id="495">
 			<date>2024-04-11</date>
 			<attendanceRecord>
 				<studentId>S00A</studentId>

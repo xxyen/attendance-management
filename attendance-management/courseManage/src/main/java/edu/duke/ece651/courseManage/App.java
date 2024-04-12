@@ -10,14 +10,19 @@ import java.io.InputStreamReader;
 
 public class App {
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws IOException {
     System.out.println("\n******************************************\n" +
                        "Welcome to the Course Management App!\n" +
                        "******************************************\n");
     BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
     courseManager CourseManager = new courseManager(inputReader, System.out);
     //CourseManager.createCourse(inputReader, System.out);
-    CourseManager.loop();
+    try {
+      CourseManager.loop();
+    }
+    catch(Exception e) {
+      System.exit(0);
+    }
     System.exit(0);
   }
 }

@@ -1,0 +1,249 @@
+
+******************************************
+Welcome to the Course Management App!
+******************************************
+
+--------------------------------------------------------------------------------
+MAIN MENU
+1.  View the list of all courses.
+2.  Add a new course.
+3.  Remove an existing course.
+4.  Update an existing course.
+5.  Exit the system.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+Please enter the course information required below to view sections.
+Course ID: 
+Course ID does not exist! Please try again!
+Course ID: 
+--------------------------------------------------------------------------------
+Here is the list of all sections:
+Section ID: 383     Course ID: 3e     Professor ID: prof001
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are removing an existing section! Please enter the information required below.
+Course ID: 
+Section ID: 
+********************************************************************************
+DANGER!!! Remove a section will be destructive, do you want to continue? [Y/N]
+********************************************************************************
+--------------------------------------------------------------------------------
+Removal cancelled! Nothing is removed.
+Now back to the UPDATE COURSE MENU.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are removing an existing section! Please enter the information required below.
+Course ID: 
+Section ID: 
+********************************************************************************
+DANGER!!! Remove a section will be destructive, do you want to continue? [Y/N]
+********************************************************************************
+--------------------------------------------------------------------------------
+Successfully removed an existing section!
+Now back to the UPDATE COURSE MENU.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Here is the list of all students:
+Student{userid='az161', password='az161', legalName='Aoli Zhou', displayName='Aoli Zhou', email=edu.duke.ece651.shared.Email@714e1edf}
+Student{userid='stu003', password='123', legalName='Mike F', displayName='Mike', email=edu.duke.ece651.shared.Email@adddd686}
+Student{userid='stu002', password='123', legalName='Jane Doe', displayName='Jane', email=edu.duke.ece651.shared.Email@ab4135be}
+Student{userid='stu001', password='123', legalName='John Smith', displayName='John', email=edu.duke.ece651.shared.Email@1822afca}
+Student{userid='111', password='111', legalName='222', displayName='223', email=edu.duke.ece651.shared.Email@99839259}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+Section ID: 
+Section ID does not exist! Please try again!
+Section ID: 
+--------------------------------------------------------------------------------
+Here is the list of all enrolled students:
+Enrollment{enrollmentId=162, sectionId=261, studentId='stu002', enrollmentDate=2024-04-09 00:00:00, status='enrolled', receiveNotifications=true}
+Enrollment{enrollmentId=178, sectionId=261, studentId='111', enrollmentDate=2024-04-10 00:00:00, status='enrolled', receiveNotifications=true}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+Please enter the course information required below to view sections.
+Course ID: 
+--------------------------------------------------------------------------------
+Here is the list of all sections:
+Section ID: 261     Course ID: 2w     Professor ID: prof001
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are adding a new studnet to a section! Please enter the information required below.
+Section ID: 
+Student ID: 
+Student ID does not exist! Please try again!
+Student ID: 
+Student ID = 111
+This student is already enrolled! Please try again!
+Student ID: 
+Student ID = stu001
+Do you want to receive notifications? [Y/N]
+--------------------------------------------------------------------------------
+Successfully added a new student!
+Now back to the UPDATE COURSE MENU.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are adding new studnets to a section! Please enter the information required below.
+Section ID: 
+Do you want to receive notifications? [Y/N]
+CSV File Path:
+Roster file not found at: roster/roster1. Please try again!
+--------------------------------------------------------------------------------
+Here is the list of students to be added to the section:
+Student{userid='111', password='111', legalName='222', displayName='223', email=edu.duke.ece651.shared.Email@99839259}
+Student{userid='123', password='123', legalName='234', displayName='345', email=edu.duke.ece651.shared.Email@ed9f509b}
+--------------------------------------------------------------------------------
+
+Student 111 is already enrolled! This enrollment will be skipped.
+Student 123 does not exist! This enrollment will be skipped.
+
+--------------------------------------------------------------------------------
+Successfully added new students from file!
+Now back to the UPDATE COURSE MENU.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are removing an existing enrollment! Please enter the information required below.
+Course ID: 
+Section ID: 
+Enrollment ID: 

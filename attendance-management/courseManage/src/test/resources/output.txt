@@ -1,0 +1,289 @@
+
+******************************************
+Welcome to the Course Management App!
+******************************************
+
+--------------------------------------------------------------------------------
+MAIN MENU
+1.  View the list of all courses.
+2.  Add a new course.
+3.  Remove an existing course.
+4.  Update an existing course.
+5.  Exit the system.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Here is the list of current courses:
+ID: 1     Name: Course1
+ID: 1q     Name: 1Q
+ID: 2w     Name: 2W
+ID: 3e     Name: 3EE
+ID: ece651     Name: Software Engineer
+ID: test001     Name: Testing
+ID: test002     Name: TesingCourse
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+MAIN MENU
+1.  View the list of all courses.
+2.  Add a new course.
+3.  Remove an existing course.
+4.  Update an existing course.
+5.  Exit the system.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are creating a new course! Please enter the information required below.
+Course ID: 
+Course ID exists! Please try again!
+Course ID: 
+Course ID = 5t
+Course Name: 
+--------------------------------------------------------------------------------
+Successfully created a new course!
+Now back to the MAIN MENU.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MAIN MENU
+1.  View the list of all courses.
+2.  Add a new course.
+3.  Remove an existing course.
+4.  Update an existing course.
+5.  Exit the system.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are removing an existing course! Please enter the information required below.
+Course ID: 
+********************************************************************************
+DANGER!!! Remove a class will be destructive, do you want to continue? [Y/N]
+********************************************************************************
+--------------------------------------------------------------------------------
+Removal cancelled! Nothing is removed.
+Now back to the MAIN MENU.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MAIN MENU
+1.  View the list of all courses.
+2.  Add a new course.
+3.  Remove an existing course.
+4.  Update an existing course.
+5.  Exit the system.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are removing an existing course! Please enter the information required below.
+Course ID: 
+********************************************************************************
+DANGER!!! Remove a class will be destructive, do you want to continue? [Y/N]
+********************************************************************************
+--------------------------------------------------------------------------------
+Successfully removed an existing course!
+Now back to the MAIN MENU.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+MAIN MENU
+1.  View the list of all courses.
+2.  Add a new course.
+3.  Remove an existing course.
+4.  Update an existing course.
+5.  Exit the system.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are changing name of an existing course! Please enter the information required below.
+Course ID: 
+Please enter the new name of the course below.
+Course Name: 
+--------------------------------------------------------------------------------
+Successfully changed course name!
+Now back to the UPDATE COURSE MENU.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+You are back to the MAIN MENU!
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+MAIN MENU
+1.  View the list of all courses.
+2.  Add a new course.
+3.  Remove an existing course.
+4.  Update an existing course.
+5.  Exit the system.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Here is the list of current courses:
+ID: 1     Name: Course1
+ID: 1q     Name: 1Q
+ID: 2w     Name: 2W
+ID: 3e     Name: 3E
+ID: ece651     Name: Software Engineer
+ID: test001     Name: Testing
+ID: test002     Name: TesingCourse
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+MAIN MENU
+1.  View the list of all courses.
+2.  Add a new course.
+3.  Remove an existing course.
+4.  Update an existing course.
+5.  Exit the system.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Here is the list of all professors:
+ID: prof001     Name: John W
+ID: prof002     Name: Susan L
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+Please enter the course information required below to view sections.
+Course ID: 
+--------------------------------------------------------------------------------
+Here is the list of all sections:
+Section ID: 261     Course ID: 2w     Professor ID: prof001
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+Please enter the course information required below to view sections.
+Course ID: 
+Course ID does not exist! Please try again!
+Course ID: 
+--------------------------------------------------------------------------------
+Here is the list of all sections:
+Section ID: 261     Course ID: 2w     Professor ID: prof001
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are creating a new section! Please enter the information required below.
+Course ID: 
+Professor ID: 
+Professor ID does not exist! Please try again!
+Professor ID: 
+Professor ID = prof001
+newSection  courseId = 3e profId = prof001
+--------------------------------------------------------------------------------
+Successfully created a new section!
+Now back to the UPDATE COURSE MENU.
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+UPDATE COURSE MENU
+1.  Change course name.
+2.  View the list of all professors.
+3.  View the list of current sections.
+4.  Add a new section.
+5.  Remove an existing section.
+6.  View the list of all students.
+7.  View the list of students in a section.
+8.  Add one student to a section.
+9.  Add a list of students to a section.
+10. Remove one student from a section.
+11. Exit to MAIN MENU.
+Above are all the available actions. What do you want to do? Please type in the index number:
+--------------------------------------------------------------------------------
+
+You are removing an existing section! Please enter the information required below.
+Course ID: 
+Course ID does not exist! Please try again!
+Course ID: 
+Section ID: 
+Invalid input: it is not a positive integer! Please try again!
+Section ID: 
