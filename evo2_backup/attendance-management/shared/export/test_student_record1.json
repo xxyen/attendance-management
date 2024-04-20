@@ -1,0 +1,17 @@
+{
+    "studentId": "S00A",
+    "studentDisplayName": "display stud0A",
+    "sessions": [
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 494,
+            "status": "p"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 495,
+            "status": "a"
+        }
+    ],
+    "attendanceScore": 50
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<studentAttendance>
+	<studentId>S00A</studentId>
+	<studentDisplayName>display stud0A</studentDisplayName>
+	<attendanceScore>50.00</attendanceScore>
+	<sessions>
+		<session>
+			<sessionId>494</sessionId>
+			<sessionDate>2024-04-11</sessionDate>
+			<status>p</status>
+		</session>
+		<session>
+			<sessionId>495</sessionId>
+			<sessionDate>2024-04-11</sessionDate>
+			<status>a</status>
+		</session>
+	</sessions>
+</studentAttendance>
