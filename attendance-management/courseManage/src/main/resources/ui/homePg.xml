@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import java.lang.Double?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="edu.duke.ece651.courseManage.controller.HomeController">
+  <columnConstraints>
+    <ColumnConstraints percentWidth="15.0" />
+    <ColumnConstraints percentWidth="70.0" />
+    <ColumnConstraints percentWidth="15.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints percentHeight="25.0" />
+    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="15.0" />
+  </rowConstraints>
+  <Label text="Course Management System: Home Page" GridPane.rowIndex="0" GridPane.columnIndex="1">
+  </Label>
+  <Button text="1.  View the list of all courses." GridPane.rowIndex="1" GridPane.columnIndex="1"
+          onAction="#viewCourses">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="2.  Add a new course." GridPane.rowIndex="2" GridPane.columnIndex="1">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="3.  Remove an existing course." GridPane.rowIndex="3" GridPane.columnIndex="1">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="4.  Update an existing course." GridPane.rowIndex="4" GridPane.columnIndex="1">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="5.  Exit the system." GridPane.rowIndex="5" GridPane.columnIndex="1">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+</GridPane>

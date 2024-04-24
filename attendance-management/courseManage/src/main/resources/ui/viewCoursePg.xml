@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import java.lang.Double?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml">
+  <columnConstraints>
+    <ColumnConstraints percentWidth="15.0" />
+    <ColumnConstraints percentWidth="70.0" />
+    <ColumnConstraints percentWidth="15.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints percentHeight="25.0" />
+    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="15.0" />
+  </rowConstraints>
+  <Label text="List of current courses:" GridPane.rowIndex="0" GridPane.columnIndex="1">
+  </Label>
+  <Button text="Back to home page." GridPane.rowIndex="5" GridPane.columnIndex="1">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+</GridPane>

@@ -3,13 +3,24 @@
  */
 package edu.duke.ece651.courseManage;
 
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
-public class App {
+import edu.duke.ece651.courseManage.controller.*;
 
+public class App extends Application {
+  /*
   public static void main(String[] args) throws IOException {
     System.out.println("\n******************************************\n" +
                        "Welcome to the Course Management App!\n" +
@@ -24,6 +35,19 @@ public class App {
       System.exit(0);
     }
     System.exit(0);
+  }
+  */
+  @Override
+  public void start(Stage stage) throws IOException {
+    //URL xmlResource = getClass().getResource("/ui/homePg.xml");
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/homePg.xml"));
+    GridPane gp = loader.load();
+    HomeController controller = loader.getController();
+    controller.setMainStage(stage);
+    Scene scene = new Scene(gp, 640, 480);
+    stage.setScene(scene);
+    stage.setTitle("Course Management System");
+    stage.show();
   }
 }
 
