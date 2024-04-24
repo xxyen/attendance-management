@@ -21,9 +21,11 @@ public class HomeController {
   private void viewCourses() throws Exception {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/viewCoursePg.xml"));
     Parent coursesPage = loader.load();
-    
+    // Set the controller for the view course page
+    ViewCourseController controller = loader.getController();
+    controller.setMainStage(mainStage);
     // Set the new scene on the existing stage
-    Scene scene = new Scene(coursesPage, 640, 480);
+    Scene scene = new Scene(coursesPage, 960, 720);
     mainStage.setScene(scene);
     mainStage.show();
   }

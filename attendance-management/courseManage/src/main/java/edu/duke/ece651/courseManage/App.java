@@ -44,7 +44,7 @@ public class App extends Application {
     GridPane gp = loader.load();
     HomeController controller = loader.getController();
     controller.setMainStage(stage);
-    Scene scene = new Scene(gp, 640, 480);
+    Scene scene = new Scene(gp, 960, 720);
     stage.setScene(scene);
     stage.setTitle("Course Management System");
     stage.show();
