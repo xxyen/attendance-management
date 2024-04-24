@@ -28,7 +28,8 @@
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="2.  Add a new course." GridPane.rowIndex="2" GridPane.columnIndex="1">
+  <Button text="2.  Add a new course." GridPane.rowIndex="2" GridPane.columnIndex="1"
+          onAction="#addCourse">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
