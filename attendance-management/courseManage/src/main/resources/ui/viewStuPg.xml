@@ -8,7 +8,7 @@
 <?import java.lang.Double?>
 
 <GridPane xmlns:fx="http://javafx.com/fxml"
-          fx:controller="edu.duke.ece651.courseManage.controller.ViewCourseController">
+          fx:controller="edu.duke.ece651.courseManage.controller.ViewStuController">
   <columnConstraints>
     <ColumnConstraints percentWidth="15.0" />
     <ColumnConstraints percentWidth="70.0" />
@@ -19,12 +19,12 @@
     <RowConstraints percentHeight="65.0" />
     <RowConstraints percentHeight="20.0" />
   </rowConstraints>
-  <Label text="List of current courses:" GridPane.rowIndex="0" GridPane.columnIndex="1">
+  <Label text="List of current students:" GridPane.rowIndex="0" GridPane.columnIndex="1">
   </Label>
-  <ListView fx:id="courseListView" GridPane.rowIndex="1" GridPane.columnIndex="1">
+  <ListView fx:id="stuListView" GridPane.rowIndex="1" GridPane.columnIndex="1">
   </ListView>
-  <Button text="Back To Home Page." GridPane.rowIndex="2" GridPane.columnIndex="1"
-          onAction="#backToHome">
+  <Button text="Back To Update Course Page." GridPane.rowIndex="2" GridPane.columnIndex="1"
+          onAction="#backToUpdatePage">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
