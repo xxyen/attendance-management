@@ -14,14 +14,27 @@ public class ClientTask extends AsyncTask<Void, String, Boolean> {
     private Socket socket;
     private BufferedReader input;
     private BufferedWriter output;
-    private String host;
-    private int port;
     private Consumer<String> onResponseReceived;
+
+    private String host;
+
+    private int port;
+
+//    public ClientTask(Socket socket, BufferedReader input, BufferedWriter output, Consumer<String> onResponseReceived) {
+//        this.host = "vcm-37924.vm.duke.edu";
+//        this.port = 12345;
+//        this.socket = socket;
+//        this.onResponseReceived = onResponseReceived;
+//
+//        this.input = input;
+//        this.output = output;
+//    }
 
     public ClientTask(String host, int port, Consumer<String> onResponseReceived) {
         this.host = host;
         this.port = port;
         this.onResponseReceived = onResponseReceived;
+
     }
 
     @Override
@@ -31,7 +44,7 @@ public class ClientTask extends AsyncTask<Void, String, Boolean> {
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             publishProgress("Connected to server");
-            Scanner scanner = new Scanner(System.in);
+//            Scanner scanner = new Scanner(System.in);
 
             // Example of sending a message to the server
             //sendMessage("Hello from client!");
@@ -46,15 +59,15 @@ public class ClientTask extends AsyncTask<Void, String, Boolean> {
                         return true; // End loop on "endConnection" command from server
                     }
                 }
-                System.out.print("Enter response: ");
-                String userResponse = scanner.nextLine();
-                output.write(userResponse + "\n");
-                output.flush();
+//                System.out.print("Enter response: ");
+//                String userResponse = scanner.nextLine();
+//                output.write(userResponse + "\n");
+//                output.flush();
 
-                if ("endConnection".equalsIgnoreCase(userResponse)) {
-                    flag = false;
-                    return true;
-                }
+//                if ("endConnection".equalsIgnoreCase(userResponse)) {
+//                    flag = false;
+//                    return true;
+//                }
 
             }
             return true;
