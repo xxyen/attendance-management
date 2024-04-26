@@ -1,0 +1,332 @@
+{
+    "studentId": "stu001",
+    "studentDisplayName": "John",
+    "sessions": [
+        {
+            "sessionDate": "2024-04-08",
+            "sessionId": 29,
+            "status": "t"
+        },
+        {
+            "sessionDate": "2024-04-09",
+            "sessionId": 71,
+            "status": "t"
+        },
+        {
+            "sessionDate": "2024-04-10",
+            "sessionId": 265,
+            "status": "t"
+        },
+        {
+            "sessionDate": "2023-12-31",
+            "sessionId": 266,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 489,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 490,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2001-01-01",
+            "sessionId": 491,
+            "status": "p"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 492,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 493,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 500,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 501,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 508,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 509,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 510,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 511,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 520,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 521,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 544,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 545,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 552,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 553,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 554,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 555,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 562,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 563,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 564,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 565,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 566,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 567,
+            "status": "p"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 568,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 569,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 570,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 571,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 572,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 573,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 574,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 575,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 576,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 577,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 584,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 585,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 592,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 593,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 594,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 595,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 596,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 597,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 610,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 611,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 612,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 613,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 620,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 621,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 625,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 626,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 636,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 637,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 644,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 645,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 652,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 653,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 654,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-16",
+            "sessionId": 655,
+            "status": "a"
+        },
+        {
+            "sessionDate": "2024-04-19",
+            "sessionId": 656,
+            "status": "p"
+        },
+        {
+            "sessionDate": "2023-05-20",
+            "sessionId": 657,
+            "status": "p"
+        }
+    ],
+    "attendanceScore": 9.846153846153847
+}

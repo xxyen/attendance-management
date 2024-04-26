@@ -1,0 +1,576 @@
+{
+    "attendanceScores": [{
+        "studentId": "stu001",
+        "score": 7.632783294297951E-16
+    }],
+    "sessions": [
+        {
+            "sessionDate": "2024-04-08",
+            "sessionId": 29,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "t"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-09",
+            "sessionId": 71,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "t"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-10",
+            "sessionId": 265,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "t"
+            }]
+        },
+        {
+            "sessionDate": "2023-12-31",
+            "sessionId": 266,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 489,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 490,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2001-01-01",
+            "sessionId": 491,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "p"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 492,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 493,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 500,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 501,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 508,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 509,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 510,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 511,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 520,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 521,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 544,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 545,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 552,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 553,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 554,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 555,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 562,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 563,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 564,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 565,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 566,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 567,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 568,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 569,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 570,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 571,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 572,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 573,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 574,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 575,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 576,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 577,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 584,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 585,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 592,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 593,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 594,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 595,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 596,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 597,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 610,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 611,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 612,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 613,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 620,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 621,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 625,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 626,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 636,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 637,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 644,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 645,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 652,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-11",
+            "sessionId": 653,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2020-12-31",
+            "sessionId": 654,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        },
+        {
+            "sessionDate": "2024-04-16",
+            "sessionId": 655,
+            "attendanceRecords": [{
+                "studentId": "stu001",
+                "studentDisplayName": "John",
+                "status": "a"
+            }]
+        }
+    ],
+    "sectionId": 5
+}

@@ -43,13 +43,13 @@ public class StuTextPlayer {
 
         while (flag) {
             try {
-                out.print("--------------------------------------------------------------------------------\n");
-                out.print("1. Check and change notification preferences.\n" +
-                        "2. Get report of your attendance.\n" +
-                        "3. Exit this course.\n" +
-                        "Above are all the available actions. What do you want to do? Please type in the index number:\n");
-                out.print("--------------------------------------------------------------------------------\n");
-                out.println();
+                // out.print("--------------------------------------------------------------------------------\n");
+                // out.print("1. Check and change notification preferences.\n" +
+                //         "2. Get report of your attendance.\n" +
+                //         "3. Exit this course.\n" +
+                //         "Above are all the available actions. What do you want to do? Please type in the index number:\n");
+                // out.print("--------------------------------------------------------------------------------\n");
+                //out.println();
 
                 int index = ReaderUtilities.readPositiveInteger(inputReader);
 
@@ -63,7 +63,7 @@ public class StuTextPlayer {
                         preference = "Not Receive";
                     }
 
-                    out.print("--------------------------------------------------------------------------------\n");
+                    //out.print("--------------------------------------------------------------------------------\n");
                     out.print("Your notification preferences of course: " +
                             section.getCourseId() +
                             ", sec: " +
@@ -71,7 +71,7 @@ public class StuTextPlayer {
                             " is: " +
                             preference +
                             "\n");
-                    out.print("--------------------------------------------------------------------------------\n");
+                    //out.print("--------------------------------------------------------------------------------\n");
                     changePreference(e);
                 } else if (index == 2) {
                     getReport();
@@ -137,10 +137,10 @@ public class StuTextPlayer {
     }
 
     private void changePreference(Enrollment e) throws Exception {
-        out.print("--------------------------------------------------------------------------------\n");
-        out.print("Do you want to change your preference? (type in 'y' for yes or 'n' for no)\n");
-        out.print("--------------------------------------------------------------------------------\n");
-        out.println();
+        // out.print("--------------------------------------------------------------------------------\n");
+        // out.print("Do you want to change your preference? (type in 'y' for yes or 'n' for no)\n");
+        // out.print("--------------------------------------------------------------------------------\n");
+        // out.println();
 
         char choice = ReaderUtilities.readSingleLetter(inputReader);
 
@@ -160,15 +160,15 @@ public class StuTextPlayer {
             preference = "Not Receive";
         }
 
-        out.print("--------------------------------------------------------------------------------\n");
-        out.print("Now your notification preferences of course: " +
-                section.getCourseId() +
-                ", sec: " +
-                section.getSectionId() +
-                " is: " +
-                preference +
-                "\n");
-        out.print("--------------------------------------------------------------------------------\n");
+        // out.print("--------------------------------------------------------------------------------\n");
+        // out.print("Now your notification preferences of course: " +
+        //         section.getCourseId() +
+        //         ", sec: " +
+        //         section.getSectionId() +
+        //         " is: " +
+        //         preference +
+        //         "\n");
+        // out.print("--------------------------------------------------------------------------------\n");
 
     }
 }

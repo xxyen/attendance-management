@@ -60,13 +60,13 @@ public class ClientHandler implements Runnable{
 
         while (flag) {
             try {
-                output.print("--------------------------------------------------------------------------------\n");
-                output.print("Hello! Below are all the available actions:\n" +
-                        "1. Log in.\n" +
-                        "2. Exit this program.\n" +
+               //output.print("--------------------------------------------------------------------------------\n");
+                output.print("Hello! Below are all the available actions: " +
+                        "1. Log in. " +
+                        "2. Exit this program. " +
                         "What do you want to do? Please type in the index number:\n");
-                output.print("--------------------------------------------------------------------------------\n");
-                output.println();
+               // output.print("--------------------------------------------------------------------------------\n");
+                //output.println();
 
                 int index = ReaderUtilities.readPositiveInteger(input);
 
@@ -77,18 +77,24 @@ public class ClientHandler implements Runnable{
                     //todo:
                     //do Prof or Stu action
 
-                    if (user.getUserType() == "professor"){
-                        Professor p = (Professor) user;
-                        output.println("Login successful. Welcome, Professor " + p.getName() + "!");
-                        //output.println();
-                        profLoop(p, input, output);
-                    }
+                    // if (user.getUserType() == "professor"){
+                    //     Professor p = (Professor) user;
 
-                    else if (user.getUserType() == "student"){
+                    //     output.println("prof login");
+                    //     //output.println("Login successful. Welcome, Professor " + p.getName() + "!");
+                    //     //output.println();
+                    //     profLoop(p, input, output);
+                    // }
+
+                    if (user.getUserType() == "student"){
                         Student s = (Student) user;
-                        output.println("Login successful. Welcome, Student " + s.getDisplayName() + "!");
+                        output.println("student login " + s.getDisplayName());
+                        //output.println("Login successful. Welcome, Student " + s.getDisplayName() + "!");
                         //output.println();
                         stuLoop(s, input, output);
+                    }
+                    else {
+                        //output.println("Invalid account!");
                     }
 
                 }
@@ -116,13 +122,13 @@ public class ClientHandler implements Runnable{
     }
 
     public User signIn(BufferedReader input, PrintStream output) throws Exception {
-        output.println("Please enter your userid:");
-        output.println();
+        // output.println("Please enter your userid:");
+        // output.println();
         String userid = input.readLine();
         System.out.println(userid);
 
-        output.println("Please enter your password:");
-        output.println();
+        // output.println("Please enter your password:");
+        // output.println();
         String password = input.readLine();
         System.out.println(password);
 
@@ -139,25 +145,29 @@ public class ClientHandler implements Runnable{
 
     public Section chooseSection(User u, BufferedReader in, PrintStream out) throws IOException {
         List<Section> sectionList = new ArrayList<>();
-        if (u.getUserType() == "professor") {
-            sectionList = sectionDAO.querySectionByFaculty(u.getUserid());
-        }
-        else if(u.getUserType() == "student"){
+        // if (u.getUserType() == "professor") {
+        //     sectionList = sectionDAO.querySectionByFaculty(u.getUserid());
+        // }
+        if(u.getUserType() == "student"){
             sectionList = sectionDAO.listSectionsByStudentId(u.getUserid());
         }
         else {
             throw new IllegalArgumentException("Invalid user: neither professor nor student!");
         }
         int size = sectionList.size();
+        out.println("start of section list");
 
         for (int i = 0; i < size; i++) {
-            out.println(Integer.toString(i + 1) + ". Course:" + sectionList.get(i).getCourseId() + ", Sec: " + sectionList.get(i).getSectionId());
+            //out.println(Integer.toString(i + 1) + ". Course:" + sectionList.get(i).getCourseId() + ", Sec: " + sectionList.get(i).getSectionId());
+            out.println("Course:" + sectionList.get(i).getCourseId() + ", Sec: " + sectionList.get(i).getSectionId());
         }
-        out.print("--------------------------------------------------------------------------------\n");
-        out.println(
-                "The above is a list of all your sections, please enter the serial number of the section you want to choose.");
-        out.print("--------------------------------------------------------------------------------\n");
-        out.println();
+        out.println("end of section list");
+
+        // out.print("--------------------------------------------------------------------------------\n");
+        // out.println(
+        //         "The above is a list of all your sections, please enter the serial number of the section you want to choose.");
+        // out.print("--------------------------------------------------------------------------------\n");
+        // out.println();
         int index = ReaderUtilities.readPositiveInteger(in);
         if (index > size) {
             throw new IllegalArgumentException("Invalid input: there is no such a section!");
@@ -171,12 +181,12 @@ public class ClientHandler implements Runnable{
 
         while (flag) {
             try {
-                output.print("--------------------------------------------------------------------------------\n");
-                output.print("Below are all the available actions:\n" +
-                        "1. Manipulate on your sections.\n" +
-                        "2. Log out.\n" +
-                        "What do you want to do? Please type in the index number:\n");
-                output.print("--------------------------------------------------------------------------------\n");
+                //output.print("prof login\n");
+                // output.print("Below are all the available actions: " +
+                //         "1. Manipulate on your sections. " +
+                //         "2. Log out. " +
+                //         "What do you want to do? Please type in the index number: ");
+               // output.print("--------------------------------------------------------------------------------\n");
                 output.println();
 
                 int index = ReaderUtilities.readPositiveInteger(input);
@@ -211,13 +221,20 @@ public class ClientHandler implements Runnable{
 
         while (flag) {
             try {
-                output.print("--------------------------------------------------------------------------------\n");
-                output.print("Below are all the available actions:\n" +
-                        "1. Manipulate on your sections.\n" +
-                        "2. Log out.\n" +
-                        "What do you want to do? Please type in the index number:\n");
-                output.print("--------------------------------------------------------------------------------\n");
-                output.println();
+                //output.print("student login\n");
+                // output.print("Below are all the available actions: " +
+                //         "1. Manipulate on your sections. " +
+                //         "2. Log out. " +
+                //         "What do you want to do? Please type in the index number:\n");
+                //output.print("--------------------------------------------------------------------------------\n");
+                //output.println();
+                // int index0 = ReaderUtilities.readPositiveInteger(input);
+                // output.println(s.getDisplayName);
+
+                // output.print("Below are all the available actions: " +
+                //         "1. Manipulate on your sections. " +
+                //         "2. Log out. " +
+                //         "What do you want to do? Please type in the index number:\n");
 
                 int index = ReaderUtilities.readPositiveInteger(input);
 
