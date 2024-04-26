@@ -18,6 +18,19 @@ public class UpdateController {
   }
 
   @FXML
+  private void changeCourseName() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/changeCourseNamePg.xml"));
+    Parent changeCourseNamePage = loader.load();
+    // Set the controller for the view course page
+    ChangeCourseNameController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    // Set the new scene on the existing stage
+    Scene scene = new Scene(changeCourseNamePage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  @FXML
   private void viewProfs() throws Exception {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/viewProfPg.xml"));
     Parent profPage = loader.load();

@@ -23,7 +23,8 @@
   </rowConstraints>
   <Label text="Course Management System: Update Course Page" GridPane.rowIndex="0" GridPane.columnIndex="0">
   </Label>
-  <Button text="1.  Change course name." GridPane.rowIndex="1" GridPane.columnIndex="0">
+  <Button text="1.  Change course name." GridPane.rowIndex="1" GridPane.columnIndex="0"
+          onAction="#changeCourseName">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
