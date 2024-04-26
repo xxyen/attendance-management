@@ -17,7 +17,7 @@ import java.io.BufferedWriter;
 import java.io.*;
 import java.net.*;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SocketService.SocketServiceCallback {
 
     private TextView textViewResponse;
     public static SocketService socketService;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             SocketService.LocalBinder binder = (SocketService.LocalBinder) service;
             socketService = binder.getService();
             //socketService.setCallback(this::updateUI);
-            socketService.registerCallback(this::updateUI);
+            socketService.registerCallback(MainActivity.this);
             isBound = true;
             socketService.startConnection();
         }
@@ -39,16 +39,16 @@ public class MainActivity extends AppCompatActivity {
             isBound = false;
         }
 
-        private void updateUI(String message) {
-
-            System.out.println(message+"\n");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    textViewResponse.append(message + "\n");
-                }
-            });
-        }
+//        private void updateUI(String message) {
+//
+//            System.out.println(message+"\n");
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    textViewResponse.append(message + "\n");
+//                }
+//            });
+//        }
     };
 
     @Override
@@ -89,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+    }
+
+    @Override
+    public void onMessageReceived(String message) {
+        runOnUiThread(() -> {
+            textViewResponse.setText(message);
+        });
     }
 
 //    private void updateUI(final String response) {

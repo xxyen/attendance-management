@@ -10,11 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import duke.edu.ece651.studentclient.service.SocketService;
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity implements SocketService.SocketServiceCallback {
 
     private EditText editTextUserId;
     private EditText editTextPassword;
@@ -49,22 +50,22 @@ public class LoginActivity extends AppCompatActivity{
 
     }
 
-    private void updateUI(String message) {
-
-        System.out.println(message+"\n");
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                statusTextView.append(message + "\n");
-            }
-        });
-    }
+//    private void updateUI(String message) {
+//
+//        System.out.println(message+"\n");
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                statusTextView.append(message + "\n");
+//            }
+//        });
+//    }
 
     private void submitCredentials(String userId, String password) {
         // Assume SocketService is bound and available
-        //String message = "Login:" + userId + ":" + password;
-        MainActivity.socketService.sendMessage(userId);
-        MainActivity.socketService.sendMessage(password);
+        String message = userId + "\n" + password;
+        MainActivity.socketService.sendMessage(message);
+        //MainActivity.socketService.sendMessage(password);
     }
 
 
@@ -74,7 +75,7 @@ public class LoginActivity extends AppCompatActivity{
         public void onServiceConnected(ComponentName className, IBinder service) {
             SocketService.LocalBinder binder = (SocketService.LocalBinder) service;
             socketService = binder.getService();
-            socketService.registerCallback(this::updateUI);
+            socketService.registerCallback(LoginActivity.this);
             isBound = true;
         }
 
@@ -84,16 +85,6 @@ public class LoginActivity extends AppCompatActivity{
             isBound = false;
         }
 
-        private void updateUI(String message) {
-
-            System.out.println(message+"\n");
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    statusTextView.append(message + "\n");
-                }
-            });
-        }
     };
 
     @Override
@@ -108,7 +99,7 @@ public class LoginActivity extends AppCompatActivity{
     protected void onStop() {
         super.onStop();
         if (isBound) {
-            socketService.unregisterCallback(this::updateUI);
+            socketService.unregisterCallback(this);
             unbindService(connection);
             isBound = false;
         }
@@ -117,7 +108,62 @@ public class LoginActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(connection);
+        if (isBound) {
+            unbindService(connection);
+            socketService.unregisterCallback(this);
+            isBound = false;  // 更新标志状态
+        }
+    }
+
+    @Override
+    public void onMessageReceived(String message) {
+        runOnUiThread(() -> {
+            statusTextView.setText(message);
+            if (message.startsWith("student login")) {
+                String[] parts = message.split(" "); // Assuming the format is "student login username"
+                if (parts.length > 2) {
+                    showLoginSuccessDialog(parts[2]);
+                }
+            } else {
+                showLoginFailureDialog();
+            }
+        });
+    }
+
+    private void showLoginSuccessDialog(String userName) {
+        new AlertDialog.Builder(this)
+                .setTitle("Login Success")
+                .setMessage("You have successfully logged in.")
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    navigateToSelectionActivity(userName);
+                })
+                .show();
+    }
+
+    private void showLoginFailureDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Log in Failed")
+                .setMessage("ID or password is incorrect.")
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                    navigateBackToMainActivity();
+                })
+                .show();
+    }
+
+    private void navigateBackToMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish(); // 结束 LoginActivity，返回 MainActivity
+    }
+
+    private void navigateToSelectionActivity(String userName) {
+        Intent intent = new Intent(this, SelectionActivity.class);
+        intent.putExtra("userName", userName);
+        startActivity(intent);
+        finish(); // 结束 LoginActivity
     }
 }
 
