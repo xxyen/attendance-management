@@ -19,9 +19,11 @@ public class SocketService extends Service {
     private Socket socket;
     private BufferedReader input;
     private BufferedWriter output;
-    private Consumer<String> onResponseReceived;
+    //private Consumer<String> onResponseReceived;
 
-    private List<Consumer<String>> callbacks = new ArrayList<>();
+    //private List<Consumer<String>> callbacks = new ArrayList<>();
+
+    private List<SocketServiceCallback> callbacks = new ArrayList<>();
 
     private String host = "vcm-37924.vm.duke.edu";
     private int port = 12345;
@@ -41,29 +43,35 @@ public class SocketService extends Service {
         return binder;
     }
 
-//    public void setCallback(Consumer<String> onResponseReceived) {
-//        this.onResponseReceived = onResponseReceived;
+//    public void registerCallback(Consumer<String> onResponseReceive) {
+//        if (!callbacks.contains(onResponseReceive)) {
+//            callbacks.add(onResponseReceive);
+//        }
 //    }
 //
-//    private SocketServiceCallback callback;
+//    public void unregisterCallback(Consumer<String> onResponseReceive) {
+//        callbacks.remove(onResponseReceive);
+//    }
 //
-//    public void setCallback2(SocketServiceCallback callback) {
-//        this.callback = callback;
+//    private void notifyCallbacks(String message) {
+//        for (Consumer<String> onResponseReceive : callbacks) {
+//            onResponseReceive.accept(message);
+//        }
 //    }
 
-    public void registerCallback(Consumer<String> onResponseReceive) {
-        if (!callbacks.contains(onResponseReceive)) {
-            callbacks.add(onResponseReceive);
+    public void registerCallback(SocketServiceCallback callback) {
+        if (!callbacks.contains(callback)) {
+            callbacks.add(callback);
         }
     }
 
-    public void unregisterCallback(Consumer<String> onResponseReceive) {
-        callbacks.remove(onResponseReceive);
+    public void unregisterCallback(SocketServiceCallback callback) {
+        callbacks.remove(callback);
     }
 
     private void notifyCallbacks(String message) {
-        for (Consumer<String> onResponseReceive : callbacks) {
-            onResponseReceive.accept(message);
+        for (SocketServiceCallback callback : callbacks) {
+            callback.onMessageReceived(message);
         }
     }
 
@@ -79,7 +87,7 @@ public class SocketService extends Service {
                 String fromServer;
                 boolean flag = true;
                 while (flag) {
-                    while ((fromServer = input.readLine()) != null && !fromServer.isEmpty()) {
+                    while ((fromServer = input.readLine()) != null) {
                        //onResponseReceived.accept(fromServer);
 //                        if (callback != null) {
 //                            callback.onMessageReceived(fromServer);
