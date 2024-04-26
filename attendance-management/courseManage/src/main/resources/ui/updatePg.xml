@@ -38,11 +38,13 @@
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="4.  Add a new section." GridPane.rowIndex="2" GridPane.columnIndex="1">
+  <Button text="4.  Add a new section." GridPane.rowIndex="2" GridPane.columnIndex="1"
+          onAction="#addSection">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="5.  Remove an existing section." GridPane.rowIndex="3" GridPane.columnIndex="0">
+  <Button text="5.  Remove an existing section." GridPane.rowIndex="3" GridPane.columnIndex="0"
+          onAction="#removeSection">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
@@ -51,7 +53,8 @@
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="7.  View the list of students in a section." GridPane.rowIndex="4" GridPane.columnIndex="0">
+  <Button text="7.  View the list of students in a section." GridPane.rowIndex="4" GridPane.columnIndex="0"
+          onAction="#viewStusInSection">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>

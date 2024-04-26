@@ -57,6 +57,32 @@ public class UpdateController {
   }
 
   @FXML
+  private void addSection() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/addSectionPg.xml"));
+    Parent addSectionPage = loader.load();
+    // Set the controller for the view course page
+    AddSectionController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    // Set the new scene on the existing stage
+    Scene scene = new Scene(addSectionPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  @FXML
+  private void removeSection() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/removeSectionPg.xml"));
+    Parent removeSectionPage = loader.load();
+    // Set the controller for the view course page
+    RemoveSectionController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    // Set the new scene on the existing stage
+    Scene scene = new Scene(removeSectionPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  @FXML
   private void viewStus() throws Exception {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/viewStuPg.xml"));
     Parent stuPage = loader.load();
@@ -65,6 +91,19 @@ public class UpdateController {
     controller.setMainStage(mainStage);
     // Set the new scene on the existing stage
     Scene scene = new Scene(stuPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  @FXML
+  private void viewStusInSection() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/viewStuInSectionPg.xml"));
+    Parent stuInSectionPage = loader.load();
+    // Set the controller for the view course page
+    ViewStuInSectionController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    // Set the new scene on the existing stage
+    Scene scene = new Scene(stuInSectionPage, 960, 720);
     mainStage.setScene(scene);
     mainStage.show();
   }
