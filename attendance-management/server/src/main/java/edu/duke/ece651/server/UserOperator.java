@@ -32,7 +32,7 @@ public class UserOperator {
 
     //System.out.println("test d");
 
-    throw new IllegalArgumentException("The userid or password is invalid!");
+    throw new IllegalArgumentException("The userid or password is invalid!" + userid + password);
   }
 
 }

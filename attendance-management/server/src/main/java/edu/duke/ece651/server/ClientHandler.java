@@ -12,6 +12,9 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ClientHandler implements Runnable{
     private Socket clientSocket;
@@ -27,232 +30,273 @@ public class ClientHandler implements Runnable{
     private static EnrollmentDAO enrollmentDAO = new EnrollmentDAO();
     private static SessionDAO sessionDAO = new SessionDAO();
 
-    public ClientHandler(Socket socket) {
+    private ObjectInputStream input;
+    private ObjectOutputStream output;
+    private ObjectMapper mapper = new ObjectMapper();
+
+    public ClientHandler(Socket socket) throws IOException {
         this.clientSocket = socket;
+        this.output = new ObjectOutputStream(clientSocket.getOutputStream());
+        this.output.flush();
+        this.input = new ObjectInputStream(clientSocket.getInputStream());
     }
 
-//    public void trySendFile(PrintStream output) throws Exception{
-//        output.println("startOfFile");
-//
-//        String filePath = "/home/wille/Desktop/test2.xml"; // 根据请求确定文件路径
-//
-//        // 发送文件名给客户端
-//        File file = new File(filePath);
-//        output.println(file.getName());
-//        //output.flush();
-//
-//        // 发送文件内容
-//        try (BufferedReader fileReader = new BufferedReader(new FileReader(file))) {
-//            String line;
-//            while ((line = fileReader.readLine()) != null) {
-//                output.println(line);
-//            }
-//            //output.flush();
-//        }
-//
-//        // 发送结束信号
-//        output.println("endOfFile");
-//        //output.flush();
-//    }
+    // public void mainLoop(BufferedReader input, PrintStream output){
+    //     boolean flag = true;
 
-    public void mainLoop(BufferedReader input, PrintStream output){
+    //     while (flag) {
+    //         try {
+    //             output.print("--------------------------------------------------------------------------------\n");
+    //             output.print("Hello! Below are all the available actions:\n" +
+    //                     "1. Log in.\n" +
+    //                     "2. Exit this program.\n" +
+    //                     "What do you want to do? Please type in the index number:\n");
+    //             output.print("--------------------------------------------------------------------------------\n");
+    //             output.println();
+
+    //             int index = ReaderUtilities.readPositiveInteger(input);
+
+    //             if (index == 1){
+    //                 User user = signIn(input, output);
+
+    //                 if (user.getUserType() == "professor"){
+    //                     Professor p = (Professor) user;
+    //                     output.println("Login successful. Welcome, Professor " + p.getName() + "!");
+
+    //                     profLoop(p, input, output);
+    //                 }
+
+    //                 else if (user.getUserType() == "student"){
+    //                     Student s = (Student) user;
+    //                     output.println("Login successful. Welcome, Student " + s.getDisplayName() + "!");
+
+    //                     stuLoop(s, input, output);
+    //                 }
+
+    //             }
+    //             else if (index == 2){
+    //                 output.println("Have a nice day! From ECE 651 team 6.");
+    //                 output.println("endConnection");
+    //                 output.println();
+    //                 flag = false;
+    //                 break;
+    //             }
+
+    //             else {
+    //                 throw new IllegalArgumentException("Invalid action number, please choose your action again!");
+    //             }
+
+    //         } catch (Exception e) {
+    //             output.println(e.getMessage());
+    //         }
+    //     }
+    // }
+
+    private void mainLoop() throws IOException, ClassNotFoundException {
         boolean flag = true;
-
         while (flag) {
             try {
-                output.print("--------------------------------------------------------------------------------\n");
-                output.print("Hello! Below are all the available actions:\n" +
-                        "1. Log in.\n" +
-                        "2. Exit this program.\n" +
-                        "What do you want to do? Please type in the index number:\n");
-                output.print("--------------------------------------------------------------------------------\n");
-                output.println();
-
-                int index = ReaderUtilities.readPositiveInteger(input);
-
-                if (index == 1){
-                    User user = signIn(input, output);
-                    //output.println("test3");
-
-                    //todo:
-                    //do Prof or Stu action
-
-                    if (user.getUserType() == "professor"){
-                        Professor p = (Professor) user;
-                        output.println("Login successful. Welcome, Professor " + p.getName() + "!");
-                        //output.println();
-                        profLoop(p, input, output);
-                    }
-
-                    else if (user.getUserType() == "student"){
-                        Student s = (Student) user;
-                        output.println("Login successful. Welcome, Student " + s.getDisplayName() + "!");
-                        //output.println();
-                        stuLoop(s, input, output);
-                    }
-
+                if (clientSocket.isClosed()) {
+                    System.out.println("Client has closed the connection.");
+                    flag = false; 
+                    continue;
                 }
-                else if (index == 2){
-                    output.println("Have a nice day! From ECE 651 team 6.");
-                    output.println("endConnection");
-                    output.println();
-                    flag = false;
-                    break;
+    
+                String jsonCredentials = (String) input.readObject();
+                Map<String, String> credentials = mapper.readValue(jsonCredentials, Map.class);
+                
+                User user = userOperator.signIn(credentials.get("userid"), credentials.get("password"));
+                
+                if (user instanceof Professor) {
+                    Professor p = (Professor) user;
+                    output.writeObject(p.getName()); 
+                    output.flush();
+
+                    profLoop(p);
+
+                } else {
+                    output.writeObject("User is not a professor.");
+                    output.flush();
                 }
 
-                //for file sending test
-//                else if (index == 3){
-//                    trySendFile(output);
-//                }
-                else {
-                    throw new IllegalArgumentException("Invalid action number, please choose your action again!");
-                }
-
-            } catch (Exception e) {
-                output.println(e.getMessage());
-                //output.println();
+            } catch (EOFException e) {
+                System.out.println("Client disconnected.");
+                flag = false; 
+            }catch (IllegalArgumentException e) {
+                output.writeObject(e.getMessage());
+                output.flush();
             }
+            output.flush();
         }
     }
 
-    public User signIn(BufferedReader input, PrintStream output) throws Exception {
-        output.println("Please enter your userid:");
-        output.println();
-        String userid = input.readLine();
-        System.out.println(userid);
+    public void profLoop(Professor p) throws IOException {
+            boolean flag = true;
+    
+            while (flag) {
+                try {
+                    String json = (String) input.readObject();
+                    Map<String, String> command = mapper.readValue(json, Map.class);
+                    
+                    if ("Logout".equals(command.get("action"))) {
+                        System.out.println("Client requested logout.");
+                        flag = false;
+                        break;
+                    } else if ("ManipulateSections".equals(command.get("action"))) {
+                        System.out.println("Client requested to manipulate sections.");
+                        Section s = chooseSection(p);
+                        // ProfTextPlayer player = new ProfTextPlayer(p, s, input, output);
+                        // player.loop();
+                    }
+    
+                } catch (EOFException e) {
+                    System.out.println("Client disconnected.");
+                    flag = false; 
+                }catch (Exception e) {
+                    output.writeObject(e.getMessage());
+                    output.flush();
+                }
+                output.flush();
+            }
+        }
 
-        output.println("Please enter your password:");
-        output.println();
-        String password = input.readLine();
-        System.out.println(password);
-
-        //output.println("test1");
-        User user = userOperator.signIn(userid, password);
-        // 登录成功，发送欢迎信息
-        //output.println("Login successful. Welcome, " + user.getUserid() + "!");
-
-        //output.println("test2");
-
-        return user;
-
-    }
-
-    public Section chooseSection(User u, BufferedReader in, PrintStream out) throws IOException {
+    public Section chooseSection(Professor p) throws IOException,ClassNotFoundException {
         List<Section> sectionList = new ArrayList<>();
-        if (u.getUserType() == "professor") {
-            sectionList = sectionDAO.querySectionByFaculty(u.getUserid());
-        }
-        else if(u.getUserType() == "student"){
-            sectionList = sectionDAO.listSectionsByStudentId(u.getUserid());
-        }
-        else {
-            throw new IllegalArgumentException("Invalid user: neither professor nor student!");
-        }
-        int size = sectionList.size();
+        sectionList = sectionDAO.querySectionByFaculty(p.getUserid());
 
-        for (int i = 0; i < size; i++) {
-            out.println(Integer.toString(i + 1) + ". Course:" + sectionList.get(i).getCourseId() + ", Sec: " + sectionList.get(i).getSectionId());
+        HashMap<String, List<String>> sectionsData = new HashMap<>();
+        List<String> sectionsInfo = new ArrayList<>();
+
+        for (Section section : sectionList) {
+            sectionsInfo.add("Course: " + section.getCourseId() + ", Sec: " + section.getSectionId());
         }
-        out.print("--------------------------------------------------------------------------------\n");
-        out.println(
-                "The above is a list of all your sections, please enter the serial number of the section you want to choose.");
-        out.print("--------------------------------------------------------------------------------\n");
-        out.println();
-        int index = ReaderUtilities.readPositiveInteger(in);
-        if (index > size) {
-            throw new IllegalArgumentException("Invalid input: there is no such a section!");
+        
+        sectionsData.put("sections", sectionsInfo);
+        String jsonSections = mapper.writeValueAsString(sectionsData);
+        output.writeObject(jsonSections);
+        output.flush();
+
+        int index = 1;
+        HashMap<String, Object> command = new ObjectMapper().readValue((String)input.readObject(), HashMap.class);
+        if ("SelectSection".equals(command.get("action"))) {
+            index = (Integer) command.get("index");
+            System.out.println("Server received selected section index: " + index);
         }
-        return sectionList.get(index - 1);
-        //return null;
+
+        System.out.println("Server go to selected section id: " + sectionList.get(index).getSectionId());
+        return sectionList.get(index);
     }
 
-    public void profLoop(Professor p, BufferedReader input, PrintStream output){
-        boolean flag = true;
+    // public Section chooseSection(User u, BufferedReader in, PrintStream out) throws IOException {
+    //     List<Section> sectionList = new ArrayList<>();
+    //     if (u.getUserType() == "professor") {
+    //         sectionList = sectionDAO.querySectionByFaculty(u.getUserid());
+    //     }
+    //     else if(u.getUserType() == "student"){
+    //         sectionList = sectionDAO.listSectionsByStudentId(u.getUserid());
+    //     }
+    //     else {
+    //         throw new IllegalArgumentException("Invalid user: neither professor nor student!");
+    //     }
+    //     int size = sectionList.size();
 
-        while (flag) {
-            try {
-                output.print("--------------------------------------------------------------------------------\n");
-                output.print("Below are all the available actions:\n" +
-                        "1. Manipulate on your sections.\n" +
-                        "2. Log out.\n" +
-                        "What do you want to do? Please type in the index number:\n");
-                output.print("--------------------------------------------------------------------------------\n");
-                output.println();
+    //     for (int i = 0; i < size; i++) {
+    //         out.println(Integer.toString(i + 1) + ". Course:" + sectionList.get(i).getCourseId() + ", Sec: " + sectionList.get(i).getSectionId());
+    //     }
+    //     out.print("--------------------------------------------------------------------------------\n");
+    //     out.println(
+    //             "The above is a list of all your sections, please enter the serial number of the section you want to choose.");
+    //     out.print("--------------------------------------------------------------------------------\n");
+    //     out.println();
+    //     int index = ReaderUtilities.readPositiveInteger(in);
+    //     if (index > size) {
+    //         throw new IllegalArgumentException("Invalid input: there is no such a section!");
+    //     }
+    //     return sectionList.get(index - 1);
+    // }
 
-                int index = ReaderUtilities.readPositiveInteger(input);
+    // public void profLoop(Professor p, BufferedReader input, PrintStream output){
+    //     boolean flag = true;
 
-                if (index == 1){
-                    //todo:
-                    //display section list and choose
-                    Section s = chooseSection(p, input, output);
-                    ProfTextPlayer player = new ProfTextPlayer(p, s, input, output);
-                    player.loop();
-                }
-                else if (index == 2){
-                    output.println("Successfully log out!");
-                    //output.println();
+    //     while (flag) {
+    //         try {
+    //             output.print("--------------------------------------------------------------------------------\n");
+    //             output.print("Below are all the available actions:\n" +
+    //                     "1. Manipulate on your sections.\n" +
+    //                     "2. Log out.\n" +
+    //                     "What do you want to do? Please type in the index number:\n");
+    //             output.print("--------------------------------------------------------------------------------\n");
+    //             output.println();
 
-                    flag = false;
-                    break;
-                }
-                else {
-                    throw new IllegalArgumentException("Invalid action number, please choose your action again!");
-                }
+    //             int index = ReaderUtilities.readPositiveInteger(input);
 
-            } catch (Exception e) {
-                output.println(e.getMessage());
-                //output.println();
-            }
-        }
-    }
+    //             if (index == 1){
+    //                 //todo:
+    //                 //display section list and choose
+    //                 Section s = chooseSection(p, input, output);
+    //                 ProfTextPlayer player = new ProfTextPlayer(p, s, input, output);
+    //                 player.loop();
+    //             }
+    //             else if (index == 2){
+    //                 output.println("Successfully log out!");
+    //                 //output.println();
 
-    public void stuLoop(Student s, BufferedReader input, PrintStream output){
-        boolean flag = true;
+    //                 flag = false;
+    //                 break;
+    //             }
+    //             else {
+    //                 throw new IllegalArgumentException("Invalid action number, please choose your action again!");
+    //             }
 
-        while (flag) {
-            try {
-                output.print("--------------------------------------------------------------------------------\n");
-                output.print("Below are all the available actions:\n" +
-                        "1. Manipulate on your sections.\n" +
-                        "2. Log out.\n" +
-                        "What do you want to do? Please type in the index number:\n");
-                output.print("--------------------------------------------------------------------------------\n");
-                output.println();
+    //         } catch (Exception e) {
+    //             output.println(e.getMessage());
+    //             //output.println();
+    //         }
+    //     }
+    // }
 
-                int index = ReaderUtilities.readPositiveInteger(input);
+    // public void stuLoop(Student s, BufferedReader input, PrintStream output){
+    //     boolean flag = true;
 
-                if (index == 1){
-                    Section ses = chooseSection(s, input, output);
-                    //todo:
-                    //run student loop
-                    StuTextPlayer player = new StuTextPlayer(input, output, ses, s);
-                    player.loop();
+    //     while (flag) {
+    //         try {
+    //             output.print("--------------------------------------------------------------------------------\n");
+    //             output.print("Below are all the available actions:\n" +
+    //                     "1. Manipulate on your sections.\n" +
+    //                     "2. Log out.\n" +
+    //                     "What do you want to do? Please type in the index number:\n");
+    //             output.print("--------------------------------------------------------------------------------\n");
+    //             output.println();
 
-                }
-                else if (index == 2){
-                    output.println("Successfully log out!");
-                    flag = false;
-                    break;
-                }
-                else {
-                    throw new IllegalArgumentException("Invalid action number, please choose your action again!");
-                }
+    //             int index = ReaderUtilities.readPositiveInteger(input);
 
-            } catch (Exception e) {
-                output.println(e.getMessage());
-            }
-        }
-    }
+    //             if (index == 1){
+    //                 Section ses = chooseSection(s, input, output);
+    //                 //todo:
+    //                 //run student loop
+    //                 StuTextPlayer player = new StuTextPlayer(input, output, ses, s);
+    //                 player.loop();
+
+    //             }
+    //             else if (index == 2){
+    //                 output.println("Successfully log out!");
+    //                 flag = false;
+    //                 break;
+    //             }
+    //             else {
+    //                 throw new IllegalArgumentException("Invalid action number, please choose your action again!");
+    //             }
+
+    //         } catch (Exception e) {
+    //             output.println(e.getMessage());
+    //         }
+    //     }
+    // }
 
     @Override
     public void run() {
-        try (
-                BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                PrintStream output = new PrintStream(clientSocket.getOutputStream(), true)
-        ) {
-            mainLoop(input, output);
-
-            // 处理完成后关闭连接
+        try {
+            mainLoop();
             clientSocket.close();
         } catch (Exception e) {
             System.err.println("Exception in client handler: " + e.getMessage());
