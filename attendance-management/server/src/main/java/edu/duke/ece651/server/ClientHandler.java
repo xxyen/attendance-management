@@ -145,8 +145,8 @@ public class ClientHandler implements Runnable{
                     } else if ("ManipulateSections".equals(command.get("action"))) {
                         System.out.println("Client requested to manipulate sections.");
                         Section s = chooseSection(p);
-                        // ProfTextPlayer player = new ProfTextPlayer(p, s, input, output);
-                        // player.loop();
+                        ProfTextPlayer player = new ProfTextPlayer(p, s, input, output);
+                        player.loop();
                     }
     
                 } catch (EOFException e) {

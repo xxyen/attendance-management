@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.profClient.controller.ExportRecordController">
+    <Label text="Please choose the format (json or xml):"/>
+    <ComboBox fx:id="formatComboBox" promptText="Select Format"/>
+    <Label text="Please choose a directory path to save the file:"/>
+    <Button text="Choose Directory" onAction="#handleDirectoryChoice"/>
+    <Label fx:id="selectedDirectoryLabel" text="No directory selected"/>
+    <Button text="Confirm" onAction="#handleConfirm"/>
+</VBox>

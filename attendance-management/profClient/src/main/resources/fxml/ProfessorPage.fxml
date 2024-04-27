@@ -7,6 +7,6 @@
     <Label text="These are all available actions. What do you want to do?"/>
     <Button text="Start a new session and take attendance" onAction="#handleStartNewSession"/>
     <Button text="Change attendance record of a student in one session" onAction="#handleChangeAttendance"/>
-    <Button text="Export attendance records of a session" onAction="#handleExportRecords"/>
+    <Button text="Export attendance records of a section" onAction="#handleExportRecords"/>
     <Button text="Exit this course" onAction="#handleExit"/>
 </VBox>
