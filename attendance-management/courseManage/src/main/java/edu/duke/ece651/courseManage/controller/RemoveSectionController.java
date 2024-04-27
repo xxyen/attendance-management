@@ -13,6 +13,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ButtonType;
+import java.util.Optional;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,6 +56,9 @@ public class RemoveSectionController {
       showAlert("Error", "Section ID does not exist", AlertType.ERROR);
       return;
     }
+    if (!showConfirmationDialog("Warning", "DANGER!!! Remove a section will be destructive.\nDo you REALLY want to proceed?")) {
+      return;
+    }
     boolean isSuccess = removeSection(sectionId);
     if (isSuccess) {
       showAlert("Success", "Section removed successfully", AlertType.INFORMATION);
@@ -68,6 +73,16 @@ public class RemoveSectionController {
     SectionDAO sectionIO = new SectionDAO();
     sectionIO.deleteSection(sectionId);
     return true;
+  }
+
+  private boolean showConfirmationDialog(String title, String content) {
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(null);
+    alert.setContentText(content);
+    
+    Optional<ButtonType> result = alert.showAndWait();
+    return result.isPresent() && result.get() == ButtonType.OK;
   }
 
   private void showAlert(String title, String content, AlertType type) {

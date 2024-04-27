@@ -132,7 +132,7 @@ public class LoadStudentsController {
       addEnrollment(sectionId, student.getUserid());
       added++;
     }
-    String ans = added + "students added successfully\n" + enrolled + "students already enrolled\n" + notexist + "students ID do not exist";
+    String ans = added + " students added successfully\n" + enrolled + " students already enrolled\n" + notexist + " students ID do not exist";
     showAlert("Success", ans, AlertType.INFORMATION);
     clearForm();
   }
