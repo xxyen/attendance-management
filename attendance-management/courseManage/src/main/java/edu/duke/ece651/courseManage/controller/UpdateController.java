@@ -107,6 +107,32 @@ public class UpdateController {
     mainStage.setScene(scene);
     mainStage.show();
   }
+
+  @FXML
+  private void addStuToSection() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/addStudentToSectionPg.xml"));
+    Parent addStuPage = loader.load();
+    // Set the controller for the view course page
+    AddStudentToSectionController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    // Set the new scene on the existing stage
+    Scene scene = new Scene(addStuPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  @FXML
+  private void LoadStusToSection() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/loadStudentsToSectionPg.xml"));
+    Parent loadStusPage = loader.load();
+    // Set the controller for the view course page
+    LoadStudentsController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    // Set the new scene on the existing stage
+    Scene scene = new Scene(loadStusPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
   
   @FXML
   private void backToHome() throws Exception {
