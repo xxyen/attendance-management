@@ -26,12 +26,7 @@ import java.util.HashMap;
  */
 public class ProfTextPlayer {
     private Professor professor;
-    //private Course course;
     private Section section;
-
-    // private final BufferedReader inputReader;
-    // private final PrintStream out;
-
 
     private static FacultyDAO facultyDAO = new FacultyDAO();
     private static StudentDAO studentDAO = new StudentDAO();
@@ -52,21 +47,6 @@ public class ProfTextPlayer {
         this.input = input;
         this.output = output;
     }
-
-    /**
-     * Constructor
-     */
-
-    // public ProfTextPlayer(Professor professor, Section section, BufferedReader inputReader,
-    //                       PrintStream out) {
-    //     this.professor = professor;
-    //     //this.course = course;
-    //     this.section = section;
-    //     this.inputReader = inputReader;
-    //     this.out = out;
-
-    // }
-
 
     /**
      * Read one single letter from input,
@@ -178,25 +158,25 @@ public class ProfTextPlayer {
      * Search student with given ID.
      * @param id is the student's ID.
      */
-    // public Student searchStudent(String id) {
-    //     //todo
-    //     //search student by id in the section
-    //     //return studentDAO.queryStudentById(id);
-    //     Enrollment e = enrollmentDAO.findEnrollmentByStudentAndSection(id, section.getSectionId());
-    //     if (e == null){
-    //         return null;
-    //     }
-    //     return studentDAO.queryStudentById(e.getStudentId());
-    // }
+    public Student searchStudent(String id) {
+        //todo
+        //search student by id in the section
+        //return studentDAO.queryStudentById(id);
+        Enrollment e = enrollmentDAO.findEnrollmentByStudentAndSection(id, section.getSectionId());
+        if (e == null){
+            return null;
+        }
+        return studentDAO.queryStudentById(e.getStudentId());
+    }
 
     /**
      * Full action of searching a student.
      */
     // public Student doSearchStudent() throws IOException {
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.print("Please type in the student's id:\n");
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.println();
+    //     // out.print("--------------------------------------------------------------------------------\n");
+    //     // out.print("Please type in the student's id:\n");
+    //     // out.print("--------------------------------------------------------------------------------\n");
+    //     // out.println();
 
     //     String s = inputReader.readLine();
     //     if (s == null) {
@@ -209,6 +189,21 @@ public class ProfTextPlayer {
     //     }
     //     return ans;
     // }
+
+    public List<String> getStudentIdsForSession(Session s) throws Exception{
+        List<Enrollment> enrollments = enrollmentDAO.listEnrollmentsBySection(s.getSectionId());
+        List<String> studentIds = new ArrayList<>();
+        for (Enrollment enrollment : enrollments) {
+            studentIds.add(enrollment.getStudentId());
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        String studentIdJson = mapper.writeValueAsString(studentIds);
+        output.writeObject(studentIdJson);
+        output.flush(); 
+
+        return studentIds;
+    }
 
     /**
      * Read a positive integer from input.
@@ -232,6 +227,25 @@ public class ProfTextPlayer {
     /**
      * Choose a session from the list.
      */
+    public Session chooseSession() throws IOException,ClassNotFoundException {
+        List<Session> sessionList = sessionDAO.listSessionsBySection(section.getSectionId());
+
+        ObjectMapper mapper = new ObjectMapper();
+        String sessionJson = mapper.writeValueAsString(sessionList);
+        output.writeObject(sessionJson);
+        output.flush(); 
+
+
+        int index = 1;
+        HashMap<String, Object> command = new ObjectMapper().readValue((String)input.readObject(), HashMap.class);
+        if ("SelectSession".equals(command.get("action"))) {
+            index = (Integer) command.get("index");
+            System.out.println("Server received selected session index: " + index);
+        }
+
+        System.out.println("Server go to selected session date: " + sessionList.get(index).getSessionDate());
+        return sessionList.get(index);
+    }
     // public Session chooseSession() throws IOException {
     //      List<Session> sessionList = sessionDAO.listSessionsBySection(section.getSectionId());
     //      int size = sessionList.size();
@@ -255,37 +269,68 @@ public class ProfTextPlayer {
     /**
      * Send email to a given email address.
      */
-    // public void sendNotification(Email target, String sub, String body) throws GeneralSecurityException, IOException {
-    //     Email eF = new Email("jzsun00@gmail.com");
-    //     EmailNotification sender = new EmailNotification(eF, target);
-    //     sender.sendEmail(sub, body);
-    // }
+    public void sendNotification(Email target, String sub, String body) throws GeneralSecurityException, IOException {
+        Email eF = new Email("jzsun00@gmail.com");
+        EmailNotification sender = new EmailNotification(eF, target);
+        sender.sendEmail(sub, body);
+    }
 
     /**
      * Send notification to student when their attendance status is changed.
      */
-    // public void sendStatusChangeNotification(Student s, Session ses, Status sta)
-    //         throws GeneralSecurityException, IOException {
-    //     String sub = "Attendance Status Changed";
-    //     StringBuilder body = new StringBuilder("To ");
-    //     body.append(s.getLegalName());
-    //     body.append(": \n");
-    //     body.append("\n");
-    //     body.append("Notice: Your attendance status on the course: ");
-    //     body.append(section.getCourseId());
-    //     body.append(" at date: ");
-    //     body.append(ses.getSessionDate());
-    //     body.append(" has been changed to '");
-    //     body.append(sta.getStatus());
-    //     body.append("'. If there is any problem, please contact your professor.\n");
-    //     body.append("\n");
-    //     body.append("ECE 651 team 6");
-    //     sendNotification(s.getEmail(), sub, body.toString());
-    // }
+    public void sendStatusChangeNotification(Student s, Session ses, Status sta)
+            throws GeneralSecurityException, IOException {
+        String sub = "Attendance Status Changed";
+        StringBuilder body = new StringBuilder("To ");
+        body.append(s.getLegalName());
+        body.append(": \n");
+        body.append("\n");
+        body.append("Notice: Your attendance status on the course: ");
+        body.append(section.getCourseId());
+        body.append(" at date: ");
+        body.append(ses.getSessionDate());
+        body.append(" has been changed to '");
+        body.append(sta.getStatus());
+        body.append("'. If there is any problem, please contact your professor.\n");
+        body.append("\n");
+        body.append("ECE 651 team 6");
+        sendNotification(s.getEmail(), sub, body.toString());
+    }
 
     /**
      * Full action of changing attendance status of a student.
      */
+    public void changeStatus() throws Exception {
+        Session target = chooseSession();
+        System.out.println("server finishes choose session");
+
+        getStudentIdsForSession(target);
+        System.out.println("server finishes send student ids");
+
+        String jsonRecord = (String) input.readObject();
+        Map<String, String> record = mapper.readValue(jsonRecord, Map.class);
+
+        Student s = searchStudent(record.get("studentid"));
+
+        Boolean flag = false;
+
+        AttendanceRecord r = attendanceRecordDAO.findAttendanceRecordBySessionAndStudent(target.getSessionId(), record.get("studentid"));
+
+        Status newSta = new Status(record.get("status").charAt(0));
+        if (r != null) {
+            r.setStatus(newSta);
+            attendanceRecordDAO.updateAttendanceRecord(r);
+            output.writeObject("success");
+            output.flush();
+            if (enrollmentDAO.findEnrollmentByStudentAndSection(record.get("studentid"), section.getSectionId()).isReceiveNotifications()) {
+                sendStatusChangeNotification(s, target, newSta);
+            }
+
+        } else {
+            output.writeObject("Sorry, there is no record of this student in chosen session!\n");
+            output.flush();
+        }
+    }
     // public void changeStatus() throws Exception {
     //     Session target = chooseSession();
 
@@ -345,7 +390,7 @@ public class ProfTextPlayer {
         FileInputStream fileIn = new FileInputStream(file);
         int bytesRead;
         while ((bytesRead = fileIn.read(buffer)) != -1) {
-            out.write(buffer, 0, bytesRead);  // Then send the file content
+            out.write(buffer, 0, bytesRead); 
         }
         fileIn.close();
         out.writeObject("EOF");
@@ -387,8 +432,9 @@ public class ProfTextPlayer {
                     System.out.println("Server received take attendance.");
 
                 } else if ("ChangeStatus".equals(command.get("action"))) {
-                    // changeStatus();
-                    System.out.println("Server received change status.");
+                    System.out.println("Server goes to change status.");
+                    changeStatus();
+                    System.out.println("Server finishes change status.");
 
                 } else if ("Export".equals(command.get("action"))) {
                     System.out.println("Server goes to export.");

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.profClient.controller.ChangeStatusController">
+   <children>
+      <VBox layoutX="50.0" layoutY="50.0" prefHeight="300.0" prefWidth="400.0" spacing="20.0">
+         <children>
+            <Label fx:id="instructionLabel" text="Please select a student and choose a new attendance status" />
+            <ComboBox fx:id="studentIdComboBox" prefWidth="150.0" promptText="Student ID" />
+            <ComboBox fx:id="statusComboBox" prefWidth="150.0" promptText="Status" />
+            <Button mnemonicParsing="false" onAction="#handleConfirm" text="Confirm" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

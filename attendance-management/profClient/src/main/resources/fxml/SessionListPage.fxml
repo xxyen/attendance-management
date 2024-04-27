@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.profClient.controller.SessionListController">
+    <padding>
+        <Insets top="10" right="0" bottom="0" left="20"/>
+    </padding>
+    <Label text="This is a list of all the sessions, please choose one session:"/>
+    <ScrollPane fitToWidth="true" prefHeight="200">
+        <VBox fx:id="sessionsContainer" spacing="5">
+        </VBox>
+    </ScrollPane>
+    <Button text="Confirm" onAction="#handleConfirm"/>
+</VBox>
