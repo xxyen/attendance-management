@@ -21,52 +21,39 @@ import java.util.List;
 import edu.duke.ece651.shared.*;
 import edu.duke.ece651.shared.dao.*;
 import edu.duke.ece651.shared.model.*;
+import edu.duke.ece651.userAdmin.UserManagement;
 
-public class AddCourseController {
+public class RemoveFacultyController {
 
   private Stage mainStage;
 
   @FXML
-  private TextField courseIdField;
-  
-  @FXML
-  private TextField courseNameField;
+  private TextField facultyIdField;
 
   public void setMainStage(Stage mainStage) {
     this.mainStage = mainStage;
   }
 
   @FXML
-  private void createCourseButton() {
-    String courseId = courseIdField.getText().trim();
-    String courseName = courseNameField.getText().trim();
-    if (courseId.isEmpty() || courseName.isEmpty()) {
-      showAlert("Error", "Course ID and name cannot be empty", AlertType.ERROR);
+  private void removeFacultyButton() {
+    String facultyIdString = facultyIdField.getText().trim();
+    if (facultyIdString.isEmpty()) {
+      showAlert("Error", "Faculty ID cannot be empty", AlertType.ERROR);
       return;
     }
-    CourseDAO courseIO = new CourseDAO();
-    List<Course> courses = courseIO.findAllCourses();
-    for (Course course: courses) {
-      if (course.getCourseId().equals(courseId)) {
-        showAlert("Error", "Course ID already exists", AlertType.ERROR);
-        return;
-      }
+    
+    if (!UserManagement.checkFacultyExistsByID(facultyIdString)) {
+      showAlert("Error", "Faculty ID does not exist", AlertType.ERROR);
+      return;
     }
-    boolean isSuccess = createCourse(courseId, courseName);
-    if (isSuccess) {
-      showAlert("Success", "Course created successfully", AlertType.INFORMATION);
+    UserManagement.removeFaculty(facultyIdString);
+    if (!UserManagement.checkFacultyExistsByID(facultyIdString)) {
+      showAlert("Success", "Faculty removed successfully", AlertType.INFORMATION);
       clearForm();
     }
     else {
-      showAlert("Error", "Failed to create course", AlertType.ERROR);
+      showAlert("Error", "Failed to remove faculty", AlertType.ERROR);
     }
-  }
-
-  private boolean createCourse(String courseId, String courseName) {
-    CourseDAO courseIO = new CourseDAO();
-    Course newCourse = new Course(courseId, courseName);
-    courseIO.addCourse(newCourse);
-    return true;
   }
 
   private void showAlert(String title, String content, AlertType type) {
@@ -78,12 +65,11 @@ public class AddCourseController {
   }
 
   private void clearForm() {
-    courseIdField.clear();
-    courseNameField.clear();
+    facultyIdField.clear();
   }
-  
+
   @FXML
-  private void backToHome() throws Exception {
+  private void backToHomePage() throws Exception {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/homePg.xml"));
     Parent homePage = loader.load();
     HomeController controller = loader.getController();

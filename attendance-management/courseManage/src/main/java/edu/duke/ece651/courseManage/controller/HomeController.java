@@ -9,6 +9,8 @@ import javafx.scene.Node;
 
 import java.io.IOException;
 
+import edu.duke.ece651.userAdmin.*;
+
 public class HomeController {
   
   private Stage mainStage;
@@ -18,56 +20,127 @@ public class HomeController {
   }
   
   @FXML
-  private void viewCourses() throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/viewCoursePg.xml"));
-    Parent coursesPage = loader.load();
-    // Set the controller for the view course page
-    ViewCourseController controller = loader.getController();
+  private void viewStudents() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/viewStuPg.xml"));
+    Parent studentsPage = loader.load();
+    ViewStuController controller = loader.getController();
     controller.setMainStage(mainStage);
-    // Set the new scene on the existing stage
-    Scene scene = new Scene(coursesPage, 960, 720);
+    Scene scene = new Scene(studentsPage, 960, 720);
     mainStage.setScene(scene);
     mainStage.show();
   }
 
   @FXML
-  private void addCourse() throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/addCoursePg.xml"));
-    Parent addCoursePage = loader.load();
-    // Set the controller for the view course page
-    AddCourseController controller = loader.getController();
+  private void viewFaculty() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/viewProfPg.xml"));
+    Parent facultyPage = loader.load();
+    ViewProfController controller = loader.getController();
     controller.setMainStage(mainStage);
-    // Set the new scene on the existing stage
-    Scene scene = new Scene(addCoursePage, 960, 720);
+    Scene scene = new Scene(facultyPage, 960, 720);
     mainStage.setScene(scene);
     mainStage.show();
   }
 
   @FXML
-  private void removeCourse() throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/removeCoursePg.xml"));
-    Parent removeCoursePage = loader.load();
-    // Set the controller for the view course page
-    RemoveCourseController controller = loader.getController();
+  private void addStudent() throws Exception {
+    FXMLLoader loader = null;
+    if(UserManagement.getDisplayNamePermission()) {
+      loader = new FXMLLoader(getClass().getResource("/ui/addStudentPgWithDisplayName.xml"));
+    } else {
+      loader = new FXMLLoader(getClass().getResource("/ui/addStudentPgWithoutDisplayName.xml"));
+    }
+    Parent addStudentPage = loader.load();
+    AddStudentController controller = loader.getController();
     controller.setMainStage(mainStage);
-    // Set the new scene on the existing stage
-    Scene scene = new Scene(removeCoursePage, 960, 720);
+    Scene scene = new Scene(addStudentPage, 960, 720);
     mainStage.setScene(scene);
     mainStage.show();
   }
 
   @FXML
-  private void updateCourse() throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/updatePg.xml"));
-    Parent updateCoursePage = loader.load();
-    // Set the controller for the view course page
-    UpdateController controller = loader.getController();
+  private void updateStudent() throws Exception {
+    FXMLLoader loader = null;
+    if(UserManagement.getDisplayNamePermission()) {
+      loader = new FXMLLoader(getClass().getResource("/ui/updateStudentPgWithDisplayName.xml"));
+    } else {
+      loader = new FXMLLoader(getClass().getResource("/ui/updateStudentPgWithoutDisplayName.xml"));
+    }
+    
+    Parent updateStudentPage = loader.load();
+    UpdateStudentController controller = loader.getController();
     controller.setMainStage(mainStage);
-    // Set the new scene on the existing stage
-    Scene scene = new Scene(updateCoursePage, 960, 720);
+    Scene scene = new Scene(updateStudentPage, 960, 720);
     mainStage.setScene(scene);
     mainStage.show();
   }
+
+  @FXML
+  private void addFaculty() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/addFacultyPg.xml"));
+    Parent addFacultyPage = loader.load();
+    AddFacultyController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    Scene scene = new Scene(addFacultyPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  @FXML
+  private void updateFaculty() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/updateFacultyPg.xml"));
+    Parent updateFacultyPage = loader.load();
+    UpdateFacultyController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    Scene scene = new Scene(updateFacultyPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  @FXML
+  private void removeStudent() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/removeStudentPg.xml"));
+    Parent removeStudentPage = loader.load();
+    RemoveStudentController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    Scene scene = new Scene(removeStudentPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  @FXML
+  private void removeFaculty() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/removeFacultyPg.xml"));
+    Parent removeFacultyPage = loader.load();
+    RemoveFacultyController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    Scene scene = new Scene(removeFacultyPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  @FXML
+  private void setPermission() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/changePermissionPg.xml"));
+    Parent setPermissionPage = loader.load();
+    ChangePermissionController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    Scene scene = new Scene(setPermissionPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  // @FXML
+  // private void updateCourse() throws Exception {
+  //   FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/updatePg.xml"));
+  //   Parent updateCoursePage = loader.load();
+  //   // Set the controller for the view course page
+  //   UpdateController controller = loader.getController();
+  //   controller.setMainStage(mainStage);
+  //   // Set the new scene on the existing stage
+  //   Scene scene = new Scene(updateCoursePage, 960, 720);
+  //   mainStage.setScene(scene);
+  //   mainStage.show();
+  // }
 
   @FXML
   private void exitSystem() throws Exception {

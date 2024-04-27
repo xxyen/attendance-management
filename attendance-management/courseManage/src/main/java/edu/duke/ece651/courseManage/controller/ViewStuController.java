@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,11 +20,15 @@ import java.util.Set;
 import edu.duke.ece651.shared.*;
 import edu.duke.ece651.shared.dao.*;
 import edu.duke.ece651.shared.model.*;
+import edu.duke.ece651.userAdmin.*;
 
 public class ViewStuController {
 
   @FXML
   private ListView<String> stuListView;
+
+  @FXML
+  private Label displayPermission;
 
   private Stage mainStage;
   private ObservableList<String> stuObservableList = FXCollections.observableArrayList();
@@ -34,18 +39,20 @@ public class ViewStuController {
 
   public void initialize() {
     // Assume loadDataFromDatabase() is a method that fetches data from the database
-    List<String> stuData = loadDataFromDatabase(); 
-    updateStuListView(stuData);
-  }
-
-  private List<String> loadDataFromDatabase() {
-    List<String> ans = new ArrayList<String>();
-    StudentDAO stuIO = new StudentDAO();
-    Set<Student> stus = stuIO.queryAllStudents();
-    for (Student stu: stus) {
-      ans.add(stu.toString());
+    Set<Student> allStu = UserManagement.getAllStudent();
+    List<String> stuList = new ArrayList<>();
+    if(UserManagement.getDisplayNamePermission()){
+      for(Student stu: allStu) {
+        stuList.add("ID: " + stu.getUserid() + ",  Legal Name: " + stu.getLegalName() + ",  Display Name: " + stu.getDisplayName() + ",  " + stu.getEmail().getEmailAddr());
+      }
+      displayPermission.setText("Students are allowed to have their display names.");
+    } else {
+      for(Student stu: allStu) {
+        stuList.add("ID: " + stu.getUserid() + ",  Legal Name: " + stu.getLegalName() + stu.getEmail().getEmailAddr());
+      }
+      displayPermission.setText("Students are not allowed to have their display names.");
     }
-    return ans;
+    updateStuListView(stuList);
   }
 
   public void updateStuListView(List<String> stus) {
@@ -54,13 +61,13 @@ public class ViewStuController {
   }
   
   @FXML
-  private void backToUpdatePage() throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/updatePg.xml"));
-    Parent updatePage = loader.load();
-    UpdateController controller = loader.getController();
+  private void backToHomePage() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/homePg.xml"));
+    Parent homePage = loader.load();
+    HomeController controller = loader.getController();
     controller.setMainStage(mainStage);
     // Set the new scene on the existing stage
-    Scene scene = new Scene(updatePage, 960, 720);
+    Scene scene = new Scene(homePage, 960, 720);
     mainStage.setScene(scene);
     mainStage.show();
   }

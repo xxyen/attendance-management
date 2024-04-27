@@ -54,13 +54,13 @@ public class ViewProfController {
   }
   
   @FXML
-  private void backToUpdatePage() throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/updatePg.xml"));
-    Parent updatePage = loader.load();
-    UpdateController controller = loader.getController();
+  private void backToHomePage() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/homePg.xml"));
+    Parent homePage = loader.load();
+    HomeController controller = loader.getController();
     controller.setMainStage(mainStage);
     // Set the new scene on the existing stage
-    Scene scene = new Scene(updatePage, 960, 720);
+    Scene scene = new Scene(homePage, 960, 720);
     mainStage.setScene(scene);
     mainStage.show();
   }

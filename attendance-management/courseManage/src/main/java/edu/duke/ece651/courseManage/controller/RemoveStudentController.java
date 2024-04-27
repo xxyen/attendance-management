@@ -21,53 +21,41 @@ import java.util.List;
 import edu.duke.ece651.shared.*;
 import edu.duke.ece651.shared.dao.*;
 import edu.duke.ece651.shared.model.*;
+import edu.duke.ece651.userAdmin.UserManagement;
 
-public class RemoveCourseController {
+public class RemoveStudentController {
 
   private Stage mainStage;
 
   @FXML
-  private TextField courseIdField;
+  private TextField studentIdField;
 
   public void setMainStage(Stage mainStage) {
     this.mainStage = mainStage;
   }
 
   @FXML
-  private void removeCourseButton() {
-    String courseId = courseIdField.getText().trim();
-    if (courseId.isEmpty()) {
-      showAlert("Error", "Course ID cannot be empty", AlertType.ERROR);
+  private void removeStudentButton() {
+    String studentId = studentIdField.getText().trim();
+    if (studentId.isEmpty()) {
+      showAlert("Error", "Student ID cannot be empty", AlertType.ERROR);
       return;
     }
-    CourseDAO courseIO = new CourseDAO();
-    List<Course> courses = courseIO.findAllCourses();
-    boolean findCourse = false;
-    for (Course course: courses) {
-      if (course.getCourseId().equals(courseId)) {
-        findCourse = true;
-        break;
-      }
-    }
-    if (findCourse == false) {
-      showAlert("Error", "Course ID does not exist", AlertType.ERROR);
+
+    if (!UserManagement.checkStudentExistsByID(studentId)) {
+      showAlert("Error", "Student ID does not exist", AlertType.ERROR);
       return;
     }
-    boolean isSuccess = removeCourse(courseId);
-    if (isSuccess) {
-      showAlert("Success", "Course removed successfully", AlertType.INFORMATION);
+    UserManagement.removeStudent(studentId);
+    if (!UserManagement.checkStudentExistsByID(studentId)) {
+      showAlert("Success", "Student removed successfully", AlertType.INFORMATION);
       clearForm();
     }
     else {
-      showAlert("Error", "Failed to remove course", AlertType.ERROR);
+      showAlert("Error", "Failed to remove student", AlertType.ERROR);
     }
   }
 
-  private boolean removeCourse(String courseId) {
-    CourseDAO courseIO = new CourseDAO();
-    courseIO.deleteCourse(courseId);
-    return true;
-  }
 
   private void showAlert(String title, String content, AlertType type) {
     Alert alert = new Alert(type);
@@ -78,7 +66,7 @@ public class RemoveCourseController {
   }
 
   private void clearForm() {
-    courseIdField.clear();
+    studentIdField.clear();
   }
   
   @FXML

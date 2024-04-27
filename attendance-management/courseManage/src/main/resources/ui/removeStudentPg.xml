@@ -9,7 +9,7 @@
 <?import java.lang.Double?>
 
 <GridPane xmlns:fx="http://javafx.com/fxml"
-          fx:controller="edu.duke.ece651.courseManage.controller.AddCourseController">
+          fx:controller="edu.duke.ece651.courseManage.controller.RemoveStudentController">
   <columnConstraints>
     <ColumnConstraints percentWidth="15.0" />
     <ColumnConstraints percentWidth="70.0" />
@@ -25,24 +25,19 @@
     <RowConstraints percentHeight="20.0" />
     <RowConstraints percentHeight="20.0" />
   </rowConstraints>
-  <Label text="Create A New Course" GridPane.rowIndex="0" GridPane.columnIndex="1">
+  <Label text="Remove A Student" GridPane.rowIndex="0" GridPane.columnIndex="1">
   </Label>
-  <Label text="Course ID:" GridPane.rowIndex="1" GridPane.columnIndex="1">
+  <Label text="Student ID:" GridPane.rowIndex="1" GridPane.columnIndex="1">
   </Label>
-  <TextField fx:id="courseIdField" promptText="Enter Course ID"
+  <TextField fx:id="studentIdField" promptText="Enter Student ID"
              GridPane.rowIndex="2" GridPane.columnIndex="1">
   </TextField>
-  <Label text="Course Name:" GridPane.rowIndex="3" GridPane.columnIndex="1">
-  </Label>
-  <TextField fx:id="courseNameField" promptText="Enter Course Name"
-             GridPane.rowIndex="4" GridPane.columnIndex="1">
-  </TextField>
-  <Button text="Create New Course" GridPane.rowIndex="5" GridPane.columnIndex="1"
-          onAction="#createCourseButton">
+  <Button text="Remove Student" GridPane.rowIndex="5" GridPane.columnIndex="1"
+          onAction="#removeStudentButton">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Back to home page." GridPane.rowIndex="7" GridPane.columnIndex="1"
+  <Button text="Back To Home Page" GridPane.rowIndex="7" GridPane.columnIndex="1"
           onAction="#backToHome">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>

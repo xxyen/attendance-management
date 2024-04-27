@@ -23,8 +23,8 @@
   </Label>
   <ListView fx:id="profListView" GridPane.rowIndex="1" GridPane.columnIndex="1">
   </ListView>
-  <Button text="Back To Update Course Page." GridPane.rowIndex="2" GridPane.columnIndex="1"
-          onAction="#backToUpdatePage">
+  <Button text="Back To Previous Page" GridPane.rowIndex="2" GridPane.columnIndex="1"
+          onAction="#backToHomePage">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>

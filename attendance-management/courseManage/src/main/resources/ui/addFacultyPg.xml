@@ -9,7 +9,7 @@
 <?import java.lang.Double?>
 
 <GridPane xmlns:fx="http://javafx.com/fxml"
-          fx:controller="edu.duke.ece651.courseManage.controller.RemoveSectionController">
+          fx:controller="edu.duke.ece651.courseManage.controller.AddFacultyController">
   <columnConstraints>
     <ColumnConstraints percentWidth="15.0" />
     <ColumnConstraints percentWidth="70.0" />
@@ -21,24 +21,35 @@
     <RowConstraints percentHeight="10.0" />
     <RowConstraints percentHeight="5.0" />
     <RowConstraints percentHeight="10.0" />
-    <RowConstraints percentHeight="20.0" />
+    <RowConstraints percentHeight="5.0" />
+    <RowConstraints percentHeight="10.0" />
     <RowConstraints percentHeight="20.0" />
     <RowConstraints percentHeight="20.0" />
   </rowConstraints>
-  <Label text="Remove A Section" GridPane.rowIndex="0" GridPane.columnIndex="1">
+  <Label text="Add A New Faculty Member" GridPane.rowIndex="0" GridPane.columnIndex="1">
   </Label>
-  <Label text="Section ID:" GridPane.rowIndex="1" GridPane.columnIndex="1">
+  <Label text="ID:" GridPane.rowIndex="1" GridPane.columnIndex="1">
   </Label>
-  <TextField fx:id="sectionIdField" promptText="Enter Section ID"
+  <TextField fx:id="facultyIdField" promptText="Enter Faculty ID"
              GridPane.rowIndex="2" GridPane.columnIndex="1">
   </TextField>
-  <Button text="Remove Section" GridPane.rowIndex="5" GridPane.columnIndex="1"
-          onAction="#removeSectionButton">
+  <Label text="Name:" GridPane.rowIndex="3" GridPane.columnIndex="1">
+  </Label>
+  <TextField fx:id="facultyNameField" promptText="Enter Name"
+             GridPane.rowIndex="4" GridPane.columnIndex="1">
+  </TextField>
+  <Label text="Email:" GridPane.rowIndex="5" GridPane.columnIndex="1">
+  </Label>
+  <TextField fx:id="emailField" promptText="Enter Email Address"
+             GridPane.rowIndex="6" GridPane.columnIndex="1">
+  </TextField>
+  <Button text="Create" GridPane.rowIndex="7" GridPane.columnIndex="1"
+          onAction="#addFacultyButton">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Back To Update Course Page." GridPane.rowIndex="7" GridPane.columnIndex="1"
-          onAction="#backToUpdatePage">
+  <Button text="Back To Previous Page" GridPane.rowIndex="8" GridPane.columnIndex="1"
+          onAction="#backToHomePage">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>

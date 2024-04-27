@@ -9,9 +9,8 @@
 <GridPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="edu.duke.ece651.courseManage.controller.HomeController">
   <columnConstraints>
-    <ColumnConstraints percentWidth="15.0" />
-    <ColumnConstraints percentWidth="70.0" />
-    <ColumnConstraints percentWidth="15.0" />
+    <ColumnConstraints percentWidth="50.0" />
+    <ColumnConstraints percentWidth="50.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints percentHeight="25.0" />
@@ -21,31 +20,46 @@
     <RowConstraints percentHeight="15.0" />
     <RowConstraints percentHeight="15.0" />
   </rowConstraints>
-  <Label text="Course Management System: Home Page" GridPane.rowIndex="0" GridPane.columnIndex="1">
+  <Label text="Administration Application: User Management Page" GridPane.rowIndex="0" GridPane.columnIndex="0">
   </Label>
-  <Button text="1.  View the list of all courses." GridPane.rowIndex="1" GridPane.columnIndex="1"
-          onAction="#viewCourses">
+  <Button text="View Students" GridPane.rowIndex="1" GridPane.columnIndex="0" onAction="#viewStudents">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="2.  Add a new course." GridPane.rowIndex="2" GridPane.columnIndex="1"
-          onAction="#addCourse">
+  <Button text="Add A Student" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#addStudent">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="3.  Remove an existing course." GridPane.rowIndex="3" GridPane.columnIndex="1"
-          onAction="#removeCourse">
+  <Button text="Remove A Student" GridPane.rowIndex="3" GridPane.columnIndex="0" onAction="#removeStudent">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="4.  Update an existing course." GridPane.rowIndex="4" GridPane.columnIndex="1"
-          onAction="#updateCourse">
+  <Button text="Update A Student" GridPane.rowIndex="4" GridPane.columnIndex="0" onAction="#updateStudent">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="5.  Exit the system." GridPane.rowIndex="5" GridPane.columnIndex="1"
-          onAction="#exitSystem">
+  <Button text="Modify Global Setting" GridPane.rowIndex="5" GridPane.columnIndex="0"  onAction="#setPermission">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
+
+
+  <Button text="View Faculty" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction="#viewFaculty">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="Add A Faculty Member" GridPane.rowIndex="2" GridPane.columnIndex="1" onAction="#addFaculty">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="Remove A Faculty Member" GridPane.rowIndex="3" GridPane.columnIndex="1" onAction="#removeFaculty">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="Update A Faculty Member" GridPane.rowIndex="4" GridPane.columnIndex="1" onAction="#updateFaculty">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+ 
+  
 </GridPane>
