@@ -7,7 +7,7 @@
     <padding>
         <Insets top="10" right="0" bottom="0" left="20"/>
     </padding>
-    <Label text="The above is a list of all your sections, please choose a section you want to operate"/>
+    <Label text="This is a list of all your sections, please choose a section you want to operate"/>
     <VBox fx:id="sectionsContainer" spacing="5">
     </VBox>
     <Button text="Confirm" onAction="#handleConfirm"/>
