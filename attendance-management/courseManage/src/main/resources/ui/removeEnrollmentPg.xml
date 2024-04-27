@@ -32,10 +32,10 @@
   <TextField fx:id="sectionIdField" promptText="Enter Section ID"
              GridPane.rowIndex="2" GridPane.columnIndex="1">
   </TextField>
-  <Label text="Student ID:" GridPane.rowIndex="1" GridPane.columnIndex="1">
+  <Label text="Student ID:" GridPane.rowIndex="3" GridPane.columnIndex="1">
   </Label>
   <TextField fx:id="studentIdField" promptText="Enter Student ID"
-             GridPane.rowIndex="2" GridPane.columnIndex="1">
+             GridPane.rowIndex="4" GridPane.columnIndex="1">
   </TextField>
   <Button text="Remove Student From Section" GridPane.rowIndex="5" GridPane.columnIndex="1"
           onAction="#removeEnrollmentButton">

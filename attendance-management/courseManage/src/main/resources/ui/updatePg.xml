@@ -64,11 +64,12 @@
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
   <Button text="9.  Add a list of students to a section." GridPane.rowIndex="5" GridPane.columnIndex="0"
-          onAction="#LoadStusToSection">
+          onAction="#loadStusToSection">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="10. Remove one student from a section." GridPane.rowIndex="5" GridPane.columnIndex="1">
+  <Button text="10. Remove one student from a section." GridPane.rowIndex="5" GridPane.columnIndex="1"
+          onAction="#removeEnrollment">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>

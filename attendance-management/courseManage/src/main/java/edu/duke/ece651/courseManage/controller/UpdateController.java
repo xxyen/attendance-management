@@ -122,7 +122,7 @@ public class UpdateController {
   }
 
   @FXML
-  private void LoadStusToSection() throws Exception {
+  private void loadStusToSection() throws Exception {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/loadStudentsToSectionPg.xml"));
     Parent loadStusPage = loader.load();
     // Set the controller for the view course page
@@ -130,6 +130,19 @@ public class UpdateController {
     controller.setMainStage(mainStage);
     // Set the new scene on the existing stage
     Scene scene = new Scene(loadStusPage, 960, 720);
+    mainStage.setScene(scene);
+    mainStage.show();
+  }
+
+  @FXML
+  private void removeEnrollment() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/removeEnrollmentPg.xml"));
+    Parent removeEnrollmentPage = loader.load();
+    // Set the controller for the view course page
+    RemoveEnrollmentController controller = loader.getController();
+    controller.setMainStage(mainStage);
+    // Set the new scene on the existing stage
+    Scene scene = new Scene(removeEnrollmentPage, 960, 720);
     mainStage.setScene(scene);
     mainStage.show();
   }
