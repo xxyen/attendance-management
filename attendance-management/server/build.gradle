@@ -38,4 +38,5 @@ dependencies {
     implementation 'com.alibaba:druid:1.1.10'
     //  implementation 'org.apache.commons:commons-dbutils:1.6'
     implementation 'commons-dbutils:commons-dbutils:1.8.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.9'
 }

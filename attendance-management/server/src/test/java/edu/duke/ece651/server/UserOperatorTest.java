@@ -14,7 +14,7 @@ class UserOperatorTest {
     public void test_signIn() {
         UserOperator uo = new UserOperator();
         User user = uo.signIn("stu001", "123");
-        assertEquals("cp357@duke.edu", user.getEmail().getEmailAddr());
+        assertEquals("peicansx@gmail.com", user.getEmail().getEmailAddr());
     }
 
 

@@ -12,6 +12,8 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ClientHandler implements Runnable{
     private Socket clientSocket;
@@ -27,115 +29,124 @@ public class ClientHandler implements Runnable{
     private static EnrollmentDAO enrollmentDAO = new EnrollmentDAO();
     private static SessionDAO sessionDAO = new SessionDAO();
 
-    public ClientHandler(Socket socket) {
+    private ObjectInputStream input;
+    private ObjectOutputStream output;
+    private ObjectMapper mapper = new ObjectMapper();
+
+    public ClientHandler(Socket socket) throws IOException {
         this.clientSocket = socket;
+        this.output = new ObjectOutputStream(clientSocket.getOutputStream());
+        this.output.flush();
+        this.input = new ObjectInputStream(clientSocket.getInputStream());
     }
 
-//    public void trySendFile(PrintStream output) throws Exception{
-//        output.println("startOfFile");
-//
-//        String filePath = "/home/wille/Desktop/test2.xml"; // 根据请求确定文件路径
-//
-//        // 发送文件名给客户端
-//        File file = new File(filePath);
-//        output.println(file.getName());
-//        //output.flush();
-//
-//        // 发送文件内容
-//        try (BufferedReader fileReader = new BufferedReader(new FileReader(file))) {
-//            String line;
-//            while ((line = fileReader.readLine()) != null) {
-//                output.println(line);
-//            }
-//            //output.flush();
-//        }
-//
-//        // 发送结束信号
-//        output.println("endOfFile");
-//        //output.flush();
-//    }
+    // public ClientHandler(Socket socket) {
+    //     this.clientSocket = socket;
+    // }
 
-    public void mainLoop(BufferedReader input, PrintStream output){
+    // public void mainLoop(BufferedReader input, PrintStream output){
+    //     boolean flag = true;
+
+    //     while (flag) {
+    //         try {
+    //             output.print("--------------------------------------------------------------------------------\n");
+    //             output.print("Hello! Below are all the available actions:\n" +
+    //                     "1. Log in.\n" +
+    //                     "2. Exit this program.\n" +
+    //                     "What do you want to do? Please type in the index number:\n");
+    //             output.print("--------------------------------------------------------------------------------\n");
+    //             output.println();
+
+    //             int index = ReaderUtilities.readPositiveInteger(input);
+
+    //             if (index == 1){
+    //                 User user = signIn(input, output);
+
+    //                 if (user.getUserType() == "professor"){
+    //                     Professor p = (Professor) user;
+    //                     output.println("Login successful. Welcome, Professor " + p.getName() + "!");
+
+    //                     profLoop(p, input, output);
+    //                 }
+
+    //                 else if (user.getUserType() == "student"){
+    //                     Student s = (Student) user;
+    //                     output.println("Login successful. Welcome, Student " + s.getDisplayName() + "!");
+
+    //                     stuLoop(s, input, output);
+    //                 }
+
+    //             }
+    //             else if (index == 2){
+    //                 output.println("Have a nice day! From ECE 651 team 6.");
+    //                 output.println("endConnection");
+    //                 output.println();
+    //                 flag = false;
+    //                 break;
+    //             }
+
+    //             else {
+    //                 throw new IllegalArgumentException("Invalid action number, please choose your action again!");
+    //             }
+
+    //         } catch (Exception e) {
+    //             output.println(e.getMessage());
+    //         }
+    //     }
+    // }
+
+    private void mainLoop() throws IOException, ClassNotFoundException {
         boolean flag = true;
-
         while (flag) {
             try {
-                output.print("--------------------------------------------------------------------------------\n");
-                output.print("Hello! Below are all the available actions:\n" +
-                        "1. Log in.\n" +
-                        "2. Exit this program.\n" +
-                        "What do you want to do? Please type in the index number:\n");
-                output.print("--------------------------------------------------------------------------------\n");
-                output.println();
-
-                int index = ReaderUtilities.readPositiveInteger(input);
-
-                if (index == 1){
-                    User user = signIn(input, output);
-                    //output.println("test3");
-
-                    //todo:
-                    //do Prof or Stu action
-
-                    if (user.getUserType() == "professor"){
-                        Professor p = (Professor) user;
-                        output.println("Login successful. Welcome, Professor " + p.getName() + "!");
-                        //output.println();
-                        profLoop(p, input, output);
-                    }
-
-                    else if (user.getUserType() == "student"){
-                        Student s = (Student) user;
-                        output.println("Login successful. Welcome, Student " + s.getDisplayName() + "!");
-                        //output.println();
-                        stuLoop(s, input, output);
-                    }
-
+                if (clientSocket.isClosed()) {
+                    System.out.println("Client has closed the connection.");
+                    flag = false; 
+                    continue;
                 }
-                else if (index == 2){
-                    output.println("Have a nice day! From ECE 651 team 6.");
-                    output.println("endConnection");
-                    output.println();
-                    flag = false;
-                    break;
+    
+                String jsonCredentials = (String) input.readObject();
+                Map<String, String> credentials = mapper.readValue(jsonCredentials, Map.class);
+                
+                User user = userOperator.signIn(credentials.get("userid"), credentials.get("password"));
+                
+                if (user instanceof Professor) {
+                    Professor p = (Professor) user;
+                    output.writeObject(p.getName()); 
+                } else {
+                    output.writeObject("User is not a professor.");
                 }
-
-                //for file sending test
-//                else if (index == 3){
-//                    trySendFile(output);
-//                }
-                else {
-                    throw new IllegalArgumentException("Invalid action number, please choose your action again!");
-                }
-
-            } catch (Exception e) {
-                output.println(e.getMessage());
-                //output.println();
+            } catch (EOFException e) {
+                System.out.println("Client disconnected.");
+                flag = false; 
+            }catch (IllegalArgumentException e) {
+                output.writeObject(e.getMessage());
             }
+            output.flush();
         }
     }
 
-    public User signIn(BufferedReader input, PrintStream output) throws Exception {
-        output.println("Please enter your userid:");
-        output.println();
-        String userid = input.readLine();
-        System.out.println(userid);
+    // public User signIn(BufferedReader input, PrintStream output) throws Exception {
+    //     output.println("Please enter your userid:");
+    //     output.println();
+    //     String userid = input.readLine();
+    //     System.out.println(userid);
 
-        output.println("Please enter your password:");
-        output.println();
-        String password = input.readLine();
-        System.out.println(password);
+    //     output.println("Please enter your password:");
+    //     output.println();
+    //     String password = input.readLine();
+    //     System.out.println(password);
 
-        //output.println("test1");
-        User user = userOperator.signIn(userid, password);
-        // 登录成功，发送欢迎信息
-        //output.println("Login successful. Welcome, " + user.getUserid() + "!");
+    //     //output.println("test1");
+    //     User user = userOperator.signIn(userid, password);
+    //     // 登录成功，发送欢迎信息
+    //     //output.println("Login successful. Welcome, " + user.getUserid() + "!");
 
-        //output.println("test2");
+    //     //output.println("test2");
 
-        return user;
+    //     return user;
 
-    }
+    // }
 
     public Section chooseSection(User u, BufferedReader in, PrintStream out) throws IOException {
         List<Section> sectionList = new ArrayList<>();
@@ -244,15 +255,25 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    // @Override
+    // public void run() {
+    //     try (
+    //             BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    //             PrintStream output = new PrintStream(clientSocket.getOutputStream(), true)
+    //     ) {
+    //         mainLoop(input, output);
+
+    //         // 处理完成后关闭连接
+    //         clientSocket.close();
+    //     } catch (Exception e) {
+    //         System.err.println("Exception in client handler: " + e.getMessage());
+    //         e.printStackTrace();
+    //     }
+    // }
     @Override
     public void run() {
-        try (
-                BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                PrintStream output = new PrintStream(clientSocket.getOutputStream(), true)
-        ) {
-            mainLoop(input, output);
-
-            // 处理完成后关闭连接
+        try {
+            mainLoop();
             clientSocket.close();
         } catch (Exception e) {
             System.err.println("Exception in client handler: " + e.getMessage());

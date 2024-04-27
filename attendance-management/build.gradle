@@ -86,6 +86,11 @@ project (':courseManage'){
         implementation project(':shared')
     }
 }
+project (':profClient'){
+    dependencies {
+        implementation project(':shared')
+    }
+}
 clover {
     report{
         xml=true
@@ -117,6 +122,12 @@ tasks.register("run-courseManage") {
     description = 'Run the courseManage'
 }
 
+tasks.register("run-profClient") {
+    dependsOn project('profClient').getTasksByName('run',false)
+    group = 'Run profClient'
+    description = 'Run the profClient'
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -126,6 +137,7 @@ tasks.register("resolveDependencies") {
     dependsOn project('client').getTasksByName('resolveDependencies',false)
     dependsOn project('userAdmin').getTasksByName('resolveDependencies',false)
     dependsOn project('courseManage').getTasksByName('resolveDependencies',false)
+    dependsOn project('profClient').getTasksByName('resolveDependencies',false)
     group = 'Build'
     description = 'Resolve/Download Dependencies'
 }
