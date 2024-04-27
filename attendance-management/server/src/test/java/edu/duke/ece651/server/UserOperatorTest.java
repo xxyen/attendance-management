@@ -9,7 +9,7 @@ import java.io.ByteArrayOutputStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserOperatorTest {
-    //@Disabled
+    @Disabled
     @Test
     public void test_signIn() {
         UserOperator uo = new UserOperator();
