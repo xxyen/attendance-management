@@ -48,111 +48,62 @@ public class ProfTextPlayer {
         this.output = output;
     }
 
-    /**
-     * Read one single letter from input,
-     * used for readStatus.
-     */
-
-    // public static char readSingleLetter(BufferedReader reader) throws IOException {
-    //     String line = reader.readLine();
-    //     if (line != null && line.length() == 1 && Character.isLetter(line.charAt(0))) {
-    //         return line.charAt(0);
-    //     } else {
-    //         throw new IllegalArgumentException("Invalid input: you should only type in one letter!");
-    //     }
-    // }
-
-    /**
-     * Read a status from input.
-     */
-    // public Status readStatus(String prompt) throws IOException {
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.print(prompt);
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.println();
-    //     char status = readSingleLetter(inputReader);
-    //     return new Status(status);
-    // }
 
     /**
      * Take attendance record for all the student of this course.
      * @return a Session of the records
      */
-    // public Session takeAttendance(Date time) throws IOException {
-    //      Session newSes = new Session(section.getSectionId(), time, new Time(time.getTime()), new Time(time.getTime()));
-    //      sessionDAO.addSession(newSes);
-    //      for (Enrollment e: enrollmentDAO.listEnrollmentsBySection(section.getSectionId())) {
-    //          Student s = studentDAO.queryStudentById(e.getStudentId());
-    //          out.print("--------------------------------------------------------------------------------\n");
-    //          out.println(s.getDisplayName());
-    //          out.println(s.getUserid());
-    //          out.print("--------------------------------------------------------------------------------\n");
-
-    //          boolean flag = true;
-    //          while (flag) {
-    //              try {
-    //                  Status newStatus = readStatus(
-    //                          "Please type in the attendance status of this student. ('p' for present, 'a' for absent, 't' for tardy)\n");
-    //                  //how to get new session's id?
-    //                  AttendanceRecord tempR = new AttendanceRecord(newSes.getSessionId(), s.getUserid(), newStatus);
-    //                  //newSes.addRecord(tempR);
-    //                  attendanceRecordDAO.addAttendanceRecord(tempR);
-    //                  flag = false;
-    //              } catch (IllegalArgumentException ex) {
-    //                  out.println(ex.getMessage());
-    //                  // doOnePlacement(s, this.shipCreationFns.get(s));
-    //              }
-    //          }
-    //      }
-    //      return newSes;
-    // }
+    public Session takeAttendance(Date time) throws IOException,ClassNotFoundException,Exception {
+         Session newSes = new Session(section.getSectionId(), time, new Time(time.getTime()), new Time(time.getTime()));
+         sessionDAO.addSession(newSes);
+         // Send student id list to client
+         getStudentIdsForSession(newSes);
+        //Receive attendance record form client
+        String jsonRecord = (String) input.readObject();
+        Map<String, String> attendanceData = mapper.readValue(jsonRecord, Map.class);
+        for (Map.Entry<String, String> entry : attendanceData.entrySet()) {
+            String studentId = entry.getKey();
+            String status = entry.getValue();
+            Status newSta = new Status(status.charAt(0));
+    
+            AttendanceRecord tempR = new AttendanceRecord(newSes.getSessionId(), studentId, newSta);
+            attendanceRecordDAO.addAttendanceRecord(tempR);
+        }
+        return newSes;
+    }
 
 
-    // private static Date convertStringToDate(String inputDate) throws Exception {
-    //     SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-    //     formatter.setLenient(false); // 设置解析日期的严格模式
-    //     return formatter.parse(inputDate); // 尝试解析输入的字符串
-    // }
+    private static Date convertStringToDate(String inputDate) throws Exception {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        formatter.setLenient(false); 
+        return formatter.parse(inputDate);
+    }
 
-    // public Date readDate() throws Exception {
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.print("Please type in the date (MM/DD/YYYY) that you want to record attendance for:\n");
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.println();
-
-    //     String s = inputReader.readLine();
-
-    //     Date date = convertStringToDate(s);
-    //     if (!date.before(new Date())) { // 检查日期是否早于当前日期
-    //         throw new IllegalArgumentException("Invalid date: the date you typed is not earlier than the current date!");
-    //     }
-    //     return date;
-    // }
 
     /**
      * Full action of take attendance of a new session.
      */
-    // public void full_takeAttendance() throws Exception {
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.print("Below are all the available actions:\n" +
-    //             "1. Take attendance for today.\n" +
-    //             "2. Take attendance for a previous date.\n" +
-    //             "What do you want to do? Please type in the index number:\n");
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.println();
+    public void full_takeAttendance() throws Exception {
+        String json = (String) input.readObject();
+        Map<String, String> command = mapper.readValue(json, Map.class);
 
-    //     int index = readPositiveInteger(inputReader);
-    //     if (index == 1){
-    //         takeAttendance(new Date());
-    //     }
-    //     else if (index == 2){
-    //         takeAttendance(readDate());
-    //     }
-    //     else {
-    //         throw new IllegalArgumentException("Invalid action number!");
-    //     }
+        if ("TakeAttendanceToday".equals(command.get("action"))) {
+            System.out.println("Server starts take attendance for today.");
+            takeAttendance(new Date());
+            System.out.println("Server finishes take attendance for tody.");
 
-    // }
+        } else if ("TakeAttendancePreviousDate".equals(command.get("action"))) {
+            System.out.println("Server starts take attendance for previous date.");
+            Map<String, String> attendanceData = new HashMap<>();
+            String jsonData = (String) input.readObject();
+            attendanceData = mapper.readValue(jsonData, Map.class);
+            String dateString = attendanceData.get("date");
+            Date date = convertStringToDate(dateString);
+            takeAttendance(date);
+            System.out.println("Server finishes take attendance for previous date.");
+
+        } 
+    }
 
     /**
      * Search student with given ID.
@@ -169,27 +120,6 @@ public class ProfTextPlayer {
         return studentDAO.queryStudentById(e.getStudentId());
     }
 
-    /**
-     * Full action of searching a student.
-     */
-    // public Student doSearchStudent() throws IOException {
-    //     // out.print("--------------------------------------------------------------------------------\n");
-    //     // out.print("Please type in the student's id:\n");
-    //     // out.print("--------------------------------------------------------------------------------\n");
-    //     // out.println();
-
-    //     String s = inputReader.readLine();
-    //     if (s == null) {
-    //         throw new EOFException(
-    //                 "You didn't type in any instruction!\n");
-    //     }
-    //     Student ans = searchStudent(s);
-    //     if (ans == null) {
-    //         throw new IllegalArgumentException("Invalid input: there is no student with this id in this course!");
-    //     }
-    //     return ans;
-    // }
-
     public List<String> getStudentIdsForSession(Session s) throws Exception{
         List<Enrollment> enrollments = enrollmentDAO.listEnrollmentsBySection(s.getSectionId());
         List<String> studentIds = new ArrayList<>();
@@ -204,25 +134,6 @@ public class ProfTextPlayer {
 
         return studentIds;
     }
-
-    /**
-     * Read a positive integer from input.
-     * Used for choosing action or session.
-     */
-    // public int readPositiveInteger(BufferedReader reader) throws IOException {
-    //     String line = reader.readLine(); // 从BufferedReader读取一行
-    //     try {
-    //         int number = Integer.parseInt(line); // 尝试将读取的行转换为整数
-    //         if (number > 0) {
-    //             return number; // 如果是正整数，则返回
-    //         } else {
-    //             throw new IllegalArgumentException("Invalid input: it is not a positive integer!"); // 如果不是正整数，抛出异常
-    //         }
-    //     } catch (NumberFormatException e) {
-    //         // 如果转换失败（即输入不是整数），也抛出IllegalArgumentException
-    //         throw new IllegalArgumentException("Invalid input: it is not a positive integer!");
-    //     }
-    // }
 
     /**
      * Choose a session from the list.
@@ -246,25 +157,6 @@ public class ProfTextPlayer {
         System.out.println("Server go to selected session date: " + sessionList.get(index).getSessionDate());
         return sessionList.get(index);
     }
-    // public Session chooseSession() throws IOException {
-    //      List<Session> sessionList = sessionDAO.listSessionsBySection(section.getSectionId());
-    //      int size = sessionList.size();
-
-    //      for (int i = 0; i < size; i++) {
-    //          out.println(Integer.toString(i + 1) + ": Date " + sessionList.get(i).getSessionDate());
-    //      }
-    //      out.print("--------------------------------------------------------------------------------\n");
-    //      out.println(
-    //              "The above is a list of all the sessions, please enter the serial number of the session you want to choose.");
-    //      out.print("--------------------------------------------------------------------------------\n");
-    //     out.println();
-
-    //     int index = readPositiveInteger(inputReader);
-    //      if (index > size) {
-    //          throw new IllegalArgumentException("Invalid input: there is no such a session!");
-    //      }
-    //      return sessionList.get(index - 1);
-    // }
 
     /**
      * Send email to a given email address.
@@ -331,57 +223,6 @@ public class ProfTextPlayer {
             output.flush();
         }
     }
-    // public void changeStatus() throws Exception {
-    //     Session target = chooseSession();
-
-    //     Student s = doSearchStudent();
-
-    //     Status newSta = readStatus(
-    //             "Please type in the new attendance status of this student. ('p' for present, 'a' for absent, 't' for tardy)\n");
-
-    //     Boolean flag = false;
-
-    //     AttendanceRecord r = attendanceRecordDAO.findAttendanceRecordBySessionAndStudent(target.getSessionId(), s.getUserid());
-
-    //     if (r != null) {
-    //         r.setStatus(newSta);
-    //         attendanceRecordDAO.updateAttendanceRecord(r);
-    //         out.print("--------------------------------------------------------------------------------\n");
-    //         out.print("Successfully update the record!\n");
-    //         out.print("--------------------------------------------------------------------------------\n");
-    //         // to-do
-    //         // send email notification
-    //         if (enrollmentDAO.findEnrollmentByStudentAndSection(s.getUserid(), section.getSectionId()).isReceiveNotifications()) {
-    //             sendStatusChangeNotification(s, target, newSta);
-    //         }
-
-    //     } else {
-    //         out.print("--------------------------------------------------------------------------------\n");
-    //         out.print("Sorry, there is no record of this student in chosen session!\n");
-    //         out.print("--------------------------------------------------------------------------------\n");
-    //     }
-    // }
-
-
-    /**
-     * Read export file format from input.
-     */
-    // public String readFormat(String prompt) throws IOException {
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.print(prompt);
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.println();
-
-    //     String s = inputReader.readLine();
-    //     if (s == null) {
-    //         throw new EOFException(
-    //                 "You didn't type in any instruction!\n");
-    //     }
-    //     if (!(s.equals("xml") || s.equals("json"))) {
-    //         throw new IllegalArgumentException("Invalid format! You should only choose json or xml!");
-    //     }
-    //     return s;
-    // }
 
     private void sendFileToClient(ObjectOutputStream out, String filePath) throws IOException {
         File file = new File(filePath);
@@ -406,14 +247,12 @@ public class ProfTextPlayer {
         HashMap<String, String> command = mapper.readValue(json, HashMap.class);
 
         String format = command.get("format");
-        // String filepath = command.get("path");
 
         Date date = new Date();
         String path = "src/profExportReport/" + section.getSectionId() + "_" + date.toString() + "." + format;
 
         ExportService.exportSectionAttendanceDataForProfessor(section.getSectionId(), format, path);
         sendFileToClient(output, path);
-        // sendFileService.sendFile(out, path);
     }
 
     /**
@@ -428,16 +267,17 @@ public class ProfTextPlayer {
                 Map<String, String> command = mapper.readValue(json, Map.class);
 
                 if ("TakeAttendance".equals(command.get("action"))) {
-                    // full_takeAttendance();
-                    System.out.println("Server received take attendance.");
+                    System.out.println("Server starts take attendance.");
+                    full_takeAttendance();
+                    System.out.println("Server finishes take attendance.");
 
                 } else if ("ChangeStatus".equals(command.get("action"))) {
-                    System.out.println("Server goes to change status.");
+                    System.out.println("Server starts change status.");
                     changeStatus();
                     System.out.println("Server finishes change status.");
 
                 } else if ("Export".equals(command.get("action"))) {
-                    System.out.println("Server goes to export.");
+                    System.out.println("Server starts export.");
                     exportSessions();
                     System.out.println("Server finishes export.");
                 } else if ("Exit".equals(command.get("action"))) {
@@ -462,55 +302,5 @@ public class ProfTextPlayer {
             output.flush();
         }
     }
-
-    // public void loop() throws Exception {
-    //     boolean flag = true;
-
-    //     while (flag) {
-    //         try {
-    //             out.print("--------------------------------------------------------------------------------\n");
-    //             out.print("1. Start a new session and take attendance.\n" +
-    //                     "2. Change attendance record of a student in one session.\n" +
-    //                     "3. Export attendance records of a session.\n" +
-    //                     "4. Exit this course.\n" +
-    //                     "Above are all the available actions. What do you want to do? Please type in the index number:\n");
-    //             out.print("--------------------------------------------------------------------------------\n");
-    //             out.println();
-
-    //             int index = readPositiveInteger(inputReader);
-
-    //             if (index == 1) {
-    //                 full_takeAttendance();
-    //             } else if (index == 2) {
-    //                 changeStatus();
-    //             } else if (index == 3) {
-    //                 // todo
-    //                 // add export method
-    //                 exportSessions();
-    //             } else if (index == 4) {
-    //                 out.print("--------------------------------------------------------------------------------\n");
-    //                 out.print("You have exited from course: " +
-    //                         // course.getCourseid() +
-    //                         section.getCourseId() +
-    //                         section.getSectionId() +
-    //                         "!" +
-    //                         "\n");
-    //                 out.print("--------------------------------------------------------------------------------\n");
-
-    //                 flag = false;
-    //                 break;
-    //             } else {
-    //                 throw new IllegalArgumentException("Invalid action number, please choose your action again!");
-    //             }
-
-    //         } catch (Exception e) {
-    //             out.println(e.getMessage());
-    //         }
-    //     }
-    // }
-
-    // public BufferedReader getInputReader() {
-    //     return inputReader;
-    // }
 }
 

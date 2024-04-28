@@ -27,44 +27,54 @@ public class ProfessorPageController {
     private ObjectMapper mapper = new ObjectMapper();
 
     @FXML
-    protected void handleStartNewSession() {
-        System.out.println("StartNewSession clicked!");
+    protected void handleStartNewSession(ActionEvent event) throws IOException {
+        HashMap<String, String> command = new HashMap<>();
+        command.put("action", "TakeAttendance");
+        String json = mapper.writeValueAsString(command);
+        App.out.writeObject(json);
+        App.out.flush();
 
-    }
-
-    @FXML
-protected void handleChangeAttendance(ActionEvent event) throws IOException {
-    HashMap<String, String> command = new HashMap<>();
-    command.put("action", "ChangeStatus");
-    String json = mapper.writeValueAsString(command);
-    App.out.writeObject(json);
-    App.out.flush();
-
-    try {
-        String sessionJson = (String) App.in.readObject();
-        List<Session> sessionList = mapper.readValue(sessionJson, new TypeReference<List<Session>>(){});
-        List<String> sessionDates = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-        for (Session session : sessionList) {
-            String dateString = dateFormat.format(session.getSessionDate());
-            String startTimeString = timeFormat.format(session.getStartTime());
-            String dateTimeString = dateString + " " + startTimeString;
-            sessionDates.add(dateTimeString);
-        }
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SessionListPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/StartNewSessionPage.fxml"));
         Parent root = loader.load();
-        SessionListController controller = loader.getController();
-        controller.populateSessions(sessionDates);
         Scene scene = new Scene(root, 640, 480);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-    } catch (IOException | ClassNotFoundException e) {
-        e.printStackTrace();
     }
-}
+
+    @FXML
+    protected void handleChangeAttendance(ActionEvent event) throws IOException {
+        HashMap<String, String> command = new HashMap<>();
+        command.put("action", "ChangeStatus");
+        String json = mapper.writeValueAsString(command);
+        App.out.writeObject(json);
+        App.out.flush();
+
+        try {
+            String sessionJson = (String) App.in.readObject();
+            List<Session> sessionList = mapper.readValue(sessionJson, new TypeReference<List<Session>>(){});
+            List<String> sessionDates = new ArrayList<>();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+            for (Session session : sessionList) {
+                String dateString = dateFormat.format(session.getSessionDate());
+                String startTimeString = timeFormat.format(session.getStartTime());
+                String dateTimeString = dateString + " " + startTimeString;
+                sessionDates.add(dateTimeString);
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SessionListPage.fxml"));
+            Parent root = loader.load();
+            SessionListController controller = loader.getController();
+            controller.populateSessions(sessionDates);
+            Scene scene = new Scene(root, 640, 480);
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     protected void handleExportRecords(ActionEvent event)throws IOException {

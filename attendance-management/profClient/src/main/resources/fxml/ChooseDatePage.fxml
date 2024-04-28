@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.duke.ece651.profClient.controller.ChooseDateController">
+    <padding>
+        <Insets top="10" right="0" bottom="0" left="20"/>
+    </padding>
+    <Label text="Choose a date to take attendance" />
+    <HBox alignment="CENTER">
+        <Label text="Select Date: " />
+        <DatePicker fx:id="datePicker" />
+    </HBox>
+    <Button mnemonicParsing="false" onAction="#handleConfirmButtonClick" text="Confirm" />
+</VBox>
