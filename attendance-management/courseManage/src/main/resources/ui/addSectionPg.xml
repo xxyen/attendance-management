@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import java.lang.Double?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml"
+          fx:controller="edu.duke.ece651.courseManage.controller.AddSectionController">
+  <columnConstraints>
+    <ColumnConstraints percentWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="20.0" />
+    <RowConstraints percentHeight="20.0" />
+  </rowConstraints>
+  <Button text="Course Management System" GridPane.rowIndex="0" GridPane.columnIndex="0"
+          style="-fx-font: 35px Tahoma;
+                 -fx-background-color: black,#012169;
+                 -fx-text-fill: ivory;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="Add a New Section" GridPane.rowIndex="1" GridPane.columnIndex="0"
+          style="-fx-font: 30px Tahoma;
+                 -fx-background-color: black,#012169;
+                 -fx-text-fill: ivory;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Label text="Course ID:" GridPane.rowIndex="2" GridPane.columnIndex="0"
+         style="-fx-font: 25px Tahoma;">
+  </Label>
+  <TextField fx:id="courseIdField" promptText="Enter Course ID"
+             GridPane.rowIndex="3" GridPane.columnIndex="0"
+             style="-fx-font: 25px Tahoma;">
+  </TextField>
+  <Label text="Professor ID:" GridPane.rowIndex="4" GridPane.columnIndex="0"
+         style="-fx-font: 25px Tahoma;">
+  </Label>
+  <TextField fx:id="profIdField" promptText="Enter Professor ID"
+             GridPane.rowIndex="5" GridPane.columnIndex="0"
+             style="-fx-font: 25px Tahoma;">
+  </TextField>
+  <Button text="Add New Section" GridPane.rowIndex="6" GridPane.columnIndex="0"
+          onAction="#addSectionButton"
+          style="-fx-font: 25px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="Back To Update Course Page" GridPane.rowIndex="7" GridPane.columnIndex="0"
+          onAction="#backToUpdatePage"
+          style="-fx-font: 25px Tahoma;
+                 -fx-background-color: black,#FA8072;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+</GridPane>

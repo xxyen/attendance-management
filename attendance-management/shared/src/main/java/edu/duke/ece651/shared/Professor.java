@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.io.IOException;
 
 /**
  * This class represents the professor.
@@ -65,6 +66,16 @@ public class Professor implements User {
   public Email getEmail() {
     return email;
   }
+
+  /**
+   * set email address of the user
+   * @param email (String)
+   * @throws IOException if the email address is invalid
+   */
+  public void setEmail(String email) throws IOException {
+    this.email = new Email(email);
+  }
+
 
   /**
    * set the password of the faculty member

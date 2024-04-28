@@ -31,6 +31,12 @@
         <activity android:name=".CourseSelectionActivity"/>
         <activity android:name=".FunctionSelectionActivity"/>
         <activity android:name=".PreferenceActivity"/>
+        <activity android:name=".ReportSelectionActivity"/>
+        <activity android:name=".ReportDisplayActivity"/>
+        <activity android:name=".ReportDisplayActivity2"/>
+        <activity android:name=".ReportDisplayActivity3"/>
+        <activity android:name=".FormatSelectionActivity"/>
+
 
 
 

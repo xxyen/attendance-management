@@ -79,10 +79,10 @@ public class ReaderUtilities {
    * Read export file format from input.
    */
   public static String readFormat(String prompt, BufferedReader inputReader, PrintStream out) throws IOException {
-    out.print("--------------------------------------------------------------------------------\n");
-    out.print(prompt);
-    out.print("--------------------------------------------------------------------------------\n");
-    out.println();
+    // out.print("--------------------------------------------------------------------------------\n");
+    // out.print(prompt);
+    // out.print("--------------------------------------------------------------------------------\n");
+    // out.println();
 
     String s = inputReader.readLine();
     if (s == null) {

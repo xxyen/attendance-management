@@ -76,14 +76,14 @@ public class StuTextPlayer {
                 } else if (index == 2) {
                     getReport();
                 } else if (index == 3) {
-                    out.print("--------------------------------------------------------------------------------\n");
+                    //out.print("--------------------------------------------------------------------------------\n");
                     out.print("You have exited from course: " +
                             // course.getCourseid() +
                             section.getCourseId() +
                             section.getSectionId() +
                             "!" +
                             "\n");
-                    out.print("--------------------------------------------------------------------------------\n");
+                    //out.print("--------------------------------------------------------------------------------\n");
 
                     flag = false;
                     break;
@@ -98,16 +98,16 @@ public class StuTextPlayer {
     }
 
     private void getReport() throws Exception {
-        out.print("--------------------------------------------------------------------------------\n");
-        out.print("Do you want a summary or detailed report? (type in 's' for summary or 'd' for detailed)\n");
-        out.print("--------------------------------------------------------------------------------\n");
-        out.println();
+        // out.print("--------------------------------------------------------------------------------\n");
+        // out.print("Do you want a summary or detailed report? (type in 's' for summary or 'd' for detailed)\n");
+        // out.print("--------------------------------------------------------------------------------\n");
+        // out.println();
 
         char choice = ReaderUtilities.readSingleLetter(inputReader);
         
         if (choice == 's' || choice == 'S'){
             AttendanceRecordService s = new AttendanceRecordService();
-            out.print("--------------------------------------------------------------------------------\n");
+            //out.print("--------------------------------------------------------------------------------\n");
             out.print("Your attendance participation score for course: " +
                     section.getCourseId() + 
                     ", section: " + 
@@ -115,7 +115,7 @@ public class StuTextPlayer {
                     " is : " +
                     s.calculateStudentSectionScore(student.getUserid(), section.getSectionId()) +
                     "\n");
-            out.print("--------------------------------------------------------------------------------\n");
+           // out.print("--------------------------------------------------------------------------------\n");
         }
         else if (choice == 'd' || choice == 'D'){
             exportReport();
