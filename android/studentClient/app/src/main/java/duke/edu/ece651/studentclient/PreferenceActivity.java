@@ -26,11 +26,13 @@ public class PreferenceActivity extends AppCompatActivity implements SocketServi
 
         buttonYes.setOnClickListener(v -> {
             MainActivity.socketService.sendMessage("y");
+            MainActivity.socketService.unregisterCallback(this);
             showAlert("You have successfully changed your preference!");
         });
 
         buttonNo.setOnClickListener(v -> {
             MainActivity.socketService.sendMessage("n");
+            MainActivity.socketService.unregisterCallback(this);
             finish();
         });
     }
