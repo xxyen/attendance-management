@@ -140,7 +140,7 @@
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="11. Back to Home Page" GridPane.rowIndex="8" GridPane.columnIndex="0"
+  <Button text="Back to Home Page" GridPane.rowIndex="8" GridPane.columnIndex="0"
           GridPane.columnSpan="2"
           onAction="#backToHome"
           style="-fx-font: 25px Tahoma;

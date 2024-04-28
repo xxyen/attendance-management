@@ -75,7 +75,7 @@
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="5.  Exit Course Management System" GridPane.rowIndex="7" GridPane.columnIndex="0"
+  <Button text="Exit Course Management System" GridPane.rowIndex="7" GridPane.columnIndex="0"
           onAction="#exitSystem"
           style="-fx-font: 25px Tahoma;
                 -fx-background-color: black,#FA8072;

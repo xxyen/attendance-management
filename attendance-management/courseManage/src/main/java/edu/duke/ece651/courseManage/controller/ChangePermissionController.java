@@ -51,7 +51,7 @@ public class ChangePermissionController {
   @FXML
   private void setPermissionToFalseButton() {
     UserManagement.setDisplayNamePermission(false);
-    if(UserManagement.getDisplayNamePermission()) {
+    if(!UserManagement.getDisplayNamePermission()) {
       showAlert("Success", "Show display name during taking attendance: false", AlertType.INFORMATION);
       displayPermission.setText("Display names of students are NOT displayed for attendance.");
     } else {

@@ -13,65 +13,134 @@
     <ColumnConstraints percentWidth="50.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints percentHeight="25.0" />
-    <RowConstraints percentHeight="15.0" />
-    <RowConstraints percentHeight="15.0" />
-    <RowConstraints percentHeight="15.0" />
-    <RowConstraints percentHeight="15.0" />
-    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="8.0" />
+    <RowConstraints percentHeight="12.0" />
+    <RowConstraints percentHeight="12.0" />
+    <RowConstraints percentHeight="12.0" />
+    <RowConstraints percentHeight="12.0" />
+    <RowConstraints percentHeight="12.0" />
+    <RowConstraints percentHeight="12.0" />
   </rowConstraints>
-  <Label text="Administration Application: User Management Page" GridPane.rowIndex="0" GridPane.columnIndex="0">
-  </Label>
-  <Button text="View Students" GridPane.rowIndex="1" GridPane.columnIndex="0"
-          onAction="#viewStudents">
+  <Button text="User Management System" GridPane.rowIndex="0" GridPane.columnIndex="0"
+          GridPane.columnSpan="2"
+          style="-fx-font: 35px Tahoma;
+                 -fx-background-color: black,#DEB887;
+                 -fx-text-fill: ivory;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Add A Student" GridPane.rowIndex="2" GridPane.columnIndex="0"
-          onAction="#addStudent">
+  <Button text="Home Page" GridPane.rowIndex="1" GridPane.columnIndex="0"
+          GridPane.columnSpan="2"
+          style="-fx-font: 30px Tahoma;
+                 -fx-background-color: black,#DEB887;
+                 -fx-text-fill: ivory;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Remove A Student" GridPane.rowIndex="3" GridPane.columnIndex="0"
-          onAction="#removeStudent">
+  <Button text="1.  View Students" GridPane.rowIndex="3" GridPane.columnIndex="0"
+          onAction="#viewStudents"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Update A Student" GridPane.rowIndex="4" GridPane.columnIndex="0"
-          onAction="#updateStudent">
+  <Button text="3.  Add A Student" GridPane.rowIndex="4" GridPane.columnIndex="0"
+          onAction="#addStudent"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Modify Global Setting" GridPane.rowIndex="5" GridPane.columnIndex="0"
-          onAction="#setPermission">
+  <Button text="5.  Remove A Student" GridPane.rowIndex="5" GridPane.columnIndex="0"
+          onAction="#removeStudent"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="7.  Update A Student" GridPane.rowIndex="6" GridPane.columnIndex="0"
+          onAction="#updateStudent"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="9.  Modify Global Setting" GridPane.rowIndex="7" GridPane.columnIndex="0"
+          GridPane.columnSpan="2"
+          onAction="#setPermission"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
 
 
-  <Button text="View Faculty" GridPane.rowIndex="1" GridPane.columnIndex="1"
-          onAction="#viewFaculty">
+  <Button text="2.  View Faculty" GridPane.rowIndex="3" GridPane.columnIndex="1"
+          onAction="#viewFaculty"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Add A Faculty Member" GridPane.rowIndex="2" GridPane.columnIndex="1"
-          onAction="#addFaculty">
+  <Button text="4.  Add A Faculty Member" GridPane.rowIndex="4" GridPane.columnIndex="1"
+          onAction="#addFaculty"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Remove A Faculty Member" GridPane.rowIndex="3" GridPane.columnIndex="1"
-          onAction="#removeFaculty">
+  <Button text="6.  Remove A Faculty Member" GridPane.rowIndex="5" GridPane.columnIndex="1"
+          onAction="#removeFaculty"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Update A Faculty Member" GridPane.rowIndex="4" GridPane.columnIndex="1"
-          onAction="#updateFaculty">
+  <Button text="8.  Update A Faculty Member" GridPane.rowIndex="6" GridPane.columnIndex="1"
+          onAction="#updateFaculty"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
 
-  <Button text="Exit User Management System" GridPane.rowIndex="5" GridPane.columnIndex="1"
-          onAction="#exitSystem">
+  <Button text="Exit User Management System" GridPane.rowIndex="8" GridPane.columnIndex="0"
+          GridPane.columnSpan="2"
+          onAction="#exitSystem"
+          style="-fx-font: 25px Tahoma;
+                -fx-background-color: black,#FA8072;
+                -fx-text-fill: ivory;
+                -fx-background-radius: 10, 10;
+                -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>

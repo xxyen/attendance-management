@@ -11,31 +11,71 @@
 <GridPane xmlns:fx="http://javafx.com/fxml"
           fx:controller="edu.duke.ece651.courseManage.controller.ChangePermissionController">
   <columnConstraints>
-    <ColumnConstraints percentWidth="45.0" />
-    <ColumnConstraints percentWidth="45.0" />
+    <ColumnConstraints percentWidth="50.0" />
+    <ColumnConstraints percentWidth="50.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints percentHeight="20.0" />
-    <RowConstraints percentHeight="20.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="35.0" />
+    <RowConstraints percentHeight="5.0" />
     <RowConstraints percentHeight="20.0" />
   </rowConstraints>
-  <Label fx:id="displayPermission" GridPane.rowIndex="0" GridPane.columnIndex="0">
+  <Button text="User Management System" GridPane.rowIndex="0" GridPane.columnIndex="0"
+          GridPane.columnSpan="2"
+          style="-fx-font: 35px Tahoma;
+                 -fx-background-color: black,#DEB887;
+                 -fx-text-fill: ivory;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="Modify Global Setting" GridPane.rowIndex="1" GridPane.columnIndex="0"
+          GridPane.columnSpan="2"
+          style="-fx-font: 30px Tahoma;
+                 -fx-background-color: black,#DEB887;
+                 -fx-text-fill: ivory;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Label fx:id="displayPermission" GridPane.rowIndex="2" GridPane.columnIndex="0"
+         GridPane.columnSpan="2"
+         style="-fx-font: 25px Tahoma;">
   </Label>
-  <Label text="How would you like to set it?" GridPane.rowIndex="0" GridPane.columnIndex="1">
+  <Label text="How would you like to set it?" GridPane.rowIndex="3" GridPane.columnIndex="0"
+         GridPane.columnSpan="2"
+         style="-fx-font: 25px Tahoma;">
   </Label>
   
-  <Button text="Allowed" GridPane.rowIndex="1" GridPane.columnIndex="0"
-          onAction="#setPermissionToTrueButton">
+  <Button text="Allowed" GridPane.rowIndex="4" GridPane.columnIndex="0"
+          onAction="#setPermissionToTrueButton"
+          style="-fx-font: 25px Tahoma;
+                -fx-background-color: black,#3CB371;
+                -fx-text-fill: ivory;
+                -fx-background-radius: 10, 10;
+                -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Not Allowed" GridPane.rowIndex="1" GridPane.columnIndex="1"
-          onAction="#setPermissionToFalseButton">
+  <Button text="Not Allowed" GridPane.rowIndex="4" GridPane.columnIndex="1"
+          onAction="#setPermissionToFalseButton"
+          style="-fx-font: 25px Tahoma;
+                -fx-background-color: black,#CD5C5C;
+                -fx-text-fill: ivory;
+                -fx-background-radius: 10, 10;
+                -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Back To Home Page" GridPane.rowIndex="2" GridPane.columnIndex="1"
-          onAction="#backToHomePage">
+  <Button text="Back To Home Page" GridPane.rowIndex="6" GridPane.columnIndex="0"
+          onAction="#backToHomePage"
+          GridPane.columnSpan="2"
+          style="-fx-font: 25px Tahoma;
+                -fx-background-color: black,#FA8072;
+                -fx-text-fill: ivory;
+                -fx-background-radius: 10, 10;
+                -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
