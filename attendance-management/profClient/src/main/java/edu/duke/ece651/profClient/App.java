@@ -105,7 +105,7 @@ public class App extends Application {
         in = new ObjectInputStream(socket.getInputStream());
         
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("Attendance Management - Professor Client");
         primaryStage.setScene(new Scene(root, 640, 480));
         primaryStage.show();
     }
