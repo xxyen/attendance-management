@@ -9,6 +9,9 @@
 plugins {
     id 'com.bmuschko.clover' version '2.2.3'
     id 'java'
+
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 
@@ -84,6 +87,14 @@ project (':userAdmin'){
 project (':courseManage'){
     dependencies {
         implementation project(':shared')
+
+        testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+        implementation 'com.google.guava:guava:30.1.1-jre'
+        testImplementation 'org.mockito:mockito-core:2.+'
+        testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
+        testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
+        testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
+        testImplementation 'org.testfx:openjfx-monocle:jdk-12.0.1+2'
     }
 }
 project (':profClient'){
