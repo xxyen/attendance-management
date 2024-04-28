@@ -11,6 +11,10 @@ import edu.duke.ece651.profClient.App;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
 
 import java.io.IOException;
 import java.time.LocalDate;
