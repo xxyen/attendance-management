@@ -18,20 +18,20 @@ public class HomeController {
   }
   
   @FXML
-  private void viewCourses() throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/viewCoursePg.xml"));
+  private void courseManage() throws Exception {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/courseHomePg.xml"));
     Parent coursesPage = loader.load();
     // Set the controller for the view course page
-    ViewCourseController controller = loader.getController();
+    CourseHomeController controller = loader.getController();
     controller.setMainStage(mainStage);
     // Set the new scene on the existing stage
     Scene scene = new Scene(coursesPage, 960, 720);
     mainStage.setScene(scene);
     mainStage.show();
   }
-
+  /*
   @FXML
-  private void addCourse() throws Exception {
+  private void userManage() throws Exception {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/addCoursePg.xml"));
     Parent addCoursePage = loader.load();
     // Set the controller for the view course page
@@ -42,32 +42,7 @@ public class HomeController {
     mainStage.setScene(scene);
     mainStage.show();
   }
-
-  @FXML
-  private void removeCourse() throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/removeCoursePg.xml"));
-    Parent removeCoursePage = loader.load();
-    // Set the controller for the view course page
-    RemoveCourseController controller = loader.getController();
-    controller.setMainStage(mainStage);
-    // Set the new scene on the existing stage
-    Scene scene = new Scene(removeCoursePage, 960, 720);
-    mainStage.setScene(scene);
-    mainStage.show();
-  }
-
-  @FXML
-  private void updateCourse() throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/updatePg.xml"));
-    Parent updateCoursePage = loader.load();
-    // Set the controller for the view course page
-    UpdateController controller = loader.getController();
-    controller.setMainStage(mainStage);
-    // Set the new scene on the existing stage
-    Scene scene = new Scene(updateCoursePage, 960, 720);
-    mainStage.setScene(scene);
-    mainStage.show();
-  }
+  */
 
   @FXML
   private void exitSystem() throws Exception {

@@ -54,9 +54,9 @@ public class ViewCourseController {
   
   @FXML
   private void backToHome() throws Exception {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/homePg.xml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/courseHomePg.xml"));
     Parent homePage = loader.load();
-    HomeController controller = loader.getController();
+    CourseHomeController controller = loader.getController();
     controller.setMainStage(mainStage);
     // Set the new scene on the existing stage
     Scene scene = new Scene(homePage, 960, 720);
