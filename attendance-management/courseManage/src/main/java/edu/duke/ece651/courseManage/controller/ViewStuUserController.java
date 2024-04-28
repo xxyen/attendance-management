@@ -48,8 +48,8 @@ public class ViewStuUserController {
       displayPermission.setText("Students are allowed to have their display names.");
     } else {
       for(Student stu: allStu) {
-        //stuList.add("ID: " + stu.getUserid() + ",  Legal Name: " + stu.getLegalName() + stu.getEmail().getEmailAddr());
-        stuList.add(stu.toString());
+        stuList.add("ID: " + stu.getUserid() + ",  Legal Name: " + stu.getLegalName() + ",  Email: " + stu.getEmail().getEmailAddr());
+        ///stuList.add(stu.toString());
       }
       displayPermission.setText("Students are not allowed to have their display names.");
     }

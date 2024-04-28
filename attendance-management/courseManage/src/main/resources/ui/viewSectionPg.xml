@@ -10,21 +10,37 @@
 <GridPane xmlns:fx="http://javafx.com/fxml"
           fx:controller="edu.duke.ece651.courseManage.controller.ViewSectionController">
   <columnConstraints>
-    <ColumnConstraints percentWidth="15.0" />
-    <ColumnConstraints percentWidth="70.0" />
-    <ColumnConstraints percentWidth="15.0" />
+    <ColumnConstraints percentWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="10.0" />
     <RowConstraints percentHeight="65.0" />
-    <RowConstraints percentHeight="20.0" />
+    <RowConstraints percentHeight="15.0" />
   </rowConstraints>
-  <Label text="List of current sections:" GridPane.rowIndex="0" GridPane.columnIndex="1">
-  </Label>
-  <ListView fx:id="sectionListView" GridPane.rowIndex="1" GridPane.columnIndex="1">
+  <Button text="Course Management System" GridPane.rowIndex="0" GridPane.columnIndex="0"
+         style="-fx-font: 35px Tahoma;
+                -fx-background-color: black,#012169;
+                -fx-text-fill: ivory;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="View the List of Current Sections" GridPane.rowIndex="1" GridPane.columnIndex="0"
+          style="-fx-font: 30px Tahoma;
+                -fx-background-color: black,#012169;
+                -fx-text-fill: ivory;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <ListView fx:id="sectionListView" GridPane.rowIndex="2" GridPane.columnIndex="0">
   </ListView>
-  <Button text="Back To Update Course Page." GridPane.rowIndex="2" GridPane.columnIndex="1"
-          onAction="#backToUpdatePage">
+  <Button text="Back To Update Course Page" GridPane.rowIndex="3" GridPane.columnIndex="0"
+          onAction="#backToUpdatePage"
+          style="-fx-font: 25px Tahoma;
+                 -fx-background-color: black,#FA8072;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>

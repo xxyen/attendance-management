@@ -14,67 +14,140 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints percentHeight="10.0" />
-    <RowConstraints percentHeight="15.0" />
-    <RowConstraints percentHeight="15.0" />
-    <RowConstraints percentHeight="15.0" />
-    <RowConstraints percentHeight="15.0" />
-    <RowConstraints percentHeight="15.0" />
-    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="8.0" />
+    <RowConstraints percentHeight="12.0" />
+    <RowConstraints percentHeight="12.0" />
+    <RowConstraints percentHeight="12.0" />
+    <RowConstraints percentHeight="12.0" />
+    <RowConstraints percentHeight="12.0" />
+    <RowConstraints percentHeight="12.0" />
   </rowConstraints>
-  <Label text="Course Management System: Update Course Page" GridPane.rowIndex="0" GridPane.columnIndex="0">
-  </Label>
-  <Button text="1.  Change course name." GridPane.rowIndex="1" GridPane.columnIndex="0"
-          onAction="#changeCourseName">
+
+  <Button text="Course Management System" GridPane.rowIndex="0" GridPane.columnIndex="0"
+          GridPane.columnSpan="2"
+          style="-fx-font: 35px Tahoma;
+                 -fx-background-color: black,#012169;
+                 -fx-text-fill: ivory;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="2.  View the list of all professors." GridPane.rowIndex="1" GridPane.columnIndex="1"
-          onAction="#viewProfs">
+  <Button text="Update an Existing Course: Home Page" GridPane.rowIndex="1" GridPane.columnIndex="0"
+          GridPane.columnSpan="2"
+          style="-fx-font: 30px Tahoma;
+                 -fx-background-color: black,#012169;
+                 -fx-text-fill: ivory;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="3.  View the list of current sections." GridPane.rowIndex="2" GridPane.columnIndex="0"
-          onAction="#viewSections">
+  <Button text="1.  Change Course Name" GridPane.rowIndex="3" GridPane.columnIndex="0"
+          onAction="#changeCourseName"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="4.  Add a new section." GridPane.rowIndex="2" GridPane.columnIndex="1"
-          onAction="#addSection">
+  <Button text="2.  View the List of All Professors" GridPane.rowIndex="3" GridPane.columnIndex="1"
+          onAction="#viewProfs"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="5.  Remove an existing section." GridPane.rowIndex="3" GridPane.columnIndex="0"
-          onAction="#removeSection">
+  <Button text="3.  View the List of Current Sections" GridPane.rowIndex="4" GridPane.columnIndex="0"
+          onAction="#viewSections"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="6.  View the list of all students." GridPane.rowIndex="3" GridPane.columnIndex="1"
-          onAction="#viewStus">
+  <Button text="4.  Add a New Section" GridPane.rowIndex="4" GridPane.columnIndex="1"
+          onAction="#addSection"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="7.  View the list of students in a section." GridPane.rowIndex="4" GridPane.columnIndex="0"
-          onAction="#viewStusInSection">
+  <Button text="5.  Remove an Existing Section" GridPane.rowIndex="5" GridPane.columnIndex="0"
+          onAction="#removeSection"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="8.  Add one student to a section." GridPane.rowIndex="4" GridPane.columnIndex="1"
-          onAction="#addStuToSection">
+  <Button text="6.  View the List of All Students" GridPane.rowIndex="5" GridPane.columnIndex="1"
+          onAction="#viewStus"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="9.  Add a list of students to a section." GridPane.rowIndex="5" GridPane.columnIndex="0"
-          onAction="#loadStusToSection">
+  <Button text="7.  View the List of Students in a Section" GridPane.rowIndex="6" GridPane.columnIndex="0"
+          onAction="#viewStusInSection"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="10. Remove one student from a section." GridPane.rowIndex="5" GridPane.columnIndex="1"
-          onAction="#removeEnrollment">
+  <Button text="8.  Add One Student to a Section" GridPane.rowIndex="6" GridPane.columnIndex="1"
+          onAction="#addStuToSection"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="11. Exit to Home Page." GridPane.rowIndex="6" GridPane.columnIndex="0"
-          onAction="#backToHome">
+  <Button text="9.  Add a List of Students to a Section" GridPane.rowIndex="7" GridPane.columnIndex="0"
+          onAction="#loadStusToSection"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="10. Remove One Student from a Section" GridPane.rowIndex="7" GridPane.columnIndex="1"
+          onAction="#removeEnrollment"
+          style="-fx-font: 20px Tahoma;
+                 -fx-background-color: black,#778899;
+                 -fx-text-fill: ivory;
+                 -fx-background-radius: 10, 10;
+                 -fx-background-insets: 2, 5;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="11. Back to Home Page" GridPane.rowIndex="8" GridPane.columnIndex="0"
+          GridPane.columnSpan="2"
+          onAction="#backToHome"
+          style="-fx-font: 25px Tahoma;
+                -fx-background-color: black,#FA8072;
+                -fx-text-fill: ivory;
+                -fx-background-radius: 10, 10;
+                -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>

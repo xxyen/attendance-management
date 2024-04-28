@@ -13,37 +13,53 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints percentHeight="15.0" />
-    <RowConstraints percentHeight="15.0" />
+    <RowConstraints percentHeight="10.0" />
+    <RowConstraints percentHeight="5.0" />
     <RowConstraints percentHeight="25.0" />
     <RowConstraints percentHeight="25.0" />
     <RowConstraints percentHeight="20.0" />
   </rowConstraints>
-  <Label text="Administration System" GridPane.rowIndex="0" GridPane.columnIndex="0"
-         style="-fx-font: 35px Tahoma;
-                -fx-background-color: black,#012169;
-                -fx-text-fill: ivory;
-                -fx-background-radius: 10, 10;
-                -fx-background-insets: 2, 5;">
-  </Label>
-  <Label text="Home Page" GridPane.rowIndex="1" GridPane.columnIndex="0"
+  <Button text="Administration System" GridPane.rowIndex="0" GridPane.columnIndex="0"
          style="-fx-font: 50px Tahoma;
+                -fx-background-color: black,#87CEFA;
+                -fx-text-fill: ivory;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="Home Page" GridPane.rowIndex="1" GridPane.columnIndex="0"
+         style="-fx-font: 40px Tahoma;
+                -fx-background-color: black,#87CEFA;
+                -fx-text-fill: ivory;">
+    <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
+    <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
+  </Button>
+  <Button text="Course Management System" GridPane.rowIndex="3" GridPane.columnIndex="0"
+          onAction="#courseManage"
+          style="-fx-font: 35px Tahoma;
                 -fx-background-color: black,#012169;
                 -fx-text-fill: ivory;
                 -fx-background-radius: 10, 10;
                 -fx-background-insets: 2, 5;">
-  </Label>
-  <Button text="Course Management System" GridPane.rowIndex="2" GridPane.columnIndex="0"
-          onAction="#courseManage">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="User Management System" GridPane.rowIndex="3" GridPane.columnIndex="0"
-          onAction="#userManage">
+  <Button text="User Management System" GridPane.rowIndex="4" GridPane.columnIndex="0"
+          onAction="#userManage"
+          style="-fx-font: 35px Tahoma;
+                -fx-background-color: black,#FFB6C1;
+                -fx-text-fill: ivory;
+                -fx-background-radius: 10, 10;
+                -fx-background-insets: 2, 5;">
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
-  <Button text="Exit System" GridPane.rowIndex="4" GridPane.columnIndex="0"
-          onAction="#exitSystem">
+  <Button text="Exit System" GridPane.rowIndex="5" GridPane.columnIndex="0"
+          onAction="#exitSystem"
+          style="-fx-font: 35px Tahoma;
+                -fx-background-color: black,#FA8072;
+                -fx-text-fill: ivory;
+                -fx-background-radius: 10, 10;
+                -fx-background-insets: 2, 5;">>
     <maxHeight><Double fx:constant="MAX_VALUE"/></maxHeight>
     <maxWidth><Double fx:constant="MAX_VALUE"/></maxWidth>
   </Button>
