@@ -8,6 +8,14 @@
 ## Documentation
 - [Task Breakdown](https://docs.google.com/spreadsheets/d/1x7Ri4QJ-Jm6Cy72xTA2OOKtt6kzGuaV_iuCRhnrZxEg/edit#gid=0)<br /> <br />
 
+
+**Evolution 3**
+- [Ev2 Updated Requirement](https://docs.google.com/document/d/15zmtWIonYmc4HfxxXaQUDIxBkyH4d3-7lWlUq3e0PEk/edit) 
+- [Changes Impact Report](https://docs.google.com/document/d/1vrOZi5cZxER5TSeIWlxnqbVSnzDgIWraa4TLjkPGJVY/edit)
+- [Installation and Configuration Instructions](https://docs.google.com/document/d/1Lt41WeodsSb_TsBAqK3eNR0bZTu42lOsDcLsiMPA_Y4/edit)
+- Updated class diagram (in the uml directory)<br /> <br />
+
+
 **Evolution 2**
 - [Ev2 Notes](https://docs.google.com/document/d/1n1gmAWfFtEzDxdXGroxk5EqH-CfMxwwJ85f3w0ZP2Nk/edit)
 - [Ev2 DB Structure](https://docs.google.com/document/d/1s3EM3V6wiWx9IROGiIVDYF0NVr4GINPYGf9JzEkdxH4/edit) 
