@@ -216,7 +216,6 @@ public class Student implements User {
 public String toString() {
     return "Student{" +
             "userid='" + userid + '\'' +
-            ", password='" + password + '\'' +
             ", legalName='" + legalName + '\'' +
             ", displayName='" + displayName + '\'' +
             ", email=" + email +
