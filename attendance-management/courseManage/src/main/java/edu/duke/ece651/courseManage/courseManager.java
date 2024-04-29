@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import edu.duke.ece651.shared.*;
 import edu.duke.ece651.shared.model.*;
 import edu.duke.ece651.shared.dao.*;
-
+/*
 public class courseManager {
   
   private final BufferedReader inputReader;
@@ -676,6 +676,6 @@ public class courseManager {
 
 
 }
-
+*/
 
 
