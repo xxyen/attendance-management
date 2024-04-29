@@ -105,10 +105,16 @@ public class AttendanceRecordService {
     public Map<String, Double> calculateSectionScores(int sectionId) {
         List<AttendanceRecord> records = attendanceRecordDAO.listAttendanceBySection(sectionId);
         Map<String, Double> studentScores = new HashMap<>();
+        Map<String, Integer> studentCounts = new HashMap<>();
         // Group records by student and calculate each student's average score
         records.forEach(record -> {
-            studentScores.compute(record.getStudentId(), (id, score) -> score == null ? getScore(record.getStatus().getStatus()) : (score + getScore(record.getStatus().getStatus())) / 2);
+            String studentId = record.getStudentId();
+            double newScore = getScore(record.getStatus().getStatus());
+            studentScores.compute(studentId, (id, score) -> score == null ? newScore : score + newScore);
+            studentCounts.compute(studentId, (id, count) -> count == null ? 1 : count + 1);
         });
+        // Divide total scores by counts to get averages
+        studentScores.forEach((id, score) -> studentScores.put(id, score / studentCounts.get(id)));
         return studentScores;
     }
 
