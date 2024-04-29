@@ -36,7 +36,6 @@ public class ChangeStatusController {
 
     @FXML
     private void initialize() {
-        // instructionLabel.setText("Please select a student and choose a new attendance status");
         statusComboBox.getItems().addAll("p", "a", "t");
     }
 

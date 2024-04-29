@@ -79,35 +79,25 @@ public class ExportRecordController implements Initializable {
 
     private void receiveFileFromServer() throws IOException, ClassNotFoundException {
         String fileName = (String) App.in.readObject();
-        // fileName = fileName.replace("'", "");
         File file = new File(selectedDirectory, fileName);
-        FileOutputStream fileOut = new FileOutputStream(file);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
     
-        InputStream rawIn = App.socket.getInputStream();  
-        byte[] buffer = new byte[4096];
-        int bytesRead;
-        while ((bytesRead = rawIn.read(buffer)) != -1) {
-            String str = new String(buffer, 0, bytesRead, StandardCharsets.UTF_8);
-            if(str.contains("EOF")) {
-                break;
-            }
-            fileOut.write(buffer, 0, bytesRead);
+        Object obj;
+        while ((obj = App.in.readObject()) != null && !obj.equals("EOF")) {
+            writer.write((String) obj);
+            writer.newLine();
         }
-        fileOut.close();
-        
-        // while ((bytesRead = rawIn.read(buffer)) != -1) {
-        //     fileOut.write(buffer, 0, bytesRead);
-        // }
-        // fileOut.close();
+        writer.close();
     
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Export Confirmation");
         alert.setHeaderText(null);
         alert.setContentText("File '" + fileName + "' has been successfully exported and saved.");
         alert.showAndWait();
-
+    
         navigateBackToProfessorPage();
     }
+    
     private void navigateBackToProfessorPage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProfessorPage.fxml"));

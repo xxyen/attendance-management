@@ -224,21 +224,21 @@ public class ProfTextPlayer {
         }
     }
 
-    private void sendFileToClient(ObjectOutputStream out, String filePath) throws IOException {
+    private void sendFileToClient(ObjectOutputStream output, String filePath) throws IOException {
         File file = new File(filePath);
-        out.writeObject(file.getName());
-        byte[] buffer = new byte[4096];
-        FileInputStream fileIn = new FileInputStream(file);
-        int bytesRead;
-        while ((bytesRead = fileIn.read(buffer)) != -1) {
-            out.write(buffer, 0, bytesRead); 
+        output.writeObject(file.getName());
+    
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            output.writeObject(line);
         }
-        fileIn.close();
-        out.writeObject("EOF");
-        out.flush();
+        reader.close();
+    
+        output.writeObject("EOF");
+        output.flush();
     }
     
-
     /**
      * Export attendance record of a session.
      */
