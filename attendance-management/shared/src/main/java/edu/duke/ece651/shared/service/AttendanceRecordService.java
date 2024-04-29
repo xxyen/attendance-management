@@ -114,7 +114,7 @@ public class AttendanceRecordService {
             studentCounts.compute(studentId, (id, count) -> count == null ? 1 : count + 1);
         });
         // Divide total scores by counts to get averages
-        studentScores.forEach((id, score) -> studentScores.put(id, score / studentCounts.get(id)));
+        studentScores.forEach((id, score) -> studentScores.put(id, Math.round((score / studentCounts.get(id)) * 100.0) / 100.0));
         return studentScores;
     }
 
