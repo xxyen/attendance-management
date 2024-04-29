@@ -36,6 +36,11 @@ public class AddCourseController {
     this.mainStage = mainStage;
   }
 
+  public void setFields(TextField IdField, TextField NameField) {
+    this.courseIdField = IdField;
+    this.courseNameField = NameField;
+  }
+
   @FXML
   private void createCourseButton() {
     String courseId = courseIdField.getText().trim();
