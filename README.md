@@ -12,8 +12,8 @@
 **Evolution 3**
 - [Ev2 Updated Requirement](https://docs.google.com/document/d/15zmtWIonYmc4HfxxXaQUDIxBkyH4d3-7lWlUq3e0PEk/edit) 
 - [Changes Impact Report](https://docs.google.com/document/d/1vrOZi5cZxER5TSeIWlxnqbVSnzDgIWraa4TLjkPGJVY/edit)
-- [Installation and Configuration Instructions] (https://docs.google.com/document/d/1Lt41WeodsSb_TsBAqK3eNR0bZTu42lOsDcLsiMPA_Y4/edit)
-- [Updated class diagram (in the uml directory)]<br /> <br />
+- [Installation and Configuration Instructions](https://docs.google.com/document/d/1Lt41WeodsSb_TsBAqK3eNR0bZTu42lOsDcLsiMPA_Y4/edit)
+- Updated class diagram (in the uml directory)<br /> <br />
 
 
 **Evolution 2**
