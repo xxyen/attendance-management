@@ -13,9 +13,34 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.ResourceAccessMode;
 import org.junit.jupiter.api.parallel.ResourceLock;
 import org.junit.jupiter.api.parallel.Resources;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.Start;
+import org.testfx.util.WaitForAsyncUtils;
+
+import javafx.application.Platform;
+import javafx.stage.Stage;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.Node;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.input.MouseEvent;
+import javafx.event.ActionEvent;
+
+import org.testfx.api.FxRobot;
 
 
+@ExtendWith(ApplicationExtension.class)
 public class AppTest {
+  App a;
   @Disabled
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
@@ -40,5 +65,17 @@ public class AppTest {
     String expected = new String(expectedStream.readAllBytes());
     String actual = bytes.toString();
   }
+
+  @Start
+  public void start(Stage stage) throws IOException {
+    a  = new App();
+    a.start(stage);
+  }
+
+  @Test
+  void test_(FxRobot robot) {
+    robot.clickOn("Course Management System");
+  }
+
 
 }
