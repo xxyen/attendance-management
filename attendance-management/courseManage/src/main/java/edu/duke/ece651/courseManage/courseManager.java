@@ -22,7 +22,7 @@ import edu.duke.ece651.shared.model.*;
 import edu.duke.ece651.shared.dao.*;
 
 public class courseManager {
-  
+  /*
   private final BufferedReader inputReader;
   private final PrintStream out;
   
@@ -674,7 +674,7 @@ public class courseManager {
         }
     }
 
-
+*/
 }
 
 
