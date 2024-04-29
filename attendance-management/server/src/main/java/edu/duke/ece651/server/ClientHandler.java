@@ -41,57 +41,6 @@ public class ClientHandler implements Runnable{
         this.input = new ObjectInputStream(clientSocket.getInputStream());
     }
 
-    // public void mainLoop(BufferedReader input, PrintStream output){
-    //     boolean flag = true;
-
-    //     while (flag) {
-    //         try {
-    //             output.print("--------------------------------------------------------------------------------\n");
-    //             output.print("Hello! Below are all the available actions:\n" +
-    //                     "1. Log in.\n" +
-    //                     "2. Exit this program.\n" +
-    //                     "What do you want to do? Please type in the index number:\n");
-    //             output.print("--------------------------------------------------------------------------------\n");
-    //             output.println();
-
-    //             int index = ReaderUtilities.readPositiveInteger(input);
-
-    //             if (index == 1){
-    //                 User user = signIn(input, output);
-
-    //                 if (user.getUserType() == "professor"){
-    //                     Professor p = (Professor) user;
-    //                     output.println("Login successful. Welcome, Professor " + p.getName() + "!");
-
-    //                     profLoop(p, input, output);
-    //                 }
-
-    //                 else if (user.getUserType() == "student"){
-    //                     Student s = (Student) user;
-    //                     output.println("Login successful. Welcome, Student " + s.getDisplayName() + "!");
-
-    //                     stuLoop(s, input, output);
-    //                 }
-
-    //             }
-    //             else if (index == 2){
-    //                 output.println("Have a nice day! From ECE 651 team 6.");
-    //                 output.println("endConnection");
-    //                 output.println();
-    //                 flag = false;
-    //                 break;
-    //             }
-
-    //             else {
-    //                 throw new IllegalArgumentException("Invalid action number, please choose your action again!");
-    //             }
-
-    //         } catch (Exception e) {
-    //             output.println(e.getMessage());
-    //         }
-    //     }
-    // }
-
     private void mainLoop() throws IOException, ClassNotFoundException {
         boolean flag = true;
         while (flag) {
@@ -187,73 +136,6 @@ public class ClientHandler implements Runnable{
         return sectionList.get(index);
     }
 
-    // public Section chooseSection(User u, BufferedReader in, PrintStream out) throws IOException {
-    //     List<Section> sectionList = new ArrayList<>();
-    //     if (u.getUserType() == "professor") {
-    //         sectionList = sectionDAO.querySectionByFaculty(u.getUserid());
-    //     }
-    //     else if(u.getUserType() == "student"){
-    //         sectionList = sectionDAO.listSectionsByStudentId(u.getUserid());
-    //     }
-    //     else {
-    //         throw new IllegalArgumentException("Invalid user: neither professor nor student!");
-    //     }
-    //     int size = sectionList.size();
-
-    //     for (int i = 0; i < size; i++) {
-    //         out.println(Integer.toString(i + 1) + ". Course:" + sectionList.get(i).getCourseId() + ", Sec: " + sectionList.get(i).getSectionId());
-    //     }
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.println(
-    //             "The above is a list of all your sections, please enter the serial number of the section you want to choose.");
-    //     out.print("--------------------------------------------------------------------------------\n");
-    //     out.println();
-    //     int index = ReaderUtilities.readPositiveInteger(in);
-    //     if (index > size) {
-    //         throw new IllegalArgumentException("Invalid input: there is no such a section!");
-    //     }
-    //     return sectionList.get(index - 1);
-    // }
-
-    // public void profLoop(Professor p, BufferedReader input, PrintStream output){
-    //     boolean flag = true;
-
-    //     while (flag) {
-    //         try {
-    //             output.print("--------------------------------------------------------------------------------\n");
-    //             output.print("Below are all the available actions:\n" +
-    //                     "1. Manipulate on your sections.\n" +
-    //                     "2. Log out.\n" +
-    //                     "What do you want to do? Please type in the index number:\n");
-    //             output.print("--------------------------------------------------------------------------------\n");
-    //             output.println();
-
-    //             int index = ReaderUtilities.readPositiveInteger(input);
-
-    //             if (index == 1){
-    //                 //todo:
-    //                 //display section list and choose
-    //                 Section s = chooseSection(p, input, output);
-    //                 ProfTextPlayer player = new ProfTextPlayer(p, s, input, output);
-    //                 player.loop();
-    //             }
-    //             else if (index == 2){
-    //                 output.println("Successfully log out!");
-    //                 //output.println();
-
-    //                 flag = false;
-    //                 break;
-    //             }
-    //             else {
-    //                 throw new IllegalArgumentException("Invalid action number, please choose your action again!");
-    //             }
-
-    //         } catch (Exception e) {
-    //             output.println(e.getMessage());
-    //             //output.println();
-    //         }
-    //     }
-    // }
 
     // public void stuLoop(Student s, BufferedReader input, PrintStream output){
     //     boolean flag = true;
