@@ -72,12 +72,12 @@ project (':server'){
 //        testImplementation project(path: ':shared', configuration: "testPkg")
     }
 }
-project (':client'){
-    dependencies {
-        implementation project(':shared')
-//        testImplementation project(path: ':shared', configuration: "testPkg")
-    }
-}
+// project (':client'){
+//     dependencies {
+//         implementation project(':shared')
+// //        testImplementation project(path: ':shared', configuration: "testPkg")
+//     }
+// }
 project (':userAdmin'){
     dependencies {
         implementation project(':shared')
@@ -114,11 +114,11 @@ tasks.register("run-server") {
     description = 'Run the Server'
 }
 
-tasks.register("run-client") {
-    dependsOn project('client').getTasksByName('run',false)
-    group = 'Run Client/Server'
-    description = 'Run the Client'
-}
+// tasks.register("run-client") {
+//     dependsOn project('client').getTasksByName('run',false)
+//     group = 'Run Client/Server'
+//     description = 'Run the Client'
+// }
 
 tasks.register("run-userAdmin") {
     dependsOn project('userAdmin').getTasksByName('run',false)
@@ -144,7 +144,7 @@ java {
 }
 tasks.register("resolveDependencies") {
     dependsOn project('server').getTasksByName('resolveDependencies',false)
-    dependsOn project('client').getTasksByName('resolveDependencies',false)
+    // dependsOn project('client').getTasksByName('resolveDependencies',false)
     dependsOn project('userAdmin').getTasksByName('resolveDependencies',false)
     dependsOn project('courseManage').getTasksByName('resolveDependencies',false)
     dependsOn project('profClient').getTasksByName('resolveDependencies',false)

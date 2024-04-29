@@ -3,13 +3,13 @@
     "studentDisplayName": "display stud0A",
     "sessions": [
         {
-            "sessionDate": "2024-04-28",
-            "sessionId": 797,
+            "sessionDate": "2024-04-29",
+            "sessionId": 944,
             "status": "p"
         },
         {
-            "sessionDate": "2024-04-28",
-            "sessionId": 798,
+            "sessionDate": "2024-04-29",
+            "sessionId": 945,
             "status": "a"
         }
     ],
