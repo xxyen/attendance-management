@@ -125,7 +125,7 @@ public class AttendanceRecordService {
         for (AttendanceRecord record : records) {
             totalScore += getScore(record.getStatus().getStatus());
         }
-        return totalScore / records.size();
+        return Math.round((totalScore / records.size()) * 100) / 100;
     }
 
     // Convert attendance status to score
