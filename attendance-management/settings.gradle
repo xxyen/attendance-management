@@ -9,4 +9,4 @@
 
 
 rootProject.name = 'attendance_management'
-include('client', 'server', 'shared', 'userAdmin', 'courseManage', 'profClient')
+include('server', 'shared', 'userAdmin', 'courseManage', 'profClient')
