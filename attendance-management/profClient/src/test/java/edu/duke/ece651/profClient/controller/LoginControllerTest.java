@@ -18,9 +18,9 @@ public class LoginControllerTest {
 
     @Start
     private void start(Stage stage) throws Exception {
-      System.setProperty("testfx.robot", "glass");
-      System.setProperty("glass.platform", "Monocle");
-      System.setProperty("monocle.platform", "Headless");
+      // System.setProperty("testfx.robot", "glass");
+      // System.setProperty("glass.platform", "Monocle");
+      // System.setProperty("monocle.platform", "Headless");
 
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
       Parent mainNode = loader.load();
